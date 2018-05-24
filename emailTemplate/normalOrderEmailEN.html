@@ -1,0 +1,295 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Untitled Document</title>
+<style>
+@charset "utf-8";body{margin:0}a,blockquote,body,li,p,table,td{-webkit-text-size-adjust:none!important;font-family:sans-serif;font-style:normal;font-weight:400}button{width:90%}@media screen and (max-width:600px){a,blockquote,body,li,p,table,td{-webkit-text-size-adjust:none!important;font-family:sans-serif}table{width:100%}.footer{height:auto!important;max-width:48%!important;width:48%!important}table.responsiveImage{height:auto!important;max-width:30%!important;width:30%!important}table.responsiveContent{height:auto!important;max-width:66%!important;width:66%!important}.catalog{margin-left:0!important}}@media screen and (max-width:480px){a,blockquote,body,li,p,table,td{-webkit-text-size-adjust:none!important;font-family:sans-serif}table{width:100%!important;border-style:none!important}.footer,.table.responsiveContent,.table.responsiveImage{height:auto!important;max-width:96%!important;width:96%!important}.top{height:auto!important;max-width:100%!important;width:100%!important}.catalog{margin-left:0!important}button{width:90%!important}}
+a{ color:#9a783f}
+a:hover{ color: #3B290E;}
+.table-test{ width:700px; margin:0 auto;}
+.resp-50{ width:50%; float:left;}
+body{ padding:1em 0;}
+@media only screen and (max-width:600px) {
+	.table-test{ width:100%;}
+	.resp-50{ width:100%;}
+	body{ padding:0;}
+}
+.img-responsive{ width:100%; max-width:560px;}
+
+#ol {
+  counter-reset: o-counter 0;
+  list-style-type: none;
+}
+ol li .location:before {
+  content: counter(o-counter) ') ';
+  counter-increment: o-counter;
+}
+</style>
+
+</head>
+
+<body style="width:100%; background:#CFCFCF">
+<div style="width:100%; background:#CFCFCF">
+<table class="table-test" border="0" cellpadding="1" cellspacing="0" style="margin:0 auto; font-family:Arial, 微軟正黑體,Microsoft JhengHei, Helvetica, sans-serif; border:1px solid #999B9D; background:#fff;">
+
+<tr>
+<td width="29" bgcolor="#263D8B"></td>
+<td align="left" bgcolor="#263D8B">
+<table width="100%" style="margin:10px 0; display:block; float:left;"><tr>
+<td valign="middle" width="309">
+        <img src="cid:logo2" width="130" height="38" style="margin:0;">
+    </td>
+
+    <td width="309" align="right" style="color:#fff"  valign="middle">  
+    <!-- <img src="images/clp_logo_1x.png" width="121" height="31" > -->
+   <img src="cid:logo" width="121" height="31" style="margin:0;">
+    </td>
+    </tr></table>
+</td>
+<td width="31"  bgcolor="#263D8B"></td>
+
+</tr><!--row 1 ended-->
+
+
+   
+  
+  <!--row 1 ended-->
+  
+    <tr>
+    <td >&nbsp;</td>
+    <td align="center"  style="font-size:36px; font-weight:bold; color:#2485c6" height="90">
+    Order Confirmation
+    </td>
+    <td >&nbsp;</td>
+    </tr><!--greeting ended-->
+  
+  <!--content table started-->
+    <tr>
+    <td>&nbsp;</td>
+    <td>
+       <!-- table start-->
+       <br>
+       
+       <table border="0" cellpadding="3" cellspacing="1" width="100%" style="font-family: Arial, 微軟正黑體,Microsoft JhengHei, Helvetica, sans-serif; color:#231f20;">
+       
+     
+        
+     
+        <tr>
+        <td colspan="2" valign="middle" style="font-size:16px; color:#4D4D4D;">Dear customer,<!--  #name#,--> <br><br>
+Thank you for using our Smart Shopping website. Your order summary as below:
+
+</td>
+        </tr>
+        
+        
+        
+        
+          <tr>
+        <td valign="middle" style="font-size:16px; /*color:#4D4D4D*/ color:#000000;"><table width="100%" cellpadding="0" cellspacing="0" style=" font-size:14px; border:#2485c6 1px solid">
+       <tr><td style="background:#2485c6; border-bottom:#2485c6  1px solid">
+       <p style="color:#fff;margin: 8px 10px; display:block; line-height:1.2;">Order Number  :
+       <span style="color:#fff;"> #orderRef#</span></p></td>
+       <td style="background:#2485c6; border-bottom:#2485c6  1px solid">
+       <p style="color:#fff;margin: 8px 10px; display:block; line-height:1.2;">Order Date & Time :
+       <span style="color:#fff;"> #orderDate#</span></p>
+       <p style="color:#fff;margin: 8px 10px; display:block; line-height:1.2;">Payment Type :
+       <span style="color:#fff;"> #payMethod#</span></p></td>
+       </tr>
+       <!--delivery information-->
+       <tr><td colspan="2">
+       	<table width="100%" border="0" cellpadding="2" cellspacing="1" style="color:#686868; margin:10px 5px; font-size:14px;">
+            <!--  <tr style="">
+                <td width="25%" valign="top">Name: </td>
+                <td width="26%" valign="top">#name#</td>
+                <td width="18%" valign="top"></td>
+                <td width="31%" valign="top"></td>
+            </tr>
+            <tr style="">
+                <td width="25%" valign="top">Contact No: </td>
+                <td width="26%" valign="top">#contact#</td>
+                <td width="18%" valign="top"></td>
+                <td width="31%" valign="top"></td>
+            </tr>-->
+            <tr style="">
+                <td width="25%" valign="top"> </td>
+                <td width="26%" valign="top"></td>
+                <td width="18%" valign="top"></td>
+                <td width="31%" valign="top"></td>
+            </tr>
+              #deliveryAddress# 
+            
+          
+        </table>
+        </td>
+       </tr>
+       <!--delivery information-->
+       
+       
+       <!--product table started-->
+  <tr>
+  <td colspan="2">
+  		<table width="100%" border="0" cellpadding="5" cellspacing="0" style="color:#fff;  border-top:1px solid #2485c6; font-size:14px;">
+            <tr>
+                <td width="25%" align="left" valign="top" style="padding:5px; background:#2485c6; border-bottom:1px solid #2485c6; border-right:1px solid #2485c6; "><strong>Item</strong></td>
+                <td width="29%" align="center" valign="top" style="padding:5px; background:#2485c6; border-bottom:1px solid #2485c6; border-right:1px solid #2485c6; "><b>Delivery Method</b></td>
+                <td width="29%" align="center" valign="top" style="padding:5px; background:#2485c6; border-bottom:1px solid #2485c6; border-right:1px solid #2485c6; "><strong>Unit Price</strong></td>
+                <td width="26%" align="center" valign="top" style="padding:5px; background:#2485c6; border-bottom:1px solid #2485c6; border-right:1px solid #2485c6;  "><strong>Quantity</strong><strong></strong></td>
+                <td width="20%" align="right" valign="top" style="padding:5px; background:#2485c6; border-bottom:1px solid #2485c6;  "><strong>Sub-total</strong></td>
+            </tr>
+            
+            #orderItems#
+            #subTotal#
+            <!--  <tr>
+                <td colspan="3" align="center" valign="top" style=" color:#2F2F2F;  padding:3px; ">&nbsp;</td>
+                <td align="right" valign="top" style=" color:#2F2F2F; padding:5px;">
+                <strong>Sub-total</strong></td>
+                <td align="right" valign="top" style=" color:#2F2F2F;  padding:5px;"><strong>#subTotal#</strong></td>
+            </tr> -->
+            
+            <!--  <tr>
+                <td colspan="3" align="center" valign="top" style=" color:#2F2F2F;  padding:3px; ">&nbsp;</td>
+                <td align="right" valign="top" style=" color:#2F2F2F;  padding:5px;">
+                <strong>Discount</strong></td>
+                <td align="right" valign="top" style=" color:#2F2F2F;  padding:5px;"><strong>HK$168.80</strong></td>
+            </tr>-->
+            #discounteco#
+  			#ecoPoint#
+  			#promotion#
+            #discount#
+            #delivery#
+            #install#
+            #totalAmount#
+            <!--  <tr>
+                <td colspan="3" align="center" valign="top" style="padding:3px; ">&nbsp;</td>
+                <td align="right" valign="top" style=" color:#2F2F2F;  padding:5px;">
+                <strong>Delivery Cost</strong></td>
+                <td align="right" valign="top" style=" color:#2F2F2F;  padding:5px;"><strong>HK$168.80</strong></td>
+            </tr> -->
+            <!--  <tr>
+                <td colspan="3" align="center" valign="top" style=" color:#2F2F2F;  padding:3px; ">&nbsp;</td>
+                <td align="right" valign="top" style=" color:#2F2F2F; padding:5px;">
+                <strong>Total</strong></td>
+                <td align="right" valign="top" style=" color:#2F2F2F;  padding:5px;"><strong>#totalAmount#</strong></td>
+            </tr> -->
+            <tr>
+                <td colspan="3" align="center" valign="top" style="padding:5px; ">&nbsp;</td>
+                <td align="right" valign="top" style="padding:5px;">
+                <strong>Payment Method</strong></td>
+                <td align="right" valign="top" style="padding:5px;"><strong>#payMethod#</strong></td>
+            </tr>
+            <!--summary-->
+            
+        </table>
+        
+        
+        
+  
+  </td>
+  </tr>
+       </table><br>
+       
+       <table style="color:#000;font-size:12px;">
+       <tr><td>
+       <b>REMARKS:</b>
+      <p>Eco  Rewards Redemptions: </p>
+<ul type="disc">
+  <li><strong>This email cannot be used</strong> in place of a coupon. </li>
+  <li>There are two types of coupon delivery method: <br>
+  
+    <strong><u>By post:</u><br>
+      Coupons will be mailed to customers&rsquo; correspondence address within 15       working days of a successful redemption.<br>
+      <u>E-coupon :</u><br>
+      E-coupon will be stored in customer&rsquo;s Eco Rewards account. Present the       E-coupon through CLP Mobile App to redeem the reward at a designated       collection point.</strong></li>
+  <li>The redeemed coupon cannot be used in conjunction       with other gift voucher, cash coupon, promotion price or offer.</li>
+  <li>All matters and disputes are subject to the final       decision of CLP and respective merchants.</li>
+  <li>Product colours may be slightly different from       the real product due to computer settings, please in kind prevail.</li>
+  <li>Information and pictures are provided by the       merchant for reference only.</li>
+  <li>Customers have a responsibility to provide a       correct address, contact number and e-mail address. CLP will not be liable       for any loss caused by the failure to provide the correct information.</li>
+  <li>If the system encounters any problem, CLP       reserves the right to claim back the difference in amount.</li>
+</ul>
+<p><strong>For details on coupon redemption, please refer to <a href="https://www.clp.com.hk/ep_360/tnc/?locale=en">Eco Rewards Terms &amp; Conditions</a>. </strong> </p>
+<p><br>
+  Eco  Appliances Orders: </p>
+<ul type="disc">
+  <li>No revision, change of model or order       cancellation can be made once payment is settled.</li>
+  <li>For self-pickup product, customers can collect the products at the selected location <u>after <span style="color:blue;">ten</span> working days upon receiving the confirmation email</u> and <u>within one month of receiving the confirmation email</u>. </li>
+  <li>A valid confirmation email and front side copy of       the credit card must be presented at the pickup counter to collect the       product.&nbsp; Printed copies are not acceptable.</li>
+  <li>Each confirmation email of the purchased       self-pickup product can only be used once on or before the expiry date,       which cannot be extended.</li>
+  <li>Customer should check the self-pickup product at       the pickup location. The collected product is neither returnable nor       refundable after confirmation. No bag will be provided at the pickup       location. </li>
+  <li>No delivery service will be provided for pick-up       products.</li>
+  <li>For products requiring delivery services, CLP       staff will contact the customer by telephone to confirm the details of the       delivery services (i.e. date, time, delivery address) </li>
+  <li>Delivery charge is $90 per each location upon       cash on delivery. Free delivery service is available for purchase amount       over &nbsp;&nbsp;$1,000 per one single sales order. Delivery scheduled       time-slot is subject to the respective location. Installation services       will be provided at additional cost. </li>
+  <li>Save / print this page for records if necessary. </li>
+  <li>Energy Efficiency (Product and Service) Hotline       (Tel: 2678 2626). Office hours: Mon - Sat, 9:00 am - 6:00 pm (except       Sundays and Public Holidays). </li>
+  <li>CLP has final decision in all matters and disputes       in relation to the promotion offers, gifts and related activities. </li>
+  <li>Product colour could be slightly different due to       computer screen or set up, which is subject to all prevails in kind. </li>
+  <li>Information and pictures are provided by the       suppliers for reference only. </li>
+  <li>Customer should be responsible to provide correct       address, contact number and e-mail address. CLP has no liability for any       claim, complaint or dispute in relation to incorrect information provided       by customer.</li>
+  <li>Product pick-up location: <strong>(Only available for       Electrical Appliances Order)</strong></li>
+  <ul type="circle">
+    <li>Mongkok Eco Home, No. 188 Sai Yeung Choi Street        South, Mongkok </li>
+    <li>Office hours : Mon - Sun, 11:00 am - 7:00 pm        (except public holidays)</li>
+  </ul>
+</ul>
+<p>For more  TERMS &amp; CONDITIONS, <a href="http://clp.to/2qNS08k"><strong>Click Here</strong></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </p>
+<p><br>
+  Other Orders / Activities:</p>
+<ul type="disc">
+  <li>Terms and       Conditions for other orders/activities (e.g. CPD Short Courses of CLP Power Academy) will be sent to the concerned customers by       a separate email. </li>
+</ul>
+
+       <td><tr>
+       </table>
+       <br><br>
+       <span style="font-size:12px">
+       Note: This e-mail was sent from a notification-only address that does not accept incoming e-mail. Please do not reply to this message.<br>
+	CLP Power Hong Kong Limited<br>
+		'The World is in Our Hands' - Think before you print<br>
+		This email is for the sole use of the intended recipient(s) and may contain confidential information. Unauthorised use, disclosure or distribution of this email or its content is prohibited. If you have received this email in error, please delete it and notify the sender.<br>
+		CLP Holdings Limited 中電控股有限公司 <br>
+		</span>
+</td>
+        </tr>
+        
+        
+        
+    
+        
+       
+       
+        
+       
+    <tr>
+        <td height="2" valign="middle"></td>
+        <td valign="middle"></td>
+        </tr>
+    </table>
+
+       <!-- table ended-->
+    </td>
+    <td>&nbsp;</td>
+    </tr><!--content ended-->    <!--row 1 ended-->
+
+  <tr>
+    <td >&nbsp;</td>
+    <td>
+</td>
+    <td>&nbsp;</td>
+  </tr>
+  <!--company world wide ended-->
+  <tr>
+    <td style="background:#404041">&nbsp;</td>
+    <td style="background:#404041" align="center"><p style="font-size:12px; color:#fff;"><br>
+     © 2017 CLP Power Hong Kong Limited.中華電力有限公司<br>
+</p>
+</td>
+    <td style="background:#404041">&nbsp;</td>
+  </tr>
+  
+</table>
+</div>
+</body>
+</html>

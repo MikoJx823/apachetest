@@ -1,0 +1,296 @@
+#button
+button.backToTop=回頁頂
+button.back=返回
+button.print=列印
+button.donate=繼續
+button.checkout=前往付款
+button.backToHomepage=返回主頁
+button.confirmContinue=確認及提交
+
+#header
+header.english=English
+header.chinese=中文
+#menu bar
+menu.normalDonation=一般捐款
+menu.specialDonation=特別捐贈
+menu.charitySales=慈善銷售
+menu.councilWebsite=機構主頁
+menu.shoppingBag=購物袋
+menu.orderDetails=訂單詳情
+menu.total=小計
+#footer
+footer.donationPage=籌款專頁
+footer.copyRight=版權所有©
+footer.naac=鄰舍輔導會
+#share
+share.fb.label=分享至社交網絡
+share.fb.image=分享至Facebook
+share.weibo.image=分享至微博
+#meta
+meta.naac=鄰舍輔導會
+meta.charitySales.productCat.doorGift=慈善銷售 - 產品分類 - 小禮品
+meta.normalDonation=一般捐款
+meta.donation.medicalFees=為貧病長者籌募贈醫施藥經費
+meta.walkthon.sponsor=請贊助本人參加「助鄰扶老步行顯愛心2016」
+meta.walkthon=助鄰扶老步行顯愛心2016
+meta.charitySales.buffetDinner=慈善銷售 - 溫馨母親節自助晚餐
+
+
+
+
+#NORMAL AND SPECIAL DONATION
+
+#donation steps
+donation.header.note=請支持鄰舍輔導會社會服務工作
+donation.step1=捐款金額
+donation.step2=個人資料
+donation.step3=核對資料
+donation.step4=確定捐款
+
+#donation fail success
+donation.success.msg=捐款成功，謝謝您
+donation.payment.ref=付款編號 :
+donation.button.browseAgain=返回主頁
+donation.fail.msg=不好意思，交易失敗。
+donation.fail.text=您的交易未能成功。請按「返回」重新開始。
+
+#donation alert
+donation.alert.plsEnterAmount=請輸入捐贈金額
+donation.alert.plsEnterValidAmount=請填寫全額數字 ，在金額中請不要使用符號  ，例如:13,222
+donation.alert.plsEnterWholeNum=請填寫整數金額  ，在金額中請不要使用符號  ，例如:13,222
+donation.alert.lowestAmount=最低金額為港幣100元，感謝您的愛心捐款
+
+donation.alert.plsSelectTitle=請選擇稱謂
+donation.alert.plsInsertNameEng=請輸入您的英文姓名
+donation.alert.nameInEnglish=姓名必須輸入英文
+donation.alert.plsEnterEmail=請輸入電郵地址
+donation.alert.emailFormat=請輸入有效的電郵地址
+donation.alert.plsEnterContact=請輸入聯絡電話
+donation.alert.contactNoSymbols=輸入的電話號碼至少為8位數字, 請勿輸入符號或空格
+donation.alert.contact8Numbers=輸入的電話號碼至少為8位數字
+donation.alert.plsSelectCountry=請選擇國家
+donation.alert.plsAgreeTnC=請同意有關條款及細則
+donation.alert.plsInsertCompanyNameEng=請輸入公司名稱（英文）
+donation.alert.plsInsertCompanyNameChi=請輸入公司名稱（中文）
+donation.alert.plsInsertJobTitle=請輸入職位
+donation.alert.plsSelectReceipt=請選擇收據選擇
+
+#step 1 index
+donation.amount=捐款金額
+donation.others=其他金額  HKD
+donation.others.placeHolder=請輸入金額
+donation.type=捐款性質
+donation.type.oneTime=一次過捐款
+donation.type.monthly=每月捐款
+donation.donateTo=受惠對象
+donation.donateTo.naac=所有服務對象
+donation.donateTo.elderly=長者
+donation.donateTo.familyChild=家庭及兒童
+donation.donateTo.disablities=弱能人士
+
+donation.quote=作為以誠信、希望與愛心而建基於香港的多元化服務非政府機構，我們致力提供卓越專業服務，以共同發展互相關懷、尊重及分享的社會。
+
+donation.special.imageAlt=為貧病長者籌募贈醫施藥經費
+
+#step 2 personal info
+donation.personal=個人捐款
+donation.company=公司捐款 
+
+donation.form.requiredField=必須填寫
+donation.form.title.field=稱謂
+donation.form.title.plsSelect=請選擇
+donation.form.title.Mr=先生
+donation.form.title.Ms=女士
+donation.form.nameEng.field=英文姓名
+donation.form.nameEng.placeHolder=請輸入英文
+donation.form.nameChi.field=中文姓名
+donation.form.nameChi.placeHolder=請輸入中文
+donation.form.receiptHeader=收據抬頭
+donation.form.receiptHeader.placeHolder=如有別於捐款人名稱
+donation.form.companyName.placeHolder=如有別於公司名稱
+donation.form.receiptChoice.field=收據選擇
+donation.form.receiptChoice.radioButton1=電郵收據
+donation.form.receiptChoice.radioButton2=毋需發收據
+donation.form.email.field=電郵地址
+donation.form.contact.field=聯絡電話
+donation.form.country.field=國家
+donation.form.address.field=地址
+donation.form.address.roomOrFloor=室 / 層 / 郵箱
+donation.form.address.centreOrBuilding=大廈 / 座 / 樓
+donation.form.address.street=街道
+donation.form.companyNameEng.field=英文公司名稱
+donation.form.companyNameChi.field=中文公司名稱
+donation.form.jobTitle.field=職位
+donation.form.contactName=聯絡人
+
+donation.form.iAgree.label=本人同意有關
+donation.form.termsAndCondition=條款及細則。
+applicant.form.termsAndCondition=參加者須知。
+donation.form.detailsPrivacy.label=本會擬使用您的個人資料（姓名、地址、電話、電郵及傳真）以作日後聯絡、籌款、宣傳活動、訓練課程或收集意見等推廣用途。除非本會已取得您的同意或不反對通知，否則本會並不可以如此使用您的個人資料。
+donation.form.newsletterSubscribe=本人同意鄰舍輔導會使用本人個人資料作上述推廣用途 。
+
+donation.special.toUnit=受惠單位
+
+#step 3 confirm
+donation.message.plsConfirmInfo=請核對以下資料。
+donation.finalconfirmation=這網上商店位於香港，請確認這項交昜，交昜一經確認，將<u>不能</u>更改或取消。
+
+# walkIndex.jsp
+walk.title=助鄰扶老步行顯愛心2016
+walk.detail=詳請
+walk.date.label=日期：
+walk.date=2016年12月11日（星期日）
+walk.time.label=時間：
+walk.time=上午十時正
+walk.venue.label=步行地點：
+walk.venue=大埔海濱公園
+walk.route.label=路線:
+walk.route=由露天劇場至大喜街(途經回歸紀念塔及海濱長廊)
+walk.donationPurpose.subtitle=籌募目的
+walk.donationPurpose=籌募多項非政府資助服務經費，藉以改善弱勢社群的生活。
+walk.eventDetails.subtitle=活動內容
+walk.eventDetails=身體力行，踏出一步一步，為社區內弱勢社群出力。籌募活動當日設有起步禮、表演及頒獎禮。<br>特別推介：網上最高個人籌款奬<br>(本會會以電郵定期通知個別參加者最新籌款數字)<br>網上報名參加截止日期：2016年11月30日<br>網上贊助捐款截止日期：2016年12月31日
+walk.button.joinNow=立即參加
+
+walk.application.close=活動已經停止報名，謝謝您
+walk.donation.close=活動已經結束，謝謝您
+
+# walkInfo.jsp # walkInfoConfirm.jsp
+walk.personalInfo.step=個人資料
+walk.confirmInfo.step=核對資料
+walk.finish.step=完成報名
+walk.button.join=繼續
+walk.duplicated=電郵地址和聯絡電話已經被登記,請再輸入。
+
+# walkSuccess.jsp # walkDonationSuccess.jsp # wFail.jsp
+walk.successJoin.msg=成功參與，謝謝您
+walk.refNumber=參加編號 :
+walk.inviteFriend.label=請以以下連結邀請親友贊助
+walk.successCopy.msg=成功複製
+walk.failCopy.msg=未能複製! 請重試.
+walk.button.copyURL=複製連結
+walk.successSponsor.msg=成功贊助，謝謝您
+walk.payment.ref=付款編號 :
+walk.sponsor.to=贊助對象
+walk.fail.msg=抱歉！未能完成贊助!
+walk.fail.text=交易未能成功。請按「返回」重新開始。
+
+
+
+
+#Charity Merchandise
+
+# leftMenu.jsp
+sales.productCategory=產品分類 
+sales.donateTo=受惠對象
+sales.category=分類
+sales.all=全部
+sales.others=其他
+
+# productList.jsp
+sales.allProducts=產品
+sales.serviceUnit=服務單位:
+sales.soldOut.msg=抱歉, 該類商品暫時已售罄 ！
+# productInfo.jsp
+sales.useDate=使用日期
+sales.addToBag=加入購物袋
+sales.deliveryMethod=送貨方式
+sales.productDetails=產品詳情
+sales.alert.InsertQuantity=請選擇數量
+sales.alert.notEnoughStock=暫時存貨不足
+sales.alert.soldout=售罄 ！
+
+# payCancel.jsp
+checkout.payment.cancel=取消付款。
+# payFail.jsp
+checkout.payment.fail=不好意思，交易失敗。
+# paySuccess.jsp
+checkout.payment.success=成功付款，謝謝您。
+checkout.payment.ref=付款編號 :
+
+#checkout
+checkout.payment=付款
+checkout.product=商品
+checkout.productAndQuantity=產品及數量
+checkout.deliveryDetails=送貨資料
+checkout.confirmOrder=核對資料
+
+checkout.button.continueShopping=繼續購物
+checkout.button.checkout=結帳
+checkout.button.continue=繼續
+checkout.button.insertDonation=加入捐款
+checkout.button.cancelDonation=取消捐款
+
+checkout.orderDetails=訂單詳情
+checkout.item=慈善銷售項目
+checkout.quantity=數量
+checkout.price=單價
+checkout.subTotal=小計
+checkout.myExtraDonation=額外捐款:
+checkout.extraDonation=額外捐款
+checkout.grandTotal=總數 
+
+checkout.personalInfo=訂購人資料
+checkout.form.requiredField=必須填寫
+checkout.form.title.field=稱謂
+checkout.form.title.plsSelect=請選擇
+checkout.form.title.Mr=先生
+checkout.form.title.Ms=女士
+checkout.form.nameEng.field=英文姓名
+checkout.form.nameChi.field=中文姓名
+checkout.form.contact.field=聯絡電話
+checkout.form.email.field=電郵地址
+checkout.form.address.field=地址
+checkout.form.onlyHK.label=(只限香港地址)
+checkout.form.address.roomOrFloor=室 / 層 / 郵箱
+checkout.form.address.centreOrBuilding=大廈 / 座 / 樓
+checkout.form.address.street=街道
+checkout.form.receiptHeader=收據抬頭
+checkout.form.receiptHeader.placeHolder=如有別於捐款人名稱
+checkout.form.receiptChoice.field=收據選擇
+checkout.form.receiptChoice.radioButton1=電郵收據
+checkout.form.receiptChoice.radioButton2=毋需發收據
+
+checkout.form.receipientInfo=收件人資料
+checkout.form.differentRecipient.checkbox=如收件人與訂購人的資料不同，請勾選此項。
+checkout.form.iAgree.label=本人同意有關
+checkout.form.termsAndCondition=條款及細則。
+checkout.form.detailsPrivacy.label=本會擬使用您的個人資料（姓名、地址、電話、電郵及傳真）以作日後聯絡、籌款、宣傳活動、訓練課程或收集意見等推廣用途。除非本會已取得您的同意或不反對通知，否則本會並不可以如此使用您的個人資料。
+checkout.form.newsletterSubscribe=本人同意鄰舍輔導會使用本人個人資料作上述推廣用途 。
+
+checkout.confirmInfo.text=請核對以下資料。
+
+checkout.alert.minimumDonate=最低金額為港幣1元，感謝您的愛心捐款。
+checkout.alert.validAmount=請填寫有效的其他金額   ，在金額中請不要使用符號  ，例如:13,222
+checkout.alert.validQuantity=請輸入數量
+checkout.alert.plsSelectTitle=請選擇訂購人的稱謂
+checkout.alert.plsInsertNameEng=請輸入訂購人的英文姓名
+checkout.alert.nameInEnglish=必須輸入英文
+checkout.alert.plsEnterContact=請輸入訂購人的聯絡電話
+checkout.alert.contactNoSymbols=輸入的電話號碼最少為8位數字，請勿輸入符號或空格
+checkout.alert.contact8Numbers=輸入的電話號碼最少為8位數字
+checkout.alert.plsEnterEmail=請輸入訂購人電郵地址
+checkout.alert.emailFormat=請輸入有效的電郵地址
+checkout.alert.plsAgreeTnC=請同意有關條款及細則
+checkout.alert.plsSelectTitle.recipient=請選擇收件人的稱謂
+checkout.alert.plsInsertNameEng.recipient=請輸入收件人的英文姓名
+checkout.alert.plsEnterContact.recipient=請輸入收件人的聯絡電話
+
+
+
+# OTHERS
+
+# naac.jsp
+naac.sidebar.title=網上捐款
+naac.sidebar.item1=贈醫施藥惠長者 
+naac.sidebar.item2=弱能人士公開就業裝備計劃
+naac.sidebar.item3=慈善銷售
+# tnc_iframe.html
+tnc.title=條款及細則
+tnc.text1=
+tnc.text2=
+tnc.button.close=關閉
+# sessionTimeout.jsp # error.jsp
+error.sessionTimeout.title=交易逾時
+error.sessionTimeout.errorMsg=交易時限已過時，交易未能完成，
+error.clickHereToReturn=按此返回主目錄

@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.text.*,java.util.Calendar,java.util.*,com.project.bean.*,com.project.pulldown.*,com.project.service.*,com.project.util.*" contentType="text/html; charset=utf-8"%>
+<%@ page language="java" import="java.text.*,java.util.Calendar,java.util.*,com.project.util.*" contentType="text/html; charset=utf-8"%>
 <%@ page contentType="text/html; charset=utf-8"%>
 <%
 	response.setHeader("Cache-Control", "no-store"); //HTTP 1.1

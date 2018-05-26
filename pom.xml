@@ -63,6 +63,6 @@
 	</dependency>
   </dependencies>
   <build>
-    <finalName>navalli</finalName>
+    <finalName>ROOT</finalName>
   </build>
 </project>

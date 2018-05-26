@@ -8,7 +8,7 @@
 	response.setCharacterEncoding("UTF-8");
 	request.setCharacterEncoding("UTF-8");
 	
-	PropertiesUtil propUtil = new PropertiesUtil();
+	//PropertiesUtil propUtil = new PropertiesUtil();
 	//String basePath = propUtil.getProperty("hostAddr") + propUtil.getProperty("virtualHost");
 	String basePath = StringUtil.getHostAddress();
 	//String basePath = "http://localhost:8080/navalli/";	

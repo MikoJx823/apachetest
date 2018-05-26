@@ -114,9 +114,9 @@
 			        </li>
 			        <li style="padding:0px;margin:0px;"><a href="#!" class="li-icon" style="width:30px;height:30px;line-height:33px;" id="trigger-overlay"><i class="lil-search"></i></a></li>
 			    </ul>
-	        	<div id="navbar" class="navbar-collapse collapse" style="display:none;!important"> <!-- header-topmenu -->
+	        	<div id="navbar" class="navbar-collapse collapse"> <!-- header-topmenu -->
 				    <ul class="nav navbar-nav navbar-left"> 
-				         <li style="min-width:80px;text-align:center;">
+				         <li class="menu-parent-style">
 				            <a href="about.html" style="color:white">New <!--  <i class="caret"></i>--></a>
 				        </li>
 				        
@@ -126,7 +126,7 @@
 				        	
 				        	if(parent.getId() == StaticValueUtil.CAT_MAKEUP){
 				        %>
-				        <li style="min-width:80px;text-align:center;"> <!-- class="active" -->
+				        <li class="menu-parent-style"> <!-- class="active" -->
 				            <a href="index.html" data-toggle="dropdown" aria-haspopup="false" aria-expanded="false" style="color:white"><%=StringUtil.filter(parent.getName()) %> </a>
 				           	<div class="mega-dropdown1 dropdown-menu" style="left:-80px;">
 				           		<%
@@ -152,7 +152,7 @@
 				        		List<CategoryBean> catTag1 = CategoryService.getInstance().getFrontMenuBySqlwhere(sqlWhere + " and tag = 6");
 				        		List<CategoryBean> catTag2 = CategoryService.getInstance().getFrontMenuBySqlwhere(sqlWhere + " and tag = 7");	
 				        %>
-				        <li style="min-width:80px;text-align:center;">
+				        <li class="menu-parent-style"> <!-- style="min-width:80px;text-align:center;" -->
 				            <a href="index.html" data-toggle="dropdown" aria-haspopup="false" aria-expanded="false" style="color:white"><%=StringUtil.filter(parent.getName()) %> </a>
 				           	<div class="mega-dropdown2 dropdown-menu" style="left:-180px;">
 				           		<ul class="mega-subcontent">
@@ -173,7 +173,7 @@
 				        	}
 				        } 
 				        %>		       
-				        <li style="min-width:80px;text-align:center;">
+				        <li class="menu-parent-style">
 				            <a href="#!" data-toggle="dropdown" aria-haspopup="false" aria-expanded="false" style="color:white">Bestseller</a>
 				            <div class="mega-dropdown3 dropdown-menu" style="left:-280px;">
 				           		<ul class="mega-subcontent">
@@ -190,7 +190,7 @@
 				         		</ul>
 				           	</div>				            
 				        </li>
-				        <li style="min-width:80px;text-align:center;">
+				        <li class="menu-parent-style">
 				        	<a href="#!" data-toggle="dropdown" aria-haspopup="false" aria-expanded="false" style="color:white">How To</a>
 				        	<div class="mega-dropdown3 dropdown-menu" style="left:-390px;">
 				           		<ul class="mega-subcontent">
@@ -207,7 +207,7 @@
 				         		</ul>
 				           	</div>		
 				        </li>
-				        <li style="min-width:80px;text-align:center;"><a href="<%=basePath %>cart/faqs.jsp" style="color:white">FAQ</a></li>
+				        <li class="menu-parent-style"><a href="<%=basePath %>cart/faqs.jsp" style="color:white">FAQ</a></li>
 				    </ul>
 			    </div><!--/.nav-collapse -->
 	      	</div><!--/.container -->

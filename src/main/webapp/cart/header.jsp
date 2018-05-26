@@ -10,8 +10,8 @@
 	
 	Date now = new Date();
 	//String basePath = PropertiesUtil.getProperty("hostAddr")+PropertiesUtil.getProperty("virtualHost");
-	String basePath = StringUtil.getHostAddress();
-	
+	//String basePath = StringUtil.getHostAddress();
+	String basePath = "http://jws-app-xyproject.1d35.starter-us-east-1.openshiftapps.com/";	
 	
 	HashMap<String, OrderItemBean> cartMap = (HashMap<String, OrderItemBean>)request.getSession().getAttribute(SessionName.orderCartItemMap) == null ? 
 	new HashMap<String, OrderItemBean>() : (HashMap<String, OrderItemBean>)request.getSession().getAttribute(SessionName.orderCartItemMap);

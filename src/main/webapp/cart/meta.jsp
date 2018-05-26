@@ -3,7 +3,8 @@
 
 <%
 //String basePath = PropertiesUtil.getProperty("hostAddr")+PropertiesUtil.getProperty("virtualHost");
-String basePath = "http://localhost:8080/navalli/"; 
+String basePath = "http://jws-app-xyproject.1d35.starter-us-east-1.openshiftapps.com/";	
+
 %>	
 	
 	<meta charset="UTF-8">

@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.text.*,java.util.Calendar,java.util.*" contentType="text/html; charset=utf-8"%>
+<%@ page language="java" import="java.text.*,java.util.Calendar,java.util.*,com.project.util.*" contentType="text/html; charset=utf-8"%>
 <%@ page contentType="text/html; charset=utf-8"%>
 <%
 	response.setHeader("Cache-Control", "no-store"); //HTTP 1.1
@@ -8,10 +8,9 @@
 	response.setCharacterEncoding("UTF-8");
 	request.setCharacterEncoding("UTF-8");
 	
-	
+	PropertiesUtil propUtil = new PropertiesUtil();
 	//String basePath = propUtil.getProperty("hostAddr") + propUtil.getProperty("virtualHost");
-	String basePath = "http://jws-app-xyproject.1d35.starter-us-east-1.openshiftapps.com/"
-	//String basePath = StringUtil.getHostAddress();
+	String basePath = StringUtil.getHostAddress();
 	//String basePath = "http://localhost:8080/navalli/";	
 	Date now = new Date();
 	

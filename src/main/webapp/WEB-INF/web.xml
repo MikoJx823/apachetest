@@ -52,6 +52,12 @@
   	<description></description>
   	<servlet-class>com.project.servlet.CheckoutSetupServlet</servlet-class>
   </servlet>
+  <servlet>
+  	<servlet-name>SearchResultServlet</servlet-name>
+  	<display-name>SearchResultServlet</display-name>
+  	<description></description>
+  	<servlet-class>com.project.servlet.SearchResultServlet</servlet-class>
+  </servlet>
   <servlet-mapping>
   	<servlet-name>Testing</servlet-name>
   	<url-pattern>/Testing</url-pattern>
@@ -83,5 +89,9 @@
   <servlet-mapping>
   	<servlet-name>CheckoutSetupServlet</servlet-name>
   	<url-pattern>/checkout</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>SearchResultServlet</servlet-name>
+  	<url-pattern>/search</url-pattern>
   </servlet-mapping>
 </web-app>

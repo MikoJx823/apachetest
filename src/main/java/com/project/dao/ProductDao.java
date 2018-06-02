@@ -3,21 +3,16 @@ package com.project.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.log4j.Logger;
 
 import com.project.bean.ProductBean;
-import com.project.bean.ProductPriceBean;
-import com.project.bean.ProductQtyBean;
 import com.project.bean.ProductVariantBean;
 import com.project.util.PropertiesUtil;
 import com.project.util.StaticValueUtil;
-import com.project.util.StringUtil;
 
 
 /* Function :
@@ -331,13 +326,13 @@ public class ProductDao extends GenericDao
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql = "";
-		int pagingRows = 10;
+		int pagingRows = 9;
 		List<ProductBean> result = new ArrayList<ProductBean>();
 		try
 		{
 			conn = ConectionFactory.getConnection();
 			
-			pagingRows = StringUtil.strToInt(PropertiesUtil.getProperty("pagingRows.front.web"));
+			//pagingRows = StringUtil.strToInt(PropertiesUtil.getProperty("pagingRows.front.web"));
 
 			sql = "select * from product " + sqlWhere+" limit ?,?";
 			pstmt = new LoggableStatement(conn, sql);
@@ -576,11 +571,11 @@ public class ProductDao extends GenericDao
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql = "";
-		int pagingRows = 10;
+		int pagingRows = 15;
 		try
 		{
 			conn = ConectionFactory.getConnection();
-			pagingRows = StringUtil.strToInt(PropertiesUtil.getProperty("pagingRows"));
+			//pagingRows = StringUtil.strToInt(PropertiesUtil.getProperty("pagingRows"));
 			
 			sql = "select count(*) as count from product "+sqlWhere;
 			pstmt = new LoggableStatement(conn, sql);	
@@ -621,11 +616,11 @@ public class ProductDao extends GenericDao
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql = "";
-		int pagingRows = 10;
+		int pagingRows = 9;
 		try
 		{
 			conn = ConectionFactory.getConnection();
-			pagingRows = StringUtil.strToInt(PropertiesUtil.getProperty("pagingRows.front.web"));
+			//pagingRows = StringUtil.strToInt(PropertiesUtil.getProperty("pagingRows.front.web"));
 			
 			sql = "select count(*) as count from product "+sqlWhere;
 			pstmt = new LoggableStatement(conn, sql);	

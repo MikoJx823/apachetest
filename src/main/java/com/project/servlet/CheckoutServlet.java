@@ -23,7 +23,6 @@ import com.project.bean.ProductVariantBean;
 import com.project.pulldown.OrderStatusPulldown;
 import com.project.service.OrderService;
 import com.project.service.ProductService;
-import com.project.util.PropertiesUtil;
 import com.project.util.SessionName;
 import com.project.util.StaticValueUtil;
 import com.project.util.StringUtil;
@@ -52,7 +51,7 @@ public class CheckoutServlet extends HttpServlet {
 		response.setHeader("Cache-Control", "no-cache");
 		
 		String errorMsg = "";
-		PropertiesUtil propUtil = new PropertiesUtil();
+		//PropertiesUtil propUtil = new PropertiesUtil();
 		//String basePath = PropertiesUtil.getProperty("hostAddr")+PropertiesUtil.getProperty("virtualHost");
 		String basePath = StringUtil.getHostAddress();
 		/*if (!request.getSession().getAttribute(SessionName.token).equals(request.getParameter(SessionName.token)))
@@ -197,13 +196,15 @@ public class CheckoutServlet extends HttpServlet {
 	  		return;
 		}
 		
-		if(orderBean.getShipcountry().equals("MY")){
+		/*if(orderBean.getShipcountry().equals("MY")){
 			if(orderAmount - discountAmount < StringUtil.strToInt(propUtil.getString("shipping", "shipping.local.min.free"))){
 				deliveryAmount = StringUtil.strToInt(propUtil.getString("shipping", "shipping.fee.local"));
 			}
 		}else{
 			deliveryAmount = StringUtil.strToInt(propUtil.getString("shipping", "shipping.fee.international"));
-		}
+		}*/
+		
+		deliveryAmount = ProductService.getInstance().calShippping(orderAmount - discountAmount, orderBean.getShipcountry());
 		
 		totalAmount = orderAmount - discountAmount + deliveryAmount;
 		

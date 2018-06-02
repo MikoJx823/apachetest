@@ -137,6 +137,21 @@ public class ProductService
 		return products;
 	}
 	
+	public List<ProductBean> getFrontSearchBySqlWhereWithPage(String sqlWhere,int pageIdx){
+		List<ProductBean> products = productDao.getFrontSearchBySqlWhereWithPage(sqlWhere,pageIdx);
+		
+		for(ProductBean product: products ) {
+			List<ProductVariantBean> variant = productDao.getProductVariantListById(product.getId());
+			if(variant.size() > 0) {
+				List<ProductVariantBean> variants = new ArrayList<ProductVariantBean>();
+				variants.add(variant.get(0));
+				product.setProductVariant(variants);
+			}
+		}
+		
+		return products;
+	}
+	
 	public ProductVariantBean getProductVariantByPvid(int pvid){
 		return productDao.getProductVariantByPvid(pvid);
 	}

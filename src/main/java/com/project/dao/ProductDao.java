@@ -356,6 +356,40 @@ public class ProductDao extends GenericDao
 		}
 		return result;
 	}
+	
+	public List<ProductBean> getFrontSearchBySqlWhereWithPage(String sqlWhere, int pageIdx){
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "";
+		int pagingRows = 12;
+		List<ProductBean> result = new ArrayList<ProductBean>();
+		try{
+			conn = ConectionFactory.getConnection();
+			//pagingRows = StringUtil.strToInt(PropertiesUtil.getProperty("pagingRows.front.web"));
+
+			sql = "select * from product " + sqlWhere+" limit ?,?";
+			pstmt = new LoggableStatement(conn, sql);
+			
+			int count = 1;
+			pstmt.setInt(count, pagingRows * (pageIdx-1)); count ++;
+			pstmt.setInt(count, pagingRows);
+			
+			log.info("Executing SQL: " +  ((LoggableStatement) pstmt).getQueryString());
+			rs = pstmt.executeQuery();
+			
+			result = getProductFromResultSet(rs);
+
+			
+		} catch (Exception e)
+		{
+			log.error(sql, e);
+		} finally
+		{
+			DbClose.closeAll(rs, pstmt, conn);
+		}
+		return result;
+	}
 
 	public List<ProductBean> getProductOrderByPrice(int categoryId){
 		Connection conn = null;

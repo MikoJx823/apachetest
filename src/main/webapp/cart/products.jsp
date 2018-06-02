@@ -10,7 +10,6 @@
 	request.setCharacterEncoding("UTF-8");
 	
 	Date now = new Date();
-	//String basePath = PropertiesUtil.getProperty("hostAddr")+PropertiesUtil.getProperty("virtualHost");
 	String basePath = StringUtil.getHostAddress(); 
 	List<ProductBean> products = (List<ProductBean>)request.getAttribute(SessionName.products) == null ? new ArrayList<ProductBean>() : (List<ProductBean>)request.getAttribute(SessionName.products);
 	

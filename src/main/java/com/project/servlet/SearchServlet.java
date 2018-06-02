@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -19,12 +18,12 @@ import com.project.util.StaticValueUtil;
 import com.project.util.StringUtil;
 
 /**
- * Servlet implementation class SearchResultServlet
+ * Servlet implementation class SearchServlet
  */
-public class SearchResultServlet extends HttpServlet {
+public class SearchServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    
-	private static Logger log = Logger.getLogger(SearchResultServlet.class);
+       
+private static Logger log = Logger.getLogger(SearchServlet.class);
 	
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{

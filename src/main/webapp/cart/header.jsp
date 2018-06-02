@@ -118,7 +118,7 @@
 	        	<div id="navbar" class="navbar-collapse collapse"> <!-- header-topmenu -->
 				    <ul class="nav navbar-nav navbar-left"> 
 				         <li class="menu-parent-style">
-				            <a href="about.html" style="color:white">New <!--  <i class="caret"></i>--></a>
+				            <a href="#!" style="color:white">New <!--  <i class="caret"></i>--></a>
 				        </li>
 				        
 				        <%for(CategoryBean parent: parents) {

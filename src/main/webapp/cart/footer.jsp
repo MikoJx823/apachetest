@@ -11,8 +11,8 @@
 <%
     int year = Calendar.getInstance().get(Calendar.YEAR);
 	//String basePath = PropertiesUtil.getProperty("hostAddr")+PropertiesUtil.getProperty("virtualHost");
-	//String basePath = StringUtil.getHostAddress();
-	String basePath = "http://jws-app-xyproject.1d35.starter-us-east-1.openshiftapps.com/";	
+	String basePath = StringUtil.getHostAddress();
+	//String basePath = "http://localhost:8080/navalli/";
 %>
 	<footer class="footer">
 		<div class="container">
@@ -67,9 +67,9 @@
 		<div class="container">
 			<div class="row text-center pos-r">
 				<div class="col-md-7 col-xs-11 col-center col-height-center search-form">
-					<form action="#!" method="POST" class="inputs-bg" id="searchform">
+					<form action="<%=basePath %>search" method="POST" class="inputs-bg" id="searchform">
 						<strong>Type a sentence or word you want to search for, And press Enter.</strong>
-						<input type="text" name="q" class="form-control" placeholder="Search..">
+						<input type="text" name="key" class="form-control" placeholder="Search..">
 					</form>
 				</div>
 			</div>

@@ -9,6 +9,9 @@ import java.util.regex.Pattern;
 
 import org.apache.log4j.Logger;
 
+import com.project.bean.ConfigBean;
+import com.project.service.ConfigService;
+
 import sun.misc.BASE64Encoder;
 
 public class StringUtil {
@@ -86,7 +89,7 @@ public class StringUtil {
 		{
 			String pattern = "#,###,###.##";
 			NumberFormat format = new DecimalFormat(pattern);
-			returnStr = format.format(price);//"HKD "+format.format(price);
+			returnStr = "MYR" + format.format(price);//"HKD "+format.format(price);
 		}
 		catch (Exception e)
 		{
@@ -403,24 +406,32 @@ public class StringUtil {
 	
 	public static String getBasePath() {
 		
-		String enviroment = StringUtil.filter(PropertiesUtil.getProperty("enviroment"));
-		if(enviroment.equals(StaticValueUtil.ENV_PROD)) {
-			return StringUtil.filter(PropertiesUtil.getProperty("basePath.prod"));
-		}else if(enviroment.equals(StaticValueUtil.ENV_UAT)) {
-			return StringUtil.filter(PropertiesUtil.getProperty("basePath.uat"));
+		ConfigBean config = ConfigService.getInstance().getBeanByName(StaticValueUtil.CONFIG_CURRENT_ENV);
+		
+		if(StringUtil.filter(config.getValue()).equals(StaticValueUtil.ENV_PROD)) {
+			ConfigBean hostConfig = ConfigService.getInstance().getBeanByName(StaticValueUtil.CONFIG_ENV_PROD_DIR);
+			return hostConfig.getValue();
+		}else if(StringUtil.filter(config.getValue()).equals(StaticValueUtil.ENV_UAT)) {
+			ConfigBean hostConfig = ConfigService.getInstance().getBeanByName(StaticValueUtil.CONFIG_ENV_UAT_DIR);
+			return hostConfig.getValue();
 		}else {
-			return StringUtil.filter(PropertiesUtil.getProperty("basePath.local"));
+			ConfigBean hostConfig = ConfigService.getInstance().getBeanByName(StaticValueUtil.CONFIG_ENV_LOCAL_DIR);
+			return hostConfig.getValue();
 		}
 	}
 	
 	public static String getHostAddress() {
-		String enviroment = StringUtil.filter(PropertiesUtil.getProperty("enviroment"));
-		if(enviroment.equals(StaticValueUtil.ENV_PROD)) {
-			return StringUtil.filter(PropertiesUtil.getProperty("hostAddr.prod"));
-		}else if(enviroment.equals(StaticValueUtil.ENV_UAT)) {
-			return StringUtil.filter(PropertiesUtil.getProperty("hostAddr.uat"));
+		ConfigBean config = ConfigService.getInstance().getBeanByName(StaticValueUtil.CONFIG_CURRENT_ENV);
+		
+		if(StringUtil.filter(config.getValue()).equals(StaticValueUtil.ENV_PROD)) {
+			ConfigBean hostConfig = ConfigService.getInstance().getBeanByName(StaticValueUtil.CONFIG_ENV_PROD_URL);
+			return hostConfig.getValue();
+		}else if(StringUtil.filter(config.getValue()).equals(StaticValueUtil.ENV_UAT)) {
+			ConfigBean hostConfig = ConfigService.getInstance().getBeanByName(StaticValueUtil.CONFIG_ENV_UAT_URL);
+			return hostConfig.getValue();
 		}else {
-			return StringUtil.filter(PropertiesUtil.getProperty("hostAddr.local"));
+			ConfigBean hostConfig = ConfigService.getInstance().getBeanByName(StaticValueUtil.CONFIG_ENV_LOCAL_URL);
+			return hostConfig.getValue();
 		}
 	}
 	

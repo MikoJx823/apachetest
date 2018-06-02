@@ -232,4 +232,17 @@ public class StaticValueUtil
 	public static final String ENV_LOCAL = "L";
 	public static final String ENV_UAT = "U";
 	public static final String ENV_PROD = "P";
+	
+	
+	public static final String CONFIG_CURRENT_ENV = "CURRENT_ENV";
+	public static final String CONFIG_ENV_LOCAL_URL = "ENV_LOCAL_URL";
+	public static final String CONFIG_ENV_LOCAL_DIR = "ENV_LOCAL_DIR";
+	public static final String CONFIG_ENV_UAT_URL = "ENV_UAT_URL";
+	public static final String CONFIG_ENV_UAT_DIR = "ENV_UAT_DIR";
+	public static final String CONFIG_ENV_PROD_URL = "ENV_PROD_URL";
+	public static final String CONFIG_ENV_PROD_DIR = "ENV_PROD_DIR";
+	public static final String CONFIG_SHIPPING_FEE_LOCAL = "SHIPPING_FEE_LOCAL";
+	public static final String CONFIG_SHIPPING_FEE_OVERSEA = "SHIPPING_FEE_OVERSEA";
+	public static final String CONFIG_SHIPPING_LIMIT_LOCAL = "SHIPPING_LIMIT_LOCAL";
+	
 }

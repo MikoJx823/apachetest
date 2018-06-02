@@ -32,11 +32,11 @@ public class ConectionFactory
 					log.info("Cann't lookup 'java:comp/env'");
 					return null;
 				}
-				ds = (DataSource) ctx.lookup("jdbc/root");
+				ds = (DataSource) ctx.lookup("jdbc/project");
 			}
 			if (ds == null)
 			{
-				log.info("Cann't lookup 'jdbc/root'");
+				log.info("Cann't lookup 'jdbc/project'");
 
 			}
 			conn = ds.getConnection();

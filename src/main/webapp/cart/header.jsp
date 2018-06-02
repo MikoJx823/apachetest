@@ -10,8 +10,8 @@
 	
 	Date now = new Date();
 	//String basePath = PropertiesUtil.getProperty("hostAddr")+PropertiesUtil.getProperty("virtualHost");
-	//String basePath = StringUtil.getHostAddress();
-	String basePath = "http://jws-app-xyproject.1d35.starter-us-east-1.openshiftapps.com/";	
+	String basePath = StringUtil.getHostAddress();
+	
 	
 	HashMap<String, OrderItemBean> cartMap = (HashMap<String, OrderItemBean>)request.getSession().getAttribute(SessionName.orderCartItemMap) == null ? 
 	new HashMap<String, OrderItemBean>() : (HashMap<String, OrderItemBean>)request.getSession().getAttribute(SessionName.orderCartItemMap);
@@ -94,10 +94,11 @@
 			                        <a href="<%=basePath %>productdetails?id=<%=orderItem.getPid()%>"><img src="<%=basePath %>images/products/<%=StringUtil.filter(orderItem.getProductimage()) %>" class="img-responsive product-img" alt=""></a>
 			                        <div class="product-details">
 			                            <p class="product-title clearfix"><a href="<%=basePath %>productdetails?id=<%=orderItem.getPid()%>"><%=StringUtil.filter(orderItem.getProductname()) %></a></p>
+			                            <p class="product-price clearfix">Qty : <%=orderItem.getQuantity() %>
 			                            <%if(!"".equals(StringUtil.filter(orderItem.getVariantname()))) { %>
 			                            <p class="product-price clearfix">Variant : <%=StringUtil.filter(orderItem.getVariantname()) %></p>
 			                            <%} %>
-			                            <p class="product-price clearfix">Price : <%=StringUtil.formatFrontCurrencyPrice(orderItem.getPrice()) %>
+			                            <p class="product-price clearfix">Price : <%=StringUtil.formatFrontCurrencyPrice(orderItem.getPrice() - orderItem.getDiscount()) %>
 											<!--  <ins>
 												<span class="amount">$66.50</span>
 											</ins> -->
@@ -138,7 +139,7 @@
 				           		<li style="display:block;padding:3px 20px;"><p><b><%=StringUtil.filter(CategoryTagPulldown.getText(tag)) %></b></p></li>
 				           		<!-- <li style="display:block;padding:0px 20px;"><h4>Test</h4></li> class="mega-tag" -->
 				                <%for(CategoryBean category : categories){ %>
-				                <li class="topmenu-subcat"><span onClick="javascript:window.location.href='#'"><%=StringUtil.filter(category.getName()) %></span>  </li> <!-- class="active" -->
+				                <li class="topmenu-subcat"><span onClick="javascript:window.location.href='<%=basePath%>products?categoryid=<%=category.getId()%>'"><%=StringUtil.filter(category.getName()) %></span>  </li> <!-- class="active" -->
 				                <!-- <a href="index.html" class="clearfix " style="text-transform:none;"><%=StringUtil.filter(category.getName()) %></a> -->
 				                <%} %>
 				            	</ul>
@@ -157,13 +158,13 @@
 				           	<div class="mega-dropdown2 dropdown-menu" style="left:-180px;">
 				           		<ul class="mega-subcontent">
 				           		<%for(CategoryBean cat : catTag1 ) { %>
-				           		<li class="topmenu-subcat"><span onClick="javascript:window.location.href='#'"><%=StringUtil.filter(cat.getName()) %></span>  </li>
+				           		<li class="topmenu-subcat"><span onClick="javascript:window.location.href='<%=basePath%>products?categoryid=<%=cat.getId()%>'"><%=StringUtil.filter(cat.getName()) %></span>  </li>
 				                <!--<li><a href="index.html" style="text-transform: none;"><%=StringUtil.filter(cat.getName()) %></a></li>  class="active" -->
 				            	<%} %>
 				         		</ul>
 				         		<ul class="mega-subcontent">
 				           		<%for(CategoryBean cat : catTag2 ) { %>
-				           		<li class="topmenu-subcat"><span onClick="javascript:window.location.href='#'"><%=StringUtil.filter(cat.getName()) %></span>  </li>
+				           		<li class="topmenu-subcat"><span onClick="javascript:window.location.href='<%=basePath%>products?categoryid=<%=cat.getId()%>'"><%=StringUtil.filter(cat.getName()) %></span>  </li>
 				                <!-- <li><a href="index.html" style="text-transform: none;"><%=StringUtil.filter(cat.getName()) %></a></li> class="active" -->
 				            	<%} %>
 				         		</ul>

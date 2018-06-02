@@ -1,6 +1,6 @@
 package com.project.pulldown;
 
-import com.project.util.StringUtil;
+import com.project.util.StaticValueUtil;
 
 public class CountryPulldown {
 	//https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2
@@ -29,8 +29,7 @@ public class CountryPulldown {
 		result += "<option value=''>" + "--- Please Select --- " + "</option>\n";
 		
 		for(int i = 0 ; i < value.length; i++){	
-			
-			if(value[i].equals(initValue) || (StringUtil.filter(initValue).equals("") && value[i].equals("MY")) ){
+			if(value[i].equals(initValue)){
 				result += "<option value='" + value[i] + "' selected >" + name[i] + "</option>\n";  
 			}else{
 				result += "<option value='" + value[i] + "'>" + name[i] + "</option>\n";  

@@ -158,7 +158,7 @@ public class CategoryDao extends GenericDao{
 
 			pstmt = new LoggableStatement(conn, sql);
 
-			log.info("Executing SQL:" + ((LoggableStatement) pstmt).getQueryString());
+			//log.info("Executing SQL:" + ((LoggableStatement) pstmt).getQueryString());
 			
 			rs = pstmt.executeQuery();
 			

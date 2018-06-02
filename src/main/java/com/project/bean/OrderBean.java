@@ -36,20 +36,20 @@ public class OrderBean extends GenericBean{
 	private String buyercountry = "";
 	
 	//SHIPPING RELATED INFO 
-	private String isshipdifferent = "";
-	private String shipfirstname = "";
-	private String shiplastname = "";
-	private String shipcompanyname = "";
-	private String shipaddress1 = "";
-	private String shipaddress2 = "";
-	private String shippostcode = "";
-	private String shiptown = "";
-	private String shipstate = "";
-	private String shipcountry = "";
-	private String tracknumber = "";
+	private String isshipdifferent;
+	private String shipfirstname;
+	private String shiplastname;
+	private String shipcompanyname;
+	private String shipaddress1;
+	private String shipaddress2;
+	private String shippostcode;
+	private String shiptown;
+	private String shipstate;
+	private String shipcountry;
+	private String tracknumber;
 	
-	private String buyerremark = "";
-	private String adminremark = "";
+	private String buyerremark;
+	private String adminremark;
 	
 	//CARD RELATED INFO
 	private String remark;

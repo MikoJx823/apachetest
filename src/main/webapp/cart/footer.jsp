@@ -11,8 +11,8 @@
 <%
     int year = Calendar.getInstance().get(Calendar.YEAR);
 	//String basePath = PropertiesUtil.getProperty("hostAddr")+PropertiesUtil.getProperty("virtualHost");
-	String basePath = StringUtil.getHostAddress();
-	//String basePath = "http://localhost:8080/navalli/";
+	//String basePath = StringUtil.getHostAddress();
+	String basePath = "http://jws-app-xyproject.1d35.starter-us-east-1.openshiftapps.com/";	
 %>
 	<footer class="footer">
 		<div class="container">

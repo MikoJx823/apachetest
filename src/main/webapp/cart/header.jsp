@@ -117,8 +117,8 @@
 			    </ul>
 	        	<div id="navbar" class="navbar-collapse collapse"> <!-- header-topmenu -->
 				    <ul class="nav navbar-nav navbar-left"> 
-				         <li class="menu-parent-style">
-				            <a href="#!" style="color:white">New <!--  <i class="caret"></i>--></a>
+				         <li class="menu-parent-style" style="top:-3px;">
+				            <a href="!#" style="color:white;font-size:10pt;font-weight:900;">New <!--  <i class="caret"></i>--></a>
 				        </li>
 				        
 				        <%for(CategoryBean parent: parents) {
@@ -127,11 +127,11 @@
 				        	
 				        	if(parent.getId() == StaticValueUtil.CAT_MAKEUP){
 				        %>
-				        <li class="menu-parent-style"> <!-- class="active" -->
-				            <a href="index.html" data-toggle="dropdown" aria-haspopup="false" aria-expanded="false" style="color:white"><%=StringUtil.filter(parent.getName()) %> </a>
-				           	<div class="mega-dropdown1 dropdown-menu" style="left:-80px;">
+				        <li class="menu-parent-style" style="top:-3px;"> <!-- class="active" -->
+				            <a href="index.html" data-toggle="dropdown" aria-haspopup="false" aria-expanded="false" style="color:white;font-size:10pt;font-weight:900;"><%=StringUtil.filter(parent.getName()) %> </a>
+				           	<div class="mega-dropdown1 dropdown-menu" style="top:60px;left:-80px;opacity:0.95;">
 				           		<%
-				           		for(int tag: CategoryTagPulldown.value) {
+				           		/*for(int tag: CategoryTagPulldown.value) {
 				           			String sqlWhere = " where parentid = " + parent.getId() + " and tag = " + tag + " and status = " + StaticValueUtil.Active;
 				           			List<CategoryBean> categories = CategoryService.getInstance().getFrontMenuBySqlwhere(sqlWhere);
 				           		%>
@@ -143,7 +143,69 @@
 				                <!-- <a href="index.html" class="clearfix " style="text-transform:none;"><%=StringUtil.filter(category.getName()) %></a> -->
 				                <%} %>
 				            	</ul>
-				           		<%} %>
+				           		<%}*/ %>
+				           		<%
+				           		String sqlWhere = " where parentid = " + parent.getId() + " and tag = " + StaticValueUtil.TAG_FACE + " and status = " + StaticValueUtil.Active;
+				           		List<CategoryBean> faceCat = CategoryService.getInstance().getFrontMenuBySqlwhere(sqlWhere);
+				           		%>
+				           		<ul class="mega-subcontent">
+				           		<li class="subtagmenu-padding"><span style="font-weight:900;"><%=StringUtil.filter(CategoryTagPulldown.getText(StaticValueUtil.TAG_FACE)) %></span></li>
+				           		
+				           		<%	for(int i = 0; i < faceCat.size(); i++){//for(CategoryBean category : faceCat){ 
+				           				CategoryBean category = faceCat.get(i);
+				           				String bottom = "padding-bottom:10px";
+				           				if(i + 1 == faceCat.size()) bottom = "padding-bottom:20px";
+				           		%>
+				                <li class="topmenu-subcat submenu-padding" ><span onClick="javascript:window.location.href='<%=basePath%>products?categoryid=<%=category.getId()%>'"><%=StringUtil.filter(category.getName()) %></span>  </li> <!-- class="active" -->
+				                <%} %>
+				            	</ul>
+				           		
+				           		<%
+				           		sqlWhere = " where parentid = " + parent.getId() + " and tag = " + StaticValueUtil.TAG_EYE + " and status = " + StaticValueUtil.Active;
+				           		List<CategoryBean> eyeCat = CategoryService.getInstance().getFrontMenuBySqlwhere(sqlWhere);
+				           		%>
+				           		<ul class="mega-subcontent">
+				           		<!--  style="display:block;padding-top:20px;padding-bottom:10px;padding-left:35px;" -->
+				           		<li class="subtagmenu-padding"><span style="font-weight:900;"><%=StringUtil.filter(CategoryTagPulldown.getText(StaticValueUtil.TAG_EYE)) %></span></li>
+				           		<%	for(CategoryBean category : eyeCat){ 	%>
+				           		<!-- style="padding-top:10px;padding-left:35px;padding-bottom:10px;" -->
+				                <li class="topmenu-subcat submenu-padding" ><span onClick="javascript:window.location.href='<%=basePath%>products?categoryid=<%=category.getId()%>'"><%=StringUtil.filter(category.getName()) %></span>  </li> <!-- class="active" -->
+				                <%} %>
+				            	</ul>
+				           		
+				           		<%
+				           		sqlWhere = " where parentid = " + parent.getId() + " and tag = " + StaticValueUtil.TAG_CHEEKS + " and status = " + StaticValueUtil.Active;
+				           		List<CategoryBean> cheekCat = CategoryService.getInstance().getFrontMenuBySqlwhere(sqlWhere);
+				           		%>
+				           		<ul class="mega-subcontent2">
+				           		<li class="subtagmenu-padding"><span style="font-weight:900;"><%=StringUtil.filter(CategoryTagPulldown.getText(StaticValueUtil.TAG_CHEEKS)) %></span></li>
+				           		<%	for(CategoryBean category : cheekCat){ 	%>
+				                <li class="topmenu-subcat submenu-padding" ><span onClick="javascript:window.location.href='<%=basePath%>products?categoryid=<%=category.getId()%>'"><%=StringUtil.filter(category.getName()) %></span>  </li> <!-- class="active" -->
+				                <%} %>
+				            	</ul>
+				           		
+				           		<%
+				           		sqlWhere = " where parentid = " + parent.getId() + " and tag = " + StaticValueUtil.TAG_LIPS + " and status = " + StaticValueUtil.Active;
+				           		List<CategoryBean> lipCat = CategoryService.getInstance().getFrontMenuBySqlwhere(sqlWhere);
+				           		%>
+				           		<ul class="mega-subcontent2">
+				           		<li class="subtagmenu-padding"><span style="font-weight:900;"><%=StringUtil.filter(CategoryTagPulldown.getText(StaticValueUtil.TAG_LIPS)) %></span></li>
+				           		<%	for(CategoryBean category : lipCat){ 	%>
+				                <li class="topmenu-subcat submenu-padding" ><span onClick="javascript:window.location.href='<%=basePath%>products?categoryid=<%=category.getId()%>'"><%=StringUtil.filter(category.getName()) %></span>  </li> <!-- class="active" -->
+				                <%} %>
+				            	</ul>
+				           		
+				           		<%
+				           		sqlWhere = " where parentid = " + parent.getId() + " and tag = " + StaticValueUtil.TAG_TOOLS + " and status = " + StaticValueUtil.Active;
+				           		List<CategoryBean> toolsCat = CategoryService.getInstance().getFrontMenuBySqlwhere(sqlWhere);
+				           		%>
+				           		<ul class="mega-subcontent2">
+				           		<li class="subtagmenu-padding"><span style="font-weight:900;"><%=StringUtil.filter(CategoryTagPulldown.getText(StaticValueUtil.TAG_TOOLS)) %></span></li>
+				           		<%	for(CategoryBean category : toolsCat){ 	%>
+				                <li class="topmenu-subcat submenu-padding" ><span onClick="javascript:window.location.href='<%=basePath%>products?categoryid=<%=category.getId()%>'"><%=StringUtil.filter(category.getName()) %></span>  </li> <!-- class="active" -->
+				                <%} %>
+				            	</ul>
+				           		
 				           	</div>
 				        </li>
 				        <%	
@@ -153,18 +215,31 @@
 				        		List<CategoryBean> catTag1 = CategoryService.getInstance().getFrontMenuBySqlwhere(sqlWhere + " and tag = 6");
 				        		List<CategoryBean> catTag2 = CategoryService.getInstance().getFrontMenuBySqlwhere(sqlWhere + " and tag = 7");	
 				        %>
-				        <li class="menu-parent-style"> <!-- style="min-width:80px;text-align:center;" -->
-				            <a href="index.html" data-toggle="dropdown" aria-haspopup="false" aria-expanded="false" style="color:white"><%=StringUtil.filter(parent.getName()) %> </a>
-				           	<div class="mega-dropdown2 dropdown-menu" style="left:-180px;">
+				        <li class="menu-parent-style" style="top:-3px;"> <!-- style="min-width:80px;text-align:center;" -->
+				            <a href="index.html" data-toggle="dropdown" aria-haspopup="false" aria-expanded="false" style="color:white;font-size:10pt;font-weight:900;"><%=StringUtil.filter(parent.getName()) %> </a>
+				           	<div class="mega-dropdown2 dropdown-menu" style="top:60px;left:-180px;opacity:0.95;">
 				           		<ul class="mega-subcontent">
-				           		<%for(CategoryBean cat : catTag1 ) { %>
-				           		<li class="topmenu-subcat"><span onClick="javascript:window.location.href='<%=basePath%>products?categoryid=<%=cat.getId()%>'"><%=StringUtil.filter(cat.getName()) %></span>  </li>
+				           		<% for(int i = 0; i < catTag1.size(); i++) { //for(CategoryBean cat : catTag1 ) { 
+				           			CategoryBean cat = catTag1.get(i);
+				           			String top = "padding-top:10px;";
+				           			
+				           			if(i == 0 ) top = "padding-top:20px;";
+				           		%>
+				           		<!-- style="padding-top:10px;padding-left:35px;padding-bottom:10px;" -->
+				           		<li class="topmenu-subcat submenu-padding" ><span onClick="javascript:window.location.href='<%=basePath%>products?categoryid=<%=cat.getId()%>'"><%=StringUtil.filter(cat.getName()) %></span>  </li>
 				                <!--<li><a href="index.html" style="text-transform: none;"><%=StringUtil.filter(cat.getName()) %></a></li>  class="active" -->
 				            	<%} %>
 				         		</ul>
 				         		<ul class="mega-subcontent">
-				           		<%for(CategoryBean cat : catTag2 ) { %>
-				           		<li class="topmenu-subcat"><span onClick="javascript:window.location.href='<%=basePath%>products?categoryid=<%=cat.getId()%>'"><%=StringUtil.filter(cat.getName()) %></span>  </li>
+				           		<% for(int i = 0; i < catTag2.size(); i++) { //for(CategoryBean cat : catTag2 ) { 
+				           			CategoryBean cat = catTag2.get(i);
+				           			String top = "padding-top:10px;";
+				           			String bottom = "padding-bottom:10px";
+				           			if(i == 0 ) top = "padding-top:20px;";
+			           				if(i + 1 == catTag2.size()) bottom = "padding-bottom:20px";
+				           		%>
+				           		<!-- style="padding-left:35px;<%=top%><%=bottom%>" -->
+				           		<li class="topmenu-subcat submenu-padding" ><span onClick="javascript:window.location.href='<%=basePath%>products?categoryid=<%=cat.getId()%>'"><%=StringUtil.filter(cat.getName()) %></span>  </li>
 				                <!-- <li><a href="index.html" style="text-transform: none;"><%=StringUtil.filter(cat.getName()) %></a></li> class="active" -->
 				            	<%} %>
 				         		</ul>
@@ -174,24 +249,24 @@
 				        	}
 				        } 
 				        %>		       
-				        <li class="menu-parent-style">
-				            <a href="#!" data-toggle="dropdown" aria-haspopup="false" aria-expanded="false" style="color:white">Bestseller</a>
-				            <div class="mega-dropdown3 dropdown-menu" style="left:-280px;">
-				           		<ul class="mega-subcontent">
-				           		<li class="topmenu-subcat"><strong><span onClick="javascript:window.location.href='#'">FEATURED OF THE MONTH</span></strong>  </li>
+				        <li class="menu-parent-style" style="top:-3px;">
+				            <a href="#!" data-toggle="dropdown" aria-haspopup="false" aria-expanded="false" style="color:white;font-size:10pt;font-weight:900;">Bestseller</a>
+				            <div class="mega-dropdown3 dropdown-menu" style="top:60px;left:-280px;opacity:0.95;">
+				           		<ul class="mega-subcontent" style="width:220px;"> 
+				           		<li class="topmenu-subcat submenu-padding" ><strong><span onClick="javascript:window.location.href='#'">FEATURED OF THE MONTH</span></strong>  </li>
 				           		<!--<li><a href="index.html">FEATURED OF THE MONTH</a></li> <!-- class="active" -->
 				         		</ul>
-				         		<ul class="mega-subcontent">
-				         		<li class="topmenu-subcat"><strong><span onClick="javascript:window.location.href='#'">VALUE BUNDLE</span></strong>  </li>
+				         		<ul class="mega-subcontent" style="width:140px;">
+				         		<li class="topmenu-subcat submenu-padding" ><strong><span onClick="javascript:window.location.href='#'">VALUE BUNDLE</span></strong>  </li>
 				           		<!--<li><a href="index.html">VALUE BUNDLE</a></li> <!-- class="active" -->
 				         		</ul>
-				         		<ul class="mega-subcontent">
-				         		<li class="topmenu-subcat"><strong><span onClick="javascript:window.location.href='#'">OUR TOP 10</span></strong>  </li>
+				         		<ul class="mega-subcontent" style="width:150px;">
+				         		<li class="topmenu-subcat submenu-padding" ><strong><span onClick="javascript:window.location.href='#'">OUR TOP 10</span></strong>  </li>
 				           		<!--<li><a href="index.html">OUR TOP 10</a></li> <!-- class="active" -->
 				         		</ul>
 				           	</div>				            
 				        </li>
-				        <li class="menu-parent-style">
+				        <!-- <li class="menu-parent-style">
 				        	<a href="#!" data-toggle="dropdown" aria-haspopup="false" aria-expanded="false" style="color:white">How To</a>
 				        	<div class="mega-dropdown3 dropdown-menu" style="left:-390px;">
 				           		<ul class="mega-subcontent">
@@ -207,8 +282,8 @@
 				           		<!--<li><a href="index.html"><strong>VIDEO</strong></a></li>  class="active" -->
 				         		</ul>
 				           	</div>		
-				        </li>
-				        <li class="menu-parent-style"><a href="<%=basePath %>cart/faqs.jsp" style="color:white">FAQ</a></li>
+				        </li> -->
+				        <li class="menu-parent-style" style="top:-3px;"><a href="<%=basePath %>cart/faqs.jsp" style="color:white;font-size:10pt;font-weight:900;">FAQ</a></li>
 				    </ul>
 			    </div><!--/.nav-collapse -->
 	      	</div><!--/.container -->

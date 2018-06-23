@@ -3,7 +3,7 @@
 
 <%
 //String basePath = PropertiesUtil.getProperty("hostAddr")+PropertiesUtil.getProperty("virtualHost");
-String basePath = "http://jws-app-xyproject.1d35.starter-us-east-1.openshiftapps.com/";	
+String basePath = "http://jws-app-navalli.a3c1.starter-us-west-1.openshiftapps.com/";	
 
 %>	
 	

@@ -271,15 +271,12 @@
 				        	<div class="mega-dropdown3 dropdown-menu" style="left:-390px;">
 				           		<ul class="mega-subcontent">
 				           		<li class="topmenu-subcat"><strong><span onClick="javascript:window.location.href='#'">TUTORIAL</span></strong>  </li>
-				           		<!--<li><a href="index.html"><strong>TUTORIAL</strong></a></li> <!-- class="active" -->
 				         		</ul>
 				         		<ul class="mega-subcontent">
 				         		<li class="topmenu-subcat"><strong><span onClick="javascript:window.location.href='#'">CELERITIES CHOICES</span></strong>  </li>
-				           		<!--<li><a href="index.html"><strong>CELERITIES CHOICES</strong></a></li> <!-- class="active" -->
 				         		</ul>
 				         		<ul class="mega-subcontent">
 				         		<li class="topmenu-subcat"><strong><span onClick="javascript:window.location.href='#'">VIDEO</span></strong>  </li>
-				           		<!--<li><a href="index.html"><strong>VIDEO</strong></a></li>  class="active" -->
 				         		</ul>
 				           	</div>		
 				        </li> -->

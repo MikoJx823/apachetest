@@ -306,15 +306,15 @@
 	    }
 	    
 	    .slider-prod .slick-slide img {
-	      height:250px;
+	      /*height:250px;*/
 	      max-width: 100%;
 	      margin-left: auto;
     	  margin-right: auto;
     	  -moz-transition: all 0.3s;
   		  -webkit-transition: all 0.3s;
   		  transition: all 0.3s;
-  		  /*height:auto; 
-  		    opacity: .7;*/
+  		  height:auto; 
+  		   /* opacity: .7;*/
 	    }
 	    
 	    .slider-prod .slick-prev:before,
@@ -545,188 +545,12 @@
 		</div><!-- /.container -->
 	</section><!-- /.collections -->
 	
-	<section class="section"> <!-- psmall-padding-top addings:70px -->
+	<section class="section" style="background-color:#f8f8f8;"> <!-- psmall-padding-top addings:70px -->
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-12 text-center">
-					<h3 class="index-insta-header"><strong><i class="index-insta-line"></i>Latest Products<i class="index-insta-line"></i></strong></h3> 
-					<p style="padding-bottom:15px;"><i>Checkout The Latest And Hottest!</i></p>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-xs-12">
-					 <div class="section slider-resp-prod slider-prod slider">
-						<div data-product-id="1"> <!-- class="product col-md-3 col-sm-6 col-xs-12 -->
-							<div> <!--class="inner-product"  -->
-								<span style="width:40px;height:40px;line-height:40px;top:0px;right:0px;background-color:#e74c3c;backface-visibility:hidden;background-clip:padding-box;font-size:14px;color:#fff;text-align:center;display:block;overflow:hidden;z-index:1;position:absolute;color:white">Sale</span> <!--class="onsale"  -->
-								<div class="product-thumbnail">
-								<a href="#!">
-									<img src="<%=basePath %>images/Dry-winter-snow-natural-hd-wallpaper.jpg" class="img-responsive" alt="">
-								</a>
-								</div>
-								<div class="product-details text-center">
-									<!--  <div class="product-btns">
-										<span data-toggle="tooltip" data-placement="top" title="Add To Cart">
-											<a href="#!" class="li-icon add-to-cart"><i class="lil-shopping_cart"></i></a>
-										</span>
-										<span data-toggle="tooltip" data-placement="top" title="Add to Favorites">
-											<a href="#!" class="li-icon"><i class="lil-favorite"></i></a>
-										</span>
-										<span data-toggle="tooltip" data-placement="top" title="View">
-											<a href="product.html" class="li-icon view-details"><i class="lil-search"></i></a>
-										</span>
-									</div> -->
-								</div>
-							</div>
-							<h4 class="product-title" style="padding:0;margin:0;padding-top:10px;"><strong><a href="#!">Bag Maroon</a></strong></h4>
-							<p style="padding:0;margin:0;">45ml</p>
-							<p style="padding:0;margin:0;font-weight:700;font-size:14pt;">RM 44.00 <span style="background-color:red;color:white;padding-right:5px;padding-left:5px;font-size:10pt;"> 20% OFF </span> </p>
-							<p style="padding:0;margin:0;"><del>RM60.00</del></p>
-							<!--  <div class="star-rating">
-								<span style="width:90%"></span>
-							</div>
-							<p class="product-price">
-								<ins>
-									<span class="amount">$75.99</span>
-								</ins>
-							</p>-->
-						</div><!-- /.product -->
-						
-						<div data-product-id="1">
-							<div>
-								<div class="product-thumbnail">
-									<img src="<%=basePath %>images/Dry-winter-snow-natural-hd-wallpaper.jpg" class="img-responsive" alt="">
-								</div>
-								<div class="product-details text-center">
-									<!--  <div class="product-btns">
-										<span data-toggle="tooltip" data-placement="top" title="Add To Cart">
-											<a href="#!" class="li-icon add-to-cart"><i class="lil-shopping_cart"></i></a>
-										</span>
-										<span data-toggle="tooltip" data-placement="top" title="Add to Favorites">
-											<a href="#!" class="li-icon"><i class="lil-favorite"></i></a>
-										</span>
-										<span data-toggle="tooltip" data-placement="top" title="View">
-											<a href="product.html" class="li-icon view-details"><i class="lil-search"></i></a>
-										</span>
-									</div> -->
-								</div>
-							</div>
-							<h4 class="product-title" style="padding:0;margin:0;padding-top:10px;"><strong><a href="#!">Bag Maroon</a></strong></h4>
-							<p style="padding:0;margin:0;">45ml</p>
-							<p style="padding:0;margin:0;font-weight:700;font-size:14pt;">RM 44.00 <span style="background-color:red;color:white;padding-right:5px;padding-left:5px;font-size:10pt;"> 20% OFF </span> </p>
-							<p style="padding:0;margin:0;"><del>RM60.00</del></p>
-						</div><!-- /.product -->
-						
-						<div data-product-id="1">
-							<div>
-								<div class="product-thumbnail">
-									<img src="<%=basePath %>images/Dry-winter-snow-natural-hd-wallpaper.jpg" class="img-responsive" alt="">
-								</div>
-								<div class="product-details text-center">
-									<!-- <div class="product-btns">
-										 <span data-toggle="tooltip" data-placement="top" title="Add To Cart">
-											<a href="#!" class="li-icon add-to-cart"><i class="lil-shopping_cart"></i></a>
-										</span>
-										<span data-toggle="tooltip" data-placement="top" title="Add to Favorites">
-											<a href="#!" class="li-icon"><i class="lil-favorite"></i></a>
-										</span>
-										<span data-toggle="tooltip" data-placement="top" title="View">
-											<a href="product.html" class="li-icon view-details"><i class="lil-search"></i></a>
-										</span> 
-									</div>-->
-								</div>
-							</div>
-							<h4 class="product-title" style="padding:0;margin:0;padding-top:10px;"><strong><a href="#!">Bag Maroon</a></strong></h4>
-							<p style="padding:0;margin:0;">45ml</p>
-							<p style="padding:0;margin:0;font-weight:700;font-size:14pt;">RM 44.00 <span style="background-color:red;color:white;padding-right:5px;padding-left:5px;font-size:10pt;"> 20% OFF </span> </p>
-							<p style="padding:0;margin:0;"><del>RM60.00</del></p>
-						</div><!-- /.product -->
-						
-						<div data-product-id="1">
-							<div>
-								<div class="product-thumbnail">
-									<img src="<%=basePath %>images/Dry-winter-snow-natural-hd-wallpaper.jpg" class="img-responsive" alt="">
-								</div>
-								<div class="product-details text-center">
-									<!--<div class="product-btns">
-										<span data-toggle="tooltip" data-placement="top" title="Add To Cart">
-											<a href="#!" class="li-icon add-to-cart"><i class="lil-shopping_cart"></i></a>
-										</span>
-										<span data-toggle="tooltip" data-placement="top" title="Add to Favorites">
-											<a href="#!" class="li-icon"><i class="lil-favorite"></i></a>
-										</span>
-										<span data-toggle="tooltip" data-placement="top" title="View">
-											<a href="product.html" class="li-icon view-details"><i class="lil-search"></i></a>
-										</span>
-									</div> -->
-								</div>
-							</div>
-							<h4 class="product-title" style="padding:0;margin:0;padding-top:10px;"><strong><a href="#!">Bag Maroon</a></strong></h4>
-							<p style="padding:0;margin:0;">45ml</p>
-							<p style="padding:0;margin:0;font-weight:700;font-size:14pt;">RM 44.00 <span style="background-color:red;color:white;padding-right:5px;padding-left:5px;font-size:10pt;"> 20% OFF </span> </p>
-							<p style="padding:0;margin:0;"><del>RM60.00</del></p>
-						</div><!-- /.product -->
-						
-						<div data-product-id="1">
-							<div>
-								<div class="product-thumbnail">
-									<img src="<%=basePath %>images/Dry-winter-snow-natural-hd-wallpaper.jpg" class="img-responsive" alt="">
-								</div>
-								<div class="product-details text-center">
-									<!--  <div class="product-btns">
-										<span data-toggle="tooltip" data-placement="top" title="Add To Cart">
-											<a href="#!" class="li-icon add-to-cart"><i class="lil-shopping_cart"></i></a>
-										</span>
-										<span data-toggle="tooltip" data-placement="top" title="Add to Favorites">
-											<a href="#!" class="li-icon"><i class="lil-favorite"></i></a>
-										</span>
-										<span data-toggle="tooltip" data-placement="top" title="View">
-											<a href="product.html" class="li-icon view-details"><i class="lil-search"></i></a>
-										</span>
-									</div> -->
-								</div>
-							</div>
-							<h4 class="product-title" style="padding:0;margin:0;padding-top:10px;"><strong><a href="#!">Bag Maroon</a></strong></h4>
-							<p style="padding:0;margin:0;">45ml</p>
-							<p style="padding:0;margin:0;font-weight:700;font-size:14pt;">RM 44.00 <span style="background-color:red;color:white;padding-right:5px;padding-left:5px;font-size:10pt;"> 20% OFF </span> </p>
-							<p style="padding:0;margin:0;"><del>RM60.00</del></p>
-						</div><!-- /.product -->
-						
-						<div data-product-id="1">
-							<div>
-								<div class="product-thumbnail">
-									<img src="<%=basePath %>images/Dry-winter-snow-natural-hd-wallpaper.jpg" class="img-responsive" alt="">
-								</div>
-								<div class="product-details text-center">
-									<!--  <div class="product-btns">
-										<span data-toggle="tooltip" data-placement="top" title="Add To Cart">
-											<a href="#!" class="li-icon add-to-cart"><i class="lil-shopping_cart"></i></a>
-										</span>
-										<span data-toggle="tooltip" data-placement="top" title="Add to Favorites">
-											<a href="#!" class="li-icon"><i class="lil-favorite"></i></a>
-										</span>
-										<span data-toggle="tooltip" data-placement="top" title="View">
-											<a href="product.html" class="li-icon view-details"><i class="lil-search"></i></a>
-										</span>
-									</div> -->
-								</div>
-							</div>
-							<h4 class="product-title" style="padding:0;margin:0;padding-top:10px;"><strong><a href="#!">Bag Maroon</a></strong></h4>
-							<p style="padding:0;margin:0;">45ml</p>
-							<p style="padding:0;margin:0;font-weight:700;font-size:14pt;">RM 44.00 <span style="background-color:red;color:white;padding-right:5px;padding-left:5px;font-size:10pt;"> 20% OFF </span> </p>
-							<p style="padding:0;margin:0;"><del>RM60.00</del></p>
-						</div><!-- /.product -->
-					</div> 
-				</div>
-			</div>
-		</div>
-	</section><!-- /.instagram -->
-	
-	<section class="section"> <!-- psmall-padding-top addings:70px -->
-		<div class="container">
-			<div class="row">
-				<div class="col-sm-12 text-center">
-					<h3 class="index-insta-header"><strong><i class="index-insta-line"></i>Top Rated<i class="index-insta-line"></i></strong></h3> 
+					<h4 class="index-insta-header"><strong><i class="index-insta-line"></i>Latest Products<i class="index-insta-line"></i></strong></h4> 
+					<p style="padding-bottom:15px;font-size:10pt;"><i>Checkout The Latest And Hottest!</i></p>
 				</div>
 			</div>
 			<div class="row">
@@ -902,8 +726,184 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-12 text-center">
-					<h3 style="padding:0px;margin:0px;"><strong>Playing Favorites</strong></h3>
-					<p style="padding-bottom:15px;"><i>Share a selfie wearing your fave Navalli Hill products with #NHMAKEUPMY</i></p>
+					<h4 class="index-insta-header"><strong><i class="index-insta-line"></i>Top Rated<i class="index-insta-line"></i></strong></h4> 
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-12">
+					 <div class="section slider-resp-prod slider-prod slider">
+						<div data-product-id="1"> <!-- class="product col-md-3 col-sm-6 col-xs-12 -->
+							<div> <!--class="inner-product"  -->
+								<span style="width:40px;height:40px;line-height:40px;top:0px;right:0px;background-color:#e74c3c;backface-visibility:hidden;background-clip:padding-box;font-size:14px;color:#fff;text-align:center;display:block;overflow:hidden;z-index:1;position:absolute;color:white">Sale</span> <!--class="onsale"  -->
+								<div class="product-thumbnail">
+								<a href="#!">
+									<img src="<%=basePath %>images/Dry-winter-snow-natural-hd-wallpaper.jpg" class="img-responsive" alt="">
+								</a>
+								</div>
+								<div class="product-details text-center">
+									<!--  <div class="product-btns">
+										<span data-toggle="tooltip" data-placement="top" title="Add To Cart">
+											<a href="#!" class="li-icon add-to-cart"><i class="lil-shopping_cart"></i></a>
+										</span>
+										<span data-toggle="tooltip" data-placement="top" title="Add to Favorites">
+											<a href="#!" class="li-icon"><i class="lil-favorite"></i></a>
+										</span>
+										<span data-toggle="tooltip" data-placement="top" title="View">
+											<a href="product.html" class="li-icon view-details"><i class="lil-search"></i></a>
+										</span>
+									</div> -->
+								</div>
+							</div>
+							<h4 class="product-title" style="padding:0;margin:0;padding-top:10px;"><strong><a href="#!">Bag Maroon</a></strong></h4>
+							<p style="padding:0;margin:0;">45ml</p>
+							<p style="padding:0;margin:0;font-weight:700;font-size:14pt;">RM 44.00 <span style="background-color:red;color:white;padding-right:5px;padding-left:5px;font-size:10pt;"> 20% OFF </span> </p>
+							<p style="padding:0;margin:0;"><del>RM60.00</del></p>
+							<!--  <div class="star-rating">
+								<span style="width:90%"></span>
+							</div>
+							<p class="product-price">
+								<ins>
+									<span class="amount">$75.99</span>
+								</ins>
+							</p>-->
+						</div><!-- /.product -->
+						
+						<div data-product-id="1">
+							<div>
+								<div class="product-thumbnail">
+									<img src="<%=basePath %>images/Dry-winter-snow-natural-hd-wallpaper.jpg" class="img-responsive" alt="">
+								</div>
+								<div class="product-details text-center">
+									<!--  <div class="product-btns">
+										<span data-toggle="tooltip" data-placement="top" title="Add To Cart">
+											<a href="#!" class="li-icon add-to-cart"><i class="lil-shopping_cart"></i></a>
+										</span>
+										<span data-toggle="tooltip" data-placement="top" title="Add to Favorites">
+											<a href="#!" class="li-icon"><i class="lil-favorite"></i></a>
+										</span>
+										<span data-toggle="tooltip" data-placement="top" title="View">
+											<a href="product.html" class="li-icon view-details"><i class="lil-search"></i></a>
+										</span>
+									</div> -->
+								</div>
+							</div>
+							<h4 class="product-title" style="padding:0;margin:0;padding-top:10px;"><strong><a href="#!">Bag Maroon</a></strong></h4>
+							<p style="padding:0;margin:0;">45ml</p>
+							<p style="padding:0;margin:0;font-weight:700;font-size:14pt;">RM 44.00 <span style="background-color:red;color:white;padding-right:5px;padding-left:5px;font-size:10pt;"> 20% OFF </span> </p>
+							<p style="padding:0;margin:0;"><del>RM60.00</del></p>
+						</div><!-- /.product -->
+						
+						<div data-product-id="1">
+							<div>
+								<div class="product-thumbnail">
+									<img src="<%=basePath %>images/Dry-winter-snow-natural-hd-wallpaper.jpg" class="img-responsive" alt="">
+								</div>
+								<div class="product-details text-center">
+									<!-- <div class="product-btns">
+										 <span data-toggle="tooltip" data-placement="top" title="Add To Cart">
+											<a href="#!" class="li-icon add-to-cart"><i class="lil-shopping_cart"></i></a>
+										</span>
+										<span data-toggle="tooltip" data-placement="top" title="Add to Favorites">
+											<a href="#!" class="li-icon"><i class="lil-favorite"></i></a>
+										</span>
+										<span data-toggle="tooltip" data-placement="top" title="View">
+											<a href="product.html" class="li-icon view-details"><i class="lil-search"></i></a>
+										</span> 
+									</div>-->
+								</div>
+							</div>
+							<h4 class="product-title" style="padding:0;margin:0;padding-top:10px;"><strong><a href="#!">Bag Maroon</a></strong></h4>
+							<p style="padding:0;margin:0;">45ml</p>
+							<p style="padding:0;margin:0;font-weight:700;font-size:14pt;">RM 44.00 <span style="background-color:red;color:white;padding-right:5px;padding-left:5px;font-size:10pt;"> 20% OFF </span> </p>
+							<p style="padding:0;margin:0;"><del>RM60.00</del></p>
+						</div><!-- /.product -->
+						
+						<div data-product-id="1">
+							<div>
+								<div class="product-thumbnail">
+									<img src="<%=basePath %>images/Dry-winter-snow-natural-hd-wallpaper.jpg" class="img-responsive" alt="">
+								</div>
+								<div class="product-details text-center">
+									<!--<div class="product-btns">
+										<span data-toggle="tooltip" data-placement="top" title="Add To Cart">
+											<a href="#!" class="li-icon add-to-cart"><i class="lil-shopping_cart"></i></a>
+										</span>
+										<span data-toggle="tooltip" data-placement="top" title="Add to Favorites">
+											<a href="#!" class="li-icon"><i class="lil-favorite"></i></a>
+										</span>
+										<span data-toggle="tooltip" data-placement="top" title="View">
+											<a href="product.html" class="li-icon view-details"><i class="lil-search"></i></a>
+										</span>
+									</div> -->
+								</div>
+							</div>
+							<h4 class="product-title" style="padding:0;margin:0;padding-top:10px;"><strong><a href="#!">Bag Maroon</a></strong></h4>
+							<p style="padding:0;margin:0;">45ml</p>
+							<p style="padding:0;margin:0;font-weight:700;font-size:14pt;">RM 44.00 <span style="background-color:red;color:white;padding-right:5px;padding-left:5px;font-size:10pt;"> 20% OFF </span> </p>
+							<p style="padding:0;margin:0;"><del>RM60.00</del></p>
+						</div><!-- /.product -->
+						
+						<div data-product-id="1">
+							<div>
+								<div class="product-thumbnail">
+									<img src="<%=basePath %>images/Dry-winter-snow-natural-hd-wallpaper.jpg" class="img-responsive" alt="">
+								</div>
+								<div class="product-details text-center">
+									<!--  <div class="product-btns">
+										<span data-toggle="tooltip" data-placement="top" title="Add To Cart">
+											<a href="#!" class="li-icon add-to-cart"><i class="lil-shopping_cart"></i></a>
+										</span>
+										<span data-toggle="tooltip" data-placement="top" title="Add to Favorites">
+											<a href="#!" class="li-icon"><i class="lil-favorite"></i></a>
+										</span>
+										<span data-toggle="tooltip" data-placement="top" title="View">
+											<a href="product.html" class="li-icon view-details"><i class="lil-search"></i></a>
+										</span>
+									</div> -->
+								</div>
+							</div>
+							<h4 class="product-title" style="padding:0;margin:0;padding-top:10px;"><strong><a href="#!">Bag Maroon</a></strong></h4>
+							<p style="padding:0;margin:0;">45ml</p>
+							<p style="padding:0;margin:0;font-weight:700;font-size:14pt;">RM 44.00 <span style="background-color:red;color:white;padding-right:5px;padding-left:5px;font-size:10pt;"> 20% OFF </span> </p>
+							<p style="padding:0;margin:0;"><del>RM60.00</del></p>
+						</div><!-- /.product -->
+						
+						<div data-product-id="1">
+							<div>
+								<div class="product-thumbnail">
+									<img src="<%=basePath %>images/Dry-winter-snow-natural-hd-wallpaper.jpg" class="img-responsive" alt="">
+								</div>
+								<div class="product-details text-center">
+									<!--  <div class="product-btns">
+										<span data-toggle="tooltip" data-placement="top" title="Add To Cart">
+											<a href="#!" class="li-icon add-to-cart"><i class="lil-shopping_cart"></i></a>
+										</span>
+										<span data-toggle="tooltip" data-placement="top" title="Add to Favorites">
+											<a href="#!" class="li-icon"><i class="lil-favorite"></i></a>
+										</span>
+										<span data-toggle="tooltip" data-placement="top" title="View">
+											<a href="product.html" class="li-icon view-details"><i class="lil-search"></i></a>
+										</span>
+									</div> -->
+								</div>
+							</div>
+							<h4 class="product-title" style="padding:0;margin:0;padding-top:10px;"><strong><a href="#!">Bag Maroon</a></strong></h4>
+							<p style="padding:0;margin:0;">45ml</p>
+							<p style="padding:0;margin:0;font-weight:700;font-size:14pt;">RM 44.00 <span style="background-color:red;color:white;padding-right:5px;padding-left:5px;font-size:10pt;"> 20% OFF </span> </p>
+							<p style="padding:0;margin:0;"><del>RM60.00</del></p>
+						</div><!-- /.product -->
+					</div> 
+				</div>
+			</div>
+		</div>
+	</section><!-- /.instagram -->
+	
+	<section class="section" style="background-color:#f8f8f8;"> <!-- psmall-padding-top addings:70px -->
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-12 text-center">
+					<h4 style="padding:0px;margin:0px;"><strong>Playing Favorites</strong></h4>
+					<p style="padding-bottom:15px;font-size:10pt;"><i>Share a selfie wearing your fave Navalli Hill products with #NHMAKEUPMY</i></p>
 				</div>
 			</div>
 			<div class="row">

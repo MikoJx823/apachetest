@@ -20,7 +20,7 @@
 				<div class="row">
 					<div class="hidden-md hidden-lg"><div class="col-xs-1"></div> </div>
 					<div class="col-xs-11 col-md-4 widget widget-about">
-						<h3 style="color:white;margin-top:0px;"><strong>NEED HELP ?</strong> </h3>
+						<h4 style="color:white;margin-top:0px;"><strong>NEED HELP ?</strong> </h4>
 						<p style="color:white;font-weight:400;font-size:10pt;padding:0px;margin:0px;"><i>admin@nhmakeup.com.my</i></p>
 						<br>
 						<p style="display:inline-block;background-color:#d9d7d4;height:1px;width:60%;"></p>
@@ -30,7 +30,7 @@
 					
 					<div class="hidden-md hidden-lg"><div class="col-xs-1"></div> </div>
 					<div class="col-xs-11 col-md-4 widget widget-links">
-						<h3 style="color:white" class="widget-title"><strong>Customer Service</strong></h3>
+						<h4 style="color:white" class="widget-title"><strong>Customer Service</strong></h4>
 						<ol style="display:inline-block;color:white;font-weight:400;">
 							<li><a href="<%=basePath %>cart/faqs.jsp" style="color:white;">FAQs</a></li>
 							<li><a href="#" style="color:white;">Shipping Info</a></li>
@@ -41,7 +41,7 @@
 					
 					<div class="hidden-md hidden-lg"><div class="col-xs-1"></div> </div>
 					<div class="col-xs-11 col-md-4 widget widget-newsletter">
-						<h3 class="widget-title" style="color:white" ><strong>Join our Newsletter</strong></h3>
+						<h4 class="widget-title" style="color:white" ><strong>Join our Newsletter</strong></h4>
 						<form action="#!" method="POST" class="inputs-border clearfix">
 							<div class="form-group">
 									<input type="email" name="email" placeholder="admin@nhmakeup.com.my" class="form-control" autocomplete="off">

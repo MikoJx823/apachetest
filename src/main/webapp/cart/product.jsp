@@ -38,7 +38,7 @@
 
 	<jsp:include page="header.jsp" />
 
-	<div class="page-head content-top-margin">
+	<div class="page-head content-top-margin" >
 		<div class="container">
 			<div class="row">
 				<div class="col-md-8 col-sm-7">
@@ -68,38 +68,38 @@
 							</a>
 						</div>
 						<div class="product-images-carousel">
-							<%if(!"".equals(StringUtil.filter(product.getImage2()))) { %>
+							<%if(!"".equals(StringUtil.filter(product.getImage1()))) { %>
 							<div class="item">
 								<a href="<%=basePath %>/images/products/<%=product.getImage1() %>" class="fancybox" rel="gallery">
-									<img src="<%=basePath %>/images/products/<%=product.getImage1() %>" class="img-responsive">
+									<img src="<%=basePath %>/images/products/<%=product.getImage1() %>" class="img-responsive" alt="<%=product.getImage1()%>">
 								</a>
 							</div>
 							<%} %>
 							<%if(!"".equals(StringUtil.filter(product.getImage2()))) { %>
 							<div class="item">
 								<a href="<%=basePath %>/images/products/<%=product.getImage2() %>" class="fancybox" rel="gallery">
-									<img src="<%=basePath %>/images/products/<%=product.getImage2() %>" class="img-responsive" alt="">
+									<img src="<%=basePath %>/images/products/<%=product.getImage2() %>" class="img-responsive" alt="<%=product.getImage2()%>">
 								</a>
 							</div>
 							<%} %>
 							<%if(!"".equals(StringUtil.filter(product.getImage3()))) { %>
 							<div class="item">
 								<a href="<%=basePath %>/images/products/<%=product.getImage3() %>" class="fancybox" rel="gallery">
-									<img src="<%=basePath %>/images/products/<%=product.getImage3() %>" class="img-responsive" alt="">
+									<img src="<%=basePath %>/images/products/<%=product.getImage3() %>" class="img-responsive" alt="<%=product.getImage3()%>">
 								</a>
 							</div>
 							<%} %>
 							<%if(!"".equals(StringUtil.filter(product.getImage4()))) { %>
 							<div class="item">
 								<a href="<%=basePath %>/images/products/<%=product.getImage4() %>" class="fancybox" rel="gallery">
-									<img src="<%=basePath %>/images/products/<%=product.getImage4() %>" class="img-responsive">
+									<img src="<%=basePath %>/images/products/<%=product.getImage4() %>" class="img-responsive" alt="<%=product.getImage4()%>">
 								</a>
 							</div>
 							<%} %>
 							<%if(!"".equals(StringUtil.filter(product.getImage5()))) { %>
 							<div class="item">
 								<a href="<%=basePath %>/images/products/<%=product.getImage5() %>" class="fancybox" rel="gallery">
-									<img src="<%=basePath %>/images/products/<%=product.getImage5() %>" class="img-responsive" alt="">
+									<img src="<%=basePath %>/images/products/<%=product.getImage5() %>" class="img-responsive" alt="<%=product.getImage5()%>">
 								</a>
 							</div>
 							<%} %>

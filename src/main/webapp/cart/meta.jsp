@@ -1,10 +1,10 @@
-<%@ page language="java" import="com.project.util.PropertiesUtil" contentType="text/html; charset=utf-8"%>
+<%@ page language="java" import="com.project.util.*" contentType="text/html; charset=utf-8"%>
 <%@ page contentType="text/html; charset=utf-8"%>
 
 <%
 //String basePath = PropertiesUtil.getProperty("hostAddr")+PropertiesUtil.getProperty("virtualHost");
-String basePath = "http://jws-app-navalli.a3c1.starter-us-west-1.openshiftapps.com/";	
-
+//String basePath = "http://localhost:8080/navalli/"; 
+String basePath = StringUtil.getHostAddress();
 %>	
 	
 	<meta charset="UTF-8">

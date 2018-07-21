@@ -435,4 +435,20 @@ public class StringUtil {
 		}
 	}
 	
+	public static String getProductImagePath() {
+		
+		ConfigBean config = ConfigService.getInstance().getBeanByName(StaticValueUtil.CONFIG_PRODUCT_UPLOAD_DIR);
+		return config.getValue();
+		/*if(StringUtil.filter(config.getValue()).equals(StaticValueUtil.ENV_PROD)) {
+			ConfigBean hostConfig = ConfigService.getInstance().getBeanByName(StaticValueUtil.CONFIG_ENV_PROD_DIR);
+			return hostConfig.getValue();
+		}else if(StringUtil.filter(config.getValue()).equals(StaticValueUtil.ENV_UAT)) {
+			ConfigBean hostConfig = ConfigService.getInstance().getBeanByName(StaticValueUtil.CONFIG_ENV_UAT_DIR);
+			return hostConfig.getValue();
+		}else {
+			ConfigBean hostConfig = ConfigService.getInstance().getBeanByName(StaticValueUtil.CONFIG_ENV_LOCAL_DIR);
+			return hostConfig.getValue();
+		}*/
+	}
+	
 }

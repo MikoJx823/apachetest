@@ -37,10 +37,10 @@ public class ProductService
 	}
 	
 	public ProductBean insertProduct(ProductBean product){
-		ProductBean result = null;
-		if (productDao.insert(product) != null){
+		ProductBean result = productDao.insert(product);
+		if (result != null){
 			for(ProductVariantBean variant: product.getProductVariant()){
-				variant.setPid(product.getId());
+				variant.setPid(result.getId());
 				productDao.insertProductVariant(variant);
 			}
 			//product.setProductQty(productQtys);
@@ -51,16 +51,40 @@ public class ProductService
 	}
 	
 	public ProductBean updateProduct(ProductBean product){
-		ProductBean result = null;
+		ProductBean result = productDao.update(product);
 		log.info("variant size: " + product.getProductVariant().size());
-		if (productDao.update(product) !=null){
+		if (result != null){
+			
+			List<ProductVariantBean> oldvariants = getProductVariantListById(product.getId());
+			
+			//inactive old variants
+			for(ProductVariantBean oldvariant: oldvariants) {
+				oldvariant.setStatus(StaticValueUtil.Inactive);
+				oldvariant.setModifiedBy(product.getModifiedBy());
+				oldvariant.setModifiedDate(new Date());
+				
+				productDao.updateProductVariant(oldvariant);
+			}
+			
 			for(ProductVariantBean variant: product.getProductVariant()){
-				variant.setPid(product.getId());
-				productDao.updateProductVariant(variant);
+				if(variant.getPvid() > 0) {
+					productDao.updateProductVariant(variant);
+				}else {
+					variant.setPid(product.getId());
+					variant.setCreatedBy(product.getModifiedBy());
+					variant.setCreatedDate(new Date());
+					variant.setModifiedBy(product.getModifiedBy());
+					variant.setModifiedDate(new Date());
+					productDao.insertProductVariant(variant);
+				}
 			}
 		}
 		
 		return  result;
+	}
+	
+	public ProductBean updateStatus(ProductBean product){
+		return productDao.updateStatus(product);
 	}
 	
 	public ProductBean delete(ProductBean product){
@@ -98,8 +122,8 @@ public class ProductService
 	}
 	
 	public ProductBean getFrontBeanDetailById(int pid){
-		String sqlWhere = " where status = " + StaticValueUtil.Active + " and id = " + pid + 
-						  " and displaystart < now() and displayend > now() ";
+		String sqlWhere = " where status = " + StaticValueUtil.Active + " and id = " + pid; /*+ 
+						  " and displaystart < now() and displayend > now() ";*/
 		
 		List<ProductBean> products = productDao.getProductBySqlwhere(sqlWhere);
 		
@@ -200,10 +224,10 @@ public class ProductService
 	public double getEarlyBirdDiscount(ProductVariantBean variant) {
 		Date now = new Date();
 		
-		if(variant.getEarlybirdend() != null && variant.getEarlybirdstart() != null && 
-				variant.getEarlybirddiscount() > 0 && variant.getEarlybirddiscount() <= 100) {
-			if(now.after(variant.getEarlybirdstart()) && now.before(variant.getEarlybirdend())) {
-				return variant.getPrice() * (1 - variant.getEarlybirddiscount() / 100);
+		if(variant.getDiscountstart() != null && variant.getDiscountend() != null && 
+				variant.getDiscount() > 0 && variant.getDiscount() <= 100) {
+			if(now.after(variant.getDiscountstart()) && now.before(variant.getDiscountend())) {
+				return variant.getPrice() * (1 - variant.getDiscount() / 100);
 			}
 		}
 		

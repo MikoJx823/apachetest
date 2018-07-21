@@ -142,7 +142,7 @@ public class CategoryService {
 		List<CategoryBean> parents = getListBySqlwhere(sqlWhere);
 		
 		for(CategoryBean parent: parents ){
-			result += "<option value='' disable>" + StringUtil.filter(parent.getName()) + "</option>";
+			result += "<option value='' disabled>" + StringUtil.filter(parent.getName()) + "</option>";
 			
 			sqlWhere = " where parentid = " + parent.getId() + " and status != " + StaticValueUtil.Delete + 
 					  " order by tag, name ";
@@ -153,7 +153,7 @@ public class CategoryService {
 				
 				if(currenttag != subcat.getTag() && subcat.getParentId() == 1){
 					currenttag = subcat.getTag();
-					result += "<option disable >&nbsp;&nbsp;" + StringUtil.filter(CategoryTagPulldown.getText(subcat.getTag())) + "</option>";
+					result += "<option disabled >&nbsp;&nbsp;" + StringUtil.filter(CategoryTagPulldown.getText(subcat.getTag())) + "</option>";
 				}
 				
 				if(subcat.getId() == categoryid){
@@ -221,6 +221,41 @@ public class CategoryService {
 			}
 			
 		}
+		
+		return result;
+	}
+	
+	public String getCategorySearchPulldown(String categoryid){
+		String result = "<option value=''>ALL</option>";
+		
+		String sqlWhere = " where parentid = " + StaticValueUtil.PARENT_CAT + " and status != " + StaticValueUtil.Delete + 
+						  " order by name ";
+		
+		List<CategoryBean> parents = getListBySqlwhere(sqlWhere);
+		
+		for(CategoryBean parent: parents ){
+			result += "<option value='' disabled>" + StringUtil.filter(parent.getName()) + "</option>";
+			
+			sqlWhere = " where parentid = " + parent.getId() + " and status != " + StaticValueUtil.Delete + 
+					  " order by tag, name ";
+			List<CategoryBean> subcats = getListBySqlwhere(sqlWhere);
+			
+			int currenttag = 0;
+			for(CategoryBean subcat: subcats){
+				
+				if(currenttag != subcat.getTag() && subcat.getParentId() == 1){
+					currenttag = subcat.getTag();
+					result += "<option disabled >&nbsp;&nbsp;" + StringUtil.filter(CategoryTagPulldown.getText(subcat.getTag())) + "</option>";
+				}
+				
+				if(categoryid.equals(subcat.getId() + "")){
+					result += "<option value='" + subcat.getId() + "' selected >&nbsp;&nbsp;&nbsp;" + StringUtil.filter(subcat.getName()) + "</option>";
+				}else{
+					result += "<option value='" + subcat.getId() + "' >&nbsp;&nbsp;&nbsp;" + StringUtil.filter(subcat.getName()) + "</option>";
+				}
+			}
+		}
+		
 		
 		return result;
 	}

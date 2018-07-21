@@ -1,6 +1,7 @@
 package com.project.service;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -15,6 +16,7 @@ import com.project.bean.AdminInfoBean;
 import com.project.bean.GroupInfoBean;
 import com.project.bean.RightsInfoBean;
 import com.project.dao.AdminDao;
+import com.project.util.SessionName;
 import com.project.util.StaticValueUtil;
 import com.project.util.StringUtil;
 
@@ -235,7 +237,7 @@ public class AdminService
 	}
 	
 	public static void performBlockAccess(HttpServletRequest request, HttpServletResponse response, String mainMenu, String subMenu ) throws ServletException, IOException{
-		AdminInfoBean loginUser = (AdminInfoBean)request.getSession().getAttribute("loginUser");
+		AdminInfoBean loginUser = (AdminInfoBean)request.getSession().getAttribute(SessionName.loginAdmin);
 		
 		List<AdminGroupFunction> adminGroupFunctions = loginUser.getAdminGroupFunction();
 		
@@ -259,5 +261,38 @@ public class AdminService
 		}
 		
 		return result;
+	}
+	
+	public void checkLogin(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		AdminInfoBean loginUser = (AdminInfoBean) request.getSession().getAttribute(SessionName.loginAdmin);
+		String url = request.getRequestURL().toString();
+		
+		if (loginUser == null&& !url.contains("/LoginServlet") && !url.contains("login.jsp")&& !url.contains("/css/") && !url.contains("/images/") && !url.contains("/layer/")
+				&& !url.contains("/js/") && !url.endsWith("/admin/"))
+		{
+			
+				PrintWriter pw = response.getWriter();
+				pw.println("<script type='text/javascript'>alert('Your session has been timed out.')</script> <script type='text/javascript'>window.top.location='" + request.getContextPath()
+						+ "/admin/'</script> ");
+				pw.flush();
+
+				return;
+		}
+	}
+	
+	public static void checkLogin1(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		AdminInfoBean loginUser = (AdminInfoBean) request.getSession().getAttribute(SessionName.loginAdmin);
+		String url = request.getRequestURL().toString();
+		String basePath = StringUtil.getHostAddress();
+		if (loginUser == null&& !url.contains("/LoginServlet") && !url.contains("login.jsp")&& !url.contains("/css/") && !url.contains("/images/") && !url.contains("/layer/")
+				&& !url.contains("/js/") && !url.endsWith("/admin/"))
+		{
+			
+				PrintWriter pw = response.getWriter();
+				pw.println("<script type='text/javascript'>alert('Your session has been timed out.')</script> <script type='text/javascript'>window.location.href='" + basePath// request.getContextPath()
+						+ "admin/'</script> ");
+				pw.flush();
+				return;
+		}
 	}
 }

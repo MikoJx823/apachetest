@@ -32,16 +32,16 @@
 <head>
 	<jsp:include page="meta.jsp" />
 </head>
-<body>
+<body style="background-color:#f8f8f8;">
 	<jsp:include page="header.jsp" />
 
-	<div class="page-head content-top-margin">
+	<div class="page-head content-top-margin" style="background:black;">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-8 col-sm-7">
 					<ol class="breadcrumb">
-						<li><a href="<%=basePath%>index.jsp">Home</a></li>
-						<li class="active">Products</li>
+						<!--  <li><a href="<%=basePath%>index.jsp">Home</a></li>-->
+						<li class="active" style="color:white;">Products</li>
 					</ol>
 				</div>
 			</div><!-- /.row -->
@@ -55,15 +55,15 @@
 					<div class="shop-sidebar shop-sidebar-left">
 						<div class="widgets">
 							<div class="widget widget-search">
-								<h3 class="widget-title">What's on your mind<span class="typed-cursor">?</span></h3>
+								<h5 class="widget-title" style="font-size:12pt">What's on your mind ?</h5>
 								<form action="<%=basePath %>products" method="POST" class="inputs-border inputs-bg">
 									<input type="text" class="form-control" name="search" placeholder="Search Products.." value="<%=search%>">
 									<input type="hidden" name="categoryid" value="<%=categoryid%>">
 								</form>
 							</div><!-- /.widget-search -->
 
-							<div class="widget widget-categories">
-								<h3 class="widget-title">Categories</h3>
+							<div class="widget widget-categories hidden-xs hidden-sm">
+								<h4 class="widget-title"><strong>Categories</strong></h4>
 								<%=CategoryService.getInstance().getFrontCatFilter(categoryid) %>
 								<!--  <ul>
 									<li>
@@ -114,7 +114,7 @@
 								String path = basePath + "productdetails?id=" + product.getId();
 							
 						%>
-							<div class="product col-md-4 col-sm-6 col-xs-12" data-product-id="1">
+							<div class="product col-md-3 col-sm-6 col-xs-12" data-product-id="1">
 								<div class="inner-product">
 									<!--<span class="onsale">Sale!</span>
 									  <span class="onsale new">New!</span>
@@ -125,7 +125,7 @@
 									<div class="product-thumbnail">
 										<!--  <img src="<%=basePath%>images/<%=product.getImage1() %>" class="img-responsive" alt=""> -->
 										<a href="<%=basePath%>productdetails?id=<%=product.getId()%>">
-										<img src="<%=basePath%>images/products/<%=product.getImage1() %>" class="img-responsive" alt="">
+										<img src="<%=basePath%>images/products/<%=product.getImage1() %>" class="img-responsive" alt="">  <!-- style="height:250px;" -->
 										</a>
 									</div>
 									<div class="product-details text-center">
@@ -142,7 +142,9 @@
 										</div>
 									</div>
 								</div>
-								<h3 class="product-title"><a href="<%=path%>"><%=StringUtil.filter(product.getName()) %> </a></h3>
+								
+								<h4 class="product-title" style="padding:0;margin:0;padding-top:10px;text-align: left;"><strong><a href="<%=path%>"><%=StringUtil.filter(product.getName()) %> </a></strong></h4>
+								<p style="padding:0;margin:0;text-align: left;">45ml</p>
 								<!--  <div class="star-rating">
 									<span style="width:90%"></span>
 								</div> -->
@@ -150,17 +152,21 @@
 									<%
 									
 									if(earlybird > 0){ %>
-									<ins>
+									<p style="padding:0;margin:0;font-weight:700;font-size:14pt;text-align: left;"><%=StringUtil.formatCurrencyPrice(earlybird) %>
+										<span style="background-color:red;color:white;padding-right:5px;padding-left:5px;font-size:10pt;"> 20% OFF </span> </p>
+									<p style="padding:0;margin:0;text-align: left;"><del><%=StringUtil.formatCurrencyPrice(variant.getPrice()) %></del></p>
+									<!--  <ins>
 										<span class="amount"><%=StringUtil.formatCurrencyPrice(earlybird) %></span>
 									</ins>
 									<del>
 										<span class="amount"><%=StringUtil.formatCurrencyPrice(variant.getPrice()) %></span>
-									</del>
+									</del>-->
 										
 									<%}else { %>
-									<ins>
+									<p style="padding:0;margin:0;font-weight:700;font-size:14pt;text-align: left;"><%=StringUtil.formatCurrencyPrice(variant.getPrice()) %></p>
+									<!--<ins>
 										<span class="amount"><%=StringUtil.formatCurrencyPrice(variant.getPrice()) %></span>
-									</ins>
+									</ins> -->
 									<%} %>
 								</p>
 							</div><!-- /.product -->

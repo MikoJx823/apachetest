@@ -546,7 +546,7 @@ public class OrderDao extends GenericDao
 			count ++;
 			pstmt.setInt(count, pagingRows);
 			
-			//log.info("Executing SQL:" + ((LoggableStatement) pstmt).getQueryString());
+			log.info("Executing SQL:" + ((LoggableStatement) pstmt).getQueryString());
 			
 			rs = pstmt.executeQuery();
 			

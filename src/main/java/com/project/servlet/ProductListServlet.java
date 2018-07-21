@@ -75,7 +75,7 @@ public class ProductListServlet extends HttpServlet {
 			ProductService service = ProductService.getInstance();
 			//CategoryService categoryService = CategoryService.getInstance();
 			
-			String sqlWhere = " where status = " + StaticValueUtil.Active + " and displaystart < now() and displayend > now() ";
+			String sqlWhere = " where status = " + StaticValueUtil.Active ;//+ " and displaystart < now() and displayend > now() ";
 			
 			//if(!"".equals(categoryId)) {
 			CategoryBean category = CategoryService.getInstance().getBeanById(StringUtil.strToInt(categoryId));

@@ -244,5 +244,7 @@ public class StaticValueUtil
 	public static final String CONFIG_SHIPPING_FEE_LOCAL = "SHIPPING_FEE_LOCAL";
 	public static final String CONFIG_SHIPPING_FEE_OVERSEA = "SHIPPING_FEE_OVERSEA";
 	public static final String CONFIG_SHIPPING_LIMIT_LOCAL = "SHIPPING_LIMIT_LOCAL";
-	
+	public static final String CONFIG_BANNER_DIR = "BANNER_DIR";
+	public static final String CONFIG_PRODUCT_DIR = "PRODUCT_DIR";
+	public static final String CONFIG_PRODUCT_UPLOAD_DIR = "PRODUCT_UPLOAD_DIR";
 }

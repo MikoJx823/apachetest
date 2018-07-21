@@ -13,7 +13,7 @@ public class DatePulldown
 	{
 		String result = "";
 		String data = "";
-		result += "<option value=''>" + "---" + "</option>\n";
+		result += "<option value=''>" + "---" + "</option>";
 		for (int i = 1; i <= 31; i++)
 		{
 			if (i < 10)
@@ -26,11 +26,11 @@ public class DatePulldown
 			}
 			if (DD != null && i == DD)
 			{
-				result += "<option value='" + data + "' selected>" + data + "</option>\n";
+				result += "<option value='" + data + "' selected>" + data + "</option>";
 			}
 			else
 			{
-				result += "<option value='" + data + "'>" + data + "</option>\n";
+				result += "<option value='" + data + "'>" + data + "</option>";
 			}
 		}
 		return result;
@@ -40,7 +40,7 @@ public class DatePulldown
 	{
 		String result = "";
 		String data = "";
-		result += "<option value=''>" + "---" + "</option>\n";
+		result += "<option value=''>" + "---" + "</option>";
 		for (int i = 1; i <= 12; i++)
 		{
 			if (i < 10)
@@ -53,11 +53,11 @@ public class DatePulldown
 			}
 			if (MM != null && i == MM)
 			{
-				result += "<option value='" + data + "' selected>" + data + "</option>\n";
+				result += "<option value='" + data + "' selected>" + data + "</option>";
 			}
 			else
 			{
-				result += "<option value='" + data + "'>" + data + "</option>\n";
+				result += "<option value='" + data + "'>" + data + "</option>";
 			}
 		}
 		return result;
@@ -68,16 +68,36 @@ public class DatePulldown
 		String result = "";
 		int startYear = new Date().getYear() + 1900 - 1;
 		int maxYear = new Date().getYear() + 1900+2;
-		result += "<option value=''>" + "---" + "</option>\n";
+		result += "<option value=''>" + "---" + "</option>";
 		for (int i = startYear; i <= maxYear; i++)
 		{
 			if (YYYY != null && i == YYYY)
 			{
-				result += "<option value='" + i + "' selected>" + i + "</option>\n";
+				result += "<option value='" + i + "' selected>" + i + "</option>";
 			}
 			else
 			{
-				result += "<option value='" + i + "'>" + i + "</option>\n";
+				result += "<option value='" + i + "'>" + i + "</option>";
+			}
+		}
+		return result;
+	}
+	
+	public static String getYYYYPulldown2(Integer YYYY)
+	{
+		String result = "";
+		int startYear = 2018;
+		int maxYear = new Date().getYear() + 1900+2;
+		result += "<option value=''>" + "---" + "</option>";
+		for (int i = startYear; i <= maxYear; i++)
+		{
+			if (YYYY != null && i == YYYY)
+			{
+				result += "<option value='" + i + "' selected>" + i + "</option>";
+			}
+			else
+			{
+				result += "<option value='" + i + "'>" + i + "</option>";
 			}
 		}
 		return result;
@@ -87,7 +107,7 @@ public class DatePulldown
 	{
 		String result = "";
 		String data = "";
-		result += "<option value=''>" + "---" + "</option>\n";
+		result += "<option value=''>" + "---" + "</option>";
 		for (int i = 0; i < 24; i++)
 		{
 			if (i < 10)
@@ -100,11 +120,11 @@ public class DatePulldown
 			}
 			if (HH != null && i == HH)
 			{
-				result += "<option value='" + data + "' selected>" + data + "</option>\n";
+				result += "<option value='" + data + "' selected>" + data + "</option>";
 			}
 			else
 			{
-				result += "<option value='" + data + "'>" + data + "</option>\n";
+				result += "<option value='" + data + "'>" + data + "</option>";
 			}
 		}
 		return result;
@@ -114,7 +134,7 @@ public class DatePulldown
 	{
 		String result = "";
 		String data = "";
-		result += "<option value=''>" + "---" + "</option>\n";
+		result += "<option value=''>" + "---" + "</option>";
 		for (int i = 0; i < 60; i++)
 		{
 			if (i < 10)
@@ -127,11 +147,11 @@ public class DatePulldown
 			}
 			if (SS != null && i == SS)
 			{
-				result += "<option value='" + data + "' selected>" + data + "</option>\n";
+				result += "<option value='" + data + "' selected>" + data + "</option>";
 			}
 			else
 			{
-				result += "<option value='" + data + "'>" + data + "</option>\n";
+				result += "<option value='" + data + "'>" + data + "</option>";
 			}
 		}
 		return result;

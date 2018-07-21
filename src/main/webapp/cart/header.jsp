@@ -118,7 +118,7 @@
 	        	<div id="navbar" class="navbar-collapse collapse"> <!-- header-topmenu -->
 				    <ul class="nav navbar-nav navbar-left"> 
 				         <li class="menu-parent-style" style="top:-3px;">
-				            <a href="!#" style="color:white;font-size:10pt;font-weight:900;">New <!--  <i class="caret"></i>--></a>
+				            <a href="<%=basePath%>new" style="color:white;font-size:10pt;font-weight:900;">New <!--  <i class="caret"></i>--></a>
 				        </li>
 				        
 				        <%for(CategoryBean parent: parents) {
@@ -144,6 +144,7 @@
 				                <%} %>
 				            	</ul>
 				           		<%}*/ %>
+				           		
 				           		<%
 				           		String sqlWhere = " where parentid = " + parent.getId() + " and tag = " + StaticValueUtil.TAG_FACE + " and status = " + StaticValueUtil.Active;
 				           		List<CategoryBean> faceCat = CategoryService.getInstance().getFrontMenuBySqlwhere(sqlWhere);
@@ -253,6 +254,7 @@
 				            <a href="#!" data-toggle="dropdown" aria-haspopup="false" aria-expanded="false" style="color:white;font-size:10pt;font-weight:900;">Bestseller</a>
 				            <div class="mega-dropdown3 dropdown-menu" style="top:60px;left:-280px;opacity:0.95;">
 				           		<ul class="mega-subcontent" style="width:220px;"> 
+				           		<!-- style="padding-left:35px;padding-top:10px;padding-bottom:10px;"  -->
 				           		<li class="topmenu-subcat submenu-padding" ><strong><span onClick="javascript:window.location.href='#'">FEATURED OF THE MONTH</span></strong>  </li>
 				           		<!--<li><a href="index.html">FEATURED OF THE MONTH</a></li> <!-- class="active" -->
 				         		</ul>
@@ -267,7 +269,7 @@
 				           	</div>				            
 				        </li>
 				        <!-- <li class="menu-parent-style">
-				        	<a href="#!" data-toggle="dropdown" aria-haspopup="false" aria-expanded="false" style="color:white">How To</a>
+				        	<a href="#!" data-toggle="dropdown" aria-haspopup="false" aria-expanded="false" style="color:white;font-size:10pt;font-weight:900;">How To</a>
 				        	<div class="mega-dropdown3 dropdown-menu" style="left:-390px;">
 				           		<ul class="mega-subcontent">
 				           		<li class="topmenu-subcat"><strong><span onClick="javascript:window.location.href='#'">TUTORIAL</span></strong>  </li>

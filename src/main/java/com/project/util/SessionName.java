@@ -80,6 +80,7 @@ public class SessionName {
 	public static String actionTypeDelete = "delete";
 	public static String actionTypeView = "view";
 	public static String actionTypeExport = "export";
+	public static String actionTypeUpdateStatus = "updatestatus";
 	
 	public static String itemid = "id";
 	public static String beanInfo = "beanInfo";

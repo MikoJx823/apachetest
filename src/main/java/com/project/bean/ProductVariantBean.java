@@ -13,28 +13,29 @@ public class ProductVariantBean extends GenericBean{
 	private int quantity;
 	
 	private double price;
-	private double earlybirddiscount;
-	private Date earlybirdstart;
-	private Date earlybirdend;
+	private double discount;
+	private Date discountstart;
+	private Date discountend;
 	
 	
-	public double getEarlybirddiscount() {
-		return earlybirddiscount;
+	
+	public double getDiscount() {
+		return discount;
 	}
-	public void setEarlybirddiscount(double earlybirddiscount) {
-		this.earlybirddiscount = earlybirddiscount;
+	public void setDiscount(double discount) {
+		this.discount = discount;
 	}
-	public Date getEarlybirdstart() {
-		return earlybirdstart;
+	public Date getDiscountstart() {
+		return discountstart;
 	}
-	public void setEarlybirdstart(Date earlybirdstart) {
-		this.earlybirdstart = earlybirdstart;
+	public void setDiscountstart(Date discountstart) {
+		this.discountstart = discountstart;
 	}
-	public Date getEarlybirdend() {
-		return earlybirdend;
+	public Date getDiscountend() {
+		return discountend;
 	}
-	public void setEarlybirdend(Date earlybirdend) {
-		this.earlybirdend = earlybirdend;
+	public void setDiscountend(Date discountend) {
+		this.discountend = discountend;
 	}
 	public int getPvid() {
 		return pvid;

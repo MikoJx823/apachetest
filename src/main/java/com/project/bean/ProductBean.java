@@ -22,7 +22,10 @@ public class ProductBean extends GenericBean{
 	private String shortdesc;
 	private String descimage;
 	private String detail;
-	//private String additionaldesc;
+	
+	private String fulldesc;
+	private String additionaldesc;
+
 	
 	//private int isrecommend;
 	//private int merchantCode;
@@ -35,6 +38,18 @@ public class ProductBean extends GenericBean{
 	private int ppid;
 	private List<ProductVariantBean> productVariant;
 	
+	public String getFulldesc() {
+		return fulldesc;
+	}
+	public void setFulldesc(String fulldesc) {
+		this.fulldesc = fulldesc;
+	}
+	public String getAdditionaldesc() {
+		return additionaldesc;
+	}
+	public void setAdditionaldesc(String additionaldesc) {
+		this.additionaldesc = additionaldesc;
+	}
 	public int getCategoryid() {
 		return categoryid;
 	}

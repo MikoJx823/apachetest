@@ -54,8 +54,8 @@ public class ProductDao extends GenericDao
 			sql = "insert into product(" +
 					"categoryid, name, productcode, image1, image2, " + 
 					"image3, image4, image5, displaystart, displayend, " + 
-					"shortdesc, descimage, detail, brandid, " + 
-					"status, createddate, createdby" + 
+					"detail, shortdesc, additionaldesc, brandid, " + 
+					"status, createdby, createddate" + 
 					") values (" +
 					"?,?,?,?,?, ?,?,?,?,?, ?,?,?,?, ?,?,? " +
 					")";
@@ -76,9 +76,9 @@ public class ProductDao extends GenericDao
 			pstm.setTimestamp(count, getTimestamp(product.getDisplaystart())); count++;
 			pstm.setTimestamp(count, getTimestamp(product.getDisplayend())); count++;
 			
-			pstm.setString(count, product.getShortdesc()); count++;
-			pstm.setString(count, product.getDescimage()); count++;
 			pstm.setString(count, product.getDetail()); count++;
+			pstm.setString(count, product.getShortdesc()); count++;
+			pstm.setString(count, product.getAdditionaldesc()); count++;
 			pstm.setInt(count, product.getBrandid()); count++;
 			
 			pstm.setInt(count, product.getStatus()); count++;
@@ -122,8 +122,8 @@ public class ProductDao extends GenericDao
 			sql = "update product set " +
 					"categoryid=?, name=?, productcode=?, image1=?, image2=?," + 
 					"image3=?, image4=?, image5=?, displaystart=?, displayend=?, " + 
-					"shortdesc=?, descimage=?, detail=?, brandid=?, " + 
-					"status=?, modifieddate=?, modifiedby=?" + 
+					"detail=?, shortdesc=?, additionaldesc=?, brandid=?, " + 
+					"status=?, modifiedby=?, modifieddate=?" + 
 					"where id=?";
 					
 			conn = ConectionFactory.getConnection();
@@ -142,9 +142,9 @@ public class ProductDao extends GenericDao
 			pstm.setTimestamp(count, getTimestamp(product.getDisplaystart())); count++;
 			pstm.setTimestamp(count, getTimestamp(product.getDisplayend())); count++;
 			
-			pstm.setString(count, product.getShortdesc()); count++;
-			pstm.setString(count, product.getDescimage()); count++;
 			pstm.setString(count, product.getDetail()); count++;
+			pstm.setString(count, product.getShortdesc()); count++;
+			pstm.setString(count, product.getAdditionaldesc()); count++;
 			pstm.setInt(count, product.getBrandid()); count++;
 			
 			pstm.setInt(count, product.getStatus()); count++;
@@ -168,7 +168,45 @@ public class ProductDao extends GenericDao
 		}
 		return product;
 	}
+	
+	public ProductBean updateStatus(ProductBean product){
 
+		Connection conn = null;
+		PreparedStatement pstm = null;
+		ResultSet rs = null;
+		String sql = "";
+		try{
+			
+			sql = "update product set " +
+					"status=?, modifieddate=?, modifiedby=?" + 
+					"where id=?";
+					
+			conn = ConectionFactory.getConnection();
+			pstm = new LoggableStatement(conn, sql);
+			int count = 1;
+
+			pstm.setInt(count, product.getStatus()); count++;
+			pstm.setString(count, product.getModifiedBy()); count++;
+			pstm.setTimestamp(count, getTimestamp(new Date())); count++;
+			
+			pstm.setInt(count, product.getId()); count++;
+			//log.info("Executing SQL:" + ((LoggableStatement) pstm).getQueryString());
+			//log.info("Executing SQL:" + sql);
+				
+			pstm.executeUpdate();
+
+		}catch (Exception e){
+			product = null;
+			log.error(sql, e);
+		}finally{
+			DbClose.close(rs);
+			DbClose.close(pstm);
+			DbClose.close(conn);
+
+		}
+		return product;
+	}
+	
 	public ProductBean getProductById(int pid){
 
 		Connection conn = null;
@@ -430,10 +468,10 @@ public class ProductDao extends GenericDao
 			conn = ConectionFactory.getConnection();
 			sql = "insert into productvariant(" + 
 					"pid, seq, name, quantity, price, " + 
-					"earlybirddiscount, earlybirdstart, earlybirdend, " +
+					"discount, discountstart, discountend, " +
 					"status, createddate, createdby" + 
 					") values (" + 
-					"?,?,?,?,?, ?, ?,?,? " +
+					"?,?,?,?,?, ?,?,?, ?,?,? " +
 					")";
 			
 			pstm = new LoggableStatement(conn, sql);
@@ -446,9 +484,9 @@ public class ProductDao extends GenericDao
 			pstm.setInt(count, variant.getQuantity());count++;
 			pstm.setDouble(count, variant.getPrice()); count++;
 			
-			pstm.setDouble(count, variant.getEarlybirddiscount()); count++;
-			pstm.setTimestamp(count, getTimestamp(variant.getEarlybirdstart())); count++;
-			pstm.setTimestamp(count, getTimestamp(variant.getEarlybirdend())); count++;
+			pstm.setDouble(count, variant.getDiscount()); count++;
+			pstm.setTimestamp(count, getTimestamp(variant.getDiscountstart())); count++;
+			pstm.setTimestamp(count, getTimestamp(variant.getDiscountend())); count++;
 			
 			pstm.setInt(count, variant.getStatus());count++;
 			pstm.setTimestamp(count, getTimestamp(new Date()));count++;
@@ -486,9 +524,9 @@ public class ProductDao extends GenericDao
 		String sql = "";
 		try{
 			conn = ConectionFactory.getConnection();
-			sql = "update productqty set " + 
+			sql = "update productvariant set " + 
 					"pid=?, seq=?, name=?, quantity=?, price=?,"+
-					"earlybirddiscount=?, earlybirdstart=?, earlybirdend=?, " +
+					"discount=?, discountstart=?, discountend=?, " +
 					"status=?, modifieddate=?,modifiedby=? " +
 					"where pvid=?";
 			
@@ -502,9 +540,9 @@ public class ProductDao extends GenericDao
 			pstm.setInt(count, variant.getQuantity());count++;
 			pstm.setDouble(count, variant.getPrice()); count++;
 			
-			pstm.setDouble(count, variant.getEarlybirddiscount()); count++;
-			pstm.setTimestamp(count, getTimestamp(variant.getEarlybirdstart())); count++;
-			pstm.setTimestamp(count, getTimestamp(variant.getEarlybirdend())); count++;
+			pstm.setDouble(count, variant.getDiscount()); count++;
+			pstm.setTimestamp(count, getTimestamp(variant.getDiscountstart())); count++;
+			pstm.setTimestamp(count, getTimestamp(variant.getDiscountend())); count++;
 			
 			pstm.setInt(count, variant.getStatus());count++;
 			pstm.setTimestamp(count, getTimestamp(new Date()));count++;
@@ -537,7 +575,7 @@ public class ProductDao extends GenericDao
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql = "";
-		List<ProductVariantBean>  resultlist = null;
+		
 		ProductVariantBean result = null;
 		try
 		{
@@ -548,9 +586,12 @@ public class ProductDao extends GenericDao
 			//log.info("Executing SQL:" + ((LoggableStatement) pstmt).getQueryString());
 			
 			rs = pstmt.executeQuery();
-			resultlist = getProductVariantFromResultSet(rs);
+
+			List<ProductVariantBean>  resultlist = getProductVariantFromResultSet(rs);
+			
 			if(resultlist.size()==1)
 				result = resultlist.get(0);
+			
 			
 		} catch (Exception e)
 		{
@@ -572,10 +613,10 @@ public class ProductDao extends GenericDao
 		try
 		{
 			conn = ConectionFactory.getConnection();
-			sql = "select * from productvariant where pid=? and status !=? ";
+			sql = "select * from productvariant where pid=? and status =? ";
 			pstmt = new LoggableStatement(conn, sql);
 			pstmt.setInt(1, pid);
-			pstmt.setInt(2, StaticValueUtil.Delete);
+			pstmt.setInt(2, StaticValueUtil.Active);
 			log.info("Executing SQL: " +  ((LoggableStatement) pstmt).getQueryString());
 			
 			rs = pstmt.executeQuery();
@@ -775,9 +816,9 @@ public class ProductDao extends GenericDao
 			product.setDisplaystart(rs.getTimestamp("displaystart"));
 			
 			product.setDisplayend(rs.getTimestamp("displayend"));
-			product.setShortdesc(rs.getString("shortdesc"));
-			product.setDescimage(rs.getString("descimage"));
 			product.setDetail(rs.getString("detail"));
+			product.setShortdesc(rs.getString("shortdesc"));
+			product.setAdditionaldesc(rs.getString("additionaldesc"));
 			product.setBrandid(rs.getInt("brandid"));
 			
 			product.setStatus(rs.getInt("status"));
@@ -804,9 +845,9 @@ public class ProductDao extends GenericDao
 			bean.setQuantity(rs.getInt("quantity"));
 			
 			bean.setPrice(rs.getDouble("price"));
-			bean.setEarlybirddiscount(rs.getDouble("earlybirddiscount"));
-			bean.setEarlybirdstart(rs.getTimestamp("earlybirdstart"));
-			bean.setEarlybirdend(rs.getTimestamp("earlybirdend"));
+			bean.setDiscount(rs.getDouble("discount"));
+			bean.setDiscountstart(rs.getTimestamp("discountstart"));
+			bean.setDiscountend(rs.getTimestamp("discountend"));
 			
 			bean.setStatus(rs.getInt("status"));
 			bean.setCreatedDate(rs.getTimestamp("createddate"));

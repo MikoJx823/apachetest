@@ -4,6 +4,16 @@
 
 <web-app>
   <display-name>Archetype Created Web Application</display-name>
+  <filter>
+  	<filter-name>LoginFilter</filter-name>
+  	<display-name>LoginFilter</display-name>
+  	<description></description>
+  	<filter-class>com.project.filter.LoginFilter</filter-class>
+  </filter>
+  <filter-mapping>
+  	<filter-name>LoginFilter</filter-name>
+  	<url-pattern>/LoginFilter</url-pattern>
+  </filter-mapping>
   <servlet>
   	<servlet-name>Testing</servlet-name>
   	<display-name>Testing</display-name>
@@ -53,6 +63,54 @@
   	<servlet-class>com.project.servlet.CheckoutSetupServlet</servlet-class>
   </servlet>
   <servlet>
+  	<servlet-name>LoginServlet</servlet-name>
+  	<display-name>LoginServlet</display-name>
+  	<description></description>
+  	<servlet-class>com.project.servlet.admin.LoginServlet</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>AdminBannerServlet</servlet-name>
+  	<display-name>AdminBannerServlet</display-name>
+  	<description></description>
+  	<servlet-class>com.project.servlet.admin.AdminBannerServlet</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>AdminCategoryServlet</servlet-name>
+  	<display-name>AdminCategoryServlet</display-name>
+  	<description></description>
+  	<servlet-class>com.project.servlet.admin.AdminCategoryServlet</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>AdminProductServlet</servlet-name>
+  	<display-name>AdminProductServlet</display-name>
+  	<description></description>
+  	<servlet-class>com.project.servlet.admin.AdminProductServlet</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>AdminReportServlet</servlet-name>
+  	<display-name>AdminReportServlet</display-name>
+  	<description></description>
+  	<servlet-class>com.project.servlet.admin.AdminReportServlet</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>AdminOrderServlet</servlet-name>
+  	<display-name>AdminOrderServlet</display-name>
+  	<description></description>
+  	<servlet-class>com.project.servlet.admin.AdminOrderServlet</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>GroupServlet</servlet-name>
+  	<display-name>GroupServlet</display-name>
+  	<description></description>
+  	<servlet-class>com.project.servlet.admin.GroupServlet</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>UserServlet</servlet-name>
+  	<display-name>UserServlet</display-name>
+  	<description></description>
+  	<servlet-class>com.project.servlet.admin.UserServlet</servlet-class>
+  </servlet>
+  <servlet>
   	<servlet-name>SearchServlet</servlet-name>
   	<display-name>SearchServlet</display-name>
   	<description></description>
@@ -89,6 +147,39 @@
   <servlet-mapping>
   	<servlet-name>CheckoutSetupServlet</servlet-name>
   	<url-pattern>/checkout</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>LoginServlet</servlet-name>
+  	<url-pattern>/admin/</url-pattern>
+  	<url-pattern>/admin/LoginServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>AdminBannerServlet</servlet-name>
+  	<url-pattern>/AdminBannerServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>AdminCategoryServlet</servlet-name>
+  	<url-pattern>/admin/category/AdminCategoryServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>AdminProductServlet</servlet-name>
+  	<url-pattern>/admin/product/AdminProductServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>AdminReportServlet</servlet-name>
+  	<url-pattern>/admin/report/AdminReportServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>AdminOrderServlet</servlet-name>
+  	<url-pattern>/admin/order/AdminOrderServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>GroupServlet</servlet-name>
+  	<url-pattern>/admin/system/GroupServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>UserServlet</servlet-name>
+  	<url-pattern>/admin/system/UserServlet</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
   	<servlet-name>SearchServlet</servlet-name>

@@ -1,15 +1,21 @@
 package com.project.servlet.admin;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 
 import org.apache.log4j.Logger;
 
@@ -19,7 +25,6 @@ import com.project.bean.MsgAlertBean;
 import com.project.bean.ProductBean;
 import com.project.bean.ProductVariantBean;
 import com.project.pulldown.ProductStatus;
-import com.project.service.AdminService;
 import com.project.service.ProductService;
 import com.project.util.DateUtil;
 import com.project.util.PropertiesUtil;
@@ -30,6 +35,7 @@ import com.project.util.StringUtil;
 /**
  * Servlet implementation class AdminProductServlet
  */
+@MultipartConfig
 public class AdminProductServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -40,38 +46,25 @@ public class AdminProductServlet extends HttpServlet {
 		resp.setContentType("text/html");
 		resp.setHeader("Cache-Control", "no-cache");
 		String actionType = req.getParameter("actionType");
-		
-		AdminService.getInstance().checkLogin(req, resp);
-		
-		SmartUpload su = new SmartUpload();
-		if (null == actionType){
-			su.initialize(this.getServletConfig(), req, resp);
-			try{
-				su.upload();
-			}catch (Exception e){
-				log.info(e);
-			}
-			
-			actionType = su.getRequest().getParameter("actionType");
-		}
+	
 		log.info("actionType:" + actionType);
 
 		if (SessionName.actionTypeSearch.equals(actionType)){
 			search(req, resp);
 		}else if (SessionName.actionTypeAdd.equals(actionType)){
-			add(req, resp, su);
+			add(req, resp);
 		}else if (SessionName.actionTypeView.equals(actionType)){
 			// productView(req, resp, su);
 		}else if (SessionName.actionTypeDelete.equals(actionType)){
-			delete(req, resp, su);
+			delete(req, resp);
 		}else if (SessionName.actionTypeEdit.equals(actionType)){
-			edit(req, resp, su);
+			edit(req, resp);
 		}else if (SessionName.actionTypeUpdateStatus.equals(actionType)) {
 			updateStatus(req,resp);
 		}
 	}
 
-	private void delete(HttpServletRequest request, HttpServletResponse response, SmartUpload su){
+	private void delete(HttpServletRequest request, HttpServletResponse response){
 		String resultUrl = "productIdx.jsp";
 		String errorMsg = "";
 		try
@@ -106,80 +99,30 @@ public class AdminProductServlet extends HttpServlet {
 		}
 	}
 
-	private void add(HttpServletRequest request, HttpServletResponse response, SmartUpload su){
+	private void add(HttpServletRequest request, HttpServletResponse response){
 		String resultUrl = "productAdd.jsp";
 		String errorMsg = "";
 		Date now = new Date();
 
-		if (!request.getSession().getAttribute(SessionName.token).equals(su.getRequest().getParameter(SessionName.token)))
+		if (!request.getSession().getAttribute(SessionName.token).equals(request.getParameter(SessionName.token)))
 			return;
 
 		try
 		{
 			AdminInfoBean loginAdmin = (AdminInfoBean) request.getSession().getAttribute(SessionName.loginAdmin);
 			
-			su.setMaxFileSize(10000);
-			su.setTotalMaxFileSize(20000);
-			// su.setAllowedFilesList("jpg,gif,JPG,GIF,jpeg,PNG,png");
-			su.setAllowedFilesList("jpg,JPG,jpeg,PNG,png");
 			
 			List<ProductVariantBean> variants = new ArrayList<ProductVariantBean>();
 			
-			int categoryId = StringUtil.strToInt(su.getRequest().getParameter("categoryId"));
-			int brandId = StringUtil.strToInt(su.getRequest().getParameter("brandId"));
-			String productcode = StringUtil.filter(su.getRequest().getParameter("productCode"));
-			String ename = StringUtil.filter(su.getRequest().getParameter("eName"));
-			int status = StringUtil.strToInt(StringUtil.filter(su.getRequest().getParameter("status"), (StaticValueUtil.Inactive + "")));
-			String fullDesc = StringUtil.filter(su.getRequest().getParameter("fulldesc"));
-			String shortDesc = StringUtil.filter(su.getRequest().getParameter("shortdesc"));
-			String additionalDesc = StringUtil.filter(su.getRequest().getParameter("additionaldesc"));
-			int variantcounter = StringUtil.strToInt(su.getRequest().getParameter("variantcounter")); 
-			
-			log.info("here");
-			
-			/*String dayFromStr = StringUtil.filter(su.getRequest().getParameter("dayFrom"), now.getDate());
-			String monthFromStr = StringUtil.filter(su.getRequest().getParameter("monthFrom"), now.getMonth());
-			String yearFromStr = StringUtil.filter(su.getRequest().getParameter("yearFrom"), now.getYear());
-			String hourFromStr = StringUtil.filter(su.getRequest().getParameter("hourFrom"), "00");
-			String minuteFromStr = StringUtil.filter(su.getRequest().getParameter("minuteFrom"), "00");
-			String secondFromStr = StringUtil.filter(su.getRequest().getParameter("secondFrom"), "00");
-			
-			String dayToStr = StringUtil.filter(su.getRequest().getParameter("dayTo"), now.getDate());
-			String monthToStr = StringUtil.filter(su.getRequest().getParameter("monthTo"), now.getMonth());
-			String yearToStr = StringUtil.filter(su.getRequest().getParameter("yearTo"), now.getYear());
-			String hourToStr = StringUtil.filter(su.getRequest().getParameter("hourTo"), "23");
-			String minuteToStr = StringUtil.filter(su.getRequest().getParameter("minuteTo"), "59");
-			String secondToStr = StringUtil.filter(su.getRequest().getParameter("secondTo"), "59");
-			
-			String dateFromStr = yearFromStr + "-" + monthFromStr + "-" + dayFromStr + " "+hourFromStr+":"+minuteFromStr+":"+secondFromStr;
-			String dateToStr = yearToStr + "-" + monthToStr + "-" + dayToStr + " "+hourToStr+":"+minuteToStr+":"+secondToStr;;
-			
-			
-			//PRICE RELATED 
-			double price = StringUtil.strToDouble(su.getRequest().getParameter("price"));
-			double discountPrice = StringUtil.strToDouble(su.getRequest().getParameter("discountPrice"));
-			int discountType = StringUtil.strToInt(su.getRequest().getParameter("discountType"));
-			
-			String discountDayFromStr = StringUtil.filter(su.getRequest().getParameter("dayFrom"), now.getDate());
-			String discountMonthFromStr = StringUtil.filter(su.getRequest().getParameter("monthFrom"), now.getMonth());
-			String discountYearFromStr = StringUtil.filter(su.getRequest().getParameter("yearFrom"), now.getYear());
-			String discountHourFromStr = StringUtil.filter(su.getRequest().getParameter("hourFrom"), "00");
-			String discountMinuteFromStr = StringUtil.filter(su.getRequest().getParameter("minuteFrom"), "00");
-			String discountSecondFromStr = StringUtil.filter(su.getRequest().getParameter("secondFrom"), "00");
-			
-			String discountDayToStr = StringUtil.filter(su.getRequest().getParameter("dayTo"), now.getDate());
-			String discountMonthToStr = StringUtil.filter(su.getRequest().getParameter("monthTo"), now.getMonth());
-			String discountYearToStr = StringUtil.filter(su.getRequest().getParameter("yearTo"), now.getYear());
-			String discountHourToStr = StringUtil.filter(su.getRequest().getParameter("hourTo"), "23");
-			String discountMinuteToStr = StringUtil.filter(su.getRequest().getParameter("minuteTo"), "59");
-			String discountSecondToStr = StringUtil.filter(su.getRequest().getParameter("secondTo"), "59");
-			
-			String discountDateFromStr = discountYearFromStr + "-" + discountMonthFromStr + "-" + discountDayFromStr + " "+ discountHourFromStr+":"+ discountMinuteFromStr+":"+ discountSecondFromStr;
-			String discountDateToStr = discountYearToStr + "-" + discountMonthToStr + "-" + discountDayToStr + " "+ discountHourToStr+":"+ discountMinuteToStr+":"+ discountSecondToStr;
-			
-			//QUANTITY RELATED 
-			int quantity = StringUtil.strToInt(su.getRequest().getParameter("quantity"));
-			*/
+			int categoryId = StringUtil.strToInt(request.getParameter("categoryId"));
+			int brandId = StringUtil.strToInt(request.getParameter("brandId"));
+			String productcode = StringUtil.filter(request.getParameter("productCode"));
+			String ename = StringUtil.filter(request.getParameter("eName"));
+			int status = StringUtil.strToInt(StringUtil.filter(request.getParameter("status"), (StaticValueUtil.Inactive + "")));
+			String fullDesc = StringUtil.filter(request.getParameter("fulldesc"));
+			String shortDesc = StringUtil.filter(request.getParameter("shortdesc"));
+			String additionalDesc = StringUtil.filter(request.getParameter("additionaldesc"));
+			int variantcounter = StringUtil.strToInt(request.getParameter("variantcounter")); 
 			
 			ProductBean product = new ProductBean();
 
@@ -202,24 +145,24 @@ public class AdminProductServlet extends HttpServlet {
 			for(int i = 1; i <= variantcounter; i++) {
 				ProductVariantBean variant = new ProductVariantBean();
 				
-				String variantname = StringUtil.filter(su.getRequest().getParameter("variant" + i));
-				double price = StringUtil.strToDouble(su.getRequest().getParameter("price" + i));
-				double discount = StringUtil.strToDouble(StringUtil.filter(su.getRequest().getParameter("discount" + i),"0"));
-				int quantity = StringUtil.strToInt(su.getRequest().getParameter("quantity" + i));
+				String variantname = StringUtil.filter(request.getParameter("variant" + i));
+				double price = StringUtil.strToDouble(request.getParameter("price" + i));
+				double discount = StringUtil.strToDouble(StringUtil.filter(request.getParameter("discount" + i),"0"));
+				int quantity = StringUtil.strToInt(request.getParameter("quantity" + i));
 				
-				String discountDayFromStr = StringUtil.filter(su.getRequest().getParameter("ddayFrom" + i), now.getDate());
-				String discountMonthFromStr = StringUtil.filter(su.getRequest().getParameter("dmonthFrom" + i), now.getMonth());
-				String discountYearFromStr = StringUtil.filter(su.getRequest().getParameter("dyearFrom" + i), now.getYear() + 1900);
-				String discountHourFromStr = StringUtil.filter(su.getRequest().getParameter("dhourFrom" + i), "00");
-				String discountMinuteFromStr = StringUtil.filter(su.getRequest().getParameter("dminuteFrom" + i), "00");
-				String discountSecondFromStr = StringUtil.filter(su.getRequest().getParameter("dsecondFrom" + i), "00");
+				String discountDayFromStr = StringUtil.filter(request.getParameter("ddayFrom" + i), now.getDate());
+				String discountMonthFromStr = StringUtil.filter(request.getParameter("dmonthFrom" + i), now.getMonth());
+				String discountYearFromStr = StringUtil.filter(request.getParameter("dyearFrom" + i), now.getYear() + 1900);
+				String discountHourFromStr = StringUtil.filter(request.getParameter("dhourFrom" + i), "00");
+				String discountMinuteFromStr = StringUtil.filter(request.getParameter("dminuteFrom" + i), "00");
+				String discountSecondFromStr = StringUtil.filter(request.getParameter("dsecondFrom" + i), "00");
 				
-				String discountDayToStr = StringUtil.filter(su.getRequest().getParameter("ddayTo" + i), now.getDate());
-				String discountMonthToStr = StringUtil.filter(su.getRequest().getParameter("dmonthTo" + i), now.getMonth());
-				String discountYearToStr = StringUtil.filter(su.getRequest().getParameter("dyearTo" + i), now.getYear() + 1900);
-				String discountHourToStr = StringUtil.filter(su.getRequest().getParameter("dhourTo" + i), "00");
-				String discountMinuteToStr = StringUtil.filter(su.getRequest().getParameter("dminuteTo" + i), "00");
-				String discountSecondToStr = StringUtil.filter(su.getRequest().getParameter("dsecondTo" + i), "00");
+				String discountDayToStr = StringUtil.filter(request.getParameter("ddayTo" + i), now.getDate());
+				String discountMonthToStr = StringUtil.filter(request.getParameter("dmonthTo" + i), now.getMonth());
+				String discountYearToStr = StringUtil.filter(request.getParameter("dyearTo" + i), now.getYear() + 1900);
+				String discountHourToStr = StringUtil.filter(request.getParameter("dhourTo" + i), "00");
+				String discountMinuteToStr = StringUtil.filter(request.getParameter("dminuteTo" + i), "00");
+				String discountSecondToStr = StringUtil.filter(request.getParameter("dsecondTo" + i), "00");
 				
 				String discountDateFromStr = discountYearFromStr + "-" + discountMonthFromStr + "-" + discountDayFromStr + " "+ discountHourFromStr+":"+ discountMinuteFromStr+":"+ discountSecondFromStr;
 				String discountDateToStr = discountYearToStr + "-" + discountMonthToStr + "-" + discountDayToStr + " "+ discountHourToStr+":"+ discountMinuteToStr+":"+ discountSecondToStr;
@@ -240,78 +183,64 @@ public class AdminProductServlet extends HttpServlet {
 			
 			product.setProductVariant(variants);
 
-			for (int i = 0; i < su.getFiles().getCount(); i++){
-				com.jspsmart.upload.File file = su.getFiles().getFile(i);
-				String fieldName = file.getFieldName();
-				String fileExt = file.getFileExt();
-
-				if ("".equals(fileExt)){
-					continue;
+			try {
+				for (int i = 1; i <= 4; i++) {
+					Part filePart = request.getPart("image" + i);
+					String fileName = StringUtil.filter(Paths.get(filePart.getSubmittedFileName()).getFileName().toString()); // MSIE fix.
+					//InputStream fileContent = filePart.getInputStream();
+					
+					if(!"".equals(fileName) && !(fileName.toLowerCase().endsWith("jpg") || fileName.toLowerCase().endsWith("png"))) {
+						errorMsg += "Image format is not correct. (only support jpg and png) ";
+						break;
+					}
+					
+					if(filePart.getName().equals("image1")) {
+						product.setImage1("y");
+					}
+					
 				}
-
-				if (!(fileExt.toLowerCase().endsWith("jpg") || fileExt.toLowerCase().endsWith("png")))
-				{
-					errorMsg += "Image format is not correct.";
-					break;
-				}
-				
-				if ("image1".equals(fieldName)){
-					log.info("field 1 " + fieldName);
-					product.setImage1("y");
-				}else if ("image2".equals(fieldName)){
-					product.setImage2("y");
-				}else if ("image3".equals(fieldName)){
-					product.setImage3("y");
-				}else if ("image4".equals(fieldName)){
-					product.setImage4("y");
-				}else if ("image5".equals(fieldName)){
-					product.setImage5("y");
-				}
-			}
+			} catch (IOException e) {
+				e.printStackTrace();
+			} 
 
 			errorMsg = this.checkInfo(product, errorMsg);
 			
 			if ("".equals(errorMsg)){
-				for (int i = 0; i < su.getFiles().getCount(); i++)
-				{
-					com.jspsmart.upload.File file = su.getFiles().getFile(i);
-					String fieldName = file.getFieldName();
-					String fileExt = file.getFileExt();
-
-					if ("".equals(fileExt))
-					{
-						continue;
-					}
-
-					if (!(fileExt.toLowerCase().endsWith("jpg") || fileExt.toLowerCase().endsWith("png")))
-					{
-						errorMsg += "Image format is not correct.";
-						break;
-					}
-					else
-					{
-						String fileName = new Date().getTime() + i + "." + fileExt;
-
-						// file.saveAs("/"+PropertiesUtil.getProperty("productImagePath")
-						// + fileName);
+				try {
+					for (int i = 1; i <= 4; i++) {
+						Part filePart = request.getPart("image" + i);
+						String fileName = StringUtil.filter(Paths.get(filePart.getSubmittedFileName()).getFileName().toString()); // MSIE fix.
+						InputStream fileContent = filePart.getInputStream();
 						
-						log.info("basePath " + StringUtil.getBasePath());
-						file.saveAs(StringUtil.getProductImagePath() + fileName);
-						//file.saveAs(StringUtil.getBasePath() + "images/products/" + fileName);
-						
-						if ("image1".equals(fieldName)){
-							product.setImage1(fileName);
-						}else if ("image2".equals(fieldName)){
-							product.setImage2(fileName);
-						}else if ("image3".equals(fieldName)){
-							product.setImage3(fileName);
-						}else if ("image4".equals(fieldName)){
-							product.setImage4(fileName);
-						}else if ("image5".equals(fieldName)){
-							product.setImage5(fileName);
+						if(!"".equals(fileName)) {
+							@SuppressWarnings("resource")
+							OutputStream outputStream = new FileOutputStream(new File((getServletContext().getRealPath("") + "images" + File.separator + "products" + File.separator).replace('\\', '/') + filePart.getSubmittedFileName()));
+							
+							int read = 0;
+							byte[] bytes = new byte[1024];
+
+							while ((read = fileContent.read(bytes)) != -1) {
+								outputStream.write(bytes, 0, read);
+							}
+							
+							if(filePart.getName().equals("image1")) {
+								product.setImage1(fileName);
+							}else if(filePart.getName().equals("image2")) {
+								product.setImage2(fileName);
+							}else if(filePart.getName().equals("image3")) {
+								product.setImage3(fileName);
+							}else if(filePart.getName().equals("image4")) {
+								product.setImage4(fileName);
+							}else if(filePart.getName().equals("image5")) {
+								product.setImage5(fileName);
+							}
+							
 						}
+						
 					}
-				}
+				} catch (IOException e) {
+					e.printStackTrace();
+				} 
 			}
 			
 			log.info("after image ");
@@ -353,13 +282,13 @@ public class AdminProductServlet extends HttpServlet {
 		}
 	}
 
-	private void edit(HttpServletRequest request, HttpServletResponse response, SmartUpload su){
+	private void edit(HttpServletRequest request, HttpServletResponse response){
 		log.info("upload");
 		String resultUrl = "productIdx.jsp";
 		Date now = new Date();
 		String errorMsg = "";
 
-		if (!request.getSession().getAttribute(SessionName.token).equals(su.getRequest().getParameter(SessionName.token)))
+		if (!request.getSession().getAttribute(SessionName.token).equals(request.getParameter(SessionName.token)))
 			return;
 
 		String maxSizeStr = PropertiesUtil.getProperty("upload.maxSize");
@@ -367,10 +296,6 @@ public class AdminProductServlet extends HttpServlet {
 		//String tempUpload = PropertiesUtil.getProperty("basePath") + PropertiesUtil.getProperty("upload.temp");
 		String productUpload = StringUtil.getProductImagePath();//PropertiesUtil.getProperty("basePath") + PropertiesUtil.getProperty("productImagePath");
 			
-		/*File temp = new File(tempUpload);
-		if (!temp.exists()){
-			temp.mkdirs();
-		}*/
 
 		File upload = new File(productUpload);
 		if (!upload.exists()){
@@ -378,48 +303,22 @@ public class AdminProductServlet extends HttpServlet {
 		}
 
 		try{
-			// MultipartRequest multiReq = new MultipartRequest(req, tempUpload,
-			// maxSize) ;
 
 			AdminInfoBean loginAdmin = (AdminInfoBean) request.getSession().getAttribute("loginAdmin");
 
-			su.setMaxFileSize(10000);
-			su.setTotalMaxFileSize(20000);
-			su.setAllowedFilesList("jpg,JPG,jpeg,PNG,png");
-
-			int id = StringUtil.strToInt(su.getRequest().getParameter("id"));
-			int categoryId = StringUtil.strToInt(su.getRequest().getParameter("categoryId"));
-			int brandId = StringUtil.strToInt(su.getRequest().getParameter("brandId"));
-			String productcode = StringUtil.filter(su.getRequest().getParameter("productCode"));
-			String ename = StringUtil.filter(su.getRequest().getParameter("eName"));
-			int status = StringUtil.strToInt(StringUtil.filter(su.getRequest().getParameter("status"), (StaticValueUtil.Inactive + "")));
-			String fullDesc = StringUtil.filter(su.getRequest().getParameter("fullDesc"));
-			String shortDesc = StringUtil.filter(su.getRequest().getParameter("shortDesc"));
-			String additionalDesc = StringUtil.filter(su.getRequest().getParameter("additionalDesc"));
-			int variantcounter = StringUtil.strToInt(su.getRequest().getParameter("variantcounter")); 
-			String test = StringUtil.filter(su.getRequest().getParameter("test"));
+			int id = StringUtil.strToInt(request.getParameter("id"));
+			int categoryId = StringUtil.strToInt(request.getParameter("categoryId"));
+			int brandId = StringUtil.strToInt(request.getParameter("brandId"));
+			String productcode = StringUtil.filter(request.getParameter("productCode"));
+			String ename = StringUtil.filter(request.getParameter("eName"));
+			int status = StringUtil.strToInt(StringUtil.filter(request.getParameter("status"), (StaticValueUtil.Inactive + "")));
+			String fullDesc = StringUtil.filter(request.getParameter("fullDesc"));
+			String shortDesc = StringUtil.filter(request.getParameter("shortDesc"));
+			String additionalDesc = StringUtil.filter(request.getParameter("additionalDesc"));
+			int variantcounter = StringUtil.strToInt(request.getParameter("variantcounter")); 
+			String test = StringUtil.filter(request.getParameter("test"));
 			log.info("test"  + test);
-			//int hotPick = StringUtil.trimToInt(su.getRequest().getParameter("hotPick"));
-			//int brandid = StringUtil.trimToInt(su.getRequest().getParameter("brandId"));
-			
-			/*String dayFromStr = StringUtil.filter(su.getRequest().getParameter("dayFrom"), now.getDate());
-			String monthFromStr = StringUtil.filter(su.getRequest().getParameter("monthFrom"), now.getMonth());
-			String yearFromStr = StringUtil.filter(su.getRequest().getParameter("yearFrom"), now.getYear());
-			String hourFromStr = StringUtil.filter(su.getRequest().getParameter("hourFrom"), "00");
-			String minuteFromStr = StringUtil.filter(su.getRequest().getParameter("minuteFrom"), "00");
-			String secondFromStr = StringUtil.filter(su.getRequest().getParameter("secondFrom"), "00");
-			
-			String dayToStr = StringUtil.filter(su.getRequest().getParameter("dayTo"), now.getDate());
-			String monthToStr = StringUtil.filter(su.getRequest().getParameter("monthTo"), now.getMonth());
-			String yearToStr = StringUtil.filter(su.getRequest().getParameter("yearTo"), now.getYear());
-			String hourToStr = StringUtil.filter(su.getRequest().getParameter("hourTo"), "23");
-			String minuteToStr = StringUtil.filter(su.getRequest().getParameter("minuteTo"), "59");
-			String secondToStr = StringUtil.filter(su.getRequest().getParameter("secondTo"), "59");
-			
-			String dateFromStr = yearFromStr + "-" + monthFromStr + "-" + dayFromStr + " "+hourFromStr+":"+minuteFromStr+":"+secondFromStr;
-			String dateToStr = yearToStr + "-" + monthToStr + "-" + dayToStr + " "+hourToStr+":"+minuteToStr+":"+secondToStr;;
-			*/
-			
+
 			ProductBean product = new ProductBean();
 			List<ProductVariantBean> variants = new ArrayList<ProductVariantBean>();
 			List<ProductVariantBean> oldvariants = new ArrayList<ProductVariantBean>();
@@ -442,25 +341,25 @@ public class AdminProductServlet extends HttpServlet {
 			//FOR VARIANT UPDATE 
 			for(int i = 1; i <= variantcounter; i++) {
 				log.info("inside variant");
-				int vid = StringUtil.strToInt(StringUtil.filter(su.getRequest().getParameter("pvid" + i)));
-				String variantname = StringUtil.filter(su.getRequest().getParameter("variant" + i));
-				double price = StringUtil.strToDouble(su.getRequest().getParameter("price" + i));
-				double discount = StringUtil.strToDouble(StringUtil.filter(su.getRequest().getParameter("discount" + i),"0"));
-				int quantity = StringUtil.strToInt(su.getRequest().getParameter("quantity" + i));
+				int vid = StringUtil.strToInt(StringUtil.filter(request.getParameter("pvid" + i)));
+				String variantname = StringUtil.filter(request.getParameter("variant" + i));
+				double price = StringUtil.strToDouble(request.getParameter("price" + i));
+				double discount = StringUtil.strToDouble(StringUtil.filter(request.getParameter("discount" + i),"0"));
+				int quantity = StringUtil.strToInt(request.getParameter("quantity" + i));
 				
-				String discountDayFromStr = StringUtil.filter(su.getRequest().getParameter("ddayFrom" + i), now.getDate());
-				String discountMonthFromStr = StringUtil.filter(su.getRequest().getParameter("dmonthFrom" + i), now.getMonth());
-				String discountYearFromStr = StringUtil.filter(su.getRequest().getParameter("dyearFrom" + i), (now.getYear() + 1900));
-				String discountHourFromStr = StringUtil.filter(su.getRequest().getParameter("dhourFrom" + i), "00");
-				String discountMinuteFromStr = StringUtil.filter(su.getRequest().getParameter("dminuteFrom" + i), "00");
-				String discountSecondFromStr = StringUtil.filter(su.getRequest().getParameter("dsecondFrom" + i), "00");
+				String discountDayFromStr = StringUtil.filter(request.getParameter("ddayFrom" + i), now.getDate());
+				String discountMonthFromStr = StringUtil.filter(request.getParameter("dmonthFrom" + i), now.getMonth());
+				String discountYearFromStr = StringUtil.filter(request.getParameter("dyearFrom" + i), (now.getYear() + 1900));
+				String discountHourFromStr = StringUtil.filter(request.getParameter("dhourFrom" + i), "00");
+				String discountMinuteFromStr = StringUtil.filter(request.getParameter("dminuteFrom" + i), "00");
+				String discountSecondFromStr = StringUtil.filter(request.getParameter("dsecondFrom" + i), "00");
 				
-				String discountDayToStr = StringUtil.filter(su.getRequest().getParameter("ddayTo" + i), now.getDate());
-				String discountMonthToStr = StringUtil.filter(su.getRequest().getParameter("dmonthTo" + i), now.getMonth());
-				String discountYearToStr = StringUtil.filter(su.getRequest().getParameter("dyearTo" + i), (now.getYear() + 1900));
-				String discountHourToStr = StringUtil.filter(su.getRequest().getParameter("dhourTo" + i), "00");
-				String discountMinuteToStr = StringUtil.filter(su.getRequest().getParameter("dminuteTo" + i), "00");
-				String discountSecondToStr = StringUtil.filter(su.getRequest().getParameter("dsecondTo" + i), "00");
+				String discountDayToStr = StringUtil.filter(request.getParameter("ddayTo" + i), now.getDate());
+				String discountMonthToStr = StringUtil.filter(request.getParameter("dmonthTo" + i), now.getMonth());
+				String discountYearToStr = StringUtil.filter(request.getParameter("dyearTo" + i), (now.getYear() + 1900));
+				String discountHourToStr = StringUtil.filter(request.getParameter("dhourTo" + i), "00");
+				String discountMinuteToStr = StringUtil.filter(request.getParameter("dminuteTo" + i), "00");
+				String discountSecondToStr = StringUtil.filter(request.getParameter("dsecondTo" + i), "00");
 				
 				String discountDateFromStr = discountYearFromStr + "-" + discountMonthFromStr + "-" + discountDayFromStr + " "+ discountHourFromStr+":"+ discountMinuteFromStr+":"+ discountSecondFromStr;
 				String discountDateToStr = discountYearToStr + "-" + discountMonthToStr + "-" + discountDayToStr + " "+ discountHourToStr+":"+ discountMinuteToStr+":"+ discountSecondToStr;
@@ -484,90 +383,80 @@ public class AdminProductServlet extends HttpServlet {
 			log.info("variant size " + variants.size());
 			product.setProductVariant(variants);
 			
-			for (int i = 0; i < su.getFiles().getCount(); i++){
-				com.jspsmart.upload.File file = su.getFiles().getFile(i);
-				String fieldName = file.getFieldName();
-				String fileExt = file.getFileExt();
-
-				if ("".equals(fileExt))
-				{
-					continue;
-				}
-
-				if (!(fileExt.toLowerCase().endsWith("jpg") || fileExt.toLowerCase().endsWith("png")))
-				{
-					errorMsg += "Image format is not correct.";
-					break;
-				}
-				else{
-					if ("image1".equals(fieldName)){
-						product.setImage1("y");
+			try {
+				for (int i = 1; i <= 4; i++) {
+					Part filePart = request.getPart("image" + i);
+					String fileName = StringUtil.filter(Paths.get(filePart.getSubmittedFileName()).getFileName().toString()); // MSIE fix.
+					//InputStream fileContent = filePart.getInputStream();
+					
+					if(!"".equals(fileName) && !(fileName.toLowerCase().endsWith("jpg") || fileName.toLowerCase().endsWith("png"))) {
+						errorMsg += "Image format is not correct. (only support jpg and png) ";
+						break;
 					}
+					
 				}
-			}
+			} catch (IOException e) {
+				e.printStackTrace();
+			} 
 
 			errorMsg = this.checkInfo(product, errorMsg);
 			
 			if("".equals(errorMsg)){
-				String image2_old_flag = StringUtil.filter(su.getRequest().getParameter("image2_old_flag"));
+				String image2_old_flag = StringUtil.filter(request.getParameter("image2_old_flag"));
 				if("0".equals(image2_old_flag)){
 					product.setImage2("");
 				}
-				String image3_old_flag = StringUtil.filter(su.getRequest().getParameter("image3_old_flag"));
+				String image3_old_flag = StringUtil.filter(request.getParameter("image3_old_flag"));
 				if("0".equals(image3_old_flag)){
 					product.setImage3("");
 				}
-				String image4_old_flag = StringUtil.filter(su.getRequest().getParameter("image4_old_flag"));
+				String image4_old_flag = StringUtil.filter(request.getParameter("image4_old_flag"));
 				if("0".equals(image4_old_flag)){
 					product.setImage4("");
 				}
-				String image5_old_flag = StringUtil.filter(su.getRequest().getParameter("image5_old_flag"));
+				String image5_old_flag = StringUtil.filter(request.getParameter("image5_old_flag"));
 				if("0".equals(image5_old_flag)){
 					product.setImage5("");
 				}
 				
-				for (int i = 0; i < su.getFiles().getCount(); i++)
-				{
-					com.jspsmart.upload.File file = su.getFiles().getFile(i);
-					String fieldName = file.getFieldName();
-					String fileExt = file.getFileExt();
-	
-					if ("".equals(fileExt))
-					{
-						continue;
-					}
-	
-					if (!(fileExt.toLowerCase().endsWith("jpg") || fileExt.toLowerCase().endsWith("png")))
-					{
-						errorMsg += "Image format is not correct.";
-						break;
-					}
-					else
-					{
-						String fileName = new Date().getTime() + i + "." + fileExt;
-						// file.saveAs("/"+PropertiesUtil.getProperty("productImagePath")
-						// + fileName);
-						// file.saveAs(PropertiesUtil.getProperty("hostArr") +
-						// PropertiesUtil.getProperty("productImagePath") +
-						// fileName);
-						// String filePath = PropertiesUtil.getProperty("hostAddr")
-						// + PropertiesUtil.getProperty("virtualHost") +
-						// PropertiesUtil.getProperty("productImagePath");
-						file.saveAs(productUpload + fileName);
-	
-						if ("image1".equals(fieldName)){
-							product.setImage1(fileName);
-						}else if ("image2".equals(fieldName)){
-							product.setImage2(fileName);
-						}else if ("image3".equals(fieldName)){
-							product.setImage3(fileName);
-						}else if ("image4".equals(fieldName)){
-							product.setImage4(fileName);
-						}else if ("image5".equals(fieldName)){
-							product.setImage5(fileName);
+				
+				
+				try {
+					for (int i = 1; i <= 4; i++) {
+						Part filePart = request.getPart("image" + i);
+						String fileName = StringUtil.filter(Paths.get(filePart.getSubmittedFileName()).getFileName().toString()); // MSIE fix.
+						InputStream fileContent = filePart.getInputStream();
+						
+						if(!"".equals(fileName)) {
+							@SuppressWarnings("resource")
+							OutputStream outputStream = new FileOutputStream(new File((getServletContext().getRealPath("") + "images" + File.separator + "products" + File.separator).replace('\\', '/') + filePart.getSubmittedFileName()));
+							
+							int read = 0;
+							byte[] bytes = new byte[1024];
+
+							while ((read = fileContent.read(bytes)) != -1) {
+								outputStream.write(bytes, 0, read);
+							}
+							
+							if(filePart.getName().equals("image1")) {
+								product.setImage1(fileName);
+							}else if(filePart.getName().equals("image2")) {
+								product.setImage2(fileName);
+							}else if(filePart.getName().equals("image3")) {
+								product.setImage3(fileName);
+							}else if(filePart.getName().equals("image4")) {
+								product.setImage4(fileName);
+							}else if(filePart.getName().equals("image5")) {
+								product.setImage5(fileName);
+							}
+							
 						}
+						
 					}
-				}
+				} catch (IOException e) {
+					e.printStackTrace();
+				} 
+				
 			}
 			log.info("errorMsg" + errorMsg);
 			if ("".equals(errorMsg)){

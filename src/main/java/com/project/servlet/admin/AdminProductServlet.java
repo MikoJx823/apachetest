@@ -19,7 +19,6 @@ import javax.servlet.http.Part;
 
 import org.apache.log4j.Logger;
 
-import com.jspsmart.upload.SmartUpload;
 import com.project.bean.AdminInfoBean;
 import com.project.bean.MsgAlertBean;
 import com.project.bean.ProductBean;

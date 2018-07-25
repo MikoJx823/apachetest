@@ -69,12 +69,6 @@
   	<servlet-class>com.project.servlet.admin.LoginServlet</servlet-class>
   </servlet>
   <servlet>
-  	<servlet-name>AdminBannerServlet</servlet-name>
-  	<display-name>AdminBannerServlet</display-name>
-  	<description></description>
-  	<servlet-class>com.project.servlet.admin.AdminBannerServlet</servlet-class>
-  </servlet>
-  <servlet>
   	<servlet-name>AdminCategoryServlet</servlet-name>
   	<display-name>AdminCategoryServlet</display-name>
   	<description></description>
@@ -152,10 +146,6 @@
   	<servlet-name>LoginServlet</servlet-name>
   	<url-pattern>/admin/</url-pattern>
   	<url-pattern>/admin/LoginServlet</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-  	<servlet-name>AdminBannerServlet</servlet-name>
-  	<url-pattern>/AdminBannerServlet</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
   	<servlet-name>AdminCategoryServlet</servlet-name>

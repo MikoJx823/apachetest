@@ -732,7 +732,7 @@ public class AdminDao extends GenericDao
 		List<AdminInfoBean> result = new ArrayList<AdminInfoBean>();
 		try
 		{	
-			pagingRows = StringUtil.strToInt(PropertiesUtil.getProperty("pagingRows"));
+			//pagingRows = StringUtil.strToInt(PropertiesUtil.getProperty("pagingRows"));
 			
 			conn = ConectionFactory.getConnection();
 			sql = "select * from admininfo "+sqlWhere + " order by aid desc limit ?,?";
@@ -1023,7 +1023,7 @@ public class AdminDao extends GenericDao
 		try
 		{
 			conn = ConectionFactory.getConnection();
-			pagingRows = StringUtil.strToInt(PropertiesUtil.getProperty("pagingRows"));
+			//pagingRows = StringUtil.strToInt(PropertiesUtil.getProperty("pagingRows"));
 			
 			sql = "select count(*) as count from admininfo "+sqlWhere;
 			pstmt = new LoggableStatement(conn, sql);	

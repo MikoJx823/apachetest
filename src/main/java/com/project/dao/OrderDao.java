@@ -536,7 +536,7 @@ public class OrderDao extends GenericDao
 		try
 		{
 			conn = ConectionFactory.getConnection();
-			pagingRows = StringUtil.strToInt(PropertiesUtil.getProperty("pagingRows"));
+			//pagingRows = StringUtil.strToInt(PropertiesUtil.getProperty("pagingRows"));
 			sql = "select * from orderinfo "+sqlWhere+" order by oid DESC limit ?,?";
 			
 			pstmt = new LoggableStatement(conn, sql);
@@ -718,7 +718,7 @@ public class OrderDao extends GenericDao
 		try
 		{
 			conn = ConectionFactory.getConnection();
-			pagingRows = StringUtil.strToInt(PropertiesUtil.getProperty("pagingRows"));
+			//pagingRows = StringUtil.strToInt(PropertiesUtil.getProperty("pagingRows"));
 			
 			sql = "select count(*) as count from orderinfo "+sqlWhere;
 			pstmt = new LoggableStatement(conn, sql);	
@@ -765,11 +765,6 @@ public class OrderDao extends GenericDao
 		{
 			conn = ConectionFactory.getConnection();
 			
-			if(StaticValueUtil.LOGIN_SOURCE_MOBILE.equals(type)){
-				pagingRows = StringUtil.strToInt(PropertiesUtil.getProperty("pagingRows.front"));
-			}else {
-				pagingRows = StringUtil.strToInt(PropertiesUtil.getProperty("pagingRows.front.web"));
-			}
 			
 			sql = "select count(*) as count from orderinfo "+sqlWhere;
 			pstmt = new LoggableStatement(conn, sql);	
@@ -815,7 +810,7 @@ public class OrderDao extends GenericDao
 		try
 		{
 			conn = ConectionFactory.getConnection();
-			pagingRows = StringUtil.strToInt(PropertiesUtil.getProperty("pagingRows.front"));
+			//pagingRows = StringUtil.strToInt(PropertiesUtil.getProperty("pagingRows.front"));
 			
 			sql = "select count(*) as count from orderitem "+sqlWhere;
 			pstmt = new LoggableStatement(conn, sql);	
@@ -860,7 +855,7 @@ public class OrderDao extends GenericDao
 		try
 		{
 			conn = ConectionFactory.getConnection();
-			pagingRows = StringUtil.strToInt(PropertiesUtil.getProperty("pagingRows.front"));
+			//pagingRows = StringUtil.strToInt(PropertiesUtil.getProperty("pagingRows.front"));
 			
 			sql = "select count(*) as count from orderitem "+sqlWhere;
 			pstmt = new LoggableStatement(conn, sql);	

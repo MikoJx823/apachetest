@@ -110,6 +110,18 @@
   	<description></description>
   	<servlet-class>com.project.servlet.SearchServlet</servlet-class>
   </servlet>
+  <servlet>
+  	<servlet-name>NewServlet</servlet-name>
+  	<display-name>NewServlet</display-name>
+  	<description></description>
+  	<servlet-class>com.project.servlet.NewServlet</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>NewProductServlet</servlet-name>
+  	<display-name>NewProductServlet</display-name>
+  	<description></description>
+  	<servlet-class>com.project.servlet.NewProductServlet</servlet-class>
+  </servlet>
   <servlet-mapping>
   	<servlet-name>Testing</servlet-name>
   	<url-pattern>/Testing</url-pattern>
@@ -174,5 +186,13 @@
   <servlet-mapping>
   	<servlet-name>SearchServlet</servlet-name>
   	<url-pattern>/search</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>NewServlet</servlet-name>
+  	<url-pattern>/NewServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>NewProductServlet</servlet-name>
+  	<url-pattern>/new</url-pattern>
   </servlet-mapping>
 </web-app>

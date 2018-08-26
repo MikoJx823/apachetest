@@ -219,7 +219,22 @@
 						<!-- Tab panes -->
 						<div class="tab-content">
 						    <div class="tab-pane active" id="tab-description">
-						    	<%=StringUtil.filter(product.getDescimage()) %>
+						    	<!--  <img src="https://images.pexels.com/photos/460823/pexels-photo-460823.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" class="img-responsive"/> -->
+						    	<%if(!"".equals(StringUtil.filter(product.getDescimage()))){ %>
+						    	<img src="<%=basePath %>/images/products/<%=StringUtil.filter(product.getDescimage()) %>" class="img-responsive"/> <br>
+						    	<%} %>
+						    	<!-- 
+						    	
+						    	<div class="embed-responsive embed-responsive-21by9">
+								  <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/C1axYRDIfVU" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+								</div>
+						    	 -->
+						    	 <%if(!"".equals(StringUtil.filter(product.getDescyoutube()))){ %>
+						    	<div class="embed-responsive embed-responsive-16by9">
+    							<iframe class="embed-responsive-item" src="<%=StringUtil.filter(product.getDescyoutube())%>"></iframe>
+   								</div>
+   								<%} %>
+						    	<%//StringUtil.filter(product.getDescimage()) %>
 						    </div>
 						    <div class="tab-pane" id="tab-information">
 							    <%=StringUtil.filter(product.getDetail()) %>

@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.text.*,java.util.Calendar,java.util.*,com.project.util.*" contentType="text/html; charset=utf-8"%>
+<%@ page language="java" import="java.text.*,java.util.Calendar,java.util.*,com.project.bean.*, com.project.service.* ,com.project.util.*" contentType="text/html; charset=utf-8"%>
 <%@ page contentType="text/html; charset=utf-8"%>
 <%
 	response.setHeader("Cache-Control", "no-store"); //HTTP 1.1
@@ -306,14 +306,14 @@
 	    }
 	    
 	    .slider-prod .slick-slide img {
-	      /*height:250px;*/
+	      height:200px;
 	      max-width: 100%;
 	      margin-left: auto;
     	  margin-right: auto;
     	  -moz-transition: all 0.3s;
   		  -webkit-transition: all 0.3s;
   		  transition: all 0.3s;
-  		  height:auto; 
+  		  /*height:auto; 
   		   /* opacity: .7;*/
 	    }
 	    
@@ -545,7 +545,7 @@
 		</div><!-- /.container -->
 	</section><!-- /.collections -->
 	
-	<section class="section" style="background-color:#f8f8f8;"> <!-- psmall-padding-top addings:70px -->
+	<section class="section" style="background-color:#e0e0e0;"> <!-- psmall-padding-top addings:70px -->
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-12 text-center">
@@ -556,9 +556,10 @@
 			<div class="row">
 				<div class="col-xs-12">
 					 <div class="section slider-resp-prod slider-prod slider">
-						<div data-product-id="1"> <!-- class="product col-md-3 col-sm-6 col-xs-12 -->
+						<div data-product-id="1" style="background-color:white;"> <!-- class="product col-md-3 col-sm-6 col-xs-12 -->
 							<div> <!--class="inner-product"  -->
-								<span style="width:40px;height:40px;line-height:40px;top:0px;right:0px;background-color:#e74c3c;backface-visibility:hidden;background-clip:padding-box;font-size:14px;color:#fff;text-align:center;display:block;overflow:hidden;z-index:1;position:absolute;color:white">Sale</span> <!--class="onsale"  -->
+								<span style="width:30px;height:30px;line-height:30px;top:0px;right:0px;background-color:#e74c3c;backface-visibility:hidden;background-clip:padding-box;font-size:10px;color:#fff;text-align:center;display:block;overflow:hidden;z-index:1;position:absolute;color:white">NEW</span> <!--class="onsale"  -->
+								<span style="width:30px;height:30px;line-height:30px;top:30px;right:0px;background-color:#a52923;backface-visibility:hidden;background-clip:padding-box;font-size:10px;color:#fff;text-align:center;display:block;overflow:hidden;z-index:1;position:absolute;color:white">HOT</span>
 								<div class="product-thumbnail">
 								<a href="#!">
 									<img src="<%=basePath %>images/Dry-winter-snow-natural-hd-wallpaper.jpg" class="img-responsive" alt="">
@@ -578,10 +579,10 @@
 									</div> -->
 								</div>
 							</div>
-							<h4 class="product-title" style="padding:0;margin:0;padding-top:10px;"><strong><a href="#!">Bag Maroon</a></strong></h4>
-							<p style="padding:0;margin:0;">45ml</p>
-							<p style="padding:0;margin:0;font-weight:700;font-size:14pt;">RM 44.00 <span style="background-color:red;color:white;padding-right:5px;padding-left:5px;font-size:10pt;"> 20% OFF </span> </p>
-							<p style="padding:0;margin:0;"><del>RM60.00</del></p>
+							<h4 class="product-title" style="padding:0;margin:0;padding-left:15px;padding-top:5px;font-size:10pt;font-weight:900;"><strong><a href="#!">Bag Maroon</a></strong></h4>
+							<p style="padding:0;margin:0;padding-left:15px;font-size:10pt;">45ml</p>
+							<p style="padding:0;margin:0;padding-top:3px;padding-left:15px;font-weight:900;font-size:12pt;">RM 44.00 &nbsp;&nbsp;<span style="background-color:#e74c3c;color:white;padding-right:5px;padding-left:5px;font-size:11pt;"> 20% OFF </span> </p>
+							<p style="padding:0;margin:0;padding-left:15px;padding-bottom:10px;font-size:8pt;"><del>RM60.00</del></p>
 							<!--  <div class="star-rating">
 								<span style="width:90%"></span>
 							</div>
@@ -592,7 +593,7 @@
 							</p>-->
 						</div><!-- /.product -->
 						
-						<div data-product-id="1">
+						<div data-product-id="1" style="background-color:white;">
 							<div>
 								<div class="product-thumbnail">
 									<img src="<%=basePath %>images/Dry-winter-snow-natural-hd-wallpaper.jpg" class="img-responsive" alt="">
@@ -611,13 +612,13 @@
 									</div> -->
 								</div>
 							</div>
-							<h4 class="product-title" style="padding:0;margin:0;padding-top:10px;"><strong><a href="#!">Bag Maroon</a></strong></h4>
-							<p style="padding:0;margin:0;">45ml</p>
-							<p style="padding:0;margin:0;font-weight:700;font-size:14pt;">RM 44.00 <span style="background-color:red;color:white;padding-right:5px;padding-left:5px;font-size:10pt;"> 20% OFF </span> </p>
-							<p style="padding:0;margin:0;"><del>RM60.00</del></p>
+							<h4 class="product-title" style="padding:0;margin:0;padding-left:15px;padding-top:5px;font-size:10pt;font-weight:900;"><strong><a href="#!">Bag Maroon</a></strong></h4>
+							<p style="padding:0;margin:0;padding-left:15px;font-size:10pt;">45ml</p>
+							<p style="padding:0;margin:0;padding-top:3px;padding-left:15px;font-weight:900;font-size:12pt;">RM 44.00 &nbsp;&nbsp;<span style="background-color:#e74c3c;color:white;padding-right:5px;padding-left:5px;font-size:11pt;"> 20% OFF </span> </p>
+							<p style="padding:0;margin:0;padding-left:15px;padding-bottom:10px;font-size:8pt;"><del>RM60.00</del></p>
 						</div><!-- /.product -->
 						
-						<div data-product-id="1">
+						<div data-product-id="1" style="background-color:white;">
 							<div>
 								<div class="product-thumbnail">
 									<img src="<%=basePath %>images/Dry-winter-snow-natural-hd-wallpaper.jpg" class="img-responsive" alt="">
@@ -636,13 +637,13 @@
 									</div>-->
 								</div>
 							</div>
-							<h4 class="product-title" style="padding:0;margin:0;padding-top:10px;"><strong><a href="#!">Bag Maroon</a></strong></h4>
-							<p style="padding:0;margin:0;">45ml</p>
-							<p style="padding:0;margin:0;font-weight:700;font-size:14pt;">RM 44.00 <span style="background-color:red;color:white;padding-right:5px;padding-left:5px;font-size:10pt;"> 20% OFF </span> </p>
-							<p style="padding:0;margin:0;"><del>RM60.00</del></p>
+							<h4 class="product-title" style="padding:0;margin:0;padding-left:15px;padding-top:5px;font-size:10pt;font-weight:900;"><strong><a href="#!">Bag Maroon</a></strong></h4>
+							<p style="padding:0;margin:0;padding-left:15px;font-size:10pt;">45ml</p>
+							<p style="padding:0;margin:0;padding-top:3px;padding-left:15px;font-weight:900;font-size:12pt;">RM 44.00 &nbsp;&nbsp;<span style="background-color:#e74c3c;color:white;padding-right:5px;padding-left:5px;font-size:11pt;"> 20% OFF </span> </p>
+							<p style="padding:0;margin:0;padding-left:15px;padding-bottom:10px;font-size:8pt;"><del>RM60.00</del></p>
 						</div><!-- /.product -->
 						
-						<div data-product-id="1">
+						<div data-product-id="1" style="background-color:white;">
 							<div>
 								<div class="product-thumbnail">
 									<img src="<%=basePath %>images/Dry-winter-snow-natural-hd-wallpaper.jpg" class="img-responsive" alt="">
@@ -661,13 +662,13 @@
 									</div> -->
 								</div>
 							</div>
-							<h4 class="product-title" style="padding:0;margin:0;padding-top:10px;"><strong><a href="#!">Bag Maroon</a></strong></h4>
-							<p style="padding:0;margin:0;">45ml</p>
-							<p style="padding:0;margin:0;font-weight:700;font-size:14pt;">RM 44.00 <span style="background-color:red;color:white;padding-right:5px;padding-left:5px;font-size:10pt;"> 20% OFF </span> </p>
-							<p style="padding:0;margin:0;"><del>RM60.00</del></p>
+							<h4 class="product-title" style="padding:0;margin:0;padding-left:15px;padding-top:5px;font-size:10pt;font-weight:900;"><strong><a href="#!">Bag Maroon</a></strong></h4>
+							<p style="padding:0;margin:0;padding-left:15px;font-size:10pt;">45ml</p>
+							<p style="padding:0;margin:0;padding-top:3px;padding-left:15px;font-weight:900;font-size:12pt;">RM 44.00 &nbsp;&nbsp;<span style="background-color:#e74c3c;color:white;padding-right:5px;padding-left:5px;font-size:11pt;"> 20% OFF </span> </p>
+							<p style="padding:0;margin:0;padding-left:15px;padding-bottom:10px;font-size:8pt;"><del>RM60.00</del></p>
 						</div><!-- /.product -->
 						
-						<div data-product-id="1">
+						<div data-product-id="1" style="background-color:white;">
 							<div>
 								<div class="product-thumbnail">
 									<img src="<%=basePath %>images/Dry-winter-snow-natural-hd-wallpaper.jpg" class="img-responsive" alt="">
@@ -686,13 +687,13 @@
 									</div> -->
 								</div>
 							</div>
-							<h4 class="product-title" style="padding:0;margin:0;padding-top:10px;"><strong><a href="#!">Bag Maroon</a></strong></h4>
-							<p style="padding:0;margin:0;">45ml</p>
-							<p style="padding:0;margin:0;font-weight:700;font-size:14pt;">RM 44.00 <span style="background-color:red;color:white;padding-right:5px;padding-left:5px;font-size:10pt;"> 20% OFF </span> </p>
-							<p style="padding:0;margin:0;"><del>RM60.00</del></p>
+							<h4 class="product-title" style="padding:0;margin:0;padding-left:15px;padding-top:5px;font-size:10pt;font-weight:900;"><strong><a href="#!">Bag Maroon</a></strong></h4>
+							<p style="padding:0;margin:0;padding-left:15px;font-size:10pt;">45ml</p>
+							<p style="padding:0;margin:0;padding-top:3px;padding-left:15px;font-weight:900;font-size:12pt;">RM 44.00 &nbsp;&nbsp;<span style="background-color:#e74c3c;color:white;padding-right:5px;padding-left:5px;font-size:11pt;"> 20% OFF </span> </p>
+							<p style="padding:0;margin:0;padding-left:15px;padding-bottom:10px;font-size:8pt;"><del>RM60.00</del></p>
 						</div><!-- /.product -->
 						
-						<div data-product-id="1">
+						<div data-product-id="1" style="background-color:white;">
 							<div>
 								<div class="product-thumbnail">
 									<img src="<%=basePath %>images/Dry-winter-snow-natural-hd-wallpaper.jpg" class="img-responsive" alt="">
@@ -711,18 +712,23 @@
 									</div> -->
 								</div>
 							</div>
-							<h4 class="product-title" style="padding:0;margin:0;padding-top:10px;"><strong><a href="#!">Bag Maroon</a></strong></h4>
-							<p style="padding:0;margin:0;">45ml</p>
-							<p style="padding:0;margin:0;font-weight:700;font-size:14pt;">RM 44.00 <span style="background-color:red;color:white;padding-right:5px;padding-left:5px;font-size:10pt;"> 20% OFF </span> </p>
-							<p style="padding:0;margin:0;"><del>RM60.00</del></p>
+							<h4 class="product-title" style="padding:0;margin:0;padding-left:15px;padding-top:5px;font-size:10pt;font-weight:900;"><strong><a href="#!">Bag Maroon</a></strong></h4>
+							<p style="padding:0;margin:0;padding-left:15px;font-size:10pt;">45ml</p>
+							<p style="padding:0;margin:0;padding-top:3px;padding-left:15px;font-weight:900;font-size:12pt;">RM 44.00 &nbsp;&nbsp;<span style="background-color:#e74c3c;color:white;padding-right:5px;padding-left:5px;font-size:11pt;"> 20% OFF </span> </p>
+							<p style="padding:0;margin:0;padding-left:15px;padding-bottom:10px;font-size:8pt;"><del>RM60.00</del></p>
 						</div><!-- /.product -->
 					</div> 
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-12 text-center" style="padding-top:25px;left:-10px">
+					<button type="button" class="btn btn-default">Shop More</button>
 				</div>
 			</div>
 		</div>
 	</section><!-- /.instagram -->
 	
-	<section class="section" style="background-color:#f8f8f8;"> <!-- psmall-padding-top addings:70px -->
+	<section class="section" style="background-color:#e0e0e0;"> <!-- psmall-padding-top addings:70px -->
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-12 text-center">
@@ -732,7 +738,7 @@
 			<div class="row">
 				<div class="col-xs-12">
 					 <div class="section slider-resp-prod slider-prod slider">
-						<div data-product-id="1"> <!-- class="product col-md-3 col-sm-6 col-xs-12 -->
+						<div data-product-id="1" style="background-color:white;"> <!-- class="product col-md-3 col-sm-6 col-xs-12 -->
 							<div> <!--class="inner-product"  -->
 								<span style="width:40px;height:40px;line-height:40px;top:0px;right:0px;background-color:#e74c3c;backface-visibility:hidden;background-clip:padding-box;font-size:14px;color:#fff;text-align:center;display:block;overflow:hidden;z-index:1;position:absolute;color:white">Sale</span> <!--class="onsale"  -->
 								<div class="product-thumbnail">
@@ -754,10 +760,10 @@
 									</div> -->
 								</div>
 							</div>
-							<h4 class="product-title" style="padding:0;margin:0;padding-top:10px;"><strong><a href="#!">Bag Maroon</a></strong></h4>
-							<p style="padding:0;margin:0;">45ml</p>
-							<p style="padding:0;margin:0;font-weight:700;font-size:14pt;">RM 44.00 <span style="background-color:red;color:white;padding-right:5px;padding-left:5px;font-size:10pt;"> 20% OFF </span> </p>
-							<p style="padding:0;margin:0;"><del>RM60.00</del></p>
+							<h4 class="product-title" style="padding:0;margin:0;padding-left:15px;padding-top:5px;font-size:10pt;font-weight:900;"><strong><a href="#!">Bag Maroon</a></strong></h4>
+							<p style="padding:0;margin:0;padding-left:15px;font-size:10pt;">45ml</p>
+							<p style="padding:0;margin:0;padding-top:3px;padding-left:15px;font-weight:900;font-size:12pt;">RM 44.00 &nbsp;&nbsp;<span style="background-color:#e74c3c;color:white;padding-right:5px;padding-left:5px;font-size:11pt;"> 20% OFF </span> </p>
+							<p style="padding:0;margin:0;padding-left:15px;padding-bottom:10px;font-size:8pt;"><del>RM60.00</del></p>
 							<!--  <div class="star-rating">
 								<span style="width:90%"></span>
 							</div>
@@ -768,7 +774,7 @@
 							</p>-->
 						</div><!-- /.product -->
 						
-						<div data-product-id="1">
+						<div data-product-id="1" style="background-color:white;">
 							<div>
 								<div class="product-thumbnail">
 									<img src="<%=basePath %>images/Dry-winter-snow-natural-hd-wallpaper.jpg" class="img-responsive" alt="">
@@ -787,13 +793,13 @@
 									</div> -->
 								</div>
 							</div>
-							<h4 class="product-title" style="padding:0;margin:0;padding-top:10px;"><strong><a href="#!">Bag Maroon</a></strong></h4>
-							<p style="padding:0;margin:0;">45ml</p>
-							<p style="padding:0;margin:0;font-weight:700;font-size:14pt;">RM 44.00 <span style="background-color:red;color:white;padding-right:5px;padding-left:5px;font-size:10pt;"> 20% OFF </span> </p>
-							<p style="padding:0;margin:0;"><del>RM60.00</del></p>
+							<h4 class="product-title" style="padding:0;margin:0;padding-left:15px;padding-top:5px;font-size:10pt;font-weight:900;"><strong><a href="#!">Bag Maroon</a></strong></h4>
+							<p style="padding:0;margin:0;padding-left:15px;font-size:10pt;">45ml</p>
+							<p style="padding:0;margin:0;padding-top:3px;padding-left:15px;font-weight:900;font-size:12pt;">RM 44.00 &nbsp;&nbsp;<span style="background-color:#e74c3c;color:white;padding-right:5px;padding-left:5px;font-size:11pt;"> 20% OFF </span> </p>
+							<p style="padding:0;margin:0;padding-left:15px;padding-bottom:10px;font-size:8pt;"><del>RM60.00</del></p>
 						</div><!-- /.product -->
 						
-						<div data-product-id="1">
+						<div data-product-id="1" style="background-color:white;">
 							<div>
 								<div class="product-thumbnail">
 									<img src="<%=basePath %>images/Dry-winter-snow-natural-hd-wallpaper.jpg" class="img-responsive" alt="">
@@ -812,13 +818,13 @@
 									</div>-->
 								</div>
 							</div>
-							<h4 class="product-title" style="padding:0;margin:0;padding-top:10px;"><strong><a href="#!">Bag Maroon</a></strong></h4>
-							<p style="padding:0;margin:0;">45ml</p>
-							<p style="padding:0;margin:0;font-weight:700;font-size:14pt;">RM 44.00 <span style="background-color:red;color:white;padding-right:5px;padding-left:5px;font-size:10pt;"> 20% OFF </span> </p>
-							<p style="padding:0;margin:0;"><del>RM60.00</del></p>
+							<h4 class="product-title" style="padding:0;margin:0;padding-left:15px;padding-top:5px;font-size:10pt;font-weight:900;"><strong><a href="#!">Bag Maroon</a></strong></h4>
+							<p style="padding:0;margin:0;padding-left:15px;font-size:10pt;">45ml</p>
+							<p style="padding:0;margin:0;padding-top:3px;padding-left:15px;font-weight:900;font-size:12pt;">RM 44.00 &nbsp;&nbsp;<span style="background-color:#e74c3c;color:white;padding-right:5px;padding-left:5px;font-size:11pt;"> 20% OFF </span> </p>
+							<p style="padding:0;margin:0;padding-left:15px;padding-bottom:10px;font-size:8pt;"><del>RM60.00</del></p>
 						</div><!-- /.product -->
 						
-						<div data-product-id="1">
+						<div data-product-id="1" style="background-color:white;">
 							<div>
 								<div class="product-thumbnail">
 									<img src="<%=basePath %>images/Dry-winter-snow-natural-hd-wallpaper.jpg" class="img-responsive" alt="">
@@ -837,13 +843,13 @@
 									</div> -->
 								</div>
 							</div>
-							<h4 class="product-title" style="padding:0;margin:0;padding-top:10px;"><strong><a href="#!">Bag Maroon</a></strong></h4>
-							<p style="padding:0;margin:0;">45ml</p>
-							<p style="padding:0;margin:0;font-weight:700;font-size:14pt;">RM 44.00 <span style="background-color:red;color:white;padding-right:5px;padding-left:5px;font-size:10pt;"> 20% OFF </span> </p>
-							<p style="padding:0;margin:0;"><del>RM60.00</del></p>
+							<h4 class="product-title" style="padding:0;margin:0;padding-left:15px;padding-top:5px;font-size:10pt;font-weight:900;"><strong><a href="#!">Bag Maroon</a></strong></h4>
+							<p style="padding:0;margin:0;padding-left:15px;font-size:10pt;">45ml</p>
+							<p style="padding:0;margin:0;padding-top:3px;padding-left:15px;font-weight:900;font-size:12pt;">RM 44.00 &nbsp;&nbsp;<span style="background-color:#e74c3c;color:white;padding-right:5px;padding-left:5px;font-size:11pt;"> 20% OFF </span> </p>
+							<p style="padding:0;margin:0;padding-left:15px;padding-bottom:10px;font-size:8pt;"><del>RM60.00</del></p>
 						</div><!-- /.product -->
 						
-						<div data-product-id="1">
+						<div data-product-id="1" style="background-color:white;">
 							<div>
 								<div class="product-thumbnail">
 									<img src="<%=basePath %>images/Dry-winter-snow-natural-hd-wallpaper.jpg" class="img-responsive" alt="">
@@ -862,13 +868,13 @@
 									</div> -->
 								</div>
 							</div>
-							<h4 class="product-title" style="padding:0;margin:0;padding-top:10px;"><strong><a href="#!">Bag Maroon</a></strong></h4>
-							<p style="padding:0;margin:0;">45ml</p>
-							<p style="padding:0;margin:0;font-weight:700;font-size:14pt;">RM 44.00 <span style="background-color:red;color:white;padding-right:5px;padding-left:5px;font-size:10pt;"> 20% OFF </span> </p>
-							<p style="padding:0;margin:0;"><del>RM60.00</del></p>
+							<h4 class="product-title" style="padding:0;margin:0;padding-left:15px;padding-top:5px;font-size:10pt;font-weight:900;"><strong><a href="#!">Bag Maroon</a></strong></h4>
+							<p style="padding:0;margin:0;padding-left:15px;font-size:10pt;">45ml</p>
+							<p style="padding:0;margin:0;padding-top:3px;padding-left:15px;font-weight:900;font-size:12pt;">RM 44.00 &nbsp;&nbsp;<span style="background-color:#e74c3c;color:white;padding-right:5px;padding-left:5px;font-size:11pt;"> 20% OFF </span> </p>
+							<p style="padding:0;margin:0;padding-left:15px;padding-bottom:10px;font-size:8pt;"><del>RM60.00</del></p>
 						</div><!-- /.product -->
 						
-						<div data-product-id="1">
+						<div data-product-id="1" style="background-color:white;">
 							<div>
 								<div class="product-thumbnail">
 									<img src="<%=basePath %>images/Dry-winter-snow-natural-hd-wallpaper.jpg" class="img-responsive" alt="">
@@ -887,18 +893,23 @@
 									</div> -->
 								</div>
 							</div>
-							<h4 class="product-title" style="padding:0;margin:0;padding-top:10px;"><strong><a href="#!">Bag Maroon</a></strong></h4>
-							<p style="padding:0;margin:0;">45ml</p>
-							<p style="padding:0;margin:0;font-weight:700;font-size:14pt;">RM 44.00 <span style="background-color:red;color:white;padding-right:5px;padding-left:5px;font-size:10pt;"> 20% OFF </span> </p>
-							<p style="padding:0;margin:0;"><del>RM60.00</del></p>
+							<h4 class="product-title" style="padding:0;margin:0;padding-left:15px;padding-top:5px;font-size:10pt;font-weight:900;"><strong><a href="#!">Bag Maroon</a></strong></h4>
+							<p style="padding:0;margin:0;padding-left:15px;font-size:10pt;">45ml</p>
+							<p style="padding:0;margin:0;padding-top:3px;padding-left:15px;font-weight:900;font-size:12pt;">RM 44.00 &nbsp;&nbsp;<span style="background-color:#e74c3c;color:white;padding-right:5px;padding-left:5px;font-size:11pt;"> 20% OFF </span> </p>
+							<p style="padding:0;margin:0;padding-left:15px;padding-bottom:10px;font-size:8pt;"><del>RM60.00</del></p>
 						</div><!-- /.product -->
 					</div> 
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-12 text-center" style="padding-top:25px;left:-10px;">
+					<button type="button" class="btn btn-default">Shop More</button>
 				</div>
 			</div>
 		</div>
 	</section><!-- /.instagram -->
 	
-	<section class="section" style="background-color:#f8f8f8;"> <!-- psmall-padding-top addings:70px -->
+	<section class="section" style="background-color:#e0e0e0;"> <!--#f8f8f8  psmall-padding-top addings:70px -->
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-12 text-center">

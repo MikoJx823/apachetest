@@ -277,12 +277,27 @@
             </div><!--row-->
             
            <div class="row">
-              <div class="col-xs-24">
+           		<div class="col-xs-6">
+                	<div class="form-group">
+                    <label>Description Image</label>
+                    <input  type="file"  class="form-control" id="image5" name="image5" autocomplete="off" >  
+                    <label><small>Remarks: – 400 x 300 (max resolution)</br>File size <= 800KB<br/>Only support JPEG / PNG</small></label>                 
+          			</div><!--form-group-->
+                 </div><!--col-xs-6-->
+                 
+                 <div class="col-xs-12">
+                	<div class="form-group">
+                    <label>Description Youtube Video</label>
+                    <input  type="text"  class="form-control" id="descyoutube" name="descyoutube" autocomplete="off" value="<%=StringUtil.filter(bean.getDescyoutube()) %>" >  
+                    <label></label>                 
+          			</div><!--form-group-->
+                 </div><!--col-xs-6-->
+              <!--<div class="col-xs-24">
                 	<div class="form-group">
                     <label>Product Description</label>
                     <textarea class="form-control ckeditor"  name="fulldesc" id="fulldesc" rows="3"><%=StringUtils.trimToEmpty(bean.getDetail())%></textarea>                
-          			</div><!--form-group-->
-              </div><!--col-xs-24-->                      
+          			</div>
+              </div>    -->                   
            </div><!--row--> 
 		   
 		   <div class="row">

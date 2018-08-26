@@ -54,10 +54,11 @@ public class ProductDao extends GenericDao
 			sql = "insert into product(" +
 					"categoryid, name, productcode, image1, image2, " + 
 					"image3, image4, image5, displaystart, displayend, " + 
-					"detail, shortdesc, additionaldesc, brandid, " + 
+					"detail, shortdesc, additionaldesc, brandid, descyoutube, " +
+					"descimage, " + 
 					"status, createdby, createddate" + 
 					") values (" +
-					"?,?,?,?,?, ?,?,?,?,?, ?,?,?,?, ?,?,? " +
+					"?,?,?,?,?, ?,?,?,?,?, ?,?,?,?,?, ?, ?,?,? " +
 					")";
 			
 			pstm = new LoggableStatement(conn, sql);
@@ -80,6 +81,9 @@ public class ProductDao extends GenericDao
 			pstm.setString(count, product.getShortdesc()); count++;
 			pstm.setString(count, product.getAdditionaldesc()); count++;
 			pstm.setInt(count, product.getBrandid()); count++;
+			pstm.setString(count, product.getDescyoutube()); count++;
+			
+			pstm.setString(count, product.getDescimage()); count++;
 			
 			pstm.setInt(count, product.getStatus()); count++;
 			pstm.setString(count, product.getCreatedBy()); count++;
@@ -122,7 +126,8 @@ public class ProductDao extends GenericDao
 			sql = "update product set " +
 					"categoryid=?, name=?, productcode=?, image1=?, image2=?," + 
 					"image3=?, image4=?, image5=?, displaystart=?, displayend=?, " + 
-					"detail=?, shortdesc=?, additionaldesc=?, brandid=?, " + 
+					"detail=?, shortdesc=?, additionaldesc=?, brandid=?, descyoutube=?," + 
+					"descimage=?, " + 
 					"status=?, modifiedby=?, modifieddate=?" + 
 					"where id=?";
 					
@@ -146,6 +151,9 @@ public class ProductDao extends GenericDao
 			pstm.setString(count, product.getShortdesc()); count++;
 			pstm.setString(count, product.getAdditionaldesc()); count++;
 			pstm.setInt(count, product.getBrandid()); count++;
+			
+			pstm.setString(count, product.getDescyoutube()); count++;
+			pstm.setString(count, product.getDescimage()); count++;
 			
 			pstm.setInt(count, product.getStatus()); count++;
 			pstm.setString(count, product.getModifiedBy()); count++;
@@ -820,6 +828,9 @@ public class ProductDao extends GenericDao
 			product.setShortdesc(rs.getString("shortdesc"));
 			product.setAdditionaldesc(rs.getString("additionaldesc"));
 			product.setBrandid(rs.getInt("brandid"));
+			
+			product.setDescimage(rs.getString("descimage"));
+			product.setDescyoutube(rs.getString("descyoutube"));
 			
 			product.setStatus(rs.getInt("status"));
 			product.setCreatedDate(rs.getTimestamp("createddate"));

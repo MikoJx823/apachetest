@@ -118,6 +118,7 @@ public class AdminProductServlet extends HttpServlet {
 			String productcode = StringUtil.filter(request.getParameter("productCode"));
 			String ename = StringUtil.filter(request.getParameter("eName"));
 			int status = StringUtil.strToInt(StringUtil.filter(request.getParameter("status"), (StaticValueUtil.Inactive + "")));
+			String descYoutube = StringUtil.filter(request.getParameter("descyoutube"));
 			String fullDesc = StringUtil.filter(request.getParameter("fulldesc"));
 			String shortDesc = StringUtil.filter(request.getParameter("shortdesc"));
 			String additionalDesc = StringUtil.filter(request.getParameter("additionaldesc"));
@@ -130,7 +131,8 @@ public class AdminProductServlet extends HttpServlet {
 			product.setProductcode(productcode);
 			product.setName(ename);
 			product.setBrandid(brandId);
-			product.setDescimage(""); //descimage
+			//product.setDescimage(""); //descimage
+			product.setDescyoutube(descYoutube); 
 			//product.setFulldesc(fullDesc);
 			product.setDetail(fullDesc);
 			product.setShortdesc(shortDesc);
@@ -183,7 +185,7 @@ public class AdminProductServlet extends HttpServlet {
 			product.setProductVariant(variants);
 
 			try {
-				for (int i = 1; i <= 4; i++) {
+				for (int i = 1; i <= 5; i++) {
 					Part filePart = request.getPart("image" + i);
 					String fileName = StringUtil.filter(Paths.get(filePart.getSubmittedFileName()).getFileName().toString()); // MSIE fix.
 					//InputStream fileContent = filePart.getInputStream();
@@ -206,7 +208,7 @@ public class AdminProductServlet extends HttpServlet {
 			
 			if ("".equals(errorMsg)){
 				try {
-					for (int i = 1; i <= 4; i++) {
+					for (int i = 1; i <= 5; i++) {
 						Part filePart = request.getPart("image" + i);
 						String fileName = StringUtil.filter(Paths.get(filePart.getSubmittedFileName()).getFileName().toString()); // MSIE fix.
 						InputStream fileContent = filePart.getInputStream();
@@ -231,7 +233,7 @@ public class AdminProductServlet extends HttpServlet {
 							}else if(filePart.getName().equals("image4")) {
 								product.setImage4(fileName);
 							}else if(filePart.getName().equals("image5")) {
-								product.setImage5(fileName);
+								product.setDescimage(fileName);
 							}
 							
 						}
@@ -311,6 +313,7 @@ public class AdminProductServlet extends HttpServlet {
 			String productcode = StringUtil.filter(request.getParameter("productCode"));
 			String ename = StringUtil.filter(request.getParameter("eName"));
 			int status = StringUtil.strToInt(StringUtil.filter(request.getParameter("status"), (StaticValueUtil.Inactive + "")));
+			String descYoutube = StringUtil.filter(request.getParameter("descyoutube"));
 			String fullDesc = StringUtil.filter(request.getParameter("fullDesc"));
 			String shortDesc = StringUtil.filter(request.getParameter("shortDesc"));
 			String additionalDesc = StringUtil.filter(request.getParameter("additionalDesc"));
@@ -329,6 +332,7 @@ public class AdminProductServlet extends HttpServlet {
 			product.setName(ename);
 			product.setBrandid(brandId);
 			//product.setFulldesc(fullDesc);
+			product.setDescyoutube(descYoutube); 
 			product.setDetail(fullDesc);
 			product.setShortdesc(shortDesc);
 			product.setAdditionaldesc(additionalDesc);
@@ -383,7 +387,7 @@ public class AdminProductServlet extends HttpServlet {
 			product.setProductVariant(variants);
 			
 			try {
-				for (int i = 1; i <= 4; i++) {
+				for (int i = 1; i <= 5; i++) {
 					Part filePart = request.getPart("image" + i);
 					String fileName = StringUtil.filter(Paths.get(filePart.getSubmittedFileName()).getFileName().toString()); // MSIE fix.
 					//InputStream fileContent = filePart.getInputStream();
@@ -421,7 +425,7 @@ public class AdminProductServlet extends HttpServlet {
 				
 				
 				try {
-					for (int i = 1; i <= 4; i++) {
+					for (int i = 1; i <= 5; i++) {
 						Part filePart = request.getPart("image" + i);
 						String fileName = StringUtil.filter(Paths.get(filePart.getSubmittedFileName()).getFileName().toString()); // MSIE fix.
 						InputStream fileContent = filePart.getInputStream();
@@ -446,7 +450,7 @@ public class AdminProductServlet extends HttpServlet {
 							}else if(filePart.getName().equals("image4")) {
 								product.setImage4(fileName);
 							}else if(filePart.getName().equals("image5")) {
-								product.setImage5(fileName);
+								product.setDescimage(fileName);
 							}
 							
 						}
@@ -643,10 +647,10 @@ public class AdminProductServlet extends HttpServlet {
 		if("".equals(StringUtil.filter(bean.getShortdesc()))){
 			errorMsg += "Please input short description.<br>";
 		}
-		if("".equals(StringUtil.filter(bean.getDetail()))) {//if("".equals(StringUtil.filter(bean.getFulldesc()))) {
+		/*if("".equals(StringUtil.filter(bean.getDetail()))) {//if("".equals(StringUtil.filter(bean.getFulldesc()))) {
 			errorMsg += "Please input full description.<br>";
 		}
-		/*if("".equals(bean.getProductcode())) {
+		if("".equals(bean.getProductcode())) {
 			errorMsg += "Invalid product code. <br>";
 		}else{
 			//check product info table

@@ -142,6 +142,27 @@ if (loginUser == null&& !url.contains("/LoginServlet") && !url.contains("login.j
                  </div> col-xs-6-->
             	</td>
             </tr>
+            
+            <tr>
+            	<td class="tbl-title" colspan="4">
+            		
+            	<div class="col-xs-6">
+                	<div class="form-group">
+                    <label>Description Image </label>
+                    <%if(!(StringUtils.trimToEmpty(bean.getDescimage()).equals("")) ) {  %>
+                    <img src="<%=defaultPath%>images/products/<%=StringUtil.filter(bean.getDescimage()) %>" width="100px">
+          			<%} %>
+          			</div><!--form-group-->
+                 </div><!--col-xs-6-->
+                 
+                 <div class="col-xs-12">
+                	<div class="form-group">
+                    <label>Description Youtube </label>
+                    <%= StringUtils.trimToEmpty(bean.getDescyoutube()) %>
+          			</div><!--form-group-->
+                 </div><!--col-xs-6-->
+            	</td>
+            </tr>
             <tr>
             	<td class="tbl-title">Short Description </td>
                 <td class="tbl-content" colspan="3"><%=StringUtils.trimToEmpty(bean.getShortdesc())%></td>
@@ -152,10 +173,10 @@ if (loginUser == null&& !url.contains("/LoginServlet") && !url.contains("login.j
                 <td class="tbl-content" colspan="3"><%=StringUtils.trimToEmpty(bean.getAdditionaldesc())%></td>
             </tr>
             
-            <tr>
+            <!--  <tr>
             	<td class="tbl-title">Product Description </td>
                 <td class="tbl-content" colspan="3"><%=StringUtils.trimToEmpty(bean.getDetail())%></td>
-            </tr>
+            </tr> -->
             
             
             </tbody>

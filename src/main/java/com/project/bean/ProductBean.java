@@ -21,6 +21,7 @@ public class ProductBean extends GenericBean{
 	
 	private String shortdesc;
 	private String descimage;
+	private String descyoutube;
 	private String detail;
 	
 	private String fulldesc;
@@ -38,6 +39,12 @@ public class ProductBean extends GenericBean{
 	private int ppid;
 	private List<ProductVariantBean> productVariant;
 	
+	public String getDescyoutube() {
+		return descyoutube;
+	}
+	public void setDescyoutube(String descyoutube) {
+		this.descyoutube = descyoutube;
+	}
 	public String getFulldesc() {
 		return fulldesc;
 	}

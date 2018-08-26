@@ -740,7 +740,8 @@
 					 <div class="section slider-resp-prod slider-prod slider">
 						<div data-product-id="1" style="background-color:white;"> <!-- class="product col-md-3 col-sm-6 col-xs-12 -->
 							<div> <!--class="inner-product"  -->
-								<span style="width:40px;height:40px;line-height:40px;top:0px;right:0px;background-color:#e74c3c;backface-visibility:hidden;background-clip:padding-box;font-size:14px;color:#fff;text-align:center;display:block;overflow:hidden;z-index:1;position:absolute;color:white">Sale</span> <!--class="onsale"  -->
+								<span style="width:30px;height:30px;line-height:30px;top:0px;right:0px;background-color:#e74c3c;backface-visibility:hidden;background-clip:padding-box;font-size:10px;color:#fff;text-align:center;display:block;overflow:hidden;z-index:1;position:absolute;color:white">NEW</span> <!--class="onsale"  -->
+								<span style="width:30px;height:30px;line-height:30px;top:30px;right:0px;background-color:#a52923;backface-visibility:hidden;background-clip:padding-box;font-size:10px;color:#fff;text-align:center;display:block;overflow:hidden;z-index:1;position:absolute;color:white">HOT</span>
 								<div class="product-thumbnail">
 								<a href="#!">
 									<img src="<%=basePath %>images/Dry-winter-snow-natural-hd-wallpaper.jpg" class="img-responsive" alt="">

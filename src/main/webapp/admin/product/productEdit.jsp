@@ -279,6 +279,9 @@ if (loginUser == null&& !url.contains("/LoginServlet") && !url.contains("login.j
            		<div class="col-xs-6">
                 	<div class="form-group">
                     <label>Description Image</label>
+                    <%if(!(StringUtils.trimToEmpty(bean.getDescimage()).equals("")) ) {  %>
+                    <img id="image4_old_img" src="<%=defaultPath%>images/products/<%=bean.getDescimage() %>" width="100px" >
+                    <%} %>
                     <input  type="file"  class="form-control" id="image5" name="image5" autocomplete="off" >  
                     <label><small>Remarks: – 400 x 300 (max resolution)</br>File size <= 800KB<br/>Only support JPEG / PNG</small></label>                 
           			</div><!--form-group-->

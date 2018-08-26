@@ -284,7 +284,6 @@ public class AdminProductServlet extends HttpServlet {
 	}
 
 	private void edit(HttpServletRequest request, HttpServletResponse response){
-		log.info("upload");
 		String resultUrl = "productIdx.jsp";
 		Date now = new Date();
 		String errorMsg = "";
@@ -292,8 +291,8 @@ public class AdminProductServlet extends HttpServlet {
 		if (!request.getSession().getAttribute(SessionName.token).equals(request.getParameter(SessionName.token)))
 			return;
 
-		String maxSizeStr = PropertiesUtil.getProperty("upload.maxSize");
-		Integer maxSize = Integer.parseInt(maxSizeStr);
+		//String maxSizeStr = PropertiesUtil.getProperty("upload.maxSize");
+		//Integer maxSize = Integer.parseInt(maxSizeStr);
 		//String tempUpload = PropertiesUtil.getProperty("basePath") + PropertiesUtil.getProperty("upload.temp");
 		String productUpload = StringUtil.getProductImagePath();//PropertiesUtil.getProperty("basePath") + PropertiesUtil.getProperty("productImagePath");
 			

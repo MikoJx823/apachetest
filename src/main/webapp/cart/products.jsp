@@ -32,7 +32,7 @@
 <head>
 	<jsp:include page="meta.jsp" />
 </head>
-<body style="background-color:#f8f8f8;">
+<body style="background-color:#E0E0E0"> <!-- #f8f8f8; -->
 	<jsp:include page="header.jsp" />
 
 	<div class="page-head content-top-margin" style="background:black;">
@@ -122,10 +122,10 @@
 									<%if(earlybird > 0) { %>
 									<span class="salesicon">Sale</span>
 									<%} %>
-									<div class="product-thumbnail">
+									<div class="product-thumbnail" style="background-color:white;">
 										<!--  <img src="<%=basePath%>images/<%=product.getImage1() %>" class="img-responsive" alt=""> -->
 										<a href="<%=basePath%>productdetails?id=<%=product.getId()%>">
-										<img src="<%=basePath%>images/products/<%=product.getImage1() %>" class="img-responsive" alt="">  <!-- style="height:250px;" -->
+										<img src="<%=basePath%>images/products/<%=product.getImage1() %>" class="img-responsive" alt="" style="min-height:200px;">  <!-- style="height:250px;" -->
 										</a>
 									</div>
 									<div class="product-details text-center">
@@ -143,18 +143,17 @@
 									</div>
 								</div>
 								
-								<h4 class="product-title" style="padding:0;margin:0;padding-top:10px;text-align: left;"><strong><a href="<%=path%>"><%=StringUtil.filter(product.getName()) %> </a></strong></h4>
-								<p style="padding:0;margin:0;text-align: left;">45ml</p>
+								<div style="background-color:white;padding-bottom:10px;">
+								<h4 class="product-title" style="padding:0;margin:0;padding-left:15px;padding-top:5px;font-size:10pt;font-weight:900;text-align: left;"><strong><a href="<%=path%>"><%=StringUtil.filter(product.getName()) %> </a></strong></h4>
+								<p style="padding:0;margin:0;padding-left:15px;font-size:10pt;text-align: left;">45ml</p>
 								<!--  <div class="star-rating">
 									<span style="width:90%"></span>
 								</div> -->
-								<p class="product-price">
-									<%
-									
-									if(earlybird > 0){ %>
-									<p style="padding:0;margin:0;font-weight:700;font-size:14pt;text-align: left;"><%=StringUtil.formatCurrencyPrice(earlybird) %>
-										<span style="background-color:red;color:white;padding-right:5px;padding-left:5px;font-size:10pt;"> 20% OFF </span> </p>
-									<p style="padding:0;margin:0;text-align: left;"><del><%=StringUtil.formatCurrencyPrice(variant.getPrice()) %></del></p>
+								<!-- <p class="product-price"></p> -->
+									<% if(earlybird > 0){ %>
+									<p style="padding:0;margin:0;padding-top:3px;padding-left:15px;font-weight:900;font-size:12pt;text-align: left;"><%=StringUtil.formatCurrencyPrice(earlybird) %>
+										<span style="background-color:#e74c3c;color:white;padding-right:5px;padding-left:5px;font-size:11pt;"> 20% OFF </span> </p>
+									<p style="padding:0;margin:0;padding-left:15px;font-size:8pt;text-align: left;"><del><%=StringUtil.formatCurrencyPrice(variant.getPrice()) %></del></p>
 									<!--  <ins>
 										<span class="amount"><%=StringUtil.formatCurrencyPrice(earlybird) %></span>
 									</ins>
@@ -163,12 +162,12 @@
 									</del>-->
 										
 									<%}else { %>
-									<p style="padding:0;margin:0;font-weight:700;font-size:14pt;text-align: left;"><%=StringUtil.formatCurrencyPrice(variant.getPrice()) %></p>
+									<p style="padding:0;margin:0;padding-top:3px;padding-left:15px;padding-bottom:15px;font-weight:900;font-size:12pt;text-align: left;"><%=StringUtil.formatCurrencyPrice(variant.getPrice()) %></p>
 									<!--<ins>
 										<span class="amount"><%=StringUtil.formatCurrencyPrice(variant.getPrice()) %></span>
 									</ins> -->
 									<%} %>
-								</p>
+								</div>
 							</div><!-- /.product -->
 						<%	
 								}	

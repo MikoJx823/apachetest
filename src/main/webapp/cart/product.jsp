@@ -237,7 +237,7 @@
 						    	<%//StringUtil.filter(product.getDescimage()) %>
 						    </div>
 						    <div class="tab-pane" id="tab-information">
-							    <%=StringUtil.filter(product.getDetail()) %>
+							    <%=StringUtil.filter(product.getAdditionaldesc()) %>
 							    <!--  <table class="table shop_attributes">
 								    <tbody>
 								        <tr>

@@ -1,6 +1,7 @@
 package com.project.servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -59,18 +60,16 @@ public class NewProductServlet extends HttpServlet {
 				pageIdx = 1;
 
 			ProductService service = ProductService.getInstance();
+			String ids = service.getProductIdsForNew();
+			List<ProductBean> products = new ArrayList<ProductBean>();
 			
-			String sqlWhere = " where status = " + StaticValueUtil.Active + " and displaystart < now() and displayend > now() ";
-			
-			sqlWhere += " order by name"  ;
-
-			List<ProductBean> products = service.getProductFrontBySqlWhereWithPage(sqlWhere, pageIdx);
-			itemCount = service.getTotalItems(sqlWhere);//.getProductBySqlwhere(sqlWhere).size();
-			int totalPages = service.getFrontTotalPages(pageIdx, sqlWhere);
+			if(!"".equals(ids)) products = service.getProductBySqlwhere(" where id in (" + ids + ") order by name");
+			//itemCount = service.getTotalItems(sqlWhere);//.getProductBySqlwhere(sqlWhere).size();
+			//int totalPages = service.getFrontTotalPages(pageIdx, sqlWhere);
 		
 			request.setAttribute("new", products);
 			request.setAttribute(SessionName.pageIdx, pageIdx);
-			request.setAttribute(SessionName.totalPages, totalPages);
+			//request.setAttribute(SessionName.totalPages, totalPages);
 			request.setAttribute("categoryId", categoryId);
 			request.setAttribute("search", search);
 			//request.setAttribute("categorymap", categoryMap);

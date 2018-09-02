@@ -131,6 +131,13 @@ if (loginUser == null&& !url.contains("/LoginServlet") && !url.contains("login.j
                     </select>
           			</div><!--form-group-->
                  </div><!--col-xs-8-->
+                 
+                 <div class="col-xs-8">
+                	<div class="form-group">
+                    <label>Product List Text </label> 
+                    <input class="form-control" id="listtext" name="listtext" maxlength="50" autocomplete="off" value="<%=StringUtils.trimToEmpty(bean.getListtext())%>" >
+          			</div><!--form-group-->
+                 </div><!--col-xs-8-->
              </div><!--row-->
              
              <!-- <div class="row">

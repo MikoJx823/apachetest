@@ -35,13 +35,13 @@
 <body>
 	<jsp:include page="header.jsp" />
 
-	<div class="page-head content-top-margin">
+	<div class="page-head content-top-margin" style="background:black;">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-8 col-sm-7">
 					<ol class="breadcrumb">
-						<li><a href="<%=basePath%>index.jsp">Home</a></li>
-						<li class="active">Search</li>
+						<!--  <li><a href="<%=basePath%>index.jsp">Home</a></li>-->
+						<li class="active" style="color:white;">Search</li>
 					</ol>
 				</div>
 			</div><!-- /.row -->

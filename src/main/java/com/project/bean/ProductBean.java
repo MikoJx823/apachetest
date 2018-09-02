@@ -26,7 +26,7 @@ public class ProductBean extends GenericBean{
 	
 	private String fulldesc;
 	private String additionaldesc;
-
+	private String listtext;
 	
 	//private int isrecommend;
 	//private int merchantCode;
@@ -39,6 +39,12 @@ public class ProductBean extends GenericBean{
 	private int ppid;
 	private List<ProductVariantBean> productVariant;
 	
+	public String getListtext() {
+		return listtext;
+	}
+	public void setListtext(String listtext) {
+		this.listtext = listtext;
+	}
 	public String getDescyoutube() {
 		return descyoutube;
 	}

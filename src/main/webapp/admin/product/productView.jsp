@@ -90,6 +90,14 @@ if (loginUser == null&& !url.contains("/LoginServlet") && !url.contains("login.j
             	<td class="tbl-title">Status</td>
                 <td class="tbl-content"><%=GenericStatusPulldown.getText(bean.getStatus())%></td>
             </tr> 
+            
+            <tr>
+            	<td class="tbl-title">Product List Text</td>
+                <td class="tbl-content"><%=StringUtil.filter(bean.getListtext()) %></td>
+                
+            	<td class="tbl-title"></td>
+                <td class="tbl-content"></td>
+            </tr>
 
             <tr>
             	<td class="tbl-title" colspan="4">

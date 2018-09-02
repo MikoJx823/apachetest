@@ -55,10 +55,10 @@ public class ProductDao extends GenericDao
 					"categoryid, name, productcode, image1, image2, " + 
 					"image3, image4, image5, displaystart, displayend, " + 
 					"detail, shortdesc, additionaldesc, brandid, descyoutube, " +
-					"descimage, " + 
+					"descimage, listtext, " + 
 					"status, createdby, createddate" + 
 					") values (" +
-					"?,?,?,?,?, ?,?,?,?,?, ?,?,?,?,?, ?, ?,?,? " +
+					"?,?,?,?,?, ?,?,?,?,?, ?,?,?,?,?, ?,?, ?,?,? " +
 					")";
 			
 			pstm = new LoggableStatement(conn, sql);
@@ -84,6 +84,7 @@ public class ProductDao extends GenericDao
 			pstm.setString(count, product.getDescyoutube()); count++;
 			
 			pstm.setString(count, product.getDescimage()); count++;
+			pstm.setString(count, product.getListtext()); count++;
 			
 			pstm.setInt(count, product.getStatus()); count++;
 			pstm.setString(count, product.getCreatedBy()); count++;
@@ -127,7 +128,7 @@ public class ProductDao extends GenericDao
 					"categoryid=?, name=?, productcode=?, image1=?, image2=?," + 
 					"image3=?, image4=?, image5=?, displaystart=?, displayend=?, " + 
 					"detail=?, shortdesc=?, additionaldesc=?, brandid=?, descyoutube=?," + 
-					"descimage=?, " + 
+					"descimage=?, listtext=?, " + 
 					"status=?, modifiedby=?, modifieddate=?" + 
 					"where id=?";
 					
@@ -151,9 +152,10 @@ public class ProductDao extends GenericDao
 			pstm.setString(count, product.getShortdesc()); count++;
 			pstm.setString(count, product.getAdditionaldesc()); count++;
 			pstm.setInt(count, product.getBrandid()); count++;
-			
 			pstm.setString(count, product.getDescyoutube()); count++;
+			
 			pstm.setString(count, product.getDescimage()); count++;
+			pstm.setString(count, product.getListtext()); count++;
 			
 			pstm.setInt(count, product.getStatus()); count++;
 			pstm.setString(count, product.getModifiedBy()); count++;
@@ -372,7 +374,7 @@ public class ProductDao extends GenericDao
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql = "";
-		int pagingRows = 9;
+		int pagingRows = 12;
 		List<ProductBean> result = new ArrayList<ProductBean>();
 		try
 		{
@@ -831,6 +833,7 @@ public class ProductDao extends GenericDao
 			
 			product.setDescimage(rs.getString("descimage"));
 			product.setDescyoutube(rs.getString("descyoutube"));
+			product.setListtext(rs.getString("listtext"));
 			
 			product.setStatus(rs.getInt("status"));
 			product.setCreatedDate(rs.getTimestamp("createddate"));

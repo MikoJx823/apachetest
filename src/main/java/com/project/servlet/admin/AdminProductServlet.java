@@ -122,6 +122,7 @@ public class AdminProductServlet extends HttpServlet {
 			String fullDesc = StringUtil.filter(request.getParameter("fulldesc"));
 			String shortDesc = StringUtil.filter(request.getParameter("shortdesc"));
 			String additionalDesc = StringUtil.filter(request.getParameter("additionaldesc"));
+			String listtext = StringUtil.filter(request.getParameter("listtext"));
 			int variantcounter = StringUtil.strToInt(request.getParameter("variantcounter")); 
 			
 			ProductBean product = new ProductBean();
@@ -137,6 +138,7 @@ public class AdminProductServlet extends HttpServlet {
 			product.setDetail(fullDesc);
 			product.setShortdesc(shortDesc);
 			product.setAdditionaldesc(additionalDesc);
+			product.setListtext(listtext);
 			product.setStatus(status);
 			product.setCreatedBy(loginAdmin.getName());
 			//product.setDisplaystart(DateUtil.stringToDate(dateFromStr));
@@ -316,6 +318,7 @@ public class AdminProductServlet extends HttpServlet {
 			String fullDesc = StringUtil.filter(request.getParameter("fullDesc"));
 			String shortDesc = StringUtil.filter(request.getParameter("shortDesc"));
 			String additionalDesc = StringUtil.filter(request.getParameter("additionalDesc"));
+			String listtext = StringUtil.filter(request.getParameter("listtext"));
 			int variantcounter = StringUtil.strToInt(request.getParameter("variantcounter")); 
 			String test = StringUtil.filter(request.getParameter("test"));
 			log.info("test"  + test);
@@ -335,6 +338,7 @@ public class AdminProductServlet extends HttpServlet {
 			product.setDetail(fullDesc);
 			product.setShortdesc(shortDesc);
 			product.setAdditionaldesc(additionalDesc);
+			product.setListtext(listtext);
 			product.setStatus(status);
 			product.setModifiedBy(loginAdmin.getName());
 			

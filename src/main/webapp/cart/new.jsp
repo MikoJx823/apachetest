@@ -114,7 +114,7 @@
 								
 								<div style="background-color:white;padding-bottom:10px;">			
 								<h4 class="product-title" style="padding:0;margin:0;padding-left:15px;padding-top:5px;font-size:10pt;font-weight:900;text-align: left;"><strong><a href="<%=path%>"><%=StringUtil.filter(product.getName()) %> </a></strong></h4>
-								<p style="padding:0;margin:0;padding-left:15px;font-size:10pt;text-align: left;">45ml</p>
+								<p style="padding:0;margin:0;padding-left:15px;font-size:10pt;text-align: left;"><%=StringUtil.filter(product.getListtext()) %></p>
 								<!--  <div class="star-rating">
 									<span style="width:90%"></span>
 								</div> -->
@@ -125,6 +125,9 @@
 									<p style="padding:0;margin:0;padding-top:3px;padding-left:15px;font-weight:900;font-size:12pt;text-align: left;"><%=StringUtil.formatCurrencyPrice(earlybird) %> &nbsp;&nbsp;
 										<span style="background-color:#e74c3c;color:white;padding-right:5px;padding-left:5px;font-size:11pt;"> <%=StringUtil.formatIndexPrice2(variant.getDiscount())%>% OFF </span> </p>
 									<p style="padding:0;margin:0;padding-left:15px; font-size:8pt;text-align: left;"><del><%=StringUtil.formatCurrencyPrice(variant.getPrice()) %></del></p>
+									<%if("".equals(StringUtil.filter(product.getListtext()))) {%>
+									<p style="padding:0;margin:0;">&nbsp;</p>
+									<%} %>
 									<!-- <ins>
 										<span class="amount"><%=StringUtil.formatCurrencyPrice(earlybird) %></span>
 									</ins>
@@ -134,6 +137,9 @@
 										
 									<%}else { %>
 									<p style="padding:0;margin:0;padding-top:3px;padding-bottom:15px;padding-left:15px;font-weight:900;font-size:12pt;text-align: left;"><%=StringUtil.formatCurrencyPrice(variant.getPrice()) %></p>
+									<%if("".equals(StringUtil.filter(product.getListtext()))) {%>
+									<p style="padding:0;margin:0;">&nbsp;</p>
+									<%} %>
 									<!-- <ins>
 										<span class="amount"><%=StringUtil.formatCurrencyPrice(variant.getPrice()) %></span>
 									</ins>-->

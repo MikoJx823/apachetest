@@ -184,6 +184,10 @@ public class ProductService
 		return productDao.getProductVariantListById(pid);
 	}
 	
+	public List<ProductBean> getProductOrderByPrice(int categoryId) {
+		return productDao.getProductOrderByPrice(categoryId);
+	}
+	
 	//OTHERS 
 	public List<Integer> getProductIdBySqlwhere(String sqlWhere){
 		return productDao.getProductIdBySqlwhere(sqlWhere);
@@ -258,8 +262,44 @@ public class ProductService
 		return result;
 	}
 	
-	public List<ProductBean> getProductOrderByPrice(int categoryId) {
-		return productDao.getProductOrderByPrice(categoryId);
+	public String getProductIdsForNew() {
+		String result = "";
+		
+		String sqlWhere = " where status = " + StaticValueUtil.Active + " order by createddate desc limit 10"; 
+		List<ProductBean> products = getProductBySqlwhere(sqlWhere);
+		
+		for(ProductBean product : products) {
+			result += product.getId() + ",";
+		}
+		
+		if(result.contains(",")) {
+			result = result.substring(0, result.length() - 1);
+		}
+		
+		return result;
+	}
+	
+	public boolean checkIsNewItem(int pid) {
+		
+		String pids = getProductIdsForNew();
+
+		String pidArr[] = new String[1]; 
+		
+		if(!"".equals(pids )) {
+			if(pids.contains(",")) {
+				pidArr = pids.split(",");
+			}else {
+				pidArr[0] = pids;
+			}
+			
+			for(String arr : pidArr) {
+				if(arr.equals(pid + "")) {
+					return true;
+				}
+			}
+		}
+		
+		return false;
 	}
 	
 }

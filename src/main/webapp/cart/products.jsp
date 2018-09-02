@@ -34,8 +34,16 @@
 </head>
 <body style="background-color:#E0E0E0"> <!-- #f8f8f8; -->
 	<jsp:include page="header.jsp" />
-
-	<div class="page-head content-top-margin" style="background:black;">
+	
+	<div style="background-color:#FFC5C5; height:350px; margin-top:85px;">
+		<div class="row">
+				<div class="col-md-12">
+					<img src="">
+				</div>
+			</div>
+	</div>
+	
+	<div class="page-head" style="background:black;margin-top:25px;"> <!-- content-top-margin -->
 		<div class="container">
 			<div class="row">
 				<div class="col-md-8 col-sm-7">
@@ -119,6 +127,10 @@
 									<!--<span class="onsale">Sale!</span>
 									  <span class="onsale new">New!</span>
 									<span class="onsale hot">Hot!</span>-->
+									
+									<%if(ProductService.getInstance().checkIsNewItem(product.getId())){ %>
+									<span class="newicon">NEW</span>
+									<%} %>
 									<%if(earlybird > 0) { %>
 									<span class="salesicon">Sale</span>
 									<%} %>
@@ -151,8 +163,8 @@
 								</div> -->
 								<!-- <p class="product-price"></p> -->
 									<% if(earlybird > 0){ %>
-									<p style="padding:0;margin:0;padding-top:3px;padding-left:15px;font-weight:900;font-size:12pt;text-align: left;"><%=StringUtil.formatCurrencyPrice(earlybird) %>
-										<span style="background-color:#e74c3c;color:white;padding-right:5px;padding-left:5px;font-size:11pt;"> 20% OFF </span> </p>
+									<p style="padding:0;margin:0;padding-top:3px;padding-left:15px;font-weight:900;font-size:12pt;text-align: left;"><%=StringUtil.formatCurrencyPrice(earlybird) %> &nbsp;&nbsp;
+										<span style="background-color:#e74c3c;color:white;padding-right:5px;padding-left:5px;font-size:11pt;"> <%=StringUtil.formatIndexPrice2(variant.getDiscount())%>% OFF </span> </p>
 									<p style="padding:0;margin:0;padding-left:15px;font-size:8pt;text-align: left;"><del><%=StringUtil.formatCurrencyPrice(variant.getPrice()) %></del></p>
 									<!--  <ins>
 										<span class="amount"><%=StringUtil.formatCurrencyPrice(earlybird) %></span>

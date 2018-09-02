@@ -38,14 +38,14 @@
 
 	<jsp:include page="header.jsp" />
 
-	<div class="page-head content-top-margin" >
+	<div class="page-head content-top-margin" style="background:black;">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-8 col-sm-7">
 					<ol class="breadcrumb">
-						<li><a href="<%=basePath%>index.jsp">Home</a></li>
-						<li><a href="<%=basePath%>products">Products</a></li>
-						<li class="active"><%=StringUtil.filter(product.getName()) %></li>
+						<li><a style="color:white;" href="<%=basePath%>index.jsp">Home</a></li>
+						<li><a style="color:white;" href="<%=basePath%>products">Products</a></li>
+						<li class="active"  style="color:white;"><%=StringUtil.filter(product.getName()) %></li>
 					</ol>
 				</div>
 

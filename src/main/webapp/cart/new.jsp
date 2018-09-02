@@ -46,7 +46,7 @@
 		</div>
 	</div>-->
 	
-	<div style="background-color:#FFC5C5; height:300px; margin-top:85px;">
+	<div style="background-color:#FFC5C5; height:350px; margin-top:85px;">
 		<div class="row">
 				<div class="col-md-12">
 					<img src="">
@@ -87,8 +87,9 @@
 									<!--<span class="onsale">Sale!</span>
 									  <span class="onsale new">New!</span>
 									<span class="onsale hot">Hot!</span>-->
+									<span class="newicon">NEW</span>
 									<%if(earlybird > 0) { %>
-									<span class="salesicon">Sale</span>
+									<!--<span class="salesicon">Sale</span> -->
 									<%} %>
 									<div class="product-thumbnail">
 										<!--  <img src="<%=basePath%>images/<%=product.getImage1() %>" class="img-responsive" alt=""> -->
@@ -122,7 +123,7 @@
 									
 									if(earlybird > 0){ %>
 									<p style="padding:0;margin:0;padding-top:3px;padding-left:15px;font-weight:900;font-size:12pt;text-align: left;"><%=StringUtil.formatCurrencyPrice(earlybird) %> &nbsp;&nbsp;
-										<span style="background-color:#e74c3c;color:white;padding-right:5px;padding-left:5px;font-size:11pt;"> 20% OFF </span> </p>
+										<span style="background-color:#e74c3c;color:white;padding-right:5px;padding-left:5px;font-size:11pt;"> <%=StringUtil.formatIndexPrice2(variant.getDiscount())%>% OFF </span> </p>
 									<p style="padding:0;margin:0;padding-left:15px; font-size:8pt;text-align: left;"><del><%=StringUtil.formatCurrencyPrice(variant.getPrice()) %></del></p>
 									<!-- <ins>
 										<span class="amount"><%=StringUtil.formatCurrencyPrice(earlybird) %></span>

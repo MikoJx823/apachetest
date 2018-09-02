@@ -121,7 +121,7 @@ public class OrderDao extends GenericDao
 
 			pstm.setString(count, StringUtil.filter(order.getOrderStatus())); count++;
 			pstm.setTimestamp(count, getTimestamp(new Date())); count++;
-			pstm.setString(count, order.getCreatedBy()); count++;
+			pstm.setString(count, StringUtil.filter(order.getCreatedBy())); count++;
 			
 			log.info("Executing SQL:" + ((LoggableStatement) pstm).getQueryString());
 			//log.info("Executing SQL:" + ((LoggableStatement) pstm).getQueryString());
@@ -289,7 +289,7 @@ public class OrderDao extends GenericDao
 			
 			pstm.setString(count, StringUtil.filter(order.getOrderStatus())); count++; 
 			pstm.setTimestamp(count, new Timestamp(order.getModifiedDate().getTime()));count++;
-			pstm.setString(count, order.getModifiedBy());count++;
+			pstm.setString(count, StringUtil.filter(order.getModifiedBy()));count++;
 		
 			pstm.setInt(count, order.getoId());
 			

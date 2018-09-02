@@ -66,7 +66,7 @@ public class OrderDao extends GenericDao
 			
 			int count = 1;
 		
-			pstm.setString(count, order.getOrderRef()); count++;
+			pstm.setString(count, StringUtil.filter(order.getOrderRef())); count++;
 			pstm.setInt(count, order.getMemberid()); count++;
 			pstm.setDouble(count, order.getTotalAmount()); count++;
 			pstm.setDouble(count, order.getOrderAmount()); count++;
@@ -76,50 +76,50 @@ public class OrderDao extends GenericDao
 			pstm.setDouble(count, order.getCouponamount()); count++;
 			pstm.setDouble(count, order.getRemainAmount()); count++;
 			pstm.setTimestamp(count, getTimestamp(new Date())); count++;
-			pstm.setString(count, order.getPaymentRef()); count++;
+			pstm.setString(count, StringUtil.filter(order.getPaymentRef())); count++;
 			
-			pstm.setString(count, order.getBuyertitle()); count++;
-			pstm.setString(count, order.getBuyerfirstname()); count++;
-			pstm.setString(count, order.getBuyerlastname()); count++;
-			pstm.setString(count, order.getBuyercompanyname()); count++;
-			pstm.setString(count, order.getBuyerphone()); count++;
+			pstm.setString(count, StringUtil.filter(order.getBuyertitle())); count++;
+			pstm.setString(count, StringUtil.filter(order.getBuyerfirstname())); count++;
+			pstm.setString(count, StringUtil.filter(order.getBuyerlastname())); count++;
+			pstm.setString(count, StringUtil.filter(order.getBuyercompanyname())); count++;
+			pstm.setString(count, StringUtil.filter(order.getBuyerphone())); count++;
 			
-			pstm.setString(count, order.getBuyeremail()); count++;
-			pstm.setString(count, order.getBuyeraddress1()); count++;
-			pstm.setString(count, order.getBuyeraddress2()); count++;
-			pstm.setString(count, order.getBuyerpostcode()); count++;
-			pstm.setString(count, order.getBuyertown()); count++;
+			pstm.setString(count, StringUtil.filter(order.getBuyeremail())); count++;
+			pstm.setString(count, StringUtil.filter(order.getBuyeraddress1())); count++;
+			pstm.setString(count, StringUtil.filter(order.getBuyeraddress2())); count++;
+			pstm.setString(count, StringUtil.filter(order.getBuyerpostcode())); count++;
+			pstm.setString(count, StringUtil.filter(order.getBuyertown())); count++;
 			
-			pstm.setString(count, order.getBuyerstate()); count++;
-			pstm.setString(count, order.getBuyercountry()); count++;
-			pstm.setString(count, order.getShipfirstname()); count++;
-			pstm.setString(count, order.getShiplastname()); count++;
-			pstm.setString(count, order.getShipcompanyname()); count++;
+			pstm.setString(count, StringUtil.filter(order.getBuyerstate())); count++;
+			pstm.setString(count, StringUtil.filter(order.getBuyercountry())); count++;
+			pstm.setString(count, StringUtil.filter(order.getShipfirstname())); count++;
+			pstm.setString(count, StringUtil.filter(order.getShiplastname())); count++;
+			pstm.setString(count, StringUtil.filter(order.getShipcompanyname())); count++;
 			
-			pstm.setString(count, order.getShipaddress1()); count++;
-			pstm.setString(count, order.getShipaddress2()); count++;
-			pstm.setString(count, order.getShippostcode()); count++;
-			pstm.setString(count, order.getShiptown()); count++;
-			pstm.setString(count, order.getShipstate()); count++;
+			pstm.setString(count, StringUtil.filter(order.getShipaddress1())); count++;
+			pstm.setString(count, StringUtil.filter(order.getShipaddress2())); count++;
+			pstm.setString(count, StringUtil.filter(order.getShippostcode())); count++;
+			pstm.setString(count, StringUtil.filter(order.getShiptown())); count++;
+			pstm.setString(count, StringUtil.filter(order.getShipstate())); count++;
 			
-			pstm.setString(count, order.getShipcountry()); count++;
-			pstm.setString(count, order.getTracknumber()); count++;
-			pstm.setString(count, order.getBuyerremark()); count++;
-			pstm.setString(count, order.getAdminremark()); count++;
-			pstm.setString(count, order.getRemark()); count++;
+			pstm.setString(count, StringUtil.filter(order.getShipcountry())); count++;
+			pstm.setString(count, StringUtil.filter(order.getTracknumber())); count++;
+			pstm.setString(count, StringUtil.filter(order.getBuyerremark())); count++;
+			pstm.setString(count, StringUtil.filter(order.getAdminremark())); count++;
+			pstm.setString(count, StringUtil.filter(order.getRemark())); count++;
 			
-			pstm.setString(count, order.getPayMethod()); count++;
-			pstm.setString(count, order.getApprovalCode()); count++;
-			pstm.setString(count, order.getMaskedCardNo()); count++;
-			pstm.setString(count, order.getHolderName()); count++;
-			pstm.setString(count, order.getSrc()); count++;
+			pstm.setString(count, StringUtil.filter(order.getPayMethod())); count++;
+			pstm.setString(count, StringUtil.filter(order.getApprovalCode())); count++;
+			pstm.setString(count, StringUtil.filter(order.getMaskedCardNo())); count++;
+			pstm.setString(count, StringUtil.filter(order.getHolderName())); count++;
+			pstm.setString(count, StringUtil.filter(order.getSrc())); count++;
 			
-			pstm.setString(count, order.getCurrency()); count++;
-			pstm.setString(count, order.getEci()); count++;
-			pstm.setString(count, order.getSourceip()); count++;
-			pstm.setString(count, order.getIpcountry()); count++;
+			pstm.setString(count, StringUtil.filter(order.getCurrency())); count++;
+			pstm.setString(count, StringUtil.filter(order.getEci())); count++;
+			pstm.setString(count, StringUtil.filter(order.getSourceip())); count++;
+			pstm.setString(count, StringUtil.filter(order.getIpcountry())); count++;
 
-			pstm.setString(count, order.getOrderStatus()); count++;
+			pstm.setString(count, StringUtil.filter(order.getOrderStatus())); count++;
 			pstm.setTimestamp(count, getTimestamp(new Date())); count++;
 			pstm.setString(count, order.getCreatedBy()); count++;
 			
@@ -234,7 +234,7 @@ public class OrderDao extends GenericDao
 			pstm = new LoggableStatement(conn, sql);
 			int count = 1;
 
-			pstm.setString(count, order.getOrderRef()); count++;
+			pstm.setString(count, StringUtil.filter(order.getOrderRef())); count++;
 			pstm.setInt(count, order.getMemberid()); count++;
 			pstm.setDouble(count, order.getTotalAmount()); count++;
 			pstm.setDouble(count, order.getOrderAmount()); count++;
@@ -244,50 +244,50 @@ public class OrderDao extends GenericDao
 			pstm.setDouble(count, order.getCouponamount()); count++;
 			pstm.setDouble(count, order.getRemainAmount()); count++;
 			pstm.setTimestamp(count, getTimestamp(new Date())); count++;
-			pstm.setString(count, order.getPaymentRef()); count++;
+			pstm.setString(count, StringUtil.filter(order.getPaymentRef())); count++;
 			
-			pstm.setString(count, order.getBuyertitle()); count++;
-			pstm.setString(count, order.getBuyerfirstname()); count++;
-			pstm.setString(count, order.getBuyerlastname()); count++;
-			pstm.setString(count, order.getBuyercompanyname()); count++;
-			pstm.setString(count, order.getBuyerphone()); count++;
+			pstm.setString(count, StringUtil.filter(order.getBuyertitle())); count++;
+			pstm.setString(count, StringUtil.filter(order.getBuyerfirstname())); count++;
+			pstm.setString(count, StringUtil.filter(order.getBuyerlastname())); count++;
+			pstm.setString(count, StringUtil.filter(order.getBuyercompanyname())); count++;
+			pstm.setString(count, StringUtil.filter(order.getBuyerphone())); count++;
 			
-			pstm.setString(count, order.getBuyeremail()); count++;
-			pstm.setString(count, order.getBuyeraddress1()); count++;
-			pstm.setString(count, order.getBuyeraddress2()); count++;
-			pstm.setString(count, order.getBuyerpostcode()); count++;
-			pstm.setString(count, order.getBuyertown()); count++;
+			pstm.setString(count, StringUtil.filter(order.getBuyeremail())); count++;
+			pstm.setString(count, StringUtil.filter(order.getBuyeraddress1())); count++;
+			pstm.setString(count, StringUtil.filter(order.getBuyeraddress2())); count++;
+			pstm.setString(count, StringUtil.filter(order.getBuyerpostcode())); count++;
+			pstm.setString(count, StringUtil.filter(order.getBuyertown())); count++;
 			
-			pstm.setString(count, order.getBuyerstate()); count++;
-			pstm.setString(count, order.getBuyercountry()); count++;
-			pstm.setString(count, order.getShipfirstname()); count++;
-			pstm.setString(count, order.getShiplastname()); count++;
-			pstm.setString(count, order.getShipcompanyname()); count++;
+			pstm.setString(count, StringUtil.filter(order.getBuyerstate())); count++;
+			pstm.setString(count, StringUtil.filter(order.getBuyercountry())); count++;
+			pstm.setString(count, StringUtil.filter(order.getShipfirstname())); count++;
+			pstm.setString(count, StringUtil.filter(order.getShiplastname())); count++;
+			pstm.setString(count, StringUtil.filter(order.getShipcompanyname())); count++;
 			
-			pstm.setString(count, order.getShipaddress1()); count++;
-			pstm.setString(count, order.getShipaddress2()); count++;
-			pstm.setString(count, order.getShippostcode()); count++;
-			pstm.setString(count, order.getShiptown()); count++;
-			pstm.setString(count, order.getShipstate()); count++;
+			pstm.setString(count, StringUtil.filter(order.getShipaddress1())); count++;
+			pstm.setString(count, StringUtil.filter(order.getShipaddress2())); count++;
+			pstm.setString(count, StringUtil.filter(order.getShippostcode())); count++;
+			pstm.setString(count, StringUtil.filter(order.getShiptown())); count++;
+			pstm.setString(count, StringUtil.filter(order.getShipstate())); count++;
 			
-			pstm.setString(count, order.getShipcountry()); count++;
-			pstm.setString(count, order.getTracknumber()); count++;
-			pstm.setString(count, order.getBuyerremark()); count++;
-			pstm.setString(count, order.getAdminremark()); count++;
-			pstm.setString(count, order.getRemark()); count++;
+			pstm.setString(count, StringUtil.filter(order.getShipcountry())); count++;
+			pstm.setString(count, StringUtil.filter(order.getTracknumber())); count++;
+			pstm.setString(count, StringUtil.filter(order.getBuyerremark())); count++;
+			pstm.setString(count, StringUtil.filter(order.getAdminremark())); count++;
+			pstm.setString(count, StringUtil.filter(order.getRemark())); count++;
 			
-			pstm.setString(count, order.getPayMethod()); count++;
-			pstm.setString(count, order.getApprovalCode()); count++;
-			pstm.setString(count, order.getMaskedCardNo()); count++;
-			pstm.setString(count, order.getHolderName()); count++;
-			pstm.setString(count, order.getSrc()); count++;
+			pstm.setString(count, StringUtil.filter(order.getPayMethod())); count++;
+			pstm.setString(count, StringUtil.filter(order.getApprovalCode())); count++;
+			pstm.setString(count, StringUtil.filter(order.getMaskedCardNo())); count++;
+			pstm.setString(count, StringUtil.filter(order.getHolderName())); count++;
+			pstm.setString(count, StringUtil.filter(order.getSrc())); count++;
 			
-			pstm.setString(count, order.getCurrency()); count++;
-			pstm.setString(count, order.getEci()); count++;
-			pstm.setString(count, order.getSourceip()); count++;
-			pstm.setString(count, order.getIpcountry()); count++;
+			pstm.setString(count, StringUtil.filter(order.getCurrency())); count++;
+			pstm.setString(count, StringUtil.filter(order.getEci())); count++;
+			pstm.setString(count, StringUtil.filter(order.getSourceip())); count++;
+			pstm.setString(count, StringUtil.filter(order.getIpcountry())); count++;
 			
-			pstm.setString(count, order.getOrderStatus()); count++; 
+			pstm.setString(count, StringUtil.filter(order.getOrderStatus())); count++; 
 			pstm.setTimestamp(count, new Timestamp(order.getModifiedDate().getTime()));count++;
 			pstm.setString(count, order.getModifiedBy());count++;
 		

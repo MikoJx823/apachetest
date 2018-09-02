@@ -784,10 +784,10 @@ public class ProductDao extends GenericDao
 			conn = ConectionFactory.getConnection();
 			
 			sql = "select count(id) as count from product where categoryid in (" + categoryid + ") " +
-				  "and status = " + StaticValueUtil.Active + " and displaystart < now() and displayend > now()";
+				  "and status = " + StaticValueUtil.Active ;//+ " and displaystart < now() and displayend > now()";
 			pstmt = new LoggableStatement(conn, sql);	
 			
-			//log.info("Executing SQL: " +  ((LoggableStatement) pstmt).getQueryString());
+			log.info("Executing SQL: " +  ((LoggableStatement) pstmt).getQueryString());
 			
 			rs = pstmt.executeQuery();
 			if (rs.next()){

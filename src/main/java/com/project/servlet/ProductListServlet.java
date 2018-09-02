@@ -1,6 +1,7 @@
 package com.project.servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -45,7 +46,9 @@ public class ProductListServlet extends HttpServlet {
 		response.setHeader("Cache-Control", "no-cache");
 
 		String resultUrl = "cart/products.jsp";
+		List<ProductBean> products = new ArrayList<ProductBean>();
 		int itemCount = 0;
+		int totalPages = 0;
 		
 		try{
 			String from = StringUtil.filter(request.getParameter(SessionName.from));
@@ -77,7 +80,6 @@ public class ProductListServlet extends HttpServlet {
 			
 			String sqlWhere = " where status = " + StaticValueUtil.Active ;//+ " and displaystart < now() and displayend > now() ";
 			
-			//if(!"".equals(categoryId)) {
 			CategoryBean category = CategoryService.getInstance().getBeanById(StringUtil.strToInt(categoryId));
 				
 			if(category != null) {
@@ -86,15 +88,18 @@ public class ProductListServlet extends HttpServlet {
 				}else {
 					sqlWhere += " and categoryid in (" + categoryId + ")";
 				}
+				
+				if(!"".equals(search)) {
+					sqlWhere += " and name like '%" + search +"%' "; 
+				}
+				
+				sqlWhere += " order by name"  ;
+				
+				products = service.getProductFrontBySqlWhereWithPage(sqlWhere, pageIdx);
+				itemCount = service.getTotalItems(sqlWhere);//.getProductBySqlwhere(sqlWhere).size();
+				totalPages = service.getFrontTotalPages(pageIdx, sqlWhere);
 			}
-			//}
 			
-			if(!"".equals(search)) {
-				sqlWhere += " and name like '%" + search +"%' "; 
-			}
-			
-			sqlWhere += " order by name"  ;
-
 			//GENERATE CATEGORY LIST FOR FILTER  
 			/*List<CategoryBean> categories = CategoryService.getInstance().getListBySqlwhere(" where status = " + StaticValueUtil.Active + " order by parentid");
 			Map<Integer, String> categoryMap = new HashMap<Integer,String>();
@@ -118,9 +123,7 @@ public class ProductListServlet extends HttpServlet {
 			}*/
 			
 			
-			List<ProductBean> products = service.getProductFrontBySqlWhereWithPage(sqlWhere, pageIdx);
-			itemCount = service.getTotalItems(sqlWhere);//.getProductBySqlwhere(sqlWhere).size();
-			int totalPages = service.getFrontTotalPages(pageIdx, sqlWhere);
+			
 		
 			request.setAttribute(SessionName.products, products);
 			request.setAttribute(SessionName.pageIdx, pageIdx);

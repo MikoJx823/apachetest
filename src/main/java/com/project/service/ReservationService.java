@@ -387,7 +387,7 @@ public class ReservationService
 		String sessionExpireTime = null;
 		try
 		{
-			sessionExpireTime = PropertiesUtil.getProperty("stockhold.sessionExpireTime");
+			sessionExpireTime = "3300";//PropertiesUtil.getProperty("stockhold.sessionExpireTime");
 			sessionExpireTimeSec = Integer.parseInt(sessionExpireTime);
 		} catch (Exception e)
 		{
@@ -462,7 +462,7 @@ public class ReservationService
 			String sessionExpireTime = null;
 			try
 			{
-				sessionExpireTime = PropertiesUtil.getProperty("stockhold.sessionExpireTime");
+				sessionExpireTime = "3300";//PropertiesUtil.getProperty("stockhold.sessionExpireTime");
 				sessionExpireTimeSec = Integer.parseInt(sessionExpireTime);
 			} catch (Exception e)
 			{
@@ -661,7 +661,7 @@ public class ReservationService
 		int processSleepTimeSec;
 		try
 		{
-			processSleepTime = PropertiesUtil.getProperty("stockhold.releaseProcessSleepTime");
+			processSleepTime = "300";//PropertiesUtil.getProperty("stockhold.releaseProcessSleepTime");
 			processSleepTimeSec = Integer.parseInt(processSleepTime);
 		} catch (Exception e)
 		{

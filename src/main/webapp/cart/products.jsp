@@ -123,6 +123,7 @@
 							
 						%>
 							<div class="product col-md-3 col-sm-6 col-xs-12" data-product-id="1">
+								<div class="product-shadown"> <!-- FOR SHADOW EFFECT -->
 								<div class="inner-product">
 									<!--<span class="onsale">Sale!</span>
 									  <span class="onsale new">New!</span>
@@ -187,6 +188,7 @@
 									</ins> -->
 									<%} %>
 								
+								</div>
 								</div>
 							</div><!-- /.product -->
 						<%	

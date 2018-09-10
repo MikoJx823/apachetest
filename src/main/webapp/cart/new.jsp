@@ -83,6 +83,7 @@
 								//if(count != 1) classname = ""; 
 						%>
 							<div class="product col-md-5th-1 col-sm-4 col-xs-12" data-product-id="1">
+								<div class="product-shadown"> <!-- FOR SHADOW EFFECT -->
 								<div class="inner-product">
 									<!--<span class="onsale">Sale!</span>
 									  <span class="onsale new">New!</span>
@@ -91,7 +92,7 @@
 									<%if(earlybird > 0) { %>
 									<!--<span class="salesicon">Sale</span> -->
 									<%} %>
-									<div class="product-thumbnail" style="background-color:#FFC5C5;">
+									<div class="product-thumbnail" style="background-color:#FFC5C5;" >
 										<!--  <img src="<%=basePath%>images/<%=product.getImage1() %>" class="img-responsive" alt=""> -->
 										<a href="<%=basePath%>productdetails?id=<%=product.getId()%>">
 										<img src="<%=basePath%>images/products/<%=product.getImage1() %>" class="img-responsive" alt="" style="height:200px;">
@@ -145,6 +146,7 @@
 									</ins>-->
 									<%} %>
 								
+								</div>
 								</div>
 							</div><!-- /.product -->
 						<%			count++; if(count >= 5) count = 1;

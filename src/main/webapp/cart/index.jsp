@@ -652,6 +652,7 @@
 							
 						%>
 							<div class="product col-md-3 col-sm-6 col-xs-6" data-product-id="1">
+								<div class="product-shadown"> <!-- FOR SHADOW EFFECT -->
 								<div class="inner-product">
 									<%if(ProductService.getInstance().checkIsNewItem(product.getId())){ %>
 									<span class="newicon">NEW</span>
@@ -688,6 +689,7 @@
 										<p style="padding:0;margin:0;">&nbsp;</p>
 										<%} %>
 									<%} %>
+								</div>
 								</div>
 							</div><!-- /.product -->
 						<%	
@@ -808,6 +810,7 @@
 							
 						%>
 							<div class="product col-md-3 col-sm-6 col-xs-6" data-product-id="1">
+								<div class="product-shadown"> <!-- FOR SHADOW EFFECT -->
 								<div class="inner-product">
 									<%if(ProductService.getInstance().checkIsNewItem(product.getId())){ %>
 									<span class="newicon">NEW</span>
@@ -848,6 +851,7 @@
 										<%} %>
 									<%} %>
 								
+								</div>
 								</div>
 							</div><!-- /.product -->
 						<%	

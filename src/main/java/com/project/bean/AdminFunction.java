@@ -42,8 +42,6 @@ public class AdminFunction
 		{Order,View,Edit,ResendEmail,UpdateStatus},
 		{Report,ReportOrder,},
 		{ImportExport,Edit},
-		{Recommend,Add,View,Edit,Delete},
-		{WhatsHot,Add,View,Edit,Delete},
 		{Index,Add,View,Edit,Delete},
 		{Banner,Add,View,Edit}
 	};

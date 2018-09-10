@@ -18,6 +18,9 @@ public class StaticValueUtil
 	public static final int BANNER_INDEX_SUB_R_2 = 1102;
 	public static final int BANNER_INDEX_SUB_R_B = 1103;
 	
+	//INDEX TYPE RELATE 
+	public static final int INDEX_LATEST = 1;
+	public static final int INDEX_TOP_RATED = 2;
 	
 	//OTHER PLATFORM LOGIN RELATED 
 	public static final String LOGIN_FROM_APP = "clphk";

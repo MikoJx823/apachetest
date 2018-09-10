@@ -93,6 +93,12 @@
   	<servlet-class>com.project.servlet.admin.AdminOrderServlet</servlet-class>
   </servlet>
   <servlet>
+  	<servlet-name>AdminIndexServlet</servlet-name>
+  	<display-name>AdminIndexServlet</display-name>
+  	<description></description>
+  	<servlet-class>com.project.servlet.admin.AdminIndexServlet</servlet-class>
+  </servlet>
+  <servlet>
   	<servlet-name>GroupServlet</servlet-name>
   	<display-name>GroupServlet</display-name>
   	<description></description>
@@ -123,12 +129,12 @@
   	<servlet-class>com.project.servlet.NewProductServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-  	<servlet-name>Testing</servlet-name>
-  	<url-pattern>/Testing</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
   	<servlet-name>ProductListServlet</servlet-name>
   	<url-pattern>/products</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>Testing</servlet-name>
+  	<url-pattern>/Testing</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
   	<servlet-name>ProductDetailServlet</servlet-name>
@@ -182,6 +188,10 @@
   <servlet-mapping>
   	<servlet-name>UserServlet</servlet-name>
   	<url-pattern>/admin/system/UserServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>AdminIndexServlet</servlet-name>
+  	<url-pattern>/admin/product/AdminIndexServlet</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
   	<servlet-name>SearchServlet</servlet-name>

@@ -33,7 +33,7 @@
 	<link rel="stylesheet" type="text/css" href="<%=basePath %>css/bootstrapfor5.css">
 	
 </head>
-<body style="background-color:#E0E0E0">
+<body style="background-color:#f8f8f8;">
 	<jsp:include page="header.jsp" />
 
 	<!--  <div class="content-top-margin">
@@ -91,7 +91,7 @@
 									<%if(earlybird > 0) { %>
 									<!--<span class="salesicon">Sale</span> -->
 									<%} %>
-									<div class="product-thumbnail">
+									<div class="product-thumbnail" style="background-color:#FFC5C5;">
 										<!--  <img src="<%=basePath%>images/<%=product.getImage1() %>" class="img-responsive" alt=""> -->
 										<a href="<%=basePath%>productdetails?id=<%=product.getId()%>">
 										<img src="<%=basePath%>images/products/<%=product.getImage1() %>" class="img-responsive" alt="" style="height:200px;">

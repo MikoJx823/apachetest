@@ -410,7 +410,7 @@ public class ProductDao extends GenericDao
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql = "";
-		int pagingRows = 12;
+		int pagingRows = 10;
 		List<ProductBean> result = new ArrayList<ProductBean>();
 		try{
 			conn = ConectionFactory.getConnection();
@@ -701,7 +701,52 @@ public class ProductDao extends GenericDao
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql = "";
-		int pagingRows = 9;
+		int pagingRows = 12;
+		try
+		{
+			conn = ConectionFactory.getConnection();
+			//pagingRows = StringUtil.strToInt(PropertiesUtil.getProperty("pagingRows.front.web"));
+			
+			sql = "select count(*) as count from product "+sqlWhere;
+			pstmt = new LoggableStatement(conn, sql);	
+			
+			//log.info("Executing SQL: " +  ((LoggableStatement) pstmt).getQueryString());
+			
+			rs = pstmt.executeQuery();
+			if (rs.next())
+			{
+				result = rs.getInt("count");
+				
+				if (result % pagingRows == 0)
+				{
+					result = result / pagingRows;
+				}
+				else
+				{
+					result = result / pagingRows + 1;
+				}
+			}
+		}
+		catch (Exception e)
+		{
+			log.error(pstmt, e);
+		}
+		finally
+		{
+			DbClose.close(rs);
+			DbClose.close(pstmt);
+			DbClose.close(conn);
+		}
+		return result;
+	}
+	
+	public int getFrontSearchTotalPages(int pageIdx,String sqlWhere){
+		int result = 0;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "";
+		int pagingRows = 10;
 		try
 		{
 			conn = ConectionFactory.getConnection();

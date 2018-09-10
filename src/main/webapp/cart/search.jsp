@@ -13,13 +13,10 @@
 	String basePath = StringUtil.getHostAddress(); 
 	List<ProductBean> products = (List<ProductBean>)request.getAttribute(SessionName.products) == null ? new ArrayList<ProductBean>() : (List<ProductBean>)request.getAttribute(SessionName.products);
 	
-	int categoryid = StringUtil.trimToInt(request.getAttribute("categoryId"));
-	String search = StringUtil.filter((String)request.getAttribute("search"));
+	String key = StringUtil.filter((String)request.getAttribute("key"));
 	int totalPages = StringUtil.trimToInt(request.getAttribute(SessionName.totalPages));
 	int pageIdx = StringUtil.trimToInt(request.getAttribute(SessionName.pageIdx));
 	int itemCount = StringUtil.trimToInt(request.getAttribute(SessionName.itemCount));
-	
-	
 %>
 
 <!DOCTYPE html>
@@ -31,8 +28,9 @@
 <!-- the "no-js" class is for Modernizr. -->
 <head>
 	<jsp:include page="meta.jsp" />
+	<link rel="stylesheet" type="text/css" href="<%=basePath %>css/bootstrapfor5.css">
 </head>
-<body>
+<body style="background-color:#f8f8f8;">
 	<jsp:include page="header.jsp" />
 
 	<div class="page-head content-top-margin" style="background:black;">
@@ -72,18 +70,22 @@
 								String path = basePath + "productdetails?id=" + product.getId();
 							
 						%>
-							<div class="product col-md-3 col-sm-6 col-xs-12" data-product-id="1">
+							<div class="product col-md-5th-1 col-sm-4 col-xs-12" data-product-id="1">
+							<!-- <div class="product col-md-3 col-sm-6 col-xs-12" data-product-id="1"> -->
 								<div class="inner-product">
 									<!--<span class="onsale">Sale!</span>
 									  <span class="onsale new">New!</span>
 									<span class="onsale hot">Hot!</span>-->
-									<%if(earlybird > 0) { %>
-									<span class="salesicon">Sale</span>
+									<%if(ProductService.getInstance().checkIsNewItem(product.getId())){ %>
+									<span class="newicon">NEW</span>
 									<%} %>
-									<div class="product-thumbnail">
+									<%if(earlybird > 0) { %>
+									<!-- <span class="salesicon">Sale</span> -->
+									<%} %>
+									<div class="product-thumbnail" style="background-color:#FFC5C5;">
 										<!--  <img src="<%=basePath%>images/<%=product.getImage1() %>" class="img-responsive" alt=""> -->
 										<a href="<%=basePath%>productdetails?id=<%=product.getId()%>">
-										<img src="<%=basePath%>images/products/<%=product.getImage1() %>" class="img-responsive" alt="">
+										<img src="<%=basePath%>images/products/<%=product.getImage1() %>" class="img-responsive" alt="" style="height:200px;">
 										</a>
 									</div>
 									<div class="product-details text-center">
@@ -100,13 +102,34 @@
 										</div>
 									</div>
 								</div>
-								<h3 class="product-title"><a href="<%=path%>"><%=StringUtil.filter(product.getName()) %> </a></h3>
+								<div style="background-color:white;padding-bottom:10px;">	
+								<h4 class="product-title" style="padding:0;margin:0;padding-left:15px;padding-top:5px;font-size:10pt;font-weight:900;text-align: left;"><strong><a href="<%=path%>"><%=StringUtil.filter(product.getName()) %> </a></strong></h4>
+								<p style="padding:0;margin:0;padding-left:15px;font-size:10pt;text-align: left;"><%=StringUtil.filter(product.getListtext()) %></p>
 								<!--  <div class="star-rating">
 									<span style="width:90%"></span>
 								</div> -->
+								<!--<p class="product-price"> </p>-->
+								<%if(earlybird > 0){ %>
+									<p style="padding:0;margin:0;padding-top:3px;padding-left:15px;font-weight:900;font-size:12pt;text-align: left;"><%=StringUtil.formatCurrencyPrice(earlybird) %> &nbsp;&nbsp;
+										<span style="background-color:#e74c3c;color:white;padding-right:5px;padding-left:5px;font-size:11pt;"> <%=StringUtil.formatIndexPrice2(variant.getDiscount())%>% OFF </span> </p>
+									<p style="padding:0;margin:0;padding-left:15px; font-size:8pt;text-align: left;"><del><%=StringUtil.formatCurrencyPrice(variant.getPrice()) %></del></p>
+									<%if("".equals(StringUtil.filter(product.getListtext()))) {%>
+									<p style="padding:0;margin:0;">&nbsp;</p>
+									<%} %>
+	
+								<%}else { %>
+									<p style="padding:0;margin:0;padding-top:3px;padding-bottom:15px;padding-left:15px;font-weight:900;font-size:12pt;text-align: left;"><%=StringUtil.formatCurrencyPrice(variant.getPrice()) %></p>
+									<%if("".equals(StringUtil.filter(product.getListtext()))) {%>
+									<p style="padding:0;margin:0;">&nbsp;</p>
+									<%} %>
+								<%} %>
+								
+								<!-- <h3 class="product-title"><a href="<%=path%>"><%=StringUtil.filter(product.getName()) %> </a></h3>
+								 <div class="star-rating">
+									<span style="width:90%"></span>
+								</div> 
 								<p class="product-price">
 									<%
-									
 									if(earlybird > 0){ %>
 									<ins>
 										<span class="amount"><%=StringUtil.formatCurrencyPrice(earlybird) %></span>
@@ -120,7 +143,8 @@
 										<span class="amount"><%=StringUtil.formatCurrencyPrice(variant.getPrice()) %></span>
 									</ins>
 									<%} %>
-								</p>
+								</p>-->
+								</div>
 							</div><!-- /.product -->
 						<%	
 								}	
@@ -142,7 +166,7 @@
 			 <div class="row">
 				<div class="col-md-12">
 					<%
-					String navPath = basePath + "products?pageIdx=";
+					String navPath = basePath + "search?key=" + key + "&pageIdx=";
 					
 					if(products != null && products.size() > 0){ 
 					%>

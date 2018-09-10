@@ -44,7 +44,7 @@ private static Logger log = Logger.getLogger(SearchServlet.class);
 			ProductService service = ProductService.getInstance();
 			
 			String sqlWhere = " where status = " + StaticValueUtil.Active + 
-							  " and displaystart < now() and displayend > now()" + 
+							 // " and displaystart < now() and displayend > now()" + 
 							  " and name like '%" + key + "%' order by name";
 			
 			List<ProductBean> products = new ArrayList<ProductBean>();

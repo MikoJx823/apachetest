@@ -32,7 +32,7 @@
 <head>
 	<jsp:include page="meta.jsp" />
 </head>
-<body style="background-color:#E0E0E0"> <!-- #f8f8f8; -->
+<body style="background-color:#f8f8f8;"> 
 	<jsp:include page="header.jsp" />
 	
 	<div style="background-color:#FFC5C5; height:350px; margin-top:85px;">
@@ -132,9 +132,9 @@
 									<span class="newicon">NEW</span>
 									<%} %>
 									<%if(earlybird > 0) { %>
-									<span class="salesicon">Sale</span>
+									<!-- <span class="salesicon">Sale</span> -->
 									<%} %>
-									<div class="product-thumbnail" style="background-color:white;">
+									<div class="product-thumbnail" style="background-color:#FFC5C5;">
 										<!--  <img src="<%=basePath%>images/<%=product.getImage1() %>" class="img-responsive" alt=""> -->
 										<a href="<%=basePath%>productdetails?id=<%=product.getId()%>">
 										<img src="<%=basePath%>images/products/<%=product.getImage1() %>" class="img-responsive" alt="" style="min-height:200px;">  <!-- style="height:250px;" -->
@@ -186,6 +186,7 @@
 										<span class="amount"><%=StringUtil.formatCurrencyPrice(variant.getPrice()) %></span>
 									</ins> -->
 									<%} %>
+								
 								</div>
 							</div><!-- /.product -->
 						<%	

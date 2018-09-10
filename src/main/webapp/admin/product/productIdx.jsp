@@ -63,6 +63,9 @@
      <%if(AdminService.hasAccessRights(AdminFunction.getFunctionId(AdminFunction.Product, AdminFunction.Add), AdminFunction.haveRight, adminGroupFunctions)) {%>
     	<li role="presentation"><a href="productAdd.jsp">Add Product</a></li>
      <%} %>
+     <%if(AdminService.hasAccessRights(AdminFunction.getFunctionId(AdminFunction.Product, AdminFunction.Add), AdminFunction.haveRight, adminGroupFunctions)) {%>
+    	<li role="presentation"><a href="../product/indexIdx.jsp">Add To Index</a></li>
+    <%} %>
   </ul>
 
   <!-- Tab panes -->

@@ -19,7 +19,13 @@
 	//List<BannerInfoBean> bannerSubRightTop = BannerService.getInstance().getFrontListByPosition(StaticValueUtil.BANNER_INDEX_SUB_R_T);
 	//List<BannerInfoBean> bannerSubRightBottom1 = BannerService.getInstance().getFrontListByPosition(StaticValueUtil.BANNER_INDEX_SUB_R_B_1);
 	//List<BannerInfoBean> bannerSubRightBottom2 = BannerService.getInstance().getFrontListByPosition(StaticValueUtil.BANNER_INDEX_SUB_R_B_2);
-
+	
+    String sqlLatest = "i inner join (Select name, id from product) p on (i.pid=p.id) where status != " + StaticValueUtil.Delete + " and type = " + StaticValueUtil.INDEX_LATEST  + " order by p.name ";
+    String sqlRated = "i inner join (Select name, id from product) p on (i.pid=p.id) where status != " + StaticValueUtil.Delete + " and type = " + StaticValueUtil.INDEX_TOP_RATED  + " order by p.name ";
+    
+	List<IndexInfoBean> latestProductList = IndexService.getInstance().getListBySqlwhere(sqlLatest);
+    List<IndexInfoBean> topRatedList = IndexService.getInstance().getListBySqlwhere(sqlRated);
+	
 %>
 
 <!DOCTYPE html>
@@ -545,179 +551,67 @@
 		</div><!-- /.container -->
 	</section><!-- /.collections -->
 	
-	<section class="section" style="background-color:#e0e0e0;"> <!-- psmall-padding-top addings:70px -->
+	
+	<%if(latestProductList != null && latestProductList.size() > 0) { %>
+	<section class="section hidden-xs" style="background-color:#f8f8f8;"> <!-- psmall-padding-top addings:70px -->
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-12 text-center">
-					<h4 class="index-insta-header"><strong><i class="index-insta-line"></i>Latest Products<i class="index-insta-line"></i></strong></h4> 
+					<h4 class="index-insta-header"><strong><i class="index-insta-line"></i>HOTTEST PRODUCTS<i class="index-insta-line"></i></strong></h4> 
 					<p style="padding-bottom:15px;font-size:10pt;"><i>Checkout The Latest And Hottest!</i></p>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-xs-12">
 					 <div class="section slider-resp-prod slider-prod slider">
+				<%for(IndexInfoBean index : latestProductList){ 
+					ProductBean product = ProductService.getInstance().getFrontProductById(index.getPid());
+					
+					if(product != null){
+						
+						ProductVariantBean variant = null;
+						if(product.getProductVariant() != null && product.getProductVariant().size() > 0){
+							variant = product.getProductVariant().get(0);
+						}else{
+							variant = new ProductVariantBean();
+						}
+						
+						double earlybird = ProductService.getInstance().getEarlyBirdDiscount(variant);
+						String path = basePath + "productdetails?id=" + product.getId();	
+				%>
+				
 						<div data-product-id="1" style="background-color:white;"> <!-- class="product col-md-3 col-sm-6 col-xs-12 -->
 							<div> <!--class="inner-product"  -->
-								<span style="width:30px;height:30px;line-height:30px;top:0px;right:0px;background-color:#e74c3c;backface-visibility:hidden;background-clip:padding-box;font-size:10px;color:#fff;text-align:center;display:block;overflow:hidden;z-index:1;position:absolute;color:white">NEW</span> <!--class="onsale"  -->
-								<span style="width:30px;height:30px;line-height:30px;top:30px;right:0px;background-color:#a52923;backface-visibility:hidden;background-clip:padding-box;font-size:10px;color:#fff;text-align:center;display:block;overflow:hidden;z-index:1;position:absolute;color:white">HOT</span>
-								<div class="product-thumbnail">
-								<a href="#!">
-									<img src="<%=basePath %>images/Dry-winter-snow-natural-hd-wallpaper.jpg" class="img-responsive" alt="">
+								<%if(ProductService.getInstance().checkIsNewItem(product.getId())){ %>
+									<span style="width:30px;height:30px;line-height:30px;top:0px;right:0px;background-color:#e74c3c;backface-visibility:hidden;background-clip:padding-box;font-size:10px;color:#fff;text-align:center;display:block;overflow:hidden;z-index:1;position:absolute;color:white">NEW</span> <!--class="onsale"  -->
+								<%} %>
+								<!-- <span style="width:30px;height:30px;line-height:30px;top:30px;right:0px;background-color:#a52923;backface-visibility:hidden;background-clip:padding-box;font-size:10px;color:#fff;text-align:center;display:block;overflow:hidden;z-index:1;position:absolute;color:white">HOT</span>-->
+								<div class="product-thumbnail" style="background-color:#FFC5C5;">
+								<a href="<%=path%>">
+									<img src="<%=basePath%>images/products/<%=product.getImage1() %>" class="img-responsive" alt="">
 								</a>
 								</div>
 								<div class="product-details text-center">
-									<!--  <div class="product-btns">
-										<span data-toggle="tooltip" data-placement="top" title="Add To Cart">
-											<a href="#!" class="li-icon add-to-cart"><i class="lil-shopping_cart"></i></a>
-										</span>
-										<span data-toggle="tooltip" data-placement="top" title="Add to Favorites">
-											<a href="#!" class="li-icon"><i class="lil-favorite"></i></a>
-										</span>
-										<span data-toggle="tooltip" data-placement="top" title="View">
-											<a href="product.html" class="li-icon view-details"><i class="lil-search"></i></a>
-										</span>
-									</div> -->
 								</div>
 							</div>
-							<h4 class="product-title" style="padding:0;margin:0;padding-left:15px;padding-top:5px;font-size:10pt;font-weight:900;"><strong><a href="#!">Bag Maroon</a></strong></h4>
-							<p style="padding:0;margin:0;padding-left:15px;font-size:10pt;">45ml</p>
-							<p style="padding:0;margin:0;padding-top:3px;padding-left:15px;font-weight:900;font-size:12pt;">RM 44.00 &nbsp;&nbsp;<span style="background-color:#e74c3c;color:white;padding-right:5px;padding-left:5px;font-size:11pt;"> 20% OFF </span> </p>
-							<p style="padding:0;margin:0;padding-left:15px;padding-bottom:10px;font-size:8pt;"><del>RM60.00</del></p>
-							<!--  <div class="star-rating">
-								<span style="width:90%"></span>
-							</div>
-							<p class="product-price">
-								<ins>
-									<span class="amount">$75.99</span>
-								</ins>
-							</p>-->
+							<h4 class="product-title" style="padding:0;margin:0;padding-left:15px;padding-top:5px;font-size:10pt;font-weight:900;"><strong><a href="path"><%=StringUtil.filter(product.getName()) %></a></strong></h4>
+							<p style="padding:0;margin:0;padding-left:15px;font-size:10pt;"><%=StringUtil.filter(product.getListtext()) %></p>
+							<% if(earlybird > 0){ %>
+								<p style="padding:0;margin:0;padding-top:3px;padding-left:15px;font-weight:900;font-size:12pt;"><%=StringUtil.formatCurrencyPrice(earlybird) %> &nbsp;&nbsp;<span style="background-color:#e74c3c;color:white;padding-right:5px;padding-left:5px;font-size:11pt;"> <%=StringUtil.formatIndexPrice2(variant.getDiscount())%>% OFF </span> </p>
+								<p style="padding:0;margin:0;padding-left:15px;padding-bottom:10px;font-size:8pt;"><del><%=StringUtil.formatCurrencyPrice(variant.getPrice()) %></del></p>
+								<%if("".equals(StringUtil.filter(product.getListtext()))) {%>
+								<p style="padding:0;margin:0;">&nbsp;</p>
+								<%} %>
+							<%}else { %>
+								<p style="padding:0;margin:0;padding-top:3px;padding-left:15px;padding-bottom:25px;font-weight:900;font-size:12pt;text-align: left;"><%=StringUtil.formatCurrencyPrice(variant.getPrice()) %></p>
+								<%if("".equals(StringUtil.filter(product.getListtext()))) {%>
+								<p style="padding:0;margin:0;">&nbsp;</p>
+								<%} %>
+							<%} %>
 						</div><!-- /.product -->
-						
-						<div data-product-id="1" style="background-color:white;">
-							<div>
-								<div class="product-thumbnail">
-									<img src="<%=basePath %>images/Dry-winter-snow-natural-hd-wallpaper.jpg" class="img-responsive" alt="">
-								</div>
-								<div class="product-details text-center">
-									<!--  <div class="product-btns">
-										<span data-toggle="tooltip" data-placement="top" title="Add To Cart">
-											<a href="#!" class="li-icon add-to-cart"><i class="lil-shopping_cart"></i></a>
-										</span>
-										<span data-toggle="tooltip" data-placement="top" title="Add to Favorites">
-											<a href="#!" class="li-icon"><i class="lil-favorite"></i></a>
-										</span>
-										<span data-toggle="tooltip" data-placement="top" title="View">
-											<a href="product.html" class="li-icon view-details"><i class="lil-search"></i></a>
-										</span>
-									</div> -->
-								</div>
-							</div>
-							<h4 class="product-title" style="padding:0;margin:0;padding-left:15px;padding-top:5px;font-size:10pt;font-weight:900;"><strong><a href="#!">Bag Maroon</a></strong></h4>
-							<p style="padding:0;margin:0;padding-left:15px;font-size:10pt;">45ml</p>
-							<p style="padding:0;margin:0;padding-top:3px;padding-left:15px;font-weight:900;font-size:12pt;">RM 44.00 &nbsp;&nbsp;<span style="background-color:#e74c3c;color:white;padding-right:5px;padding-left:5px;font-size:11pt;"> 20% OFF </span> </p>
-							<p style="padding:0;margin:0;padding-left:15px;padding-bottom:10px;font-size:8pt;"><del>RM60.00</del></p>
-						</div><!-- /.product -->
-						
-						<div data-product-id="1" style="background-color:white;">
-							<div>
-								<div class="product-thumbnail">
-									<img src="<%=basePath %>images/Dry-winter-snow-natural-hd-wallpaper.jpg" class="img-responsive" alt="">
-								</div>
-								<div class="product-details text-center">
-									<!-- <div class="product-btns">
-										 <span data-toggle="tooltip" data-placement="top" title="Add To Cart">
-											<a href="#!" class="li-icon add-to-cart"><i class="lil-shopping_cart"></i></a>
-										</span>
-										<span data-toggle="tooltip" data-placement="top" title="Add to Favorites">
-											<a href="#!" class="li-icon"><i class="lil-favorite"></i></a>
-										</span>
-										<span data-toggle="tooltip" data-placement="top" title="View">
-											<a href="product.html" class="li-icon view-details"><i class="lil-search"></i></a>
-										</span> 
-									</div>-->
-								</div>
-							</div>
-							<h4 class="product-title" style="padding:0;margin:0;padding-left:15px;padding-top:5px;font-size:10pt;font-weight:900;"><strong><a href="#!">Bag Maroon</a></strong></h4>
-							<p style="padding:0;margin:0;padding-left:15px;font-size:10pt;">45ml</p>
-							<p style="padding:0;margin:0;padding-top:3px;padding-left:15px;font-weight:900;font-size:12pt;">RM 44.00 &nbsp;&nbsp;<span style="background-color:#e74c3c;color:white;padding-right:5px;padding-left:5px;font-size:11pt;"> 20% OFF </span> </p>
-							<p style="padding:0;margin:0;padding-left:15px;padding-bottom:10px;font-size:8pt;"><del>RM60.00</del></p>
-						</div><!-- /.product -->
-						
-						<div data-product-id="1" style="background-color:white;">
-							<div>
-								<div class="product-thumbnail">
-									<img src="<%=basePath %>images/Dry-winter-snow-natural-hd-wallpaper.jpg" class="img-responsive" alt="">
-								</div>
-								<div class="product-details text-center">
-									<!--<div class="product-btns">
-										<span data-toggle="tooltip" data-placement="top" title="Add To Cart">
-											<a href="#!" class="li-icon add-to-cart"><i class="lil-shopping_cart"></i></a>
-										</span>
-										<span data-toggle="tooltip" data-placement="top" title="Add to Favorites">
-											<a href="#!" class="li-icon"><i class="lil-favorite"></i></a>
-										</span>
-										<span data-toggle="tooltip" data-placement="top" title="View">
-											<a href="product.html" class="li-icon view-details"><i class="lil-search"></i></a>
-										</span>
-									</div> -->
-								</div>
-							</div>
-							<h4 class="product-title" style="padding:0;margin:0;padding-left:15px;padding-top:5px;font-size:10pt;font-weight:900;"><strong><a href="#!">Bag Maroon</a></strong></h4>
-							<p style="padding:0;margin:0;padding-left:15px;font-size:10pt;">45ml</p>
-							<p style="padding:0;margin:0;padding-top:3px;padding-left:15px;font-weight:900;font-size:12pt;">RM 44.00 &nbsp;&nbsp;<span style="background-color:#e74c3c;color:white;padding-right:5px;padding-left:5px;font-size:11pt;"> 20% OFF </span> </p>
-							<p style="padding:0;margin:0;padding-left:15px;padding-bottom:10px;font-size:8pt;"><del>RM60.00</del></p>
-						</div><!-- /.product -->
-						
-						<div data-product-id="1" style="background-color:white;">
-							<div>
-								<div class="product-thumbnail">
-									<img src="<%=basePath %>images/Dry-winter-snow-natural-hd-wallpaper.jpg" class="img-responsive" alt="">
-								</div>
-								<div class="product-details text-center">
-									<!--  <div class="product-btns">
-										<span data-toggle="tooltip" data-placement="top" title="Add To Cart">
-											<a href="#!" class="li-icon add-to-cart"><i class="lil-shopping_cart"></i></a>
-										</span>
-										<span data-toggle="tooltip" data-placement="top" title="Add to Favorites">
-											<a href="#!" class="li-icon"><i class="lil-favorite"></i></a>
-										</span>
-										<span data-toggle="tooltip" data-placement="top" title="View">
-											<a href="product.html" class="li-icon view-details"><i class="lil-search"></i></a>
-										</span>
-									</div> -->
-								</div>
-							</div>
-							<h4 class="product-title" style="padding:0;margin:0;padding-left:15px;padding-top:5px;font-size:10pt;font-weight:900;"><strong><a href="#!">Bag Maroon</a></strong></h4>
-							<p style="padding:0;margin:0;padding-left:15px;font-size:10pt;">45ml</p>
-							<p style="padding:0;margin:0;padding-top:3px;padding-left:15px;font-weight:900;font-size:12pt;">RM 44.00 &nbsp;&nbsp;<span style="background-color:#e74c3c;color:white;padding-right:5px;padding-left:5px;font-size:11pt;"> 20% OFF </span> </p>
-							<p style="padding:0;margin:0;padding-left:15px;padding-bottom:10px;font-size:8pt;"><del>RM60.00</del></p>
-						</div><!-- /.product -->
-						
-						<div data-product-id="1" style="background-color:white;">
-							<div>
-								<div class="product-thumbnail">
-									<img src="<%=basePath %>images/Dry-winter-snow-natural-hd-wallpaper.jpg" class="img-responsive" alt="">
-								</div>
-								<div class="product-details text-center">
-									<!--  <div class="product-btns">
-										<span data-toggle="tooltip" data-placement="top" title="Add To Cart">
-											<a href="#!" class="li-icon add-to-cart"><i class="lil-shopping_cart"></i></a>
-										</span>
-										<span data-toggle="tooltip" data-placement="top" title="Add to Favorites">
-											<a href="#!" class="li-icon"><i class="lil-favorite"></i></a>
-										</span>
-										<span data-toggle="tooltip" data-placement="top" title="View">
-											<a href="product.html" class="li-icon view-details"><i class="lil-search"></i></a>
-										</span>
-									</div> -->
-								</div>
-							</div>
-							<h4 class="product-title" style="padding:0;margin:0;padding-left:15px;padding-top:5px;font-size:10pt;font-weight:900;"><strong><a href="#!">Bag Maroon</a></strong></h4>
-							<p style="padding:0;margin:0;padding-left:15px;font-size:10pt;">45ml</p>
-							<p style="padding:0;margin:0;padding-top:3px;padding-left:15px;font-weight:900;font-size:12pt;">RM 44.00 &nbsp;&nbsp;<span style="background-color:#e74c3c;color:white;padding-right:5px;padding-left:5px;font-size:11pt;"> 20% OFF </span> </p>
-							<p style="padding:0;margin:0;padding-left:15px;padding-bottom:10px;font-size:8pt;"><del>RM60.00</del></p>
-						</div><!-- /.product -->
-					</div> 
+					<%} %>
+					<%} %>
+				</div> 
 				</div>
 			</div>
 			<div class="row">
@@ -728,177 +622,152 @@
 		</div>
 	</section><!-- /.instagram -->
 	
-	<section class="section" style="background-color:#e0e0e0;"> <!-- psmall-padding-top addings:70px -->
+	<section class="section products-grid second-style hidden-sm hidden-md hidden-lg" style="background-color:#f8f8f8;">
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-12 text-center">
-					<h4 class="index-insta-header"><strong><i class="index-insta-line"></i>Top Rated<i class="index-insta-line"></i></strong></h4> 
+					<h4 class="index-insta-header"><strong><i class="index-insta-line"></i>HOTTEST PRODUCTS<i class="index-insta-line"></i></strong></h4> 
+					<p style="padding-bottom:15px;font-size:10pt;"><i>Checkout The Latest And Hottest!</i></p>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+
+					<div class="masonry row">
+						<% 
+						for(IndexInfoBean index : latestProductList){
+							ProductBean product = ProductService.getInstance().getFrontProductById(index.getPid());
+							
+							if(product != null){
+								
+								ProductVariantBean variant = null;
+								if(product.getProductVariant() != null && product.getProductVariant().size() > 0){
+									variant = product.getProductVariant().get(0);
+								}else{
+									variant = new ProductVariantBean();
+								}
+								
+								double earlybird = ProductService.getInstance().getEarlyBirdDiscount(variant);
+								String path = basePath + "productdetails?id=" + product.getId();
+							
+						%>
+							<div class="product col-md-3 col-sm-6 col-xs-6" data-product-id="1">
+								<div class="inner-product">
+									<%if(ProductService.getInstance().checkIsNewItem(product.getId())){ %>
+									<span class="newicon">NEW</span>
+									<%} %>
+									<%if(earlybird > 0) { %>
+									<!-- <span class="salesicon">Sale</span> -->
+									<%} %>
+									<div class="product-thumbnail" style="background-color:#FFC5C5;">
+										<!--  <img src="<%=basePath%>images/<%=product.getImage1() %>" class="img-responsive" alt=""> -->
+										<a href="<%=basePath%>productdetails?id=<%=product.getId()%>">
+										<img src="<%=basePath%>images/products/<%=product.getImage1() %>" class="img-responsive" alt="" style="min-height:200px;">  <!-- style="height:250px;" -->
+										</a>
+									</div>
+									<div class="product-details text-center">
+										<div class="product-btns">
+										</div>
+									</div>
+								</div>
+								
+								<div style="background-color:white;padding-bottom:10px;">
+								<h4 class="product-title" style="padding:0;margin:0;padding-left:15px;padding-top:5px;font-size:10pt;font-weight:900;text-align: left;"><strong><a href="<%=path%>"><%=StringUtil.filter(product.getName()) %> </a></strong></h4>
+								<p style="padding:0;margin:0;padding-left:15px;font-size:10pt;text-align: left;"><%=StringUtil.filter(product.getListtext()) %></p>
+
+									<% if(earlybird > 0){ %>
+										<p style="padding:0;margin:0;padding-top:3px;padding-left:15px;font-weight:900;font-size:12pt;text-align: left;"><%=StringUtil.formatCurrencyPrice(earlybird) %> &nbsp;&nbsp;
+										<span style="background-color:#e74c3c;color:white;padding-right:5px;padding-left:5px;font-size:11pt;"> <%=StringUtil.formatIndexPrice2(variant.getDiscount())%>% OFF </span> </p>
+										<p style="padding:0;margin:0;padding-left:15px;font-size:8pt;text-align: left;"><del><%=StringUtil.formatCurrencyPrice(variant.getPrice()) %></del></p>
+										<%if("".equals(StringUtil.filter(product.getListtext()))) {%>
+										<p style="padding:0;margin:0;">&nbsp;</p>
+										<%} %>	
+									<%}else { %>
+										<p style="padding:0;margin:0;padding-top:3px;padding-left:15px;padding-bottom:15px;font-weight:900;font-size:12pt;text-align: left;"><%=StringUtil.formatCurrencyPrice(variant.getPrice()) %></p>
+										<%if("".equals(StringUtil.filter(product.getListtext()))) {%>
+										<p style="padding:0;margin:0;">&nbsp;</p>
+										<%} %>
+									<%} %>
+								</div>
+							</div><!-- /.product -->
+						<%	
+								}	
+							}
+						%>
+					</div><!-- /.masonry -->
+					
+				</div>
+			</div><!-- /.row -->
+			
+			<div class="row">
+				<div class="col-md-12 text-center" style="padding-top:25px;">
+					<button type="button" class="btn btn-default">Shop More</button>
+				</div>
+			</div>
+		</div><!-- /.container -->
+	</section><!-- /.products-grid -->
+	<%} %>
+	
+	<%if(topRatedList != null && topRatedList.size() > 0) { %>
+	<section class="section hidden-xs" style="background-color:#f8f8f8;"> <!-- psmall-padding-top addings:70px -->
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-12 text-center">
+					<h4 class="index-insta-header"><strong><i class="index-insta-line"></i>TOP BUNDLES<i class="index-insta-line"></i></strong></h4> 
+					<p style="padding-bottom:15px;font-size:10pt;"><i>Checkout The Value Bundles</i></p>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-xs-12">
-					 <div class="section slider-resp-prod slider-prod slider">
+					 <div class="section slider-resp-prod slider-prod slider" >
+					 <%for(IndexInfoBean index : topRatedList){ 
+					ProductBean product = ProductService.getInstance().getFrontProductById(index.getPid());
+					
+					if(product != null){
+						
+						ProductVariantBean variant = null;
+						if(product.getProductVariant() != null && product.getProductVariant().size() > 0){
+							variant = product.getProductVariant().get(0);
+						}else{
+							variant = new ProductVariantBean();
+						}
+						
+						double earlybird = ProductService.getInstance().getEarlyBirdDiscount(variant);
+						String path = basePath + "productdetails?id=" + product.getId();	
+					%>
 						<div data-product-id="1" style="background-color:white;"> <!-- class="product col-md-3 col-sm-6 col-xs-12 -->
 							<div> <!--class="inner-product"  -->
-								<span style="width:30px;height:30px;line-height:30px;top:0px;right:0px;background-color:#e74c3c;backface-visibility:hidden;background-clip:padding-box;font-size:10px;color:#fff;text-align:center;display:block;overflow:hidden;z-index:1;position:absolute;color:white">NEW</span> <!--class="onsale"  -->
-								<span style="width:30px;height:30px;line-height:30px;top:30px;right:0px;background-color:#a52923;backface-visibility:hidden;background-clip:padding-box;font-size:10px;color:#fff;text-align:center;display:block;overflow:hidden;z-index:1;position:absolute;color:white">HOT</span>
-								<div class="product-thumbnail">
-								<a href="#!">
-									<img src="<%=basePath %>images/Dry-winter-snow-natural-hd-wallpaper.jpg" class="img-responsive" alt="">
+								<%if(ProductService.getInstance().checkIsNewItem(product.getId())){ %>
+									<span style="width:30px;height:30px;line-height:30px;top:0px;right:0px;background-color:#e74c3c;backface-visibility:hidden;background-clip:padding-box;font-size:10px;color:#fff;text-align:center;display:block;overflow:hidden;z-index:1;position:absolute;color:white">NEW</span> <!--class="onsale"  -->
+								<%} %>
+								<!-- <span style="width:30px;height:30px;line-height:30px;top:30px;right:0px;background-color:#a52923;backface-visibility:hidden;background-clip:padding-box;font-size:10px;color:#fff;text-align:center;display:block;overflow:hidden;z-index:1;position:absolute;color:white">HOT</span> -->
+								<div class="product-thumbnail" style="background-color:#FFC5C5;">
+								<a href="<%=path%>">
+									<img src="<%=basePath%>images/products/<%=product.getImage1() %>" class="img-responsive" alt="">
 								</a>
 								</div>
 								<div class="product-details text-center">
-									<!--  <div class="product-btns">
-										<span data-toggle="tooltip" data-placement="top" title="Add To Cart">
-											<a href="#!" class="li-icon add-to-cart"><i class="lil-shopping_cart"></i></a>
-										</span>
-										<span data-toggle="tooltip" data-placement="top" title="Add to Favorites">
-											<a href="#!" class="li-icon"><i class="lil-favorite"></i></a>
-										</span>
-										<span data-toggle="tooltip" data-placement="top" title="View">
-											<a href="product.html" class="li-icon view-details"><i class="lil-search"></i></a>
-										</span>
-									</div> -->
 								</div>
 							</div>
-							<h4 class="product-title" style="padding:0;margin:0;padding-left:15px;padding-top:5px;font-size:10pt;font-weight:900;"><strong><a href="#!">Bag Maroon</a></strong></h4>
-							<p style="padding:0;margin:0;padding-left:15px;font-size:10pt;">45ml</p>
-							<p style="padding:0;margin:0;padding-top:3px;padding-left:15px;font-weight:900;font-size:12pt;">RM 44.00 &nbsp;&nbsp;<span style="background-color:#e74c3c;color:white;padding-right:5px;padding-left:5px;font-size:11pt;"> 20% OFF </span> </p>
-							<p style="padding:0;margin:0;padding-left:15px;padding-bottom:10px;font-size:8pt;"><del>RM60.00</del></p>
-							<!--  <div class="star-rating">
-								<span style="width:90%"></span>
-							</div>
-							<p class="product-price">
-								<ins>
-									<span class="amount">$75.99</span>
-								</ins>
-							</p>-->
+							<h4 class="product-title" style="padding:0;margin:0;padding-left:15px;padding-top:5px;font-size:10pt;font-weight:900;"><strong><a href="<%=path%>"><%=StringUtil.filter(product.getName()) %></a></strong></h4>
+							<p style="padding:0;margin:0;padding-left:15px;font-size:10pt;"><%=StringUtil.filter(product.getListtext()) %></p>
+							
+							<% if(earlybird > 0){ %>
+								<p style="padding:0;margin:0;padding-top:3px;padding-left:15px;font-weight:900;font-size:12pt;"><%=StringUtil.formatCurrencyPrice(earlybird) %> &nbsp;&nbsp;<span style="background-color:#e74c3c;color:white;padding-right:5px;padding-left:5px;font-size:11pt;"> <%=StringUtil.formatIndexPrice2(variant.getDiscount())%>% OFF </span> </p>
+								<p style="padding:0;margin:0;padding-left:15px;padding-bottom:10px;font-size:8pt;"><del><%=StringUtil.formatCurrencyPrice(variant.getPrice()) %></del></p>
+								<%if("".equals(StringUtil.filter(product.getListtext()))) {%>
+								<p style="padding:0;margin:0;">&nbsp;</p>
+								<%} %>
+							<%}else { %>
+								<p style="padding:0;margin:0;padding-top:3px;padding-left:15px;padding-bottom:25px;font-weight:900;font-size:12pt;text-align: left;"><%=StringUtil.formatCurrencyPrice(variant.getPrice()) %></p>
+								<%if("".equals(StringUtil.filter(product.getListtext()))) {%>
+								<p style="padding:0;margin:0;">&nbsp;</p>
+								<%} %>
+							<%} %>
+							
 						</div><!-- /.product -->
-						
-						<div data-product-id="1" style="background-color:white;">
-							<div>
-								<div class="product-thumbnail">
-									<img src="<%=basePath %>images/Dry-winter-snow-natural-hd-wallpaper.jpg" class="img-responsive" alt="">
-								</div>
-								<div class="product-details text-center">
-									<!--  <div class="product-btns">
-										<span data-toggle="tooltip" data-placement="top" title="Add To Cart">
-											<a href="#!" class="li-icon add-to-cart"><i class="lil-shopping_cart"></i></a>
-										</span>
-										<span data-toggle="tooltip" data-placement="top" title="Add to Favorites">
-											<a href="#!" class="li-icon"><i class="lil-favorite"></i></a>
-										</span>
-										<span data-toggle="tooltip" data-placement="top" title="View">
-											<a href="product.html" class="li-icon view-details"><i class="lil-search"></i></a>
-										</span>
-									</div> -->
-								</div>
-							</div>
-							<h4 class="product-title" style="padding:0;margin:0;padding-left:15px;padding-top:5px;font-size:10pt;font-weight:900;"><strong><a href="#!">Bag Maroon</a></strong></h4>
-							<p style="padding:0;margin:0;padding-left:15px;font-size:10pt;">45ml</p>
-							<p style="padding:0;margin:0;padding-top:3px;padding-left:15px;font-weight:900;font-size:12pt;">RM 44.00 &nbsp;&nbsp;<span style="background-color:#e74c3c;color:white;padding-right:5px;padding-left:5px;font-size:11pt;"> 20% OFF </span> </p>
-							<p style="padding:0;margin:0;padding-left:15px;padding-bottom:10px;font-size:8pt;"><del>RM60.00</del></p>
-						</div><!-- /.product -->
-						
-						<div data-product-id="1" style="background-color:white;">
-							<div>
-								<div class="product-thumbnail">
-									<img src="<%=basePath %>images/Dry-winter-snow-natural-hd-wallpaper.jpg" class="img-responsive" alt="">
-								</div>
-								<div class="product-details text-center">
-									<!-- <div class="product-btns">
-										 <span data-toggle="tooltip" data-placement="top" title="Add To Cart">
-											<a href="#!" class="li-icon add-to-cart"><i class="lil-shopping_cart"></i></a>
-										</span>
-										<span data-toggle="tooltip" data-placement="top" title="Add to Favorites">
-											<a href="#!" class="li-icon"><i class="lil-favorite"></i></a>
-										</span>
-										<span data-toggle="tooltip" data-placement="top" title="View">
-											<a href="product.html" class="li-icon view-details"><i class="lil-search"></i></a>
-										</span> 
-									</div>-->
-								</div>
-							</div>
-							<h4 class="product-title" style="padding:0;margin:0;padding-left:15px;padding-top:5px;font-size:10pt;font-weight:900;"><strong><a href="#!">Bag Maroon</a></strong></h4>
-							<p style="padding:0;margin:0;padding-left:15px;font-size:10pt;">45ml</p>
-							<p style="padding:0;margin:0;padding-top:3px;padding-left:15px;font-weight:900;font-size:12pt;">RM 44.00 &nbsp;&nbsp;<span style="background-color:#e74c3c;color:white;padding-right:5px;padding-left:5px;font-size:11pt;"> 20% OFF </span> </p>
-							<p style="padding:0;margin:0;padding-left:15px;padding-bottom:10px;font-size:8pt;"><del>RM60.00</del></p>
-						</div><!-- /.product -->
-						
-						<div data-product-id="1" style="background-color:white;">
-							<div>
-								<div class="product-thumbnail">
-									<img src="<%=basePath %>images/Dry-winter-snow-natural-hd-wallpaper.jpg" class="img-responsive" alt="">
-								</div>
-								<div class="product-details text-center">
-									<!--<div class="product-btns">
-										<span data-toggle="tooltip" data-placement="top" title="Add To Cart">
-											<a href="#!" class="li-icon add-to-cart"><i class="lil-shopping_cart"></i></a>
-										</span>
-										<span data-toggle="tooltip" data-placement="top" title="Add to Favorites">
-											<a href="#!" class="li-icon"><i class="lil-favorite"></i></a>
-										</span>
-										<span data-toggle="tooltip" data-placement="top" title="View">
-											<a href="product.html" class="li-icon view-details"><i class="lil-search"></i></a>
-										</span>
-									</div> -->
-								</div>
-							</div>
-							<h4 class="product-title" style="padding:0;margin:0;padding-left:15px;padding-top:5px;font-size:10pt;font-weight:900;"><strong><a href="#!">Bag Maroon</a></strong></h4>
-							<p style="padding:0;margin:0;padding-left:15px;font-size:10pt;">45ml</p>
-							<p style="padding:0;margin:0;padding-top:3px;padding-left:15px;font-weight:900;font-size:12pt;">RM 44.00 &nbsp;&nbsp;<span style="background-color:#e74c3c;color:white;padding-right:5px;padding-left:5px;font-size:11pt;"> 20% OFF </span> </p>
-							<p style="padding:0;margin:0;padding-left:15px;padding-bottom:10px;font-size:8pt;"><del>RM60.00</del></p>
-						</div><!-- /.product -->
-						
-						<div data-product-id="1" style="background-color:white;">
-							<div>
-								<div class="product-thumbnail">
-									<img src="<%=basePath %>images/Dry-winter-snow-natural-hd-wallpaper.jpg" class="img-responsive" alt="">
-								</div>
-								<div class="product-details text-center">
-									<!--  <div class="product-btns">
-										<span data-toggle="tooltip" data-placement="top" title="Add To Cart">
-											<a href="#!" class="li-icon add-to-cart"><i class="lil-shopping_cart"></i></a>
-										</span>
-										<span data-toggle="tooltip" data-placement="top" title="Add to Favorites">
-											<a href="#!" class="li-icon"><i class="lil-favorite"></i></a>
-										</span>
-										<span data-toggle="tooltip" data-placement="top" title="View">
-											<a href="product.html" class="li-icon view-details"><i class="lil-search"></i></a>
-										</span>
-									</div> -->
-								</div>
-							</div>
-							<h4 class="product-title" style="padding:0;margin:0;padding-left:15px;padding-top:5px;font-size:10pt;font-weight:900;"><strong><a href="#!">Bag Maroon</a></strong></h4>
-							<p style="padding:0;margin:0;padding-left:15px;font-size:10pt;">45ml</p>
-							<p style="padding:0;margin:0;padding-top:3px;padding-left:15px;font-weight:900;font-size:12pt;">RM 44.00 &nbsp;&nbsp;<span style="background-color:#e74c3c;color:white;padding-right:5px;padding-left:5px;font-size:11pt;"> 20% OFF </span> </p>
-							<p style="padding:0;margin:0;padding-left:15px;padding-bottom:10px;font-size:8pt;"><del>RM60.00</del></p>
-						</div><!-- /.product -->
-						
-						<div data-product-id="1" style="background-color:white;">
-							<div>
-								<div class="product-thumbnail">
-									<img src="<%=basePath %>images/Dry-winter-snow-natural-hd-wallpaper.jpg" class="img-responsive" alt="">
-								</div>
-								<div class="product-details text-center">
-									<!--  <div class="product-btns">
-										<span data-toggle="tooltip" data-placement="top" title="Add To Cart">
-											<a href="#!" class="li-icon add-to-cart"><i class="lil-shopping_cart"></i></a>
-										</span>
-										<span data-toggle="tooltip" data-placement="top" title="Add to Favorites">
-											<a href="#!" class="li-icon"><i class="lil-favorite"></i></a>
-										</span>
-										<span data-toggle="tooltip" data-placement="top" title="View">
-											<a href="product.html" class="li-icon view-details"><i class="lil-search"></i></a>
-										</span>
-									</div> -->
-								</div>
-							</div>
-							<h4 class="product-title" style="padding:0;margin:0;padding-left:15px;padding-top:5px;font-size:10pt;font-weight:900;"><strong><a href="#!">Bag Maroon</a></strong></h4>
-							<p style="padding:0;margin:0;padding-left:15px;font-size:10pt;">45ml</p>
-							<p style="padding:0;margin:0;padding-top:3px;padding-left:15px;font-weight:900;font-size:12pt;">RM 44.00 &nbsp;&nbsp;<span style="background-color:#e74c3c;color:white;padding-right:5px;padding-left:5px;font-size:11pt;"> 20% OFF </span> </p>
-							<p style="padding:0;margin:0;padding-left:15px;padding-bottom:10px;font-size:8pt;"><del>RM60.00</del></p>
-						</div><!-- /.product -->
+						<%} %>
+						<%} %>
 					</div> 
 				</div>
 			</div>
@@ -909,8 +778,94 @@
 			</div>
 		</div>
 	</section><!-- /.instagram -->
-	
-	<section class="section" style="background-color:#e0e0e0;"> <!--#f8f8f8  psmall-padding-top addings:70px -->
+
+	<section class="section products-grid second-style hidden-sm hidden-md hidden-lg" style="background-color:#f8f8f8;">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12 text-center">
+					<h4 class="index-insta-header"><strong><i class="index-insta-line"></i>TOP BUNDLES<i class="index-insta-line"></i></strong></h4> 
+					<p style="padding-bottom:15px;font-size:10pt;"><i>Checkout The Value Bundles</i></p>
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="col-md-12">
+					<div class="masonry row">
+						<% 
+						for(IndexInfoBean index: topRatedList){
+							ProductBean product = ProductService.getInstance().getFrontProductById(index.getPid());
+							if(product != null){
+								
+								ProductVariantBean variant = null;
+								if(product.getProductVariant() != null && product.getProductVariant().size() > 0){
+									variant = product.getProductVariant().get(0);
+								}else{
+									variant = new ProductVariantBean();
+								}
+								
+								double earlybird = ProductService.getInstance().getEarlyBirdDiscount(variant);
+								String path = basePath + "productdetails?id=" + product.getId();
+							
+						%>
+							<div class="product col-md-3 col-sm-6 col-xs-6" data-product-id="1">
+								<div class="inner-product">
+									<%if(ProductService.getInstance().checkIsNewItem(product.getId())){ %>
+									<span class="newicon">NEW</span>
+									<%} %>
+									<%if(earlybird > 0) { %>
+									<!-- <span class="salesicon">Sale</span> -->
+									<%} %>
+									<div class="product-thumbnail" style="background-color:#FFC5C5;">
+										<!--  <img src="<%=basePath%>images/<%=product.getImage1() %>" class="img-responsive" alt=""> -->
+										<a href="<%=basePath%>productdetails?id=<%=product.getId()%>">
+										<img src="<%=basePath%>images/products/<%=product.getImage1() %>" class="img-responsive" alt="" style="min-height:200px;">  <!-- style="height:250px;" -->
+										</a>
+									</div>
+									<div class="product-details text-center">
+										<div class="product-btns">
+										</div>
+									</div>
+								</div>
+								
+								<div style="background-color:white;padding-bottom:10px;">
+								<h4 class="product-title" style="padding:0;margin:0;padding-left:15px;padding-top:5px;font-size:10pt;font-weight:900;text-align: left;"><strong><a href="<%=path%>"><%=StringUtil.filter(product.getName()) %> </a></strong></h4>
+								<p style="padding:0;margin:0;padding-left:15px;font-size:10pt;text-align: left;"><%=StringUtil.filter(product.getListtext()) %></p>
+								<!--  <div class="star-rating">
+									<span style="width:90%"></span>
+								</div> -->
+								<!-- <p class="product-price"></p> -->
+									<% if(earlybird > 0){ %>
+										<p style="padding:0;margin:0;padding-top:3px;padding-left:15px;font-weight:900;font-size:12pt;text-align: left;"><%=StringUtil.formatCurrencyPrice(earlybird) %> &nbsp;&nbsp;
+										<span style="background-color:#e74c3c;color:white;padding-right:5px;padding-left:5px;font-size:11pt;"> <%=StringUtil.formatIndexPrice2(variant.getDiscount())%>% OFF </span> </p>
+										<p style="padding:0;margin:0;padding-left:15px;font-size:8pt;text-align: left;"><del><%=StringUtil.formatCurrencyPrice(variant.getPrice()) %></del></p>
+										<%if("".equals(StringUtil.filter(product.getListtext()))) {%>
+										<p style="padding:0;margin:0;">&nbsp;</p>
+										<%} %>
+									<%}else { %>
+										<p style="padding:0;margin:0;padding-top:3px;padding-left:15px;padding-bottom:15px;font-weight:900;font-size:12pt;text-align: left;"><%=StringUtil.formatCurrencyPrice(variant.getPrice()) %></p>
+										<%if("".equals(StringUtil.filter(product.getListtext()))) {%>
+										<p style="padding:0;margin:0;">&nbsp;</p>
+										<%} %>
+									<%} %>
+								
+								</div>
+							</div><!-- /.product -->
+						<%	
+								}	
+							}
+						%>
+					</div><!-- /.masonry -->
+				</div>
+			</div><!-- /.row -->
+			<div class="row">
+				<div class="col-md-12 text-center" style="padding-top:25px;">
+					<button type="button" class="btn btn-default">Shop More</button>
+				</div>
+			</div>
+		</div><!-- /.container -->
+	</section><!-- /.products-grid -->
+	<%}  %>
+	<section class="section" style="background-color:#f8f8f8"> <!--  psmall-padding-top addings:70px -->
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-12 text-center">

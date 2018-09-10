@@ -105,8 +105,8 @@ public class ProductService
 	}
 	
 	public ProductBean getFrontProductById(int pid){
-		String sqlWhere = " where status = " + StaticValueUtil.Active + " and id = " + pid + 
-						  " and displaystart < now() and displayend > now() ";
+		String sqlWhere = " where status = " + StaticValueUtil.Active + " and id = " + pid; /*+ 
+						  " and displaystart < now() and displayend > now() ";*/
 		
 		List<ProductBean> products = productDao.getProductBySqlwhere(sqlWhere);
 		
@@ -176,6 +176,10 @@ public class ProductService
 		return products;
 	}
 	
+	public List<ProductBean> getProductOrderByPrice(int categoryId) {
+		return productDao.getProductOrderByPrice(categoryId);
+	}
+	
 	public ProductVariantBean getProductVariantByPvid(int pvid){
 		return productDao.getProductVariantByPvid(pvid);
 	}
@@ -184,9 +188,6 @@ public class ProductService
 		return productDao.getProductVariantListById(pid);
 	}
 	
-	public List<ProductBean> getProductOrderByPrice(int categoryId) {
-		return productDao.getProductOrderByPrice(categoryId);
-	}
 	
 	//OTHERS 
 	public List<Integer> getProductIdBySqlwhere(String sqlWhere){
@@ -199,6 +200,10 @@ public class ProductService
 	
 	public int getFrontTotalPages(int pageIdx, String sqlWhere){
 		return productDao.getFrontTotalPages(pageIdx, sqlWhere);
+	}
+	
+	public int getFrontSearchTotalPages(int pageIdx,String sqlWhere){
+		return productDao.getFrontSearchTotalPages(pageIdx, sqlWhere);
 	}
 
 	public int getTotalItems(String sqlWhere){
@@ -302,4 +307,24 @@ public class ProductService
 		return false;
 	}
 	
+	public String getProductNamePulldown(int pid) {
+		String result = "<option> --- Please select --- </option>";
+		
+		String sqlWhere = " where status != " + StaticValueUtil.Delete;
+		
+		List<ProductBean> products = getProductBySqlwhere(sqlWhere);
+
+		if(products != null && products.size() > 0) {
+			for(ProductBean product : products) {
+				if(product.getId() == pid ) {
+					result += "<option value='" +  product.getId()+ "' selected>" +  StringUtil.filter(product.getName()) +  "</option>";
+				}else {
+					result += "<option value='" +  product.getId()+ "' >" +  StringUtil.filter(product.getName()) +  "</option>";
+				}
+			}
+		}
+		
+		return result;
+		
+	}
 }

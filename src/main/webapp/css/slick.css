@@ -85,6 +85,10 @@
 [dir='rtl'] .slick-slide
 {
     float: right;
+    transition: box-shadow .3s; /*SHADOW */
+}
+.slick-slide:hover {
+  box-shadow: 0 0 11px rgba(33,33,33,.2); /*SHADOW */
 }
 .slick-slide img
 {

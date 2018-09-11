@@ -663,7 +663,7 @@
 									<div class="product-thumbnail" style="background-color:#FFC5C5;">
 										<!--  <img src="<%=basePath%>images/<%=product.getImage1() %>" class="img-responsive" alt=""> -->
 										<a href="<%=basePath%>productdetails?id=<%=product.getId()%>">
-										<img src="<%=basePath%>images/products/<%=product.getImage1() %>" class="img-responsive" alt="" style="min-height:200px;">  <!-- style="height:250px;" -->
+										<img src="<%=basePath%>images/products/<%=product.getImage1() %>" class="img-responsive" alt="" style="max-height:200px;min-height:200px;">  <!-- style="height:250px;" -->
 										</a>
 									</div>
 									<div class="product-details text-center">
@@ -821,7 +821,7 @@
 									<div class="product-thumbnail" style="background-color:#FFC5C5;">
 										<!--  <img src="<%=basePath%>images/<%=product.getImage1() %>" class="img-responsive" alt=""> -->
 										<a href="<%=basePath%>productdetails?id=<%=product.getId()%>">
-										<img src="<%=basePath%>images/products/<%=product.getImage1() %>" class="img-responsive" alt="" style="min-height:200px;">  <!-- style="height:250px;" -->
+										<img src="<%=basePath%>images/products/<%=product.getImage1() %>" class="img-responsive" alt="" style="max-height:200px;min-height:200px;">  <!-- style="height:250px;" -->
 										</a>
 									</div>
 									<div class="product-details text-center">

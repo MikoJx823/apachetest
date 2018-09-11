@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
 
 import com.project.bean.ProductBean;
+import com.project.bean.ProductVariantBean;
 import com.project.service.ProductService;
 import com.project.util.SessionName;
 import com.project.util.StaticValueUtil;
@@ -63,7 +64,19 @@ public class NewProductServlet extends HttpServlet {
 			String ids = service.getProductIdsForNew();
 			List<ProductBean> products = new ArrayList<ProductBean>();
 			
-			if(!"".equals(ids)) products = service.getProductBySqlwhere(" where id in (" + ids + ") order by name");
+			if(!"".equals(ids)) {
+				products = service.getProductBySqlwhere(" where id in (" + ids + ") order by name");
+				if(products != null && products.size() > 0) {
+					for(ProductBean product: products ) {
+						List<ProductVariantBean> variant = ProductService.getInstance().getProductVariantListById(product.getId());
+						if(variant.size() > 0) {
+							List<ProductVariantBean> variants = new ArrayList<ProductVariantBean>();
+							variants.add(variant.get(0));
+							product.setProductVariant(variants);
+						}
+					}
+				}
+			}
 			//itemCount = service.getTotalItems(sqlWhere);//.getProductBySqlwhere(sqlWhere).size();
 			//int totalPages = service.getFrontTotalPages(pageIdx, sqlWhere);
 		

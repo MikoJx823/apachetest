@@ -304,14 +304,16 @@ if (loginUser == null&& !url.contains("/LoginServlet") && !url.contains("login.j
            </div><!--row--> 
            
            <div class="row">
-              <div class="col-xs-12">
+           		<div class="col-xs-12">
                 	<div class="form-group">
                     <label>Short Description</label>
-                    <textarea class="form-control ckeditor"  name="shortDesc" id="shortDesc" rows="3"><%=StringUtils.trimToEmpty(bean.getShortdesc())%></textarea>                
+                    <textarea class="form-control"  name="shortDesc" id="shortDesc" rows="3" style=" resize: none;"><%=StringUtils.trimToEmpty(bean.getShortdesc())%></textarea>                
           			</div><!--form-group-->
-              </div><!--col-xs-24-->   
-              
-              <div class="col-xs-12">
+              </div><!--col-xs-24-->  
+           </div>
+           
+           <div class="row">
+              <div class="col-xs-24">
                 	<div class="form-group">
                     <label>Additional Description </label>
                     <textarea class="form-control ckeditor"  name="additionalDesc" id="additionalDesc" rows="3"><%=StringUtils.trimToEmpty(bean.getAdditionaldesc())%></textarea>                

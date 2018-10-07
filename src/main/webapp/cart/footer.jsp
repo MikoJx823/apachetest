@@ -21,7 +21,7 @@
 					<div class="hidden-md hidden-lg"><div class="col-xs-1"></div> </div>
 					<div class="col-xs-11 col-md-4 widget widget-about">
 						<h4 style="color:white;margin-top:0px;"><strong>NEED HELP ?</strong> </h4>
-						<p style="color:white;font-weight:400;font-size:10pt;padding:0px;margin:0px;"><i>admin@nhmakeup.com.my</i></p>
+						<p style="color:white;font-weight:400;font-size:10pt;padding:0px;margin:0px;"><i>customer.care@navallihill.com.my</i></p>
 						<br>
 						<p style="display:inline-block;background-color:#d9d7d4;height:1px;width:60%;"></p>
 						<p style="color:white;font-size:10pt;padding-top:5px;">OPERATION HOURS</p>
@@ -44,7 +44,7 @@
 						<h4 class="widget-title" style="color:white" ><strong>Join our Newsletter</strong></h4>
 						<form action="#!" method="POST" class="inputs-border clearfix">
 							<div class="form-group">
-									<input type="email" name="email" placeholder="admin@nhmakeup.com.my" class="form-control" autocomplete="off">
+									<input type="email" name="email" placeholder="customer.care@navallihill.com.my" class="form-control" autocomplete="off">
 								<button type="submit" class="btn btn-primary"><i class="lil-long-arrow-right"></i></button>
 							</div>
 						</form>

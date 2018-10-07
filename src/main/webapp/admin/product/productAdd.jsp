@@ -311,14 +311,16 @@
            </div><!--row--> 
 		   
 		   <div class="row">
-              <div class="col-xs-12">
+		   	 <div class="col-xs-12">
                 	<div class="form-group">
                     <label>Short Description</label>
-                    <textarea class="form-control ckeditor"  name="shortdesc" id="shortdesc" rows="3"><%=StringUtils.trimToEmpty(bean.getShortdesc())%></textarea>                
+                    <textarea class="form-control"  name="shortdesc" id="shortdesc" rows="3" style=" resize: none;"><%=StringUtils.trimToEmpty(bean.getShortdesc())%></textarea>                
           			</div><!--form-group-->
               </div><!--col-xs-24-->   
-              
-              <div class="col-xs-12">
+		   </div>
+		   
+		   <div class="row">
+              <div class="col-xs-24">
                 	<div class="form-group">
                     <label>Additional Description </label>
                     <textarea class="form-control ckeditor"  name="additionaldesc" id="additionaldesc" rows="3"><%=StringUtils.trimToEmpty(bean.getAdditionaldesc())%></textarea>                

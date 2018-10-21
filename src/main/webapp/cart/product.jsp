@@ -22,6 +22,11 @@
 	}
 	
 	boolean isAvailable = false;
+	
+	CategoryBean category = CategoryService.getInstance().getBeanById(product.getCategoryid());
+	if(category == null){
+		category = new CategoryBean();
+	}
 %>
 
 <!DOCTYPE html>
@@ -38,7 +43,7 @@
 
 	<jsp:include page="header.jsp" />
 
-	<div class="page-head content-top-margin" style="background:black;">
+	<!--  <div class="page-head content-top-margin" style="background:black;">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-8 col-sm-7">
@@ -49,29 +54,32 @@
 					</ol>
 				</div>
 
-				<!--  <div class="col-md-4 col-sm-5 header-nav text-right">
-					<a rel="previous" href="#!"><i class="lil-angle-left"></i> Previous</a>
-					<a rel="next" href="#!">Next <i class="lil-angle-right"></i></a>
-				</div> -->
-			</div><!-- /.row -->
-		</div><!-- /.container -->
-	</div><!-- /.page-head -->
-
-	<section class="section single-product-wrapper">
+				
+			</div>
+		</div>
+	</div>-->
+	
+	<div style="margin-bottom:15px;padding:0;margin-top:100px;">
+	<div class="container"> <!--   style="margin:0" -->
+		<p style="color:#e26a35"><b>SHOP<%=StringUtil.filter(category.getName()).equals("")? "" : " / " + category.getName().toUpperCase() %> / <%=StringUtil.filter(product.getName()).toUpperCase() %></b></p>
+		</div>
+	</div>
+	
+	<section class=" single-product-wrapper" > <!-- section -->
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-5">
 					<div class="product-images">
 						<div class="product-thumbnail">
 							<a href="<%=basePath%>images/products/<%=product.getImage1() %>" class="fancybox" rel="gallery">
-								<img src="<%=basePath%>images/products/<%=product.getImage1() %>" class="img-responsive">
+								<img src="<%=basePath%>images/products/<%=product.getImage1() %>" class="img-responsive" style="background-color:red">
 							</a>
 						</div>
 						<div class="product-images-carousel">
 							<%if(!"".equals(StringUtil.filter(product.getImage1()))) { %>
 							<div class="item">
 								<a href="<%=basePath %>/images/products/<%=product.getImage1() %>" class="fancybox" rel="gallery">
-									<img src="<%=basePath %>/images/products/<%=product.getImage1() %>" class="img-responsive" alt="<%=product.getImage1()%>">
+									<img src="<%=basePath %>/images/products/<%=product.getImage1() %>" class="img-responsive" alt="<%=product.getImage1()%>" >
 								</a>
 							</div>
 							<%} %>
@@ -113,42 +121,43 @@
 							<!-- <div class="star-rating">
 								<span style="width:90%"></span>
 							</div>
-							<span class="rating-text">3 Reviews</span> -->
-							<span class="pull-right">Product Code: <span><%=StringUtil.filter(product.getProductcode()) %></span></span>
+							<span class="rating-text">3 Reviews</span>
+							<span class="pull-right">Product Code: <span><%=StringUtil.filter(product.getProductcode()) %></span></span>  -->
 						</div>
 
 						<div class="product-title">
 							<h3 class="product-name"><%=StringUtil.filter(product.getName())%></h3>
-							<p class="product-available">Shipping Available</p>
-							<hr>
+							<!--<p class="product-available">Shipping Available</p> -->
 						</div>
-
-						<div class="description">
-							<%=StringUtil.filter(product.getShortdesc()) %>
+						
+						<%if(!"".equals(StringUtil.filter(product.getShortdesc()))){ %>
+						<div class="row">
+							<div class="col-md-7">
+							<p class="prod-detail-short-desc"><%=StringUtil.filter(product.getShortdesc()) %></p>
+							</div>
 						</div>
-
-						<p class="price" id="pricecontainer">
+						<%} %>
+						
+						<div class="row">
+						<div class="col-md-12" id="pricecontainer">
 						<%
 							double earlybird = ProductService.getInstance().getEarlyBirdDiscount(product.getProductVariant().get(0));
 							if(earlybird > 0 ){
 						%>
-							<del>
-								<span class="amount"><%=StringUtil.formatCurrencyPrice(product.getProductVariant().get(0).getPrice()) %></span>
-							</del>
-							<ins>
-								<span class="amount"><%=StringUtil.formatCurrencyPrice(earlybird) %></span>
-							</ins>
-						<%
-							}else { 
-						%>
-							<ins>
-								<span class="amount"><%=StringUtil.formatCurrencyPrice(product.getProductVariant().get(0).getPrice()) %></span>
-							</ins>
-						<%
-							} 
-						%>
-						</p>
-
+							<p class="prod-detail-price-earlybird"><b><del><%=StringUtil.formatCurrencyPrice(product.getProductVariant().get(0).getPrice()) %></del></b> &nbsp;&nbsp;
+							<span class="prod-detail-price-discount"><b> <%=StringUtil.formatIndexPrice2(product.getProductVariant().get(0).getDiscount())%>% OFF </span></b> </p>
+							<p class="prod-detail-price"><%=StringUtil.formatCurrencyPrice(earlybird) %></p>
+						<%	}else{ %>
+							<p class="prod-detail-price"><%=StringUtil.formatCurrencyPrice(product.getProductVariant().get(0).getPrice()) %></p>
+						<%	} %>
+						<hr class="prod-hr">
+						</div>
+						</div>
+						
+						
+						<div class="row">
+						<div class="col-md-12">
+						
 						<form action="<%=basePath %>cart" id="AddToCartForm" method="POST" class="inputs-border">
 							<input type="hidden" name="actionType" value="addCart">
 							<input type="hidden" name="pid" value="<%=product.getId()%>">
@@ -165,39 +174,70 @@
 									
 									if(product.getProductVariant().size() > 1){
 								%>
-								<div class="form-group col-md-6">
+								 <!--  <div class="form-group col-md-6">
 									<label for="attr_1">Variant</label>
 									<select class="form-control" id="variant" name="pvid" onchange="variantOnChange()">
-										<!--  <option value="" selected>Choose an option</option> -->
+										
 										<%
 										for(ProductVariantBean variant: product.getProductVariant()){ 
 										%>
 										<option value="<%=variant.getPvid()%>"><%=StringUtil.filter(variant.getName()) %></option>
 										<%} %>
 									</select>
+								</div> -->
+								<div class="form-group col-md-6">
+									<label for="attr_1"><b>Colours </b></label>
+									<ul >
+									<%
+										for(ProductVariantBean variant: product.getProductVariant()){ 
+										%>
+										<li style="float:left">
+										<a href="javascript:variantOnChange(<%=variant.getPvid()%>)"><div id="pvid<%=variant.getPvid() %>" style="background-color: <%=StringUtil.filter(variant.getName()) %>; height: 45px; width: 45px; margin-right:10px; "></div></a>
+										</li>
+										
+										<!-- <option value="<%=variant.getPvid()%>"><%=StringUtil.filter(variant.getName()) %></option>-->
+										<%} %>
+										</ul>
+									<!-- <select class="form-control" id="variant" name="pvid" onchange="variantOnChange()">
+										
+										<%
+										for(ProductVariantBean variant: product.getProductVariant()){ 
+										%>
+										<option value="<%=variant.getPvid()%>"><%=StringUtil.filter(variant.getName()) %></option>
+										<%} %>
+									</select> -->
 								</div>
 								<%
 									}
 								} %>
 							</div>
 							
+							<div>
+							<p style="margin-bottom:0;padding-bottom:0;color:#e26a35"><b>FREE SHIPPING IF PURCHASE OVER RM80 </b></p>
+							<p style="font-size:8pt"><i>(WEST MALAYSIA ONLY)</i></p>
+							</div>
+							
 							<div id="variantcontainer" >
 								<div class="form-group">
 								<%if(isAvailable){ %>
-								
+									<p><b>In Stock</b></p>
 									<div class="quantity">
-										<input type="button" value="+" class="plus">
+										<input type="button" value="+" class="plus" style="color:black;border:1px solid #e26a35; border-bottom:0px;">
 										<input type="number" step="1" max="5" min="1" value="1" title="Qty" class="qty" size="4" name="qty">
-										<input type="button" value="-" class="minus">
+										<input type="button" value="-" class="minus" style="color:black;border:1px solid #e26a35;">
 									</div>
 									
-									<button type="button" class="btn btn-default" onClick="javascript:onAddToCart()"><i class="lil-add_shopping_cart"></i> Add to cart</button> 
+									<button type="button" class="btn btn-default" style="background-color:#e26a35;border:0" onClick="javascript:onAddToCart()"><!-- <i class="lil-add_shopping_cart"></i> --> Add to cart</button> 
 								<%}else{ %>
 									<p class="product-available">Out of Stock</p>
 								<%} %>
 								</div>
 							</div>
+							
+							
 						</form>
+						</div>
+						</div>
 
 					</div><!-- /.product-details -->
 				</div>
@@ -207,10 +247,10 @@
 						<!-- Nav tabs -->
 						<ul class="nav nav-tabs" role="tablist">
 						    <li class="active">
-							    <a href="#tab-description" aria-controls="tab-description" data-toggle="tab">Description</a>
+							    <a href="#tab-description" aria-controls="tab-description" data-toggle="tab" style="color:black;"><b>Tutorial / Videos</b></a>
 						    </li>
 						    <li>
-							    <a href="#tab-information" aria-controls="tab-information" data-toggle="tab">Additional Information</a>
+							    <a href="#tab-information" aria-controls="tab-information" data-toggle="tab" style="color:black;"><b>Additional Information</b></a>
 						    </li>
 						    <!--  <li>
 							    <a href="#tab-reviews" aria-controls="tab-reviews" data-toggle="tab">Reviews (3)</a>
@@ -236,8 +276,9 @@
    								<%} %>
 						    	<%//StringUtil.filter(product.getDescimage()) %>
 						    </div>
-						    <div class="tab-pane" id="tab-information">
+						    <div class="tab-pane" id="tab-information" style="color:black;">
 							    <%=StringUtil.filter(product.getAdditionaldesc()) %>
+							    
 							    <!--  <table class="table shop_attributes">
 								    <tbody>
 								        <tr>
@@ -367,11 +408,17 @@
 	<jsp:include page="footer.jsp" />
 	
 	<script type="text/javascript">
-		function variantOnChange(){
-			var pvid = $('select[name=pvid]').val();
+		function variantOnChange(pvid){
+			//var pvid = $('select[name=pvid]').val();
 			var htmlStr = "";
 			var priceStr = "";
-
+			
+			
+			<%for(ProductVariantBean variant: product.getProductVariant()){ %>
+			$("#pvid" + <%=variant.getPvid()%>).css("border","");
+			<%}%>
+			$("#pvid" + pvid).css("border","1px solid #e26a35");
+			
 			<%
 			if(product.getProductVariant().size() > 1){
 				for(ProductVariantBean variant : product.getProductVariant()){ 	
@@ -380,20 +427,26 @@
 						if(<%=ProductService.getInstance().getProductAvailableQuantity(variant.getPvid())%> > 0){
 							htmlStr = "<div class=\"form-group\">" + 
 										"<div class=\"quantity\">" +
-										 	"<input type=\"button\" value=\"+\" class=\"plus\">" +
+										 	"<input type=\"button\" value=\"+\" class=\"plus\" style=\"color:black;border:1px solid #e26a35;border-bottom:0px;\">" +
 											"<input type=\"number\" step=\"1\" max=\"5\" min=\"1\" value=\"1\" title=\"Qty\" class=\"qty\" size=\"4\" name=\"qty\">" +
-											"<input type=\"button\" value=\"-\" class=\"minus\">" +
+											"<input type=\"button\" value=\"-\" class=\"minus\" style=\"color:black;border:1px solid #e26a35;\">" +
 										  "</div>" +
-										  "<button type=\"button\" class=\"btn btn-default\" onClick=\"javascript:onAddToCart()\"><i class=\"lil-add_shopping_cart\"></i> Add to cart</button>";
-
+										  "<button type=\"button\" class=\"btn btn-default\" onClick=\"javascript:onAddToCart()\">Add to cart</button>";			  
 						}
 						
 						var earlybird = <%=ProductService.getInstance().getEarlyBirdDiscount(variant)%>;
 						if(earlybird > 0){
-							priceStr = "<del><span class=\"amount\"><%=StringUtil.formatCurrencyPrice(variant.getPrice()) %></span></del>" +
+							/*priceStr = "<del><span class=\"amount\"><%=StringUtil.formatCurrencyPrice(variant.getPrice()) %></span></del>" +
 									   "<ins><span class=\"amount\"><%=StringUtil.formatCurrencyPrice(ProductService.getInstance().getEarlyBirdDiscount(variant)) %></span></ins>";
+							*/
+							priceStr = "<p class=\"prod-detail-price-earlybird\"><del><%=StringUtil.formatCurrencyPrice(variant.getPrice()) %></del> &nbsp;&nbsp;" + 
+							   		   "<span class=\"prod-detail-price-discount\"> <%=StringUtil.formatIndexPrice2(variant.getDiscount())%>% OFF </span> </p>" + 
+							   		   "<p class=\"prod-detail-price\"><%=StringUtil.formatCurrencyPrice(ProductService.getInstance().getEarlyBirdDiscount(variant)) %></p><hr class=\"prod-hr\">";
+					
 						}else{
-							priceStr = "<ins><span class=\"amount\"><%=StringUtil.formatCurrencyPrice(variant.getPrice()) %></span></ins>";
+							//priceStr = "<ins><span class=\"amount\"><%=StringUtil.formatCurrencyPrice(variant.getPrice()) %></span></ins>";
+							priceStr = "<p class=\"prod-detail-price\"><%=StringUtil.formatCurrencyPrice(variant.getPrice()) %></p><hr class=\"prod-hr\">";
+							
 						}
 					}
 			<%		
@@ -401,7 +454,7 @@
 			%>
 				if(htmlStr == ""){
 					htmlStr = "<div class=\"form-group\">" +
-					  		  	"<p class=\"product-available\">Out of Stock</p>" + 
+					  		  	"<p class=\"product-available\">Out of Stock</p><hr>" + 
 					  		  "</div>";
 				}			
 			<%
@@ -409,22 +462,30 @@
 			%>	
 				var earlybird = <%=ProductService.getInstance().getEarlyBirdDiscount(product.getProductVariant().get(0))%>;
 				if(earlybird > 0){
-					priceStr = "<del><span class=\"amount\"><%=StringUtil.formatCurrencyPrice(product.getProductVariant().get(0).getPrice()) %></span></del>" +
+					priceStr = "<p class=\"prod-detail-price-earlybird\"><del><%=StringUtil.formatCurrencyPrice(product.getProductVariant().get(0).getPrice()) %></del> &nbsp;&nbsp;" + 
+							   "<span class=\"prod-detail-price-discount\"> <%=StringUtil.formatIndexPrice2(product.getProductVariant().get(0).getDiscount())%>% OFF </span> </p>" + 
+							   "<p class=\"prod-detail-price\"><%=StringUtil.formatCurrencyPrice(earlybird) %></p><hr class=\"prod-hr\">";
+					/*
+					"<del><span class=\"amount\"><%=StringUtil.formatCurrencyPrice(product.getProductVariant().get(0).getPrice()) %></span></del>" +
 							   "<ins><span class=\"amount\"><%=StringUtil.formatCurrencyPrice(ProductService.getInstance().getEarlyBirdDiscount(product.getProductVariant().get(0))) %></span></ins>";
+					*/
+
 				}else{
-					priceStr = "<ins><span class=\"amount\"><%=StringUtil.formatCurrencyPrice(product.getProductVariant().get(0).getPrice()) %></span></ins>";
+					priceStr = "<p class=\"prod-detail-price\"><%=StringUtil.formatCurrencyPrice(product.getProductVariant().get(0).getPrice()) %></p><hr class=\"prod-hr\">";
+						
+						//"<ins><span class=\"amount\"><%=StringUtil.formatCurrencyPrice(product.getProductVariant().get(0).getPrice()) %></span></ins>";
 				}
 				
 				
 				if(<%=ProductService.getInstance().getProductAvailableQuantity(product.getProductVariant().get(0).getPvid())%> > 0){
 					htmlStr = "<div class=\"form-group\">" + 
 					  			"<div class=\"quantity\">" +
-					  			"<input type=\"button\" value=\"+\" class=\"plus\">" +
+					  			"<input type=\"button\" value=\"+\" class=\"plus\" style=\"color:black;border:1px solid #e26a35;border-bottom:0px;\">" +
 								"<input type=\"number\" step=\"1\" max=\"5\" min=\"1\" value=\"1\" title=\"Qty\" class=\"qty\" size=\"4\" name=\"qty\">" +
-								"<input type=\"button\" value=\"-\" class=\"minus\">" +
+								"<input type=\"button\" value=\"-\" class=\"minus\" style=\"color:black;border:1px solid #e26a35;\">" +
 					  		  "</div>" +
-					  		  "<button type=\"button\" class=\"btn btn-default\" onClick=\"javascript:onAddToCart()\"><i class=\"lil-add_shopping_cart\"></i> Add to cart</button>";
-
+					  		  "<button type=\"button\" class=\"btn btn-default\" onClick=\"javascript:onAddToCart()\"> Add to cart</button>";
+ 
 				}else{
 					htmlStr = "<div class=\"form-group\">" +
 							  "<p class=\"product-available\">Out of Stock</p>" + 

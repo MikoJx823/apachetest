@@ -155,9 +155,14 @@
 				           		<%	for(int i = 0; i < faceCat.size(); i++){//for(CategoryBean category : faceCat){ 
 				           				CategoryBean category = faceCat.get(i);
 				           				String bottom = "padding-bottom:10px";
+				           				String pageUrl = basePath + "products?categoryid=" + category.getId();
+				           				
+				           				if(category.getEnableguide() == StaticValueUtil.PRODUCT_ENABLE){
+				           					pageUrl = basePath + "cart/category.jsp?id=" + category.getId();
+				           				}
 				           				if(i + 1 == faceCat.size()) bottom = "padding-bottom:20px";
 				           		%>
-				                <li class="topmenu-subcat submenu-padding" ><span onClick="javascript:window.location.href='<%=basePath%>products?categoryid=<%=category.getId()%>'"><%=StringUtil.filter(category.getName()) %></span>  </li> <!-- class="active" -->
+				                <li class="topmenu-subcat submenu-padding" ><span onClick="javascript:window.location.href='<%=pageUrl%>'"><%=StringUtil.filter(category.getName()) %></span>  </li> <!-- class="active" -->
 				                <%} %>
 				            	</ul>
 				           		

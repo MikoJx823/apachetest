@@ -9,9 +9,14 @@ public class CategoryBean extends GenericBean{
 	private String image;
 	private int seq;
 	private int tag;
+	private int enableguide;
 	
-	
-	
+	public int getEnableguide() {
+		return enableguide;
+	}
+	public void setEnableguide(int enableguide) {
+		this.enableguide = enableguide;
+	}
 	public int getTag() {
 		return tag;
 	}

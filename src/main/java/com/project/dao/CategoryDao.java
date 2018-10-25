@@ -47,10 +47,10 @@ public class CategoryDao extends GenericDao{
 			conn = ConectionFactory.getConnection();
 			sql = "insert into category("			
 					+ "name, desc, parentid, image, seq, "
-					+ "tag, "
+					+ "tag, enableguide, "
 					+ "status, createddate, createdby "
 					+ ") values("
-					+ "?,?,?,?,?, ?, ?,?,?"
+					+ "?,?,?,?,?, ?,?, ?,?,?"
 					+")";
 			
 			pstm = new LoggableStatement(conn, sql);
@@ -64,6 +64,7 @@ public class CategoryDao extends GenericDao{
 			pstm.setInt(count, bean.getSeq()); count++;
 			
 			pstm.setInt(count, bean.getTag()); count++;
+			pstm.setInt(count, bean.getEnableguide()); count++;
 			
 			pstm.setInt(count, bean.getStatus()); count++;
 			pstm.setTimestamp(count, getTimestamp(new Date())); count++;
@@ -102,7 +103,7 @@ public class CategoryDao extends GenericDao{
 		{
 			sql = "update category set "
 				+ "name=?, desc=?, parentid=?, image=?, seq=?,"
-				+ "tag=?, "
+				+ "tag=?, enableguide=?, "
 				+ "status=?, modifieddate=?, modifiedby=? "
 				+ "where id = ? ";
 
@@ -117,6 +118,7 @@ public class CategoryDao extends GenericDao{
 			pstm.setInt(count, bean.getSeq()); count++;
 			
 			pstm.setInt(count, bean.getTag()); count++;
+			pstm.setInt(count, bean.getEnableguide()); count++;
 			
 			pstm.setInt(count, bean.getStatus()); count++;
 			pstm.setTimestamp(count, getTimestamp(new Date())); count++;
@@ -193,7 +195,7 @@ public class CategoryDao extends GenericDao{
 			sql = "select * from category "+sqlWhere;
 
 			pstmt = new LoggableStatement(conn, sql);
-			//log.info("Executing SQL:" + ((LoggableStatement) pstmt).getQueryString());
+			log.info("Executing SQL:" + ((LoggableStatement) pstmt).getQueryString());
 			
 			rs = pstmt.executeQuery();
 
@@ -259,7 +261,7 @@ public class CategoryDao extends GenericDao{
 		try
 		{
 			conn = ConectionFactory.getConnection();
-			sql = "select id, parentid, name, tag, seq, status from category "+sqlWhere;
+			sql = "select id, parentid, name, tag, seq, enableguide, status from category "+sqlWhere;
 
 			pstmt = new LoggableStatement(conn, sql);
 			//log.info("Executing SQL:" + ((LoggableStatement) pstmt).getQueryString());
@@ -278,6 +280,7 @@ public class CategoryDao extends GenericDao{
 				bean.setTag(rs.getInt("tag"));
 				
 				bean.setStatus(rs.getInt("status"));
+				bean.setEnableguide(rs.getInt("enableguide"));
 				
 				result.add(bean);
 			}
@@ -420,6 +423,7 @@ public class CategoryDao extends GenericDao{
 			
 			bean.setSeq(rs.getInt("seq"));
 			bean.setTag(rs.getInt("tag"));
+			bean.setEnableguide(rs.getInt("enableguide"));
 			
 			bean.setStatus(rs.getInt("status"));
 			bean.setCreatedDate(rs.getTimestamp("createddate"));

@@ -162,8 +162,13 @@
 				           		%>
 				           		<ul class="mega-subcontent">
 					           		<li class="hidden-xs subtagmenu-padding"><span style="font-weight:900;"><%=StringUtil.filter(CategoryTagPulldown.getText(StaticValueUtil.TAG_EYE)) %></span></li>
-					           		<%	for(CategoryBean category : eyeCat){ 	%>
-					           		<li class="hidden-xs topmenu-subcat submenu-padding" ><span onClick="javascript:window.location.href='<%=basePath%>products?categoryid=<%=category.getId()%>'"><%=StringUtil.filter(category.getName()) %></span>  </li> <!-- class="active" -->
+					           		<%	for(CategoryBean category : eyeCat){ 	
+					           				String categoryPath = basePath + "products?categoryid=" + category.getId();
+					           				if(category.getEnableguide() == StaticValueUtil.STATUS_ENABLE){
+					           					categoryPath = basePath + "cart/category.jsp?id=" + category.getId();
+					           				}
+					           		%>
+					           		<li class="hidden-xs topmenu-subcat submenu-padding" ><span onClick="javascript:window.location.href='<%=categoryPath%>'"><%=StringUtil.filter(category.getName()) %></span>  </li> <!-- class="active" -->
 					                <%} %>
 				                
 				                	<!-- FOR MOBILE ONLY  -->

@@ -23,8 +23,8 @@ input.input-box::-webkit-input-placeholder {color: #ffa180 !important; font-weig
 input.input-box:-moz-placeholder {color: #ffa180 !important; font-weight: bold;font-style: italic; font-size: 10pt;}
 input.input-box::-moz-placeholder {color: #ffa180 !important; font-weight: bold;font-style: italic; font-size: 10pt;} 
 input.input-box:-ms-input-placeholder {color: #ffa180 !important; font-weight: bold; font-style: italic; font-size: 10pt;}
-.products-cat-li{border:none !important; padding:0 !important; margin:0 !important; padding-bottom:3px !important;}
-.products-cat-li-parent{color: #ffa180;padding:5px !important;}
+.products-cat-li{border:none !important; padding:0 !important; margin:0 !important; padding:4px !important;}
+.products-cat-li-parent{color: #ffa180; padding: 0 !important; margin:0 !important; padding:4px !important;}
 
 /*Product Detail Page*/
 .prod-detail-short-desc{color: #5c5c5c !important; font-size: 9pt;font-weight: bold !important;font-style: italic !important; padding-bottom:10px;}

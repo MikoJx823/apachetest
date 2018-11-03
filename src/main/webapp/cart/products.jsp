@@ -49,7 +49,7 @@
 				<div class="col-md-8 col-sm-7">
 					<ol class="breadcrumb">
 						<!--  <li><a href="<%=basePath%>index.jsp">Home</a></li>-->
-						<li class="active" style="color:#E26A35;">Shop / Promo</li>
+						<li class="active" style="color:#E26A35;font-size:11pt">Shop / Promo</li>
 					</ol>
 				</div>
 			</div><!-- /.row -->
@@ -72,8 +72,8 @@
 
 							<div class="widget widget-categories hidden-xs hidden-sm">
 								<h4 class="widget-title"><strong>Categories</strong></h4>
-								<%=CategoryService.getInstance().getFrontCatFilter(categoryid) %>
-								 <!-- <ul>
+								<%= CategoryService.getInstance().getFrontCatFilter(categoryid) %>
+								  <!-- <ul>
 									<li>
 										<a href="#!">Chairs <span class="count">(6)</span></a>
 									</li>
@@ -94,7 +94,19 @@
 									<li>
 										<a href="#!">Lighting <span class="count">(4)</span></a>
 									</li>
-								</ul>  -->
+								</ul> 
+								
+								
+								<ul>
+									<a href="#"><span style="font-weight: 900;">Pre-Makeup</span></a>
+									<li class="products-cat-li products-cat-li-parent">
+										<ul class="children">
+										<li class="products-cat-li" style="padding:10px;"><a href="http://localhost:8080/navalli/products?categoryid=4">Corrector</a></li>
+										<li class="products-cat-li" style="padding:10px;"><a href="http://localhost:8080/navalli/products?categoryid=5">Pores</a></li>
+										<li class="products-cat-li" style="padding:10px;"><a href="http://localhost:8080/navalli/products?categoryid=3">Primer</a></li>
+										</ul>
+									</li>
+								</ul>-->
 							</div><!-- /.widget-categories -->
 
 						</div><!-- /.widgets -->

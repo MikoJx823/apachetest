@@ -61,7 +61,7 @@
 	
 	<div style="margin-bottom:15px;padding:0;margin-top:100px;">
 	<div class="container"> <!--   style="margin:0" -->
-		<p style="color:#e26a35"><b>SHOP<%=StringUtil.filter(category.getName()).equals("")? "" : " / " + category.getName().toUpperCase() %> / <%=StringUtil.filter(product.getName()).toUpperCase() %></b></p>
+		<p style="color:#e26a35">&nbsp;<b>SHOP<%=StringUtil.filter(category.getName()).equals("")? "" : " / " + category.getName().toUpperCase() %> / <%=StringUtil.filter(product.getName()).toUpperCase() %></b></p>
 		</div>
 	</div>
 	

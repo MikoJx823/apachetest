@@ -230,6 +230,10 @@ public class StaticValueUtil
 	public static final int TAG_CHEEKS = 3;
 	public static final int TAG_LIPS = 4;
 	public static final int TAG_TOOLS = 5;
+	public static final int TAG_3D = 6;
+	public static final int TAG_MAKEUPSETTING = 7;
+	public static final int TAG_MAKEUPTOOLS = 8;
+	public static final int TAG_SKINCARE = 9;
 	
 	//ENVIROMENT 
 	public static final String ENV_LOCAL = "L";

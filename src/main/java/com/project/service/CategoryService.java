@@ -201,7 +201,7 @@ public class CategoryService {
 				
 				int count = ProductService.getInstance().getCountActiveProdByCategory(cat.getId() + "");
 				
-				catStr += "<li class='products-cat-li'><a href=\""+ basePath + "products?categoryid=" + cat.getId() +"\">" + cat.getName() + /*"<span class=\"count\">(" + count + ")</span>*/"</a></li>";
+				catStr += "<li class='products-cat-li' style='padding:10px;'><a href=\""+ basePath + "products?categoryid=" + cat.getId() +"\">" + cat.getName() + /*"<span class=\"count\">(" + count + ")</span>*/"</a></li>";
 				
 				if(!tagStr.equals("")) {
 					if(i + 1 == categories.size() || (i + 1 < categories.size() && categories.get(i + 1).getTag() != tag )) {

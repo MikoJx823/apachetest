@@ -149,7 +149,9 @@
 								        <div id="subcatContainer1" class="resp-dropdown-content">
 									        <ul>
 									        <%	for(CategoryBean category : faceCat){ 	%>
-									        	<li class="topmenu-subcat" style="padding-top:5px !important; padding-bottom:5px !important;" ><span><%=StringUtil.filter(category.getName()) %></span>  </li>
+									        	<li class="topmenu-subcat" style="padding-top:5px !important; padding-bottom:5px !important;" >
+									        		<span onClick="javascript:window.location.href='<%=basePath%>products?categoryid=<%=category.getId()%>'"><%=StringUtil.filter(category.getName()) %></span>  
+									        	</li>
 									        <%} %>
 									        </ul>
 								      	</div>
@@ -178,8 +180,15 @@
 								        </button> 
 								        <div id="subcatContainer2" class="resp-dropdown-content">
 									        <ul>
-									        <%	for(CategoryBean category : eyeCat){ 	%>
-									        	<li class="topmenu-subcat" style="padding-top:5px !important; padding-bottom:5px !important;" ><span><%=StringUtil.filter(category.getName()) %></span>  </li>
+									        <%	for(CategoryBean category : eyeCat){ 	
+									        	String categoryPath = basePath + "products?categoryid=" + category.getId();
+						           				if(category.getEnableguide() == StaticValueUtil.STATUS_ENABLE){
+						           					categoryPath = basePath + "cart/category.jsp?id=" + category.getId();
+						           				}
+									        %>
+									        	<li class="topmenu-subcat" style="padding-top:5px !important; padding-bottom:5px !important;" >
+									        		<span onClick="javascript:window.location.href='<%=categoryPath%>'"><%=StringUtil.filter(category.getName()) %></span>  
+									        	</li>
 									        <%} %>
 									        </ul>
 								      	</div>
@@ -204,7 +213,9 @@
 								        <div id="subcatContainer3" class="resp-dropdown-content">
 									        <ul>
 									        <%	for(CategoryBean category : cheekCat){ 	%>
-									        	<li class="topmenu-subcat" style="padding-top:5px !important; padding-bottom:5px !important;" ><span><%=StringUtil.filter(category.getName()) %></span>  </li>
+									        	<li class="topmenu-subcat" style="padding-top:5px !important; padding-bottom:5px !important;" >
+									        		<span onClick="javascript:window.location.href='<%=basePath%>products?categoryid=<%=category.getId()%>'"><%=StringUtil.filter(category.getName()) %></span>  
+									        	</li>
 									        <%} %>
 									        </ul>
 								      	</div>
@@ -229,7 +240,9 @@
 								        <div id="subcatContainer4" class="resp-dropdown-content">
 									        <ul>
 									        <%	for(CategoryBean category : lipCat){ 	%>
-									        	<li class="topmenu-subcat" style="padding-top:5px !important; padding-bottom:5px !important;" ><span><%=StringUtil.filter(category.getName()) %></span>  </li>
+									        	<li class="topmenu-subcat" style="padding-top:5px !important; padding-bottom:5px !important;" >
+									        		<span onClick="javascript:window.location.href='<%=basePath%>products?categoryid=<%=category.getId()%>'"><%=StringUtil.filter(category.getName()) %></span>  
+									        	</li>
 									        <%} %>
 									        </ul>
 								      	</div>
@@ -254,7 +267,9 @@
 								        <div id="subcatContainer5" class="resp-dropdown-content">
 									        <ul>
 									        <%	for(CategoryBean category : toolsCat){ 	%>
-									        	<li class="topmenu-subcat" style="padding-top:5px !important; padding-bottom:5px !important;" ><span><%=StringUtil.filter(category.getName()) %></span>  </li>
+									        	<li class="topmenu-subcat" style="padding-top:5px !important; padding-bottom:5px !important;" >
+									        		<span onClick="javascript:window.location.href='<%=basePath%>products?categoryid=<%=category.getId()%>'"><%=StringUtil.filter(category.getName()) %></span>  
+									        	</li>
 									        <%} %>
 									        </ul>
 								      	</div>
@@ -279,7 +294,9 @@
 								        <div id="subcatContainer6" class="resp-dropdown-content">
 									        <ul>
 									        <%	for(CategoryBean category : d3Cat){ 	%>
-									        	<li class="topmenu-subcat" style="padding-top:5px !important; padding-bottom:5px !important;" ><span><%=StringUtil.filter(category.getName()) %></span>  </li>
+									        	<li class="topmenu-subcat" style="padding-top:5px !important; padding-bottom:5px !important;" >
+									        		<span onClick="javascript:window.location.href='<%=basePath%>products?categoryid=<%=category.getId()%>'"><%=StringUtil.filter(category.getName()) %></span>  
+									        	</li>
 									        <%} %>
 									        </ul>
 								      	</div>
@@ -304,7 +321,9 @@
 								        <div id="subcatContainer7" class="resp-dropdown-content">
 									        <ul>
 									        <%	for(CategoryBean category : makeupCat){ 	%>
-									        	<li class="topmenu-subcat" style="padding-top:5px !important; padding-bottom:5px !important;" ><span><%=StringUtil.filter(category.getName()) %></span>  </li>
+									        	<li class="topmenu-subcat" style="padding-top:5px !important; padding-bottom:5px !important;" >
+									        		<span onClick="javascript:window.location.href='<%=basePath%>products?categoryid=<%=category.getId()%>'"><%=StringUtil.filter(category.getName()) %></span>  
+									        	</li>
 									        <%} %>
 									        </ul>
 								      	</div>
@@ -320,21 +339,21 @@
 				        <li class="menu-parent-style" style="top:-3px;"><a href="<%=basePath %>cart/faqs.jsp"id="shopMenu" class="header-main-menu">SHOP <i class="resp-arrow-right-white"></i></a></li>
 				        <li class="menu-parent-style" style="top:-3px;">
 				            <a href="#!" id="tutorialMenu" class="header-main-menu" data-toggle="dropdown" aria-haspopup="false" aria-expanded="false">TUTORIAL <i class="resp-arrow-right-white"></i></a>
-				            <div class="mega-dropdown3 dropdown-menu" style="top:60px;left:-280px;opacity:0.95;">
-				           		<ul class="mega-subcontent" style="width:220px;"> 
+				            <div class="mega-dropdown3 dropdown-menu" style=" top:60px;left:-280px;opacity:0.95;">
+				           		<ul class="mega-subcontent"> 
 				           		<!-- style="padding-left:35px;padding-top:10px;padding-bottom:10px;"  -->
 				           		<li class="topmenu-subcat submenu-padding" ><strong><span onClick="javascript:window.location.href='#'">UNBOXING</span></strong>  </li>
 				           		<!--<li><a href="index.html">FEATURED OF THE MONTH</a></li> <!-- class="active" -->
 				         		</ul>
-				         		<ul class="mega-subcontent" style="width:140px;">
+				         		<ul class="mega-subcontent">
 				         		<li class="topmenu-subcat submenu-padding" ><strong><span onClick="javascript:window.location.href='#'">TUTORIAL</span></strong>  </li>
 				           		<!--<li><a href="index.html">VALUE BUNDLE</a></li> <!-- class="active" -->
 				         		</ul>
-				         		<ul class="mega-subcontent" style="width:150px;">
+				         		<ul class="mega-subcontent">
 				         		<li class="topmenu-subcat submenu-padding" ><strong><span onClick="javascript:window.location.href='#'">TRENDING</span></strong>  </li>
 				           		<!--<li><a href="index.html">OUR TOP 10</a></li> <!-- class="active" -->
 				         		</ul>
-				         		<ul class="mega-subcontent" style="width:150px;">
+				         		<ul class="mega-subcontent">
 				         		<li class="topmenu-subcat submenu-padding" ><strong><span onClick="javascript:window.location.href='#'">EXPERIMENT</span></strong>  </li>
 				           		<!--<li><a href="index.html">OUR TOP 10</a></li> <!-- class="active" -->
 				         		</ul>

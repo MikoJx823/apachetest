@@ -116,7 +116,7 @@ if (loginUser == null&& !url.contains("/LoginServlet") && !url.contains("login.j
                	<%if(!(StringUtil.filter(bean.getImage()).equals("")) ) {  %>
                 	<img src="../../images/banner/<%=StringUtil.filter(bean.getImage())%>" width="100px" >
                 <%} %>
-               	<input  type="file"  class="form-control" id="image" name="image" autocomplete="off" >  
+               	<input  type="file"  class="form-control" id="image1" name="image1" autocomplete="off" >  
                 <label><small>File size <= 800KB<br/>Only support JPEG / PNG</small></label>                 
           	   </div><!--form-group-->
             </div><!--col-xs-6-->
@@ -127,7 +127,7 @@ if (loginUser == null&& !url.contains("/LoginServlet") && !url.contains("login.j
                  <%if(!(StringUtil.filter(bean.getAppimage()).equals("")) ) {  %>
                 	<img src="../../images/banner/<%=StringUtil.filter(bean.getAppimage())%>" width="100px" >
                  <%} %>
-                 <input  type="file"  class="form-control" id="appimage" name="appimage" autocomplete="off" >  
+                 <input  type="file"  class="form-control" id="image2" name="image2" autocomplete="off" >  
                  <label><small>File size <= 800KB<br/>Only support JPEG / PNG</small></label>                 
           		</div><!--form-group-->
             </div><!--col-xs-6-->

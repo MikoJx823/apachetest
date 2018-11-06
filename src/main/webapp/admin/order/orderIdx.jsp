@@ -191,7 +191,10 @@
 	       	<div class="col-xs-8"></div>
         	<div class="col-xs-8"></div>
         
-	       	<div class="col-xs-8 text-right">    
+	       	<div class="col-xs-8 text-right">
+	       	<%if(AdminService.hasAccessRights(AdminFunction.getFunctionId(AdminFunction.Order, AdminFunction.Report), AdminFunction.haveRight, adminGroupFunctions)) {%>     
+	       	<button onclick="exportReport()" class="btn btn-primary loginbtn hvr-float-shadow mt-25">Export</button>  
+	       	<%} %>
 	       	<button onclick="getSearchList()" class="btn btn-primary loginbtn hvr-float-shadow mt-25">Search</button>
 	       	</div>
        
@@ -245,16 +248,16 @@
          <td class="tbl-center"><%=OrderStatusPulldown.getName(bean.getOrderStatus()) %></td>     
               
         <td class="tbl-center">   
-         <%if(AdminService.hasAccessRights(AdminFunction.getFunctionId(AdminFunction.Order, AdminFunction.View), AdminFunction.haveRight, adminGroupFunctions)) {%>     
-           <a href="orderView.jsp?id=<%=bean.getoId() %>" class="btn btn-xs btn-cancel">View</a>
-           <%} %>
-            <%if(AdminService.hasAccessRights(AdminFunction.getFunctionId(AdminFunction.Order, AdminFunction.Edit), AdminFunction.haveRight, adminGroupFunctions)) {%>
-          <a href="orderUpdate.jsp?id=<%=bean.getoId() %>" class="btn btn-xs btn-primary">Edit</a>     
-          <%} %>  
-          <%if(AdminService.hasAccessRights(AdminFunction.getFunctionId(AdminFunction.Order, AdminFunction.ResendEmail), AdminFunction.haveRight, adminGroupFunctions) 
+           	<%if(AdminService.hasAccessRights(AdminFunction.getFunctionId(AdminFunction.Order, AdminFunction.View), AdminFunction.haveRight, adminGroupFunctions)) {%>     
+        	<a href="orderView.jsp?id=<%=bean.getoId() %>" class="btn btn-xs btn-cancel">View</a>
+          	<%} %>
+          	<%if(AdminService.hasAccessRights(AdminFunction.getFunctionId(AdminFunction.Order, AdminFunction.Edit), AdminFunction.haveRight, adminGroupFunctions)) {%>
+          	<a href="orderUpdate.jsp?id=<%=bean.getoId() %>" class="btn btn-xs btn-primary">Edit</a>     
+          	<%} %>  
+          	<%if(AdminService.hasAccessRights(AdminFunction.getFunctionId(AdminFunction.Order, AdminFunction.ResendEmail), AdminFunction.haveRight, adminGroupFunctions) 
         		&& ( bean.getOrderStatus().equals(OrderStatusPulldown.ACCEPTED))) {%>
-         	 <a href="javascript:resendEmail('<%=bean.getoId() %>')" class="btn btn-xs btn-warning">Resend Email</a>     
-          <%} %> 
+         	<a href="javascript:resendEmail('<%=bean.getoId() %>')" class="btn btn-xs btn-warning">Resend Email</a>     
+          	<%} %> 
         </td>
     </tr>
 <%} %>
@@ -287,38 +290,13 @@
     </section><!-- /section.container -->
   
 <script type="text/javascript">
-$(function () { 
-	
-	$('.tooltip-show').tooltip('show');
-	
-	$('#checkAll').change(function() {
-		   if($(this).is(":checked")) {
-			   $('input:checkbox').not(this).prop('checked', this.checked);
-		      return;
-		   }
-		   
-		   $('input:checkbox').not(this).prop('checked', false); //'unchecked' event code
-		   
-		});
-});
-
-function exportOrderList(){
-	 $("#actionType").val("exportOrderList");
+function exportReport(){
+	 $("#actionType").val("exportOrder");
 	 $("#orderForm").submit();
- }
+}
 function getSearchList(){
 	 $("#actionType").val("search");
 	 $("#orderForm").submit(); 
- }
-function printOrder(){
-	 var checkedSize = $("input[name='orderCheckIds']:checkbox:checked").size();
-	 console.log(checkedSize);
-	 if(checkedSize > 0) {
-		 $("#actionType").val("printOrder");
-		 $("#orderForm").submit();
-	 }else {
-		 alert("Please select at least one order to print.");
-	 }
 }
 function resendEmail(oId) {
 	console.log("oid " + oId);

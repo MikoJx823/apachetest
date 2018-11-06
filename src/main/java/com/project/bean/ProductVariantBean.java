@@ -1,8 +1,6 @@
 package com.project.bean;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 public class ProductVariantBean extends GenericBean{
 	
@@ -10,8 +8,9 @@ public class ProductVariantBean extends GenericBean{
 	private int pid;
 	private int seq;
 	private String name;
-	private int quantity;
+	private String code;
 	
+	private int quantity;
 	private double price;
 	private double discount;
 	private Date discountstart;
@@ -19,6 +18,12 @@ public class ProductVariantBean extends GenericBean{
 	
 	
 	
+	public String getCode() {
+		return code;
+	}
+	public void setCode(String code) {
+		this.code = code;
+	}
 	public double getDiscount() {
 		return discount;
 	}

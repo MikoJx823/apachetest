@@ -12,8 +12,6 @@ public class AdminFunction
 	public static String ImportExport = "Import / Export";
 	public static String System = "System";
 	public static String Report = "Report";
-	public static String Recommend = "Recommend Item";
-	public static String WhatsHot = "Hot Item";
 	public static String Index = "Index";
 	public static String Banner = "Banner";
 	
@@ -30,20 +28,16 @@ public class AdminFunction
 	public static String RatingView = "Rating View";
 	public static String None = "------";
 	
-	public static String ReportOrder = "Order";
-	public static String ReportPayment = "Payment";
-	
 	public static final String haveRight = "Y";
 	
 	private static final String [][] functions = {
 		{""},
 		{System,Add,View,Edit,ResetPwd},
-		{Product,Add,View,Edit,Export},
-		{Order,View,Edit,ResendEmail,UpdateStatus},
-		{Report,ReportOrder,},
-		{ImportExport,Edit},
+		{Product,Add,View,Edit},
+		{Order,View,Edit,ResendEmail,Report /*,UpdateStatus*/},
+		/*{Report,ReportOrder,},
 		{Index,Add,View,Edit,Delete},
-		{Banner,Add,View,Edit}
+		{Banner,Add,View,Edit}*/
 	};
 	
 	public static int getFunctionId(String module,String function){

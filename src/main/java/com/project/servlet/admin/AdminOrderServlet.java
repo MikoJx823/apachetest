@@ -1,8 +1,16 @@
 package com.project.servlet.admin;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeMap;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -10,14 +18,26 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
+import org.apache.poi.ss.usermodel.BorderStyle;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.IndexedColors;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.xssf.usermodel.XSSFFont;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import com.project.bean.AdminInfoBean;
 import com.project.bean.MsgAlertBean;
 import com.project.bean.OrderBean;
 import com.project.bean.OrderItemBean;
+import com.project.bean.ProductBean;
+import com.project.pulldown.CountryPulldown;
 import com.project.pulldown.OrderStatusPulldown;
 import com.project.service.AdminService;
 import com.project.service.OrderService;
+import com.project.service.ProductService;
+import com.project.util.DateUtil;
 import com.project.util.MailUtil;
 import com.project.util.SessionName;
 import com.project.util.StaticValueUtil;
@@ -33,6 +53,7 @@ public class AdminOrderServlet extends HttpServlet {
 	private static String SEARCH = "search";
 	private static String EDIT = "edit";
 	private static String RESEND_EMAIL = "resendEmail";
+	private static String EXPORT_ORDER = "exportOrder";
 	
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
@@ -51,6 +72,8 @@ public class AdminOrderServlet extends HttpServlet {
 			edit(req, resp);
 		}else if(actionType.equals(RESEND_EMAIL)){
 			resendEmail(req,resp);
+		}else if(actionType.equals(EXPORT_ORDER)) {
+			exportReport(req, resp);
 		}
 		
 	}
@@ -368,5 +391,190 @@ public class AdminOrderServlet extends HttpServlet {
 		}
 	}
 	
+	private void exportReport(HttpServletRequest request, HttpServletResponse response) {
+		try {
+
+			Calendar toDate = Calendar.getInstance();
+			String toYearDefault = String.valueOf(toDate.get(Calendar.YEAR));
+			String toMonthDefault = String.valueOf(toDate.get(Calendar.MONTH)+1);
+			String toDayDefault = String.valueOf(toDate.get(Calendar.DAY_OF_MONTH));
+			Calendar fromDate = Calendar.getInstance();
+			fromDate.add(Calendar.DATE,  -2);
+			String fromYearDefault = String.valueOf(fromDate.get(Calendar.YEAR));
+			String fromMonthDefault = String.valueOf(fromDate.get(Calendar.MONTH)+1);
+			String fromDayDefault = String.valueOf(fromDate.get(Calendar.DAY_OF_MONTH));
+			
+			String dayFromStr = StringUtil.filter(request.getParameter("dayFrom"), fromDayDefault);
+			String monthFromStr = StringUtil.filter(request.getParameter("monthFrom"), fromMonthDefault);
+			String yearFromStr = StringUtil.filter(request.getParameter("yearFrom"), fromYearDefault);
+			String dayToStr = StringUtil.filter(request.getParameter("dayTo"), toDayDefault);
+			String monthToStr = StringUtil.filter(request.getParameter("monthTo"), toMonthDefault);
+			String yearToStr = StringUtil.filter(request.getParameter("yearTo"), toYearDefault);
+			
+			String dateFromStr = yearFromStr + "-" + monthFromStr + "-" + dayFromStr + " 00:00:00";
+			String dateToStr = yearToStr + "-" + monthToStr + "-" + dayToStr + " 23:59:59";
+			
+			String ref = StringUtil.filter(request.getParameter("ref"));
+			String name = new String(StringUtil.filter(request.getParameter("name")).getBytes("ISO8859-1"), "utf-8");
+			String phone = StringUtil.filter(request.getParameter("phone"));
+			String email = StringUtil.filter(request.getParameter("email"));
+			String status = StringUtil.filter(request.getParameter("status"));
+			String productStatus = StringUtil.filter(request.getParameter("productStatus"));
+			
 	
+			AdminInfoBean loginUser = (AdminInfoBean)request.getSession().getAttribute(SessionName.loginAdmin);
+			
+			String sqlWhere = "where 1=1 ";
+			sqlWhere += "and transactiondate>='" + dateFromStr + "' and transactiondate<='" + dateToStr + "'";;
+			if (!"".equals(ref)){	
+				sqlWhere += " and orderref like '%" + ref + "%'";
+			}
+			
+			if (!"".equals(name)){
+				sqlWhere += " and (buyerfirstname like '%" + name + "%' or buyerlastname like '" + name + "' )";
+			}
+			if (!"".equals(phone))
+			{
+				sqlWhere += " and buyerphone like '%" + phone + "%'";
+			}
+			if (!"".equals(email))
+			{
+				sqlWhere += " and buyeremail like '%" + email + "%'";
+			}
+			
+			if (!"".equals(status))
+			{
+				sqlWhere += " and orderstatus = '" + status + "'";
+			}
+			
+			String productSqlWhere = " product where id in (Select pid from orderitem where orderid in (Select oid from orderinfo " + sqlWhere + " ))";
+			
+			List<OrderBean> orders =  OrderService.getInstance().getOrderListBySqlwhere(sqlWhere);
+			List<ProductBean> products = ProductService.getInstance().getProductBySqlwhere(productSqlWhere);
+			
+			//START SETUP EXCEL FILE 
+			XSSFWorkbook workbook = new XSSFWorkbook();
+		    XSSFSheet sheet = workbook.createSheet("Report");
+		    
+		    //SET HEADER FONT 
+		    XSSFFont font= workbook.createFont();
+	        font.setFontHeightInPoints((short)10);
+	        font.setFontName("Arial");
+	        font.setBold(true);
+         
+	        //SET HEADER STYLE
+	        CellStyle headerStyle =workbook.createCellStyle();;
+	        headerStyle.setFont(font);
+	        headerStyle.setWrapText(true);
+	        headerStyle.setBorderBottom(BorderStyle.THIN);
+	        headerStyle.setBorderTop(BorderStyle.THIN);
+	        headerStyle.setBorderRight(BorderStyle.THIN);
+	        headerStyle.setBorderLeft(BorderStyle.THIN);
+		    
+	        //SETUP FOR HEADER 
+	        Object[] objectTitle = {
+	        		"Transaction Date",
+	        		"Order Ref",
+	        		"Payment Ref",
+	        		"Payment Method",
+	        		"Total",
+	        		"Shipping",
+	        		"Order Status",
+	        		"Buyer Name",
+	        		"Contact",
+	        		"Email",
+	        		"Receiver Name",
+	        		"Receiver Address",
+	        		"Tracking Number"
+	        };
+	        
+	        int rowNum = 0;
+	        int counter = 0;
+	        Row row = sheet.createRow(rowNum++);
+	        
+	        for(Object title : objectTitle) {
+	        	Cell cell = row.createCell(counter++);
+	        	cell.setCellValue((String) title);
+	        	cell.setCellStyle(headerStyle);
+	        }
+	        
+	        if(products.size() > 0 ) {
+	        	for(int i = 0; i < products.size() ; i++ ) {
+		        	Cell cell = row.createCell(objectTitle.length + i);
+		        	cell.setCellValue(products.get(i).getName());
+		        	cell.setCellStyle(headerStyle);
+	        	}
+	        }
+	        
+	        //SETUP CONTENT 
+	        for(OrderBean order : orders) {
+	        	//OrderBean order = orders.get(i);
+	        	int counter2 = 0;
+	        	String addressStr = order.getShipaddress1() + ", " + order.getShipaddress2() + ", " + 
+	        					    (!"".equals(StringUtil.filter(order.getShiptown())) ? order.getShiptown() + ", " : "") + 
+	        					    (!"".equals(StringUtil.filter(order.getShipstate())) ? order.getShipstate() + ", " : "") + 
+	        					    order.getShippostcode() + ", " + CountryPulldown.getText(order.getShipcountry());  
+	        	
+		        row = sheet.createRow(rowNum++);
+		        Cell cell = row.createCell(counter2++);
+		        cell.setCellValue(DateUtil.formatDatetime_ss(order.getTransactiondate()));
+		        cell = row.createCell(counter2++);
+		        cell.setCellValue(order.getOrderRef());
+		        cell = row.createCell(counter2++);
+		        cell.setCellValue(order.getPaymentRef());
+		        cell = row.createCell(counter2++);
+		        cell.setCellValue(order.getPayMethod());
+		        cell = row.createCell(counter2++);
+		        cell.setCellValue(order.getTotalAmount());
+		        cell = row.createCell(counter2++);
+		        cell.setCellValue(order.getDeliveryAmount());
+		        cell = row.createCell(counter2++);
+		        cell.setCellValue(OrderStatusPulldown.getName(order.getOrderStatus()));
+		        cell = row.createCell(counter2++);
+		        cell.setCellValue(order.getBuyerfirstname() + " " + order.getBuyerlastname());
+		        cell = row.createCell(counter2++);
+		        cell.setCellValue(order.getBuyerphone());
+		        cell = row.createCell(counter2++);
+		        cell.setCellValue(order.getBuyeremail());
+		        cell = row.createCell(counter2++);
+		        cell.setCellValue(order.getShipfirstname() + " " + order.getShiplastname());
+		        cell = row.createCell(counter2++);
+		        cell.setCellValue(addressStr);
+		        cell = row.createCell(counter2++);
+		        cell.setCellValue(order.getTracknumber());
+		        
+		        if(products.size() > 0) {
+		        	for(ProductBean product : products) {
+		        		int purchasedQty = 0;
+		        		for(OrderItemBean orderItem : order.getOrderItems()) {
+		        			if(orderItem.getPid() == product.getId()) {
+		        				purchasedQty = orderItem.getQuantity();
+		        			}
+		        		}
+		        		
+			        	cell = row.createCell(counter2++);
+					    cell.setCellValue(purchasedQty);
+		        	}
+		        }
+	        }
+
+	        //DOWNLOAD EXCEL 
+			response.setContentType("application/vnd.ms-excel");
+			response.setHeader("Content-Disposition", "attachment; filename=OrderReport.xlsx");
+			
+		    workbook.write(response.getOutputStream());
+            workbook.close();
+
+		}catch (FileNotFoundException e) {
+			log.error(e);
+        	e.printStackTrace();
+        } catch (IOException e) {
+        	log.error(e);
+            e.printStackTrace();
+        } catch (Exception e) {
+			log.error(e);
+			e.printStackTrace();		
+		}
+		
+	}
 }

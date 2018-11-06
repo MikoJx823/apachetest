@@ -4,7 +4,6 @@
 <%@page import="com.project.util.*"%>
 <%@page import="java.io.PrintWriter" %>
 <%@page import="org.apache.commons.lang.StringUtils"%>
-
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%> 
 <%
 AdminInfoBean loginUser = (AdminInfoBean) request.getSession().getAttribute(SessionName.loginAdmin);
@@ -30,9 +29,8 @@ if (loginUser == null&& !url.contains("/LoginServlet") && !url.contains("login.j
 		return;	
 	}
 	
-	AdminInfoBean loginUser = (AdminInfoBean)session.getAttribute("loginUser");
-	
-	String basePath = PropertiesUtil.getProperty("hostAddr")+PropertiesUtil.getProperty("virtualHost.admin");
+	String basePath = StringUtil.getHostAddress() + "admin/";
+	//String basePath = PropertiesUtil.getProperty("hostAddr")+PropertiesUtil.getProperty("virtualHost.admin");
 %>
 
 <!DOCTYPE html>

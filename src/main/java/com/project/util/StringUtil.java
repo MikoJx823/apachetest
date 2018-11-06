@@ -3,6 +3,9 @@ package com.project.util;
 import java.security.MessageDigest;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -89,7 +92,7 @@ public class StringUtil {
 		{
 			String pattern = "#,###,###.##";
 			NumberFormat format = new DecimalFormat(pattern);
-			returnStr = "MYR" + format.format(price);//"HKD "+format.format(price);
+			returnStr = "RM " + format.format(price);//"HKD "+format.format(price);
 		}
 		catch (Exception e)
 		{
@@ -433,6 +436,36 @@ public class StringUtil {
 			ConfigBean hostConfig = ConfigService.getInstance().getBeanByName(StaticValueUtil.CONFIG_ENV_LOCAL_URL);
 			return hostConfig.getValue();
 		}
+	}
+	
+	public static Map<String,String> getEmailConfig() {
+		
+		String emailVariables[] = {StaticValueUtil.CONFIG_EMAIL_HOSTNAME, StaticValueUtil.CONFIG_EMAIL_USERNAME, 
+								  StaticValueUtil.CONFIG_EMAIL_PASSWORD, StaticValueUtil.CONFIG_EMAIL_FROM, 
+								  StaticValueUtil.CONFIG_EMAIL_FROM_TITLE, StaticValueUtil.CONFIG_EMAIL_BCC
+								  };
+		Map<String, String> result = new HashMap<String, String>();
+		
+		String variableNameStr = "";
+		for(String variable : emailVariables) {
+			variableNameStr += "'" + variable + "'," ; 
+		}
+		
+		if(variableNameStr.endsWith(",")) {
+			variableNameStr = variableNameStr.substring(0, variableNameStr.length() - 1);
+		}
+		
+		List<ConfigBean> configs = ConfigService.getInstance().getListBySqlwhere(" where name in (" + variableNameStr + ")");
+		
+		for(ConfigBean config : configs ) {
+			for(String variable : emailVariables) {
+				if(StringUtil.filter(config.getName()).equals(variable)) {
+					result.put(config.getName(), config.getValue());
+				}
+			}
+		}
+		
+		return result;
 	}
 	
 	public static String getProductImagePath() {

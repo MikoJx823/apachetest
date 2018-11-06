@@ -158,9 +158,9 @@ public class CartServlet extends HttpServlet {
 					
 					double earlybird = ProductService.getInstance().getEarlyBirdDiscount(variant);
 					if(earlybird > 0) {
-						orderItem.setDiscount(earlybird);
+						orderItem.setDiscount(variant.getPrice() - earlybird);
 					}
-					
+
 					orderItem.setPrice(variant.getPrice());
 					orderItem.setPid(product.getId());
 					orderItem.setPvid(pvid);

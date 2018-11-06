@@ -120,7 +120,7 @@ public class ConfigDao extends GenericDao{
 			sql = "select * from config "+sqlWhere;
 
 			pstmt = new LoggableStatement(conn, sql);
-			//log.info("Executing SQL:" + ((LoggableStatement) pstmt).getQueryString());
+			log.info("Executing SQL:" + ((LoggableStatement) pstmt).getQueryString());
 			
 			rs = pstmt.executeQuery();
 

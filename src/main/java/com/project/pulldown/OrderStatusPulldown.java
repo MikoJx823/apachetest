@@ -10,7 +10,7 @@ public class OrderStatusPulldown{
 	public static final String DELETED = "D"; //Deleted Item 
 	public static final String CANCELLED = "C";
 	
-	public static String[] texts = {"Pending", "Complete & Accept", "Complete & Reject", "Cancel", "Delete"};
+	public static String[] texts = {"Pending", "Success", "Reject", "Cancel", "Delete"};
 
 	public static String[] values = {PENDING, ACCEPTED, REJECTED, CANCELLED, DELETED};
 	

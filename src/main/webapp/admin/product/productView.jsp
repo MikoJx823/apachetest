@@ -197,7 +197,8 @@ if (loginUser == null&& !url.contains("/LoginServlet") && !url.contains("login.j
           
           <thead class="bg-black">
 			<tr>
-			<th width="10%">Variant</th>
+			<th width="10%">Name</th>
+			<th width="10%">Colour Code</th>
 			<th width="10%">Price</th>
 			<th width="10%">Discount</th>
 			<th width="10%">Quantity</th>
@@ -211,6 +212,7 @@ if (loginUser == null&& !url.contains("/LoginServlet") && !url.contains("login.j
  %>
             <tr>
              	<td><%=StringUtil.filter(variant.getName()) %></td>
+             	<td><%=StringUtil.filter(variant.getCode()) %></td>
                 <td><%=variant.getPrice()%></td>
              	<td><%=variant.getDiscount() %></td>
              	<td><%=variant.getQuantity() %></td>

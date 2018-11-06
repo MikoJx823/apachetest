@@ -238,7 +238,7 @@ if (loginUser == null&& !url.contains("/LoginServlet") && !url.contains("login.j
             
             <tr>
             	<td widht="10%"><strong>SKU Name</strong></td>
-            	<td width="60%"><strong>Name</strong> </td>
+            	<td width="70%"><strong>Name</strong> </td>
             	<td width="5%"><strong>Qty </strong> </td>
                 <td width="15%"><strong>SubTotal </strong></td>
             </tr>
@@ -257,10 +257,11 @@ if (loginUser == null&& !url.contains("/LoginServlet") && !url.contains("login.j
             		
             		//FOR SUBTOTAL PRICING SETUP
             		subTotalStr = StringUtil.formatPrice(subTotal); 
+            		
             %>	
             <tr> 
             	<td><%=StringUtils.trimToEmpty(orderItem.getProductcode())%></td> 
-                <td><%=StringUtil.filter(orderItem.getProductname()) %></td>
+                <td><%=StringUtil.filter(orderItem.getProductname()) + (!"".equals(StringUtil.filter(orderItem.getVariantname())) ? " - " + orderItem.getVariantname() :"") %></td>
                 <td class="tbl-center"><%=orderItem.getQuantity() %></td>
                 <td class="tbl-center"><%=StringUtil.filter(subTotalStr) %></td>
             </tr>

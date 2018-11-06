@@ -336,11 +336,12 @@
  			<table class="table">
  			<thead class="bg-black">
 			<tr>
-			<th width="10%">Variant</th>
+			<th width="10%">Name</th>
+			<th width="10%">Colour Code</th>
 			<th width="10%">Price</th>
 			<th width="10%">Discount</th>
 			<th width="10%">Quantity</th>
-			<th width="60%">Discount Period (Leave it when discount = 0 )</th>
+			<th width="50%">Discount Period (Leave it when discount = 0 )</th>
 			</tr>
 			</thead>
 			<tbody><input type="hidden" id="variantcounter" name="variantcounter" value="<%=variants.size()%>">
@@ -360,6 +361,7 @@
 			
  			<tr>
  			<td><input class="form-control" id="variant<%=i %>" name="variant<%=i %>" autocomplete="off" value="<%=StringUtil.filter(v.getName()) %>"  <%if(variants.size() <= 1 ){ %>disabled <%} %>> </td>
+			<td><input class="form-control" id="code<%=i %>" name="code<%=i %>" autocomplete="off" value="<%=StringUtil.filter(v.getCode()) %>"  <%if(variants.size() <= 1 ){ %>disabled <%} %>> </td>
 			<td><input class="form-control" id="price<%=i %>" name="price<%=i %>" autocomplete="off" value="<%=v.getPrice() %>"  ></td>
 			<td><input class="form-control" id="discount<%=i %>" name="discount<%=i %>" autocomplete="off" value="<%=v.getDiscount() %>"></td>
 			<td><input class="form-control" id="quantity<%=i %>" name="quantity<%=i %>" autocomplete="off" value="<%=v.getQuantity() %>"></td>
@@ -488,6 +490,7 @@ function addPriceTable(){
 	var newRow = 
 	"<tr>" + 
 	"<td><input class='form-control' id='variant" + count + "' name='variant" + count + "' autocomplete='off' value=''> </td>" +
+	"<td><input class='form-control' id='code" + count + "' name='code" + count + "' autocomplete='off' value=''  ></td>" +
 	"<td><input class='form-control' id='price" + count + "' name='price" + count + "' autocomplete='off' value=''  ></td>" +
 	"<td><input class='form-control' id='ebPrice" + count + "' name='discount" + count + "' autocomplete='off' value=''></td>" +
 	"<td><input class='form-control' id='quantity" + count + "' name='quantity" + count + "' autocomplete='off' value=''></td>" +
@@ -511,6 +514,7 @@ function addPriceTable(){
     $("table tbody").append(newRow);
     $("#variantcounter").val(count);
     $("#variant1").prop("disabled", false);
+    $("#code1").prop("disabled", false);
 }
 
 function subPriceTable(){
@@ -524,6 +528,8 @@ function subPriceTable(){
     	if(count == 1) {
     		$("#variant1").prop("disabled", true);
     		$("#variant1").val("");
+    	    $("#code1").prop("disabled", true);
+    	    $("#code1").val("");
     	}
     }
 }

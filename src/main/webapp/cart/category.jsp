@@ -30,31 +30,6 @@
 <!-- the "no-js" class is for Modernizr. -->
 <head>
 	<jsp:include page="meta.jsp" />
-
-  	<style>
-
-	#myBtn {
-	  display: block;
-	  position: fixed;
-	  bottom: 30px;
-	  right: 50px;
-	  z-index: 99;
-	  font-size: 11px;
-	  border: none;
-	  outline: none;
-	  background-color:#e26a35;
-	  color: white;
-	  cursor: pointer;
-	  height:45px;
-	  width:45px;
-	  border-radius: 50%;
-	}
-	
-	#myBtn:hover {
-	  opacity:0.9;
-	  
-	}
-</style>
 </head>
 
 <body style="background-color:#f8f8f8;">
@@ -65,7 +40,7 @@
 		<div style="position: relative;">
 			<img src="<%=basePath %>images/category/<%=category.getImage()%>" width="100%">
 		
-			<button onclick="window.location='<%=basePath + "products?categoryid=" + id%>'" id="myBtn" title="Go to top">Buy<br> Now</button>
+			<button onclick="window.location='<%=basePath + "products?categoryid=" + id%>'" class="categoryBtn" id="myBtn" title="Go to top">Buy Now</button>
 		</div>
 		
 	</section><!-- /.products-grid -->

@@ -477,11 +477,11 @@ public class ProductDao extends GenericDao
 
 			conn = ConectionFactory.getConnection();
 			sql = "insert into productvariant(" + 
-					"pid, seq, name, quantity, price, " + 
-					"discount, discountstart, discountend, " +
+					"pid, seq, name, code, quantity, "+
+					"price, discount, discountstart, discountend, " +
 					"status, createddate, createdby" + 
 					") values (" + 
-					"?,?,?,?,?, ?,?,?, ?,?,? " +
+					"?,?,?,?,?, ?,?,?,?, ?,?,? " +
 					")";
 			
 			pstm = new LoggableStatement(conn, sql);
@@ -491,9 +491,10 @@ public class ProductDao extends GenericDao
 			pstm.setInt(count, variant.getPid());count++;
 			pstm.setInt(count, variant.getSeq());count++;
 			pstm.setString(count, variant.getName()); count++;
+			pstm.setString(count, variant.getCode()); count++;
 			pstm.setInt(count, variant.getQuantity());count++;
-			pstm.setDouble(count, variant.getPrice()); count++;
 			
+			pstm.setDouble(count, variant.getPrice()); count++;
 			pstm.setDouble(count, variant.getDiscount()); count++;
 			pstm.setTimestamp(count, getTimestamp(variant.getDiscountstart())); count++;
 			pstm.setTimestamp(count, getTimestamp(variant.getDiscountend())); count++;
@@ -535,8 +536,8 @@ public class ProductDao extends GenericDao
 		try{
 			conn = ConectionFactory.getConnection();
 			sql = "update productvariant set " + 
-					"pid=?, seq=?, name=?, quantity=?, price=?,"+
-					"discount=?, discountstart=?, discountend=?, " +
+					"pid=?, seq=?, name=?, code=?, quantity=?, " +
+					"price=?, discount=?, discountstart=?, discountend=?, " +
 					"status=?, modifieddate=?,modifiedby=? " +
 					"where pvid=?";
 			
@@ -547,9 +548,10 @@ public class ProductDao extends GenericDao
 			pstm.setInt(count, variant.getPid());count++;
 			pstm.setInt(count, variant.getSeq());count++;
 			pstm.setString(count, variant.getName()); count++;
+			pstm.setString(count, variant.getCode()); count++;
 			pstm.setInt(count, variant.getQuantity());count++;
-			pstm.setDouble(count, variant.getPrice()); count++;
 			
+			pstm.setDouble(count, variant.getPrice()); count++;
 			pstm.setDouble(count, variant.getDiscount()); count++;
 			pstm.setTimestamp(count, getTimestamp(variant.getDiscountstart())); count++;
 			pstm.setTimestamp(count, getTimestamp(variant.getDiscountend())); count++;
@@ -656,7 +658,7 @@ public class ProductDao extends GenericDao
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql = "";
-		int pagingRows = 15;
+		int pagingRows = 10;
 		try
 		{
 			conn = ConectionFactory.getConnection();
@@ -901,8 +903,9 @@ public class ProductDao extends GenericDao
 			bean.setPid(rs.getInt("pid"));
 			bean.setSeq(rs.getInt("seq"));
 			bean.setName(rs.getString("name"));
+			bean.setCode(rs.getString("code"));
+
 			bean.setQuantity(rs.getInt("quantity"));
-			
 			bean.setPrice(rs.getDouble("price"));
 			bean.setDiscount(rs.getDouble("discount"));
 			bean.setDiscountstart(rs.getTimestamp("discountstart"));

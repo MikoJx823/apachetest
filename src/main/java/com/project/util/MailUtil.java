@@ -1,10 +1,5 @@
 package com.project.util;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -14,7 +9,7 @@ import org.apache.log4j.Logger;
 import com.project.bean.AdminInfoBean;
 import com.project.bean.OrderBean;
 import com.project.bean.OrderItemBean;
-import com.project.bean.ReceiptBean;
+import com.project.pulldown.CountryPulldown;
 
 /*import net.sf.jasperreports.engine.JRExporterParameter;
 import net.sf.jasperreports.engine.JasperFillManager;
@@ -37,42 +32,35 @@ public class MailUtil
 	}
 	
 	public boolean sendOrderEmail(OrderBean order ){
-		PropertiesUtil propUtil = new PropertiesUtil();
 		Map<String, String> imagesMap = new HashMap<String, String>();
 		boolean result = false;
-		boolean isEng = true;
 		
 		try {
 			// send out confirmation email
+			String basePath = StringUtil.getBasePath();
+			logger.info("BASEPATH " + basePath);
 			String recipient = order.getBuyeremail();
-			String subject = propUtil.getProperty("mailSubject.orderConfirmation");
+			String subject = "Order Confirmation";// propUtil.getProperty("mailSubject.orderConfirmation");
+
+			String templateFile = "orderEmail.html";
 			
-			String templateFile = "normalOrderEmailEN.html";
+			String filePath = basePath + "emailTemplate/";
 			
-			//String filePath = propUtil.getProperty("system.basepath") + "emailTemplate/";
-			
-			String logo2 = propUtil.getProperty("basePath")+ "images/CLP_efl_en.png";
-			imagesMap.put("logo", propUtil.getProperty("basePath")+ "images/clp_logo_1x.png" );
-			imagesMap.put("logo2", logo2 );
+			//String logo2 = basePath + "images/CLP_efl_en.png";
+			//imagesMap.put("logo", basePath + "images/clp_logo_1x.png" );
+			//imagesMap.put("logo2", logo2 );
 			
 			String buyerName = "";
-			String promotionStr = "";
 			String discountStr = "";
 			String deliveryStr = "";
-			String installStr = "";
-			String ecoPointStr = "";
-			String ecoPointDiscountStr = "";
 			String orderItemsStr = "";
 			String addressStr = "";
 			String subtotalStr = "";
 			String totalStr = "";
-			double subTotal = 0;
-			double ecoPoint = 0;
+			String summary = "";
 			
 			buyerName =  StringUtil.filter(order.getBuyerfirstname());
  			
- 			String ecopoint = I18nUtil.getString("email.ecopoint", I18nUtil.Lang_EN);
-			if(!isEng) ecopoint = I18nUtil.getString("email.ecopoint", I18nUtil.Lang_TC);
 			
 			for(OrderItemBean orderItem: order.getOrderItems()){
 				
@@ -80,96 +68,59 @@ public class MailUtil
 				String productPrice = "";
 				String subTotalStr = "";
 				
+				productPrice = "<strong>" + StringUtil.formatCurrencyPrice(orderItem.getPrice()) + "</strong>";
+				subTotalStr = "<strong>" + StringUtil.formatCurrencyPrice(orderItem.getPrice() * orderItem.getQuantity()) + "</strong>";
 				
-				//if(orderItem.getType() == StaticValueUtil.ITEM_PRODUCT) {
-				// Skip Eco Reward 
-			
-				//if(orderItem.getPid() != 0 ){ // Skip Eco Reward 
-					
-
-					
-					productPrice = "<strong>" + StringUtil.formatCurrencyPrice(orderItem.getPrice()) + "</strong>";
-					subTotalStr = "<strong>" + StringUtil.formatCurrencyPrice(orderItem.getPrice() * orderItem.getQuantity()) + "</strong>";
-					
-					orderItemsStr += "<tr>" + 
-							"<td align=\"left\" valign=\"top\" style=\"padding:5px; color:#2F2F2F; border-bottom:1px solid #2485c6;\"><strong>" + productName + "</strong></td>" + 
-							"<td align=\"center\" valign=\"top\" style=\"padding:5px; color:#2F2F2F; border-bottom:1px solid #2485c6;\">" + productPrice + "</td>" +
-							"<td align=\"center\" valign=\"top\" style=\"padding:5px; color:#2F2F2F; border-bottom:1px solid #2485c6;\"><strong>" + orderItem.getQuantity() + "</strong></td>" +
-							"<td align=\"right\" valign=\"top\" style=\"padding:5px; color:#2F2F2F; border-bottom:1px solid #2485c6;\">" + subTotalStr + "</td>" +
-							"</tr>";
-					
-				
-				
+				orderItemsStr += "<tr>" + 
+								 "<td align=\"left\" valign=\"top\" style=\"padding:5px; color:#2F2F2F; border-bottom:1px solid #2485c6;\"><strong>" + productName + "</strong></td>" + 
+								 "<td align=\"center\" valign=\"top\" style=\"padding:5px; color:#2F2F2F; border-bottom:1px solid #2485c6;\">" + productPrice + "</td>" +
+								 "<td align=\"center\" valign=\"top\" style=\"padding:5px; color:#2F2F2F; border-bottom:1px solid #2485c6;\"><strong>" + orderItem.getQuantity() + "</strong></td>" +
+								 "<td align=\"right\" valign=\"top\" style=\"padding:5px; color:#2F2F2F; border-bottom:1px solid #2485c6;\">" + subTotalStr + "</td>" +
+								 "</tr>";
 			}
 			
-			subTotal = order.getOrderAmount();
-			
-			if(subTotal > 0){
-				String text = I18nUtil.getString("email.subtotal.title", I18nUtil.Lang_EN);
-				if(!isEng) text = I18nUtil.getString("email.subtotal.title", I18nUtil.Lang_TC);
-				
+			if(order.getOrderAmount() > 0){
 				subtotalStr = "<tr>" + 
-						  "<td colspan=\"3\" align=\"center\" valign=\"top\" style=\" color:#2F2F2F;  padding:3px; \"> </td>" +
-            			  "<td align=\"right\" valign=\"top\" style=\" color:#2F2F2F;  padding:5px;\">" +
-            			  "<strong>" + text +"</strong></td>" +
-            			  "<td align=\"right\" valign=\"top\" style=\" color:#2F2F2F;  padding:5px;\"><strong>" + StringUtil.formatCurrencyPrice(subTotal) + "</strong></td>"+
-						  "</tr>";
+								"<td colspan='3' align='right' valign='top' style='color:#2F2F2F; padding:5px;'><strong>Sub-Total</strong></td>" + 
+								"<td align='right' valign='top' style='color:#2F2F2F; padding:5px;'><strong>" + StringUtil.formatCurrencyPrice(order.getOrderAmount()) + "</strong></td>" + 
+							  "</tr>";
 			}
 			
-			if(!"".equals(StringUtil.filter(order.getBuyeraddress1())) || !"".equals(StringUtil.filter(order.getBuyeraddress2())) 
+			if(!"".equals(StringUtil.filter(order.getShipaddress1())) || !"".equals(StringUtil.filter(order.getShipaddress2())) 
 			  ){
-				
-				String address = "";
-				
-				String text = I18nUtil.getString("email.address", I18nUtil.Lang_EN);
-				if(!isEng) text = I18nUtil.getString("email.address", I18nUtil.Lang_TC);
-				
+				String address = order.getShipaddress1() + ", " + order.getShipaddress2() + ", " + 
+								 (!"".equals(StringUtil.filter(order.getShiptown())) ? order.getShiptown() + ", " : "" ) + 
+								 (!"".equals(StringUtil.filter(order.getShipstate())) ? order.getShipstate() + ", " : "" ) + 
+								 CountryPulldown.getText(order.getShipcountry());
+
 				addressStr = "<tr>" +
-								"<td width=\"25%\" valign=\"top\" >" + text  + ": </td>" +
+								"<td width=\"25%\" valign=\"top\" >Deliery Address : </td>" +
 								"<td width=\"26%\" valign=\"top\" colspan=\"3\">" + address + "</td>" +
             				 "</tr>";
 			}
 			
 			if(order.getDiscountAmount() > 0){
-				String text = I18nUtil.getString("email.discount.title", I18nUtil.Lang_EN);
-				
-				if(!isEng) text = I18nUtil.getString("email.discount.title", I18nUtil.Lang_TC);
-				
 				discountStr = "<tr>" + 
-							  "<td colspan=\"3\" align=\"center\" valign=\"top\" style=\" color:#2F2F2F;  padding:3px; \"> </td>" +
-                			  "<td align=\"right\" valign=\"top\" style=\" color:#2F2F2F;  padding:5px;\">" +
-                			  "<strong>" + text +"</strong></td>" +
-                			  "<td align=\"right\" valign=\"top\" style=\" color:#2F2F2F;  padding:5px;\"><strong>" + StringUtil.formatCurrencyPrice(order.getDiscountAmount()) + "</strong></td>"+
+								"<td colspan='3' align='right' valign='top' style='color:#2F2F2F; padding:5px;'><strong>Discount</strong></td>" +
+								"<td align='right' valign='top' style='color:#2F2F2F; padding:5px;'><strong>" + StringUtil.formatCurrencyPrice(order.getDiscountAmount()) + "</strong></td>" +
 							  "</tr>";
 			}
 			
 			if(order.getDeliveryAmount() > 0 ){
-				
-				String text = I18nUtil.getString("email.delivery.title", I18nUtil.Lang_EN);
-				
-				if(!isEng) text = I18nUtil.getString("email.delivery.title", I18nUtil.Lang_TC);
-				
-				deliveryStr = "<tr>" +
-						   "<td colspan=\"3\" align=\"center\" valign=\"top\" style=\" color:#2F2F2F;  padding:3px; \">&nbsp;</td>" + 
-                		   "<td align=\"right\" valign=\"top\" style=\" color:#2F2F2F;  padding:5px;\">" +
-                		   "<strong>" + text + "</strong></td>" +
-                		   "<td align=\"right\" valign=\"top\" style=\" color:#2F2F2F;  padding:5px;\"><strong>" + StringUtil.formatCurrencyPrice(order.getDeliveryAmount()) + "</strong></td>" +
-                		   "</tr>";
+				deliveryStr = "<tr>" + 
+								"<td colspan='3' align='right' valign='top' style='color:#2F2F2F; padding:5px;'><strong>Shipping Fee</strong></td>" +
+								"<td align='right' valign='top' style='color:#2F2F2F; padding:5px;'><strong>" + StringUtil.formatCurrencyPrice(order.getDeliveryAmount()) + "</strong></td>" +
+							  "</tr>";
 			}
 			
 			if(order.getTotalAmount() > 0 ){
-				String text = I18nUtil.getString("email.total.title", I18nUtil.Lang_EN);
-				
-				if(!isEng) text = I18nUtil.getString("email.total.title", I18nUtil.Lang_TC);
-				
 				totalStr = "<tr>" +
-						   "<td colspan=\"3\" align=\"center\" valign=\"top\" style=\" color:#2F2F2F;  padding:3px; \">&nbsp;</td>" + 
-                		   "<td align=\"right\" valign=\"top\" style=\" color:#2F2F2F;  padding:5px;\">" +
-                		   "<strong>" + text + "</strong></td>" +
-                		   "<td align=\"right\" valign=\"top\" style=\" color:#2F2F2F;  padding:5px;\"><strong>" + StringUtil.formatCurrencyPrice(order.getTotalAmount()) + "</strong></td>" +
-                		   "</tr>";
-				
+							"<td colspan='3' align='right' valign='top' style='color:#2F2F2F; padding:5px;'><strong>Total Amount</strong></td>" +
+							"<td align='right' valign='top' style='color:#2F2F2F; padding:5px;'><strong>" + StringUtil.formatCurrencyPrice(order.getTotalAmount()) + "</strong></td>" +
+						   "</tr>" ;
 			}
+			
+			summary = subtotalStr + discountStr + deliveryStr + totalStr; 
 
 			HashMap<String, String> values = new HashMap<String, String>();
 			
@@ -177,25 +128,12 @@ public class MailUtil
 			
 			values.put("orderRef", StringUtil.filter(order.getOrderRef()));
 			values.put("orderDate", DateUtil.formatDatetime_mm(order.getTransactiondate()));
-			values.put("payMethod", payMethod);
-			
-			//values.put("totalAmount", StringUtil.formatCurrencyPrice(order.getTotalAmount()));
-			//values.put("buyerTitle", order.getBuyerTitle());
-			values.put("deliveryAddress", addressStr);
+			values.put("payMethod", payMethod); logger.info("PAYMENT " + payMethod);
 			values.put("name", buyerName);
 			values.put("contact", StringUtil.filter(order.getBuyerphone()));
-			
+			values.put("deliveryAddress", addressStr);
 			values.put("orderItems", orderItemsStr);
-			//values.put("subTotal", StringUtil.formatCurrencyPrice(subTotal));
-			values.put("promotion", promotionStr);
-			values.put("discount", discountStr);
-			values.put("delivery", deliveryStr);
-			values.put("install", installStr);
-			values.put("discounteco", ecoPointDiscountStr);
-			values.put("ecoPoint", ecoPointStr);
-			
-			values.put("subTotal", subtotalStr);
-			values.put("totalAmount", totalStr);
+			values.put("summary", summary);
 			
 			result = Mail.SendWithCC(subject,order.getBuyeremail(), templateFile, values, imagesMap, new ArrayList<String>());
 			

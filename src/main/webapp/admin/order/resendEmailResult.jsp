@@ -4,10 +4,26 @@
 <%@page import="org.apache.commons.lang.StringUtils"%>
 <%@page import="com.project.bean.*"%>
 <%@page import="com.project.service.*"%>
+<%@page import="java.io.PrintWriter" %>
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%
-	AdminService.getInstance().checkLogin(request, response);
-	String basePath = PropertiesUtil.getProperty("hostAddr")+PropertiesUtil.getProperty("virtualHost.admin");
+
+	AdminInfoBean loginUser = (AdminInfoBean) request.getSession().getAttribute(SessionName.loginAdmin);
+	String url = request.getRequestURL().toString();
+	
+	if (loginUser == null&& !url.contains("/LoginServlet") && !url.contains("login.jsp")&& !url.contains("/css/") && !url.contains("/images/") && !url.contains("/layer/")
+			&& !url.contains("/js/") && !url.endsWith("/admin/"))
+	{
+		
+			PrintWriter pw = response.getWriter();
+			pw.println("<script type='text/javascript'>alert('Your session has been timed out.')</script> <script type='text/javascript'>window.location.href='" + StringUtil.getHostAddress()// request.getContextPath()
+					+ "admin/'</script> ");
+			pw.flush();
+			return;
+	}
+
+	//String basePath = PropertiesUtil.getProperty("hostAddr")+PropertiesUtil.getProperty("virtualHost.admin");
+	String basePath = StringUtil.getHostAddress() + "admin/";
 %>
 <!DOCTYPE html>
 <html>

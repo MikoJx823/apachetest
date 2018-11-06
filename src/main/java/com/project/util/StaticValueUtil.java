@@ -254,4 +254,12 @@ public class StaticValueUtil
 	public static final String CONFIG_BANNER_DIR = "BANNER_DIR";
 	public static final String CONFIG_PRODUCT_DIR = "PRODUCT_DIR";
 	public static final String CONFIG_PRODUCT_UPLOAD_DIR = "PRODUCT_UPLOAD_DIR";
+	
+	public static final String CONFIF_EMAIL_DIR = "EMAIL_DIR";
+	public static final String CONFIG_EMAIL_HOSTNAME = "EMAIL_HOSTNAME";
+	public static final String CONFIG_EMAIL_USERNAME = "EMAIL_USERNAME";
+	public static final String CONFIG_EMAIL_PASSWORD = "EMAIL_PASSWORD";
+	public static final String CONFIG_EMAIL_FROM = "EMAIL_FROM";
+	public static final String CONFIG_EMAIL_FROM_TITLE = "EMAIL_FROMTITLE";
+	public static final String CONFIG_EMAIL_BCC = "EMAIL_BCC";
 }

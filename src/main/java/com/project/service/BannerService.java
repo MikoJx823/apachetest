@@ -44,8 +44,8 @@ public class BannerService {
 		return dao.getBeanById(id);
 	}
 	
-	public List<BannerInfoBean> getFrontListByPosition(int platform){
-		String sqlWhere = " where status = " + StaticValueUtil.Active + 
+	public List<BannerInfoBean> getFrontListByPosition(int position){
+		String sqlWhere = " where status = " + StaticValueUtil.Active + " and position = " + position + 
 						  " order by seq";
 		
 		return dao.getListBySqlwhere(sqlWhere);

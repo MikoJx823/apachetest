@@ -143,12 +143,12 @@ public class AdminProductServlet extends HttpServlet {
 			product.setCreatedBy(loginAdmin.getName());
 			//product.setDisplaystart(DateUtil.stringToDate(dateFromStr));
 			//product.setDisplayend(DateUtil.stringToDate(dateToStr));
-			log.info("second");
-			log.info("counter " + variantcounter);
+
 			for(int i = 1; i <= variantcounter; i++) {
 				ProductVariantBean variant = new ProductVariantBean();
 				
 				String variantname = StringUtil.filter(request.getParameter("variant" + i));
+				String code = StringUtil.filter(request.getParameter("code" + i));
 				double price = StringUtil.strToDouble(request.getParameter("price" + i));
 				double discount = StringUtil.strToDouble(StringUtil.filter(request.getParameter("discount" + i),"0"));
 				int quantity = StringUtil.strToInt(request.getParameter("quantity" + i));
@@ -171,6 +171,7 @@ public class AdminProductServlet extends HttpServlet {
 				String discountDateToStr = discountYearToStr + "-" + discountMonthToStr + "-" + discountDayToStr + " "+ discountHourToStr+":"+ discountMinuteToStr+":"+ discountSecondToStr;
 				
 				variant.setName(variantname);
+				variant.setCode(code);
 				variant.setSeq(i);
 				variant.setPrice(price);
 				variant.setDiscount(discount);
@@ -179,9 +180,6 @@ public class AdminProductServlet extends HttpServlet {
 				variant.setDiscountend(DateUtil.stringToDate(discountDateToStr));
 				variant.setStatus(StaticValueUtil.Active);
 				variants.add(variant);
-				
-				log.info(discountDateFromStr);
-				log.info(discountDateToStr);
 			}
 			
 			product.setProductVariant(variants);
@@ -246,13 +244,10 @@ public class AdminProductServlet extends HttpServlet {
 				} 
 			}
 			
-			log.info("after image ");
-			
 			ProductBean resultProd = null;
 
 			if ("".equals(errorMsg)){
 				resultProd = ProductService.getInstance().insertProduct(product);
-				log.info(resultProd == null ? "resultProd is null" : "resultProdd is not null");
 				if (resultProd != null)
 				{
 					errorMsg = "Add product success.";
@@ -263,9 +258,9 @@ public class AdminProductServlet extends HttpServlet {
 				else{
 					errorMsg = "Add product fail.";
 				}
-				log.info("errorMsg: " + errorMsg);
-				log.info("resultUrl: " + resultUrl);
 			}
+			
+			log.info("ADD ACTION : " + errorMsg);
 
 			MsgAlertBean msgAlertBean = new MsgAlertBean();
 			msgAlertBean.setType(StaticValueUtil.MsgAlertType_Show);
@@ -321,7 +316,7 @@ public class AdminProductServlet extends HttpServlet {
 			String listtext = StringUtil.filter(request.getParameter("listtext"));
 			int variantcounter = StringUtil.strToInt(request.getParameter("variantcounter")); 
 			String test = StringUtil.filter(request.getParameter("test"));
-			log.info("test"  + test);
+	
 
 			ProductBean product = new ProductBean();
 			List<ProductVariantBean> variants = new ArrayList<ProductVariantBean>();
@@ -342,13 +337,11 @@ public class AdminProductServlet extends HttpServlet {
 			product.setStatus(status);
 			product.setModifiedBy(loginAdmin.getName());
 			
-			log.info("counter " + variantcounter);
-			
 			//FOR VARIANT UPDATE 
 			for(int i = 1; i <= variantcounter; i++) {
-				log.info("inside variant");
 				int vid = StringUtil.strToInt(StringUtil.filter(request.getParameter("pvid" + i)));
 				String variantname = StringUtil.filter(request.getParameter("variant" + i));
+				String code = StringUtil.filter(request.getParameter("code" + i));
 				double price = StringUtil.strToDouble(request.getParameter("price" + i));
 				double discount = StringUtil.strToDouble(StringUtil.filter(request.getParameter("discount" + i),"0"));
 				int quantity = StringUtil.strToInt(request.getParameter("quantity" + i));
@@ -374,6 +367,7 @@ public class AdminProductServlet extends HttpServlet {
 				if(vid > 0 ) variant = ProductService.getInstance().getProductVariantByPvid(vid);
 				
 				variant.setName(variantname);
+				variant.setCode(code);
 				variant.setSeq(i);
 				variant.setPrice(price);
 				variant.setDiscount(discount);
@@ -382,11 +376,8 @@ public class AdminProductServlet extends HttpServlet {
 				variant.setDiscountend(DateUtil.stringToDate(discountDateToStr));
 				variant.setStatus(StaticValueUtil.Active);
 				variants.add(variant);
-				
-				log.info("variant : " + vid + " start : " + discountDateFromStr + " end : " + discountDateToStr);
-				log.info(variantname);
 			}
-			log.info("variant size " + variants.size());
+
 			product.setProductVariant(variants);
 			
 			try {
@@ -462,9 +453,8 @@ public class AdminProductServlet extends HttpServlet {
 				} catch (IOException e) {
 					e.printStackTrace();
 				} 
-				
 			}
-			log.info("errorMsg" + errorMsg);
+
 			if ("".equals(errorMsg)){
 				if(ProductService.getInstance().updateProduct(product) != null){
 					errorMsg = "Update Product ["+StringUtil.filter(product.getName())+"] success.";
@@ -475,12 +465,13 @@ public class AdminProductServlet extends HttpServlet {
 					resultUrl = "productEdit.jsp?pid="+ product.getId();
 						//resultUrl = "categoryView.jsp?id="+category.getId();
 				}		
-			}else{	
+			}else{
 				resultUrl = "productEdit.jsp?pid="+ product.getId();
 				//product.setProductVariant(oldvariants);
 				request.setAttribute(SessionName.beanInfo, product);
 			}
 			
+			log.info("EDIT ACTION : " + errorMsg);
 			
 			MsgAlertBean msgAlertBean = new MsgAlertBean();
 			msgAlertBean.setType(StaticValueUtil.MsgAlertType_Show);

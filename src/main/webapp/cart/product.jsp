@@ -185,6 +185,8 @@
 										<%} %>
 									</select>
 								</div> -->
+								
+								<input type="hidden" id="variantpvid" name="pvid" value="<%=product.getProductVariant().get(0).getPvid() %>">
 								<div class="form-group col-md-6">
 									<label for="attr_1"><b>Colours </b></label>
 									<ul >
@@ -419,6 +421,8 @@
 			<%}%>
 			$("#pvid" + pvid).css("border","1px solid #e26a35");
 			
+			alert(pvid);
+			$("#variantpvid").val(pvid);
 			<%
 			if(product.getProductVariant().size() > 1){
 				for(ProductVariantBean variant : product.getProductVariant()){ 	

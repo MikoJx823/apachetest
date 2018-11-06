@@ -32,6 +32,8 @@ import javax.mail.internet.MimeMultipart;
 
 import org.apache.log4j.Logger;
 
+import com.project.service.ConfigService;
+
 public class Mail
 {
 	public static final Logger logger = Logger.getLogger(Mail.class);
@@ -42,7 +44,7 @@ public class Mail
 
 	public String consturctMail(String templateFile, HashMap<String, String> map)
 	{
-		String mailpath = PropertiesUtil.MAILPATH;
+		String mailpath = ConfigService.getInstance().getBeanByName(StaticValueUtil.CONFIF_EMAIL_DIR).getValue();//PropertiesUtil.MAILPATH;
 		return this.getEmailContent(templateFile, map, mailpath);
 	}
 
@@ -220,27 +222,25 @@ public class Mail
 		try
 		{
 			logger.debug("Getting email session.......");
-
+			
+			Map<String, String> emailConfig = StringUtil.getEmailConfig();
+			
 			Properties props = null;
 
 			props = new Properties();
-			props.put(hostName, PropertiesUtil.MAILHOST);
-			props.put(mailFrom, PropertiesUtil.MAILFROM);
+			props.put(hostName, emailConfig.get(StaticValueUtil.CONFIG_EMAIL_HOSTNAME));//PropertiesUtil.MAILHOST);
+			props.put(mailFrom, emailConfig.get(StaticValueUtil.CONFIG_EMAIL_FROM));//PropertiesUtil.MAILFROM);
 
 			String receiptPath = PropertiesUtil.getProperty("receiptPath");
 			
 			Session session = null;
-			if (PropertiesUtil.MAILPASS == null || "".equalsIgnoreCase(PropertiesUtil.MAILPASS.trim()))
-			{
-
+			if("".equals(StringUtil.filter(emailConfig.get(StaticValueUtil.CONFIG_EMAIL_PASSWORD)))) {//if (PropertiesUtil.MAILPASS == null || "".equalsIgnoreCase(PropertiesUtil.MAILPASS.trim()))
 				session = Session.getInstance(props, null);
-			}
-			else
-			{
+			}else{
 
 				props.put("mail.smtp.auth", "true");
 
-				Authenticator authenticator = new SendMailAuthenticator(PropertiesUtil.MAILUSER, PropertiesUtil.MAILPASS);
+				Authenticator authenticator = new SendMailAuthenticator(emailConfig.get(StaticValueUtil.CONFIG_EMAIL_USERNAME), emailConfig.get(StaticValueUtil.CONFIG_EMAIL_PASSWORD));//PropertiesUtil.MAILUSER, PropertiesUtil.MAILPASS);
 
 				session = Session.getInstance(props, authenticator);
 			}
@@ -265,9 +265,9 @@ public class Mail
 			message.addRecipients(Message.RecipientType.TO, toAdd);
 			logger.debug("Initialize Recipients email address successful.");
 
-			if (!"".equalsIgnoreCase(PropertiesUtil.MAILBCC))
+			if (!"".equals(StringUtil.filter(emailConfig.get(StaticValueUtil.CONFIG_EMAIL_BCC))))//(!"".equalsIgnoreCase(PropertiesUtil.MAILBCC))
 			{
-				String[] bccStrings = PropertiesUtil.MAILBCC.split(",");
+				String[] bccStrings = emailConfig.get(StaticValueUtil.CONFIG_EMAIL_BCC).split(",");//PropertiesUtil.MAILBCC.split(",");
 				InternetAddress bccEamilStrings[] = new InternetAddress[bccStrings.length];
 				for (int j = 0; j < bccStrings.length; j++)
 				{
@@ -279,7 +279,8 @@ public class Mail
 			}
 
 			logger.debug("Initialize From email address....");
-			String from = PropertiesUtil.MAILUSERTITLE + "<" + PropertiesUtil.MAILFROM + ">";
+			String from = emailConfig.get(StaticValueUtil.CONFIG_EMAIL_FROM_TITLE) + "<" + emailConfig.get(StaticValueUtil.CONFIG_EMAIL_FROM) + ">"; 
+					//PropertiesUtil.MAILUSERTITLE + "<" + PropertiesUtil.MAILFROM + ">";
 			InternetAddress fromAddress = new InternetAddress(from);
 			message.setFrom(fromAddress);
 			logger.debug("Initialize From email address successful.");
@@ -366,14 +367,14 @@ public class Mail
 
 			
 			
-			if (PropertiesUtil.MAILPASS == null || "".equalsIgnoreCase(PropertiesUtil.MAILPASS.trim()))
+			if ("".equals(StringUtil.filter(emailConfig.get(StaticValueUtil.CONFIG_EMAIL_PASSWORD))))//(PropertiesUtil.MAILPASS == null || "".equalsIgnoreCase(PropertiesUtil.MAILPASS.trim()))
 			{
 				Transport.send(message);
 			}
 			else
 			{
 				Transport transport = session.getTransport("smtp");
-				transport.connect(PropertiesUtil.MAILHOST, PropertiesUtil.MAILUSER, PropertiesUtil.MAILPASS);
+				transport.connect(emailConfig.get(StaticValueUtil.CONFIG_EMAIL_HOSTNAME), emailConfig.get(StaticValueUtil.CONFIG_EMAIL_USERNAME), emailConfig.get(StaticValueUtil.CONFIG_EMAIL_PASSWORD));//(PropertiesUtil.MAILHOST, PropertiesUtil.MAILUSER, PropertiesUtil.MAILPASS);
 				transport.sendMessage(message, message.getAllRecipients());
 
 				transport.close();

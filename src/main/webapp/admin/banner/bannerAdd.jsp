@@ -34,7 +34,6 @@ if (loginUser == null&& !url.contains("/LoginServlet") && !url.contains("login.j
 <body>
 <form role="form" action="AdminBannerServlet" method="post" id="form" enctype="multipart/form-data" onsubmit="return checkForm()"> 
 <input type="hidden" name="actionType" value="add">
-
       
 <jsp:include page="../main/topNav.jsp"></jsp:include>
     <section class="container">    
@@ -111,7 +110,7 @@ if (loginUser == null&& !url.contains("/LoginServlet") && !url.contains("login.j
          	<div class="col-xs-6">
                <div class="form-group">
                	<label>Web Image </label>
-               	<input  type="file"  class="form-control" id="ewebimage" name="ewebimage" autocomplete="off" >  
+               	<input  type="file"  class="form-control" id="image1" name="image1" autocomplete="off" >  
                 <label><small>File size <= 800KB<br/>Only support JPEG / PNG</small></label>                 
           	   </div><!--form-group-->
             </div><!--col-xs-6-->
@@ -119,7 +118,7 @@ if (loginUser == null&& !url.contains("/LoginServlet") && !url.contains("login.j
             <div class="col-xs-6">
                 <div class="form-group">
                  <label>Mobile Image </label>
-                 <input  type="file"  class="form-control" id="eappimage" name="eappimage" autocomplete="off" >  
+                 <input  type="file"  class="form-control" id="image2" name="image2" autocomplete="off" >  
                  <label><small>*required for main banner only </small></label>                 
           		</div><!--form-group-->
             </div><!--col-xs-6-->

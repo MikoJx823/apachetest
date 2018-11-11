@@ -421,7 +421,7 @@
 			<%}%>
 			$("#pvid" + pvid).css("border","1px solid #e26a35");
 			
-			alert(pvid);
+			//alert(pvid);
 			$("#variantpvid").val(pvid);
 			<%
 			if(product.getProductVariant().size() > 1){

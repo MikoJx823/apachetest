@@ -136,13 +136,13 @@
 				           		List<CategoryBean> faceCat = CategoryService.getInstance().getFrontMenuBySqlwhere(sqlWhere);
 				           		%>
 				           		<ul class="mega-subcontent">
-				           			<li class="hidden-xs subtagmenu-padding"><span style="font-weight:900;"><%=StringUtil.filter(CategoryTagPulldown.getText(StaticValueUtil.TAG_FACE)) %></span></li>
+				           			<li class="hidden-xs web-hidden subtagmenu-padding"><span style="font-weight:900;"><%=StringUtil.filter(CategoryTagPulldown.getText(StaticValueUtil.TAG_FACE)) %></span></li>
 				           			<%	for(CategoryBean category : faceCat){ 	%>
-				           			<li class="hidden-xs topmenu-subcat submenu-padding" ><span onClick="javascript:window.location.href='<%=basePath%>products?categoryid=<%=category.getId()%>'"><%=StringUtil.filter(category.getName()) %></span>  </li> <!-- class="active" -->
+				           			<li class="hidden-xs web-hidden topmenu-subcat submenu-padding" ><span onClick="javascript:window.location.href='<%=basePath%>products?categoryid=<%=category.getId()%>'"><%=StringUtil.filter(category.getName()) %></span>  </li> <!-- class="active" -->
 				                	<%} %>
 				                
 					                <!-- FOR MOBILE ONLY  -->
-					                <li id="catContainer1" class="hidden-md hidden-lg hidden-sm text-center" style="padding-top:5px;padding-bottom:5px;">
+					                <li id="catContainer1" class="hidden-md hidden-lg mobile-hidden text-center" style="padding-top:5px;padding-bottom:5px;">
 					           			<button id="catBtn1" class="resp-dropdown-btn text-center " ><%=StringUtil.filter(CategoryTagPulldown.getText(StaticValueUtil.TAG_FACE)) %>
 								          <i id="catArrow1" class="resp-arrow-right-black"></i>
 								        </button> 
@@ -163,18 +163,18 @@
 				           		List<CategoryBean> eyeCat = CategoryService.getInstance().getFrontMenuBySqlwhere(sqlWhere);
 				           		%>
 				           		<ul class="mega-subcontent">
-					           		<li class="hidden-xs subtagmenu-padding"><span style="font-weight:900;"><%=StringUtil.filter(CategoryTagPulldown.getText(StaticValueUtil.TAG_EYE)) %></span></li>
+					           		<li class="hidden-xs web-hidden subtagmenu-padding"><span style="font-weight:900;"><%=StringUtil.filter(CategoryTagPulldown.getText(StaticValueUtil.TAG_EYE)) %></span></li>
 					           		<%	for(CategoryBean category : eyeCat){ 	
 					           				String categoryPath = basePath + "products?categoryid=" + category.getId();
 					           				if(category.getEnableguide() == StaticValueUtil.STATUS_ENABLE){
 					           					categoryPath = basePath + "cart/category.jsp?id=" + category.getId();
 					           				}
 					           		%>
-					           		<li class="hidden-xs topmenu-subcat submenu-padding" ><span onClick="javascript:window.location.href='<%=categoryPath%>'"><%=StringUtil.filter(category.getName()) %></span>  </li> <!-- class="active" -->
+					           		<li class="hidden-xs web-hidden topmenu-subcat submenu-padding" ><span onClick="javascript:window.location.href='<%=categoryPath%>'"><%=StringUtil.filter(category.getName()) %></span>  </li> <!-- class="active" -->
 					                <%} %>
 				                
 				                	<!-- FOR MOBILE ONLY  -->
-					                <li id="catContainer2" class="hidden-md hidden-lg hidden-sm text-center" style="padding-top:5px;padding-bottom:5px;">
+					                <li id="catContainer2" class="hidden-md hidden-lg mobile-hidden text-center" style="padding-top:5px;padding-bottom:5px;">
 					           			<button id="catBtn2" class="resp-dropdown-btn text-center " ><%=StringUtil.filter(CategoryTagPulldown.getText(StaticValueUtil.TAG_EYE)) %>
 								          <i id="catArrow2" class="resp-arrow-right-black"></i>
 								        </button> 
@@ -200,13 +200,13 @@
 				           		List<CategoryBean> cheekCat = CategoryService.getInstance().getFrontMenuBySqlwhere(sqlWhere);
 				           		%>
 				           		<ul class="mega-subcontent">
-					           		<li class="hidden-xs subtagmenu-padding"><span style="font-weight:900;"><%=StringUtil.filter(CategoryTagPulldown.getText(StaticValueUtil.TAG_CHEEKS)) %></span></li>
+					           		<li class="hidden-xs web-hidden subtagmenu-padding"><span style="font-weight:900;"><%=StringUtil.filter(CategoryTagPulldown.getText(StaticValueUtil.TAG_CHEEKS)) %></span></li>
 					           		<%	for(CategoryBean category : cheekCat){ 	%>
-					                <li class="hidden-xs topmenu-subcat submenu-padding" ><span onClick="javascript:window.location.href='<%=basePath%>products?categoryid=<%=category.getId()%>'"><%=StringUtil.filter(category.getName()) %></span>  </li> <!-- class="active" -->
+					                <li class="hidden-xs web-hidden topmenu-subcat submenu-padding" ><span onClick="javascript:window.location.href='<%=basePath%>products?categoryid=<%=category.getId()%>'"><%=StringUtil.filter(category.getName()) %></span>  </li> <!-- class="active" -->
 					                <%} %>
 				                
 				                	<!-- FOR MOBILE ONLY  -->
-					                <li id="catContainer3" class="hidden-md hidden-lg hidden-sm text-center" style="padding-top:5px;padding-bottom:5px;">
+					                <li id="catContainer3" class="hidden-md hidden-lg mobile-hidden text-center" style="padding-top:5px;padding-bottom:5px;">
 					           			<button id="catBtn3" class="resp-dropdown-btn text-center " ><%=StringUtil.filter(CategoryTagPulldown.getText(StaticValueUtil.TAG_CHEEKS)) %>
 								          <i id="catArrow3" class="resp-arrow-right-black"></i>
 								        </button> 
@@ -227,13 +227,13 @@
 				           		List<CategoryBean> lipCat = CategoryService.getInstance().getFrontMenuBySqlwhere(sqlWhere);
 				           		%>
 				           		<ul class="mega-subcontent">
-					           		<li class="hidden-xs subtagmenu-padding"><span style="font-weight:900;"><%=StringUtil.filter(CategoryTagPulldown.getText(StaticValueUtil.TAG_LIPS)) %></span></li>
+					           		<li class="hidden-xs web-hidden subtagmenu-padding"><span style="font-weight:900;"><%=StringUtil.filter(CategoryTagPulldown.getText(StaticValueUtil.TAG_LIPS)) %></span></li>
 					           		<%	for(CategoryBean category : lipCat){ 	%>
-					                <li class="hidden-xs topmenu-subcat submenu-padding" ><span onClick="javascript:window.location.href='<%=basePath%>products?categoryid=<%=category.getId()%>'"><%=StringUtil.filter(category.getName()) %></span>  </li> <!-- class="active" -->
+					                <li class="hidden-xs web-hidden topmenu-subcat submenu-padding" ><span onClick="javascript:window.location.href='<%=basePath%>products?categoryid=<%=category.getId()%>'"><%=StringUtil.filter(category.getName()) %></span>  </li> <!-- class="active" -->
 					                <%} %>
 				                
 				                	<!-- FOR MOBILE ONLY  -->
-					                <li id="catContainer4" class="hidden-md hidden-lg hidden-sm text-center" style="padding-top:5px;padding-bottom:5px;">
+					                <li id="catContainer4" class="hidden-md hidden-lg mobile-hidden text-center" style="padding-top:5px;padding-bottom:5px;">
 					           			<button id="catBtn4" class="resp-dropdown-btn text-center " ><%=StringUtil.filter(CategoryTagPulldown.getText(StaticValueUtil.TAG_LIPS)) %>
 								          <i id="catArrow4" class="resp-arrow-right-black"></i>
 								        </button> 
@@ -254,13 +254,13 @@
 				           		List<CategoryBean> toolsCat = CategoryService.getInstance().getFrontMenuBySqlwhere(sqlWhere);
 				           		%>
 				           		<ul class="mega-subcontent">
-					           		<li class="hidden-xs subtagmenu-padding"><span style="font-weight:900;"><%=StringUtil.filter(CategoryTagPulldown.getText(StaticValueUtil.TAG_TOOLS)) %></span></li>
+					           		<li class="hidden-xs web-hidden subtagmenu-padding"><span style="font-weight:900;"><%=StringUtil.filter(CategoryTagPulldown.getText(StaticValueUtil.TAG_TOOLS)) %></span></li>
 					           		<%	for(CategoryBean category : toolsCat){ 	%>
-					                <li class="hidden-xs topmenu-subcat submenu-padding" ><span onClick="javascript:window.location.href='<%=basePath%>products?categoryid=<%=category.getId()%>'"><%=StringUtil.filter(category.getName()) %></span>  </li> <!-- class="active" -->
+					                <li class="hidden-xs web-hidden topmenu-subcat submenu-padding" ><span onClick="javascript:window.location.href='<%=basePath%>products?categoryid=<%=category.getId()%>'"><%=StringUtil.filter(category.getName()) %></span>  </li> <!-- class="active" -->
 					                <%} %>
 				                
 				                	<!-- FOR MOBILE ONLY  -->
-					                <li id="catContainer5" class="hidden-md hidden-lg hidden-sm text-center" style="padding-top:5px;padding-bottom:5px;">
+					                <li id="catContainer5" class="hidden-md hidden-lg mobile-hidden text-center" style="padding-top:5px;padding-bottom:5px;">
 					           			<button id="catBtn5" class="resp-dropdown-btn text-center " ><%=StringUtil.filter(CategoryTagPulldown.getText(StaticValueUtil.TAG_TOOLS)) %>
 								          <i id="catArrow5" class="resp-arrow-right-black"></i>
 								        </button> 
@@ -281,13 +281,13 @@
 				           		List<CategoryBean> d3Cat = CategoryService.getInstance().getFrontMenuBySqlwhere(sqlWhere);
 				           		%>
 				           		<ul class="mega-subcontent">
-					           		<li class="hidden-xs subtagmenu-padding"><span style="font-weight:900;"><%=StringUtil.filter(CategoryTagPulldown.getText(StaticValueUtil.TAG_3D)) %></span></li>
+					           		<li class="hidden-xs web-hidden subtagmenu-padding"><span style="font-weight:900;"><%=StringUtil.filter(CategoryTagPulldown.getText(StaticValueUtil.TAG_3D)) %></span></li>
 					           		<%	for(CategoryBean category : d3Cat){ 	%>
-					                <li class="hidden-xs topmenu-subcat submenu-padding" ><span onClick="javascript:window.location.href='<%=basePath%>products?categoryid=<%=category.getId()%>'"><%=StringUtil.filter(category.getName()) %></span>  </li> <!-- class="active" -->
+					                <li class="hidden-xs web-hidden topmenu-subcat submenu-padding" ><span onClick="javascript:window.location.href='<%=basePath%>products?categoryid=<%=category.getId()%>'"><%=StringUtil.filter(category.getName()) %></span>  </li> <!-- class="active" -->
 					                <%} %>
 				                
 				                	<!-- FOR MOBILE ONLY  -->
-					                <li id="catContainer6" class="hidden-md hidden-lg hidden-sm text-center" style="padding-top:5px;padding-bottom:5px;">
+					                <li id="catContainer6" class="hidden-md hidden-lg mobile-hidden text-center" style="padding-top:5px;padding-bottom:5px;">
 					           			<button id="catBtn6" class="resp-dropdown-btn text-center " ><%=StringUtil.filter(CategoryTagPulldown.getText(StaticValueUtil.TAG_3D)) %>
 								          <i id="catArrow6" class="resp-arrow-right-black"></i>
 								        </button> 
@@ -308,13 +308,13 @@
 				           		List<CategoryBean> makeupCat = CategoryService.getInstance().getFrontMenuBySqlwhere(sqlWhere);
 				           		%>
 				           		<ul class="mega-subcontent">
-					           		<li class="hidden-xs subtagmenu-padding"><span style="font-weight:900;"><%=StringUtil.filter(CategoryTagPulldown.getText(StaticValueUtil.TAG_MAKEUPSETTING)) %></span></li>
+					           		<li class="hidden-xs web-hidden subtagmenu-padding"><span style="font-weight:900;"><%=StringUtil.filter(CategoryTagPulldown.getText(StaticValueUtil.TAG_MAKEUPSETTING)) %></span></li>
 					           		<%	for(CategoryBean category : makeupCat){ 	%>
-					                <li class="hidden-xs topmenu-subcat submenu-padding" ><span onClick="javascript:window.location.href='<%=basePath%>products?categoryid=<%=category.getId()%>'"><%=StringUtil.filter(category.getName()) %></span>  </li> <!-- class="active" -->
+					                <li class="hidden-xs web-hidden topmenu-subcat submenu-padding" ><span onClick="javascript:window.location.href='<%=basePath%>products?categoryid=<%=category.getId()%>'"><%=StringUtil.filter(category.getName()) %></span>  </li> <!-- class="active" -->
 					                <%} %>
 				                
 				                	<!-- FOR MOBILE ONLY  -->
-					                <li id="catContainer7" class="hidden-md hidden-lg hidden-sm text-center" style="padding-top:5px;padding-bottom:5px;">
+					                <li id="catContainer7" class="hidden-md hidden-lg mobile-hidden text-center" style="padding-top:5px;padding-bottom:5px;">
 					           			<button id="catBtn7" class="resp-dropdown-btn text-center " ><%=StringUtil.filter(CategoryTagPulldown.getText(StaticValueUtil.TAG_MAKEUPSETTING)) %>
 								          <i id="catArrow7" class="resp-arrow-right-black"></i>
 								        </button> 
@@ -436,8 +436,10 @@ $(document).ready(function(){
 			  $( this ).find( "i" ).removeClass("resp-arrow-bottom-black");
 		  }
 		  
-	  });
-
+	});
+	
+	
+	
 
 	
 	$("#catBtn1" ).click(function() {

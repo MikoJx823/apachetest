@@ -234,6 +234,20 @@
 									<p class="product-available">Out of Stock</p>
 								<%} %>
 								</div>
+								<%
+								if(category.getEnableguide() == StaticValueUtil.STATUS_ENABLE){
+									String categoryPath = basePath + "cart/category.jsp?id=" + category.getId();
+								%>
+								<div class="form-group">
+								<button type="button" class="btn btn-default" style="background-color:#e26a35;border:0" onClick="window.location.href='<%=categoryPath%>'"><!-- <i class="lil-add_shopping_cart"></i> --> Learn More</button> 
+								</div>
+								
+								<% 
+		           					
+		           				}
+								
+								%>
+								
 							</div>
 							
 							
@@ -244,7 +258,7 @@
 					</div><!-- /.product-details -->
 				</div>
 
-				<div class="col-sm-12">
+				<div class="col-sm-12" style="padding-bottom:15px;">
 					<div class="tabs-wrapper">
 						<!-- Nav tabs -->
 						<ul class="nav nav-tabs" role="tablist">
